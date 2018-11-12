@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="40889fd6a8ce49b6867bb552d4a0b98b" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="IMS2Model.tbl_batch" Width="1.5" PointX="16.5" PointY="71.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_branch" Width="1.5" PointX="5.25" PointY="63.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_category" Width="1.5" PointX="13.5" PointY="71.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_company" Width="1.5" PointX="8.25" PointY="63.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_country" Width="1.5" PointX="0.75" PointY="56.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_error_log" Width="1.5" PointX="13.5" PointY="62" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_expense" Width="1.5" PointX="10.5" PointY="61.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_expenseentry" Width="1.5" PointX="18.75" PointY="71.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_financialyear" Width="1.5" PointX="19.5" PointY="61.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_godown" Width="1.5" PointX="19.5" PointY="66.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_monytransaction" Width="1.5" PointX="16.5" PointY="60.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_party" Width="1.5" PointX="13.5" PointY="66.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_paymentmode" Width="1.5" PointX="13.5" PointY="57.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_product" Width="1.5" PointX="30" PointY="59.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_purchase" Width="1.5" PointX="21.75" PointY="63.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_purchasedetails" Width="1.5" PointX="24" PointY="69.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_rack" Width="1.5" PointX="21.75" PointY="69.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_role" Width="1.5" PointX="8.25" PointY="79.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_sale" Width="1.5" PointX="24.75" PointY="63.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_saledetails" Width="1.5" PointX="30" PointY="67.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_salesreturn" Width="1.5" PointX="27" PointY="67.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_state" Width="1.5" PointX="3" PointY="77" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_stocktransaction" Width="1.5" PointX="24.75" PointY="75.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_tax" Width="1.5" PointX="10.5" PointY="66.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_taxGroup" Width="1.5" PointX="32.25" PointY="63.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_unit" Width="1.5" PointX="16.5" PointY="66.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_User" Width="1.5" PointX="8.25" PointY="74.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_userbranch" Width="1.5" PointX="10.5" PointY="71.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_userrole" Width="1.5" PointX="10.5" PointY="76.875" IsExpanded="true" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_batch__branc__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_batch__compa__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__batch__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_saled__batch__7F2BE32F" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_sales__batch__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_stock__batch__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_branc__compa__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_branc__count__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_branc__state__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_categ__branc__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_error__branc__160F4887" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_expen__branc__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_expen__branc__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_finan__branc__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_godow__branc__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_monyt__branc__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_party__branc__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_payme__branc__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_produ__branc__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_rack__branch__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_stock__branc__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_tax__branch___4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_unit__branch__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_userb__branc__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_categ__compa__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_produ__categ__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_compa__count__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_compa__state__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_error__compa__151B244E" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_expen__compa__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_expen__compa__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_finan__compa__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_godow__compa__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_monyt__compa__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_party__compa__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_payme__compa__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_produ__compa__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_rack__compan__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_stock__compa__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_tax__company__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_unit__compan__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_userb__compa__17036CC0" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_state__count__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_expen__expen__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__finan__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_sale__financ__7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_produ__godow__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_rack__godown__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_monyt__payme__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__party__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_sale__party___797309D9" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_produ__rack___4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_produ__tax_i__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_produ__unit___48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__produ__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_saled__produ__7E37BEF6" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_sales__produ__0C85DE4D" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_stock__produ__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_taxGr__produ__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__purch__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__tax_i__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__unit___76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_userb__role___25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_userr__role___1920BF5C" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_saled__sale___7D439ABD" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_sales__sale___0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_saled__tax_i__00200768" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_saled__unit___01142BA1" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_sales__tax_i__0E6E26BF" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_sales__unit___0D7A0286" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_taxGr__tax_i__123EB7A3" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_userb__user___267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_userr__user___1A14E395" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_stock" Width="1.5" PointX="32.25" PointY="67.75" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__branc__607251E5" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_stock__branc__5FB337D6" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__compa__6166761E" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_stock__compa__5EBF139D" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_stock__produ__60A75C0F" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_stock__batch__4865BE2A" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_sale__branch__467D75B8" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_sale__compan__4589517F" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_monyt__party__477199F1" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_party__state__42ACE4D4" />
+<<<<<<< .mine
+        <EntityTypeShape EntityType="IMS2Model.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IMS2Model.Tbl_EmailVerify" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_mony" Width="1.5" PointX="22.125" PointY="74" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_paidpayment" Width="1.5" PointX="13.875" PointY="76.375" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_plan" Width="1.5" PointX="14.625" PointY="81.875" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_purchasereturnmain" Width="1.5" PointX="24.375" PointY="57.625" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_salereturnmain" Width="1.5" PointX="33.375" PointY="72.75" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_subscription" Width="1.5" PointX="16.875" PointY="76.375" />
+        <EntityTypeShape EntityType="IMS2Model.Tbl_VerifyResetPass" Width="1.5" PointX="0.75" PointY="3.75" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_mony__branch__6B24EA82" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__branc__09A971A2" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_saler__branc__160F4887" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_mony__compan__6A30C649" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_paidp__compa__395884C4" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__compa__08B54D69" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_saler__compa__151B244E" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_subsc__compa__28ED12D1" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__finan__0B91BA14" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_saler__finan__17F790F9" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_mony__party___6C190EBB" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_paidp__subsc__37703C52" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_paidp__user___3864608B" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_subsc__plan___339FAB6E" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__purch__0A9D95DB" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__purch__2EDAF651" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_saler__sale___17036CC0" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_subsc__user___3493CFA7" />
+      </Diagram>
+=======
+        <EntityTypeShape EntityType="IMS2Model.Tbl_EmailVerify" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_mony" Width="1.5" PointX="22.125" PointY="74" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_paidpayment" Width="1.5" PointX="13.875" PointY="76.375" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_plan" Width="1.5" PointX="14.625" PointY="81.875" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_purchasereturnmain" Width="2.5" PointX="24.875" PointY="57.625" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_salereturnmain" Width="1.5" PointX="33.375" PointY="72.75" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_subscription" Width="1.5" PointX="16.875" PointY="76.375" />
+        <EntityTypeShape EntityType="IMS2Model.Tbl_VerifyResetPass" Width="1.5" PointX="2.75" PointY="0.75" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_mony__branch__361203C5" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__branc__50C5FA01" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_saler__branc__567ED357" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_mony__compan__351DDF8C" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_paidp__compa__1B29035F" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__compa__4FD1D5C8" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_saler__compa__558AAF1E" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_subsc__compa__4AD81681" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__finan__52AE4273" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_saler__finan__58671BC9" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_mony__party___370627FE" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_paidp__subsc__1940BAED" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_paidp__user___1A34DF26" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_subsc__plan___15702A09" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__purch__51BA1E3A" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_saler__sale___5772F790" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_subsc__user___16644E42" />
+        <EntityTypeShape EntityType="IMS2Model.tbl_purchasereturn" Width="1.5" PointX="35.25" PointY="64" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__batch__04E4BC85" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__produ__05D8E0BE" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__purch__5DEAEAF5" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__purch__24B26D99" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__tax_i__07C12930" />
+        <AssociationConnector Association="IMS2Model.FK__tbl_purch__unit___06CD04F7" />
+        <EntityTypeShape EntityType="IMS2Model.sysdiagram" Width="1.5" PointX="7.375" PointY="0.75" />
+        </Diagram>
+>>>>>>> .r242
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

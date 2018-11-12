@@ -1,0 +1,173 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using IMSBLL.EntityModel;
+using IMSBLL.DAL;
+using System.Configuration;
+using System.IO;
+
+namespace IMS.PurchaseFolder
+{
+    public partial class PrintPurchase : System.Web.UI.Page
+    {
+        IMS_TESTEntities context = new IMS_TESTEntities();
+        SqlHelper helper = new SqlHelper();
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["TestDBConnection"].ConnectionString);
+        int a;
+        int companyId;
+        int branchId;
+        string User_id;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            SessionValue();
+            if (!IsPostBack)
+            {
+            if (Request.QueryString["id"] != null)
+            {
+                a = Convert.ToInt32(Request.QueryString["id"]);
+            }
+              
+            bindgrid();
+            pagebind();
+            logo();
+        }
+        }
+
+        private void SessionValue()
+        {
+            User_id = Convert.ToString(Session["UserID"]);
+            companyId = Convert.ToInt32(Session["company_id"]);
+            branchId = Convert.ToInt32(Session["branch_id"]);
+        }
+        public void bindgrid()
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "sp_SelectProductbyid";
+            cmd.Parameters.AddWithValue("@purchsae_id", a);
+
+            cmd.Connection = con;
+
+            try
+            {
+
+                con.Open();
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(ds);
+                Session["table"] = ds.Tables[0]; ;
+                GridView1.DataSource = (DataTable)Session["table"];
+                GridView1.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+        }
+
+        public void logo()
+        {
+            var logo=context.tbl_company.Where(w=> w.company_id==companyId).SingleOrDefault();
+            //SqlConnection con1 = new SqlConnection(ConfigurationManager.ConnectionStrings["TestDBConnection"].ConnectionString);
+            //SqlCommand cmd = new SqlCommand();
+            //cmd.CommandText = "sp_selectcompanylogo";
+            //cmd.CommandType = CommandType.StoredProcedure;
+            //cmd.Parameters.AddWithValue("@company_id", Convert.ToInt32(Session["company_id"]));
+            //cmd.Connection = con1;
+            try
+            {
+                //cmd.CommandTimeout = 600000;
+                //con1.Open();
+                //byte[] bytes = (byte[])cmd.ExecuteScalar();
+                //string strBase64 = Convert.ToBase64String(bytes);
+                if (logo.logo != null)
+                {
+                    if (File.Exists(Server.MapPath(logo.logo)))
+                    {
+                        imglogo.ImageUrl = logo.logo;
+            }
+                    else
+                    {
+                        imglogo.Visible = false;
+                        lblIms.Visible = true;
+                    }
+                }
+                else
+                {
+                    imglogo.Visible = false;
+                    lblIms.Visible = true;
+                }
+                //imglogo.ImageUrl = logo.logo.ToString();
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
+            }
+            finally
+            {
+                //con1.Close();
+                //con1.Dispose();
+            }
+        }
+        public void pagebind()
+        {
+          
+            ////Shakeeb
+            ////p.All2(p);
+            var purchase= (from p in  context.tbl_purchase
+            join c in  context.tbl_party on p.party_id equals c.party_id           
+            join company in context.tbl_company on p.company_id equals company.company_id
+                           where p.purchase_id == a && p.company_id == companyId && p.status == true && c.party_type == "Vendor"
+                          select new { PartyId = p.party_id, actualamount = p.total_amnt, createdate = p.created_date, discount = p.total_amnt, po_no = p.po_no
+                          ,
+                                       total = p.grand_total,
+                                       totalTax = p.total_tax,
+                                       name = c.party_name,
+                                       balanceamt = p.balance_amnt,
+                                       givenamt = p.given_amnt,
+                                       companyName=company.company_name,
+                                       address=company.company_address,
+                                       partyaddress=c.party_address,
+                                       partyname=c.party_name,
+                                       owneremail=company.owner_emailid,
+                                       pincode=company.pincode
+                          }).SingleOrDefault();
+          // from p in context.tbl_purchase join  context.tbl_party on  equals
+            //Scompany s = new Scompany();
+            //s.company_id = companyId;
+            //s.All(s);
+            lblCompanyName.Text = purchase.companyName;
+            lblAddress.Text = purchase.address;//s.company_address;
+            lblemail.Text = purchase.owneremail;//s.owner_emailid;
+            lblzipcode.Text = purchase.pincode;
+            int p_id = Convert.ToInt32(purchase.PartyId);
+            //tbl_party pa = new tbl_party();
+            //pa.company_id = companyId;
+            //pa.branch_id = branchId;
+            //pa.party_id = p_id;
+            //pa.party_type = "Vendor";
+            ////Shakeeb
+            ////pa.All3(pa);
+            lbldate.Text = purchase.createdate.ToString();
+            lblpartyname.Text = purchase.partyname;
+            lblpartyaddress.Text = purchase.partyaddress;
+
+            lblinvoiceno.Text = a.ToString(); //tblPurchase.purchase_id.ToString();
+            lblsubtotal.Text = purchase.actualamount.ToString();//tblPurchase.actual_amount.ToString();
+            lblTaxAmount.Text = purchase.totalTax.ToString();//tblPurchase.total_tax.ToString();
+            lblDiscountAmt.Text = purchase.balanceamt.ToString();//blPurchase.discount.ToString();
+            lblGrandTotal.Text = purchase.total.ToString(); //tblPurchase.grand_total.ToString();
+
+        }
+    }
+}
