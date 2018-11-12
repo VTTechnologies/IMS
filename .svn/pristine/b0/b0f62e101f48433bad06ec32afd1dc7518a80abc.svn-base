@@ -1,0 +1,1060 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IMSModelStoreContainer" CdmEntityContainer="IMSDBContext">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="IMSModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_batch">
+      <EntityTypeMapping TypeName="IMSModel.tbl_batch">
+        <MappingFragment StoreEntitySet="tbl_batch">
+          <ScalarProperty Name="batch_id" ColumnName="batch_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="batch_name" ColumnName="batch_name" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IMSModel.tbl_batch">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="IMSModel.Store.sp_SelectBatch">
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="IMSModel.Store.sp_Updatebatch">
+            <ScalarProperty Name="modified_date" ParameterName="modified_date" Version="Current" />
+            <ScalarProperty Name="modified_by" ParameterName="modified_by" Version="Current" />
+            <ScalarProperty Name="batch_name" ParameterName="batch_name" Version="Current" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" Version="Current" />
+            <ScalarProperty Name="batch_id" ParameterName="batch_id" Version="Current" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="IMSModel.Store.sp_Deletebatch">
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" />
+            <ScalarProperty Name="batch_id" ParameterName="batch_id" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_category">
+      <EntityTypeMapping TypeName="IMSModel.tbl_category">
+        <MappingFragment StoreEntitySet="tbl_category">
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="category_name" ColumnName="category_name" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IMSModel.tbl_category">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="IMSModel.Store.sp_SelectCategory">
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="IMSModel.Store.sp_UpdateCategory">
+            <ScalarProperty Name="modified_date" ParameterName="modified_date" Version="Current" />
+            <ScalarProperty Name="modified_by" ParameterName="modified_by" Version="Current" />
+            <ScalarProperty Name="category_name" ParameterName="category_name" Version="Current" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" Version="Current" />
+            <ScalarProperty Name="category_id" ParameterName="category_id" Version="Current" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="IMSModel.Store.sp_DeleteCategory">
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" />
+            <ScalarProperty Name="category_id" ParameterName="category_id" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_company">
+      <EntityTypeMapping TypeName="IMSModel.tbl_company">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="IMSModel.Store.sp_CompanyInsert">
+            <ScalarProperty Name="created_date" ParameterName="created_date" />
+            <ScalarProperty Name="created_by" ParameterName="created_by" />
+            <ScalarProperty Name="pincode" ParameterName="pincode" />
+            <ScalarProperty Name="country_id" ParameterName="country_id" />
+            <ScalarProperty Name="owner_mobileno" ParameterName="owner_mobileno" />
+            <ScalarProperty Name="owner_emailid" ParameterName="owner_emailid" />
+            <ScalarProperty Name="owner_name" ParameterName="owner_name" />
+            <ScalarProperty Name="company_name" ParameterName="company_name" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="IMSModel.Store.sp_UpdateCompany">
+            <ScalarProperty Name="modified_date" ParameterName="modified_date" Version="Current" />
+            <ScalarProperty Name="modified_by" ParameterName="modified_by" Version="Current" />
+            <ScalarProperty Name="GSTIN" ParameterName="GSTIN" Version="Current" />
+            <ScalarProperty Name="logo_name" ParameterName="logo_name" Version="Current" />
+            <ScalarProperty Name="logo" ParameterName="logo" Version="Current" />
+            <ScalarProperty Name="website" ParameterName="website" Version="Current" />
+            <ScalarProperty Name="fax_no" ParameterName="fax_no" Version="Current" />
+            <ScalarProperty Name="telephone_no" ParameterName="telephone_no" Version="Current" />
+            <ScalarProperty Name="city" ParameterName="city" Version="Current" />
+            <ScalarProperty Name="state_id" ParameterName="state_id" Version="Current" />
+            <ScalarProperty Name="owner_name" ParameterName="owner_name" Version="Current" />
+            <ScalarProperty Name="company_address" ParameterName="company_address" Version="Current" />
+            <ScalarProperty Name="company_name" ParameterName="company_name" Version="Current" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(IMSModel.tbl_company)">
+        <MappingFragment StoreEntitySet="tbl_company">
+          <ScalarProperty Name="logo" ColumnName="logo" />
+          <ScalarProperty Name="logo_name" ColumnName="logo_name" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="owner_emailid" ColumnName="owner_emailid" />
+          <ScalarProperty Name="owner_mobileno" ColumnName="owner_mobileno" />
+          <ScalarProperty Name="owner_name" ColumnName="owner_name" />
+          <ScalarProperty Name="website" ColumnName="website" />
+          <ScalarProperty Name="fax_no" ColumnName="fax_no" />
+          <ScalarProperty Name="telephone_no" ColumnName="telephone_no" />
+          <ScalarProperty Name="GSTIN" ColumnName="GSTIN" />
+          <ScalarProperty Name="pincode" ColumnName="pincode" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="state_id" ColumnName="state_id" />
+          <ScalarProperty Name="country_id" ColumnName="country_id" />
+          <ScalarProperty Name="company_address" ColumnName="company_address" />
+          <ScalarProperty Name="company_name" ColumnName="company_name" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_country">
+      <EntityTypeMapping TypeName="IMSModel.tbl_country">
+        <MappingFragment StoreEntitySet="tbl_country">
+          <ScalarProperty Name="country_id" ColumnName="country_id" />
+          <ScalarProperty Name="country_name" ColumnName="country_name" />
+          <ScalarProperty Name="currency_name" ColumnName="currency_name" />
+          <ScalarProperty Name="currency_symbol" ColumnName="currency_symbol" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_expense">
+      <EntityTypeMapping TypeName="IMSModel.tbl_expense">
+        <MappingFragment StoreEntitySet="tbl_expense">
+          <ScalarProperty Name="expense_id" ColumnName="expense_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="expense_name" ColumnName="expense_name" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IMSModel.tbl_expense">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="IMSModel.Store.sp_SelectExpense">
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="IMSModel.Store.sp_UpdateExpense">
+            <ScalarProperty Name="modified_date" ParameterName="modified_date" Version="Current" />
+            <ScalarProperty Name="modified_by" ParameterName="modified_by" Version="Current" />
+            <ScalarProperty Name="expense_name" ParameterName="expense_name" Version="Current" />
+            <ScalarProperty Name="expense_id" ParameterName="expense_id" Version="Current" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" Version="Current" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="IMSModel.Store.sp_DeleteExpense">
+            <ScalarProperty Name="expense_id" ParameterName="expense_id" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_expenseentry">
+      <EntityTypeMapping TypeName="IMSModel.tbl_expenseentry">
+        <MappingFragment StoreEntitySet="tbl_expenseentry">
+          <ScalarProperty Name="expenseentry_id" ColumnName="expenseentry_id" />
+          <ScalarProperty Name="expense_id" ColumnName="expense_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="spent_on" ColumnName="spent_on" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_financialyear">
+      <EntityTypeMapping TypeName="IMSModel.tbl_financialyear">
+        <MappingFragment StoreEntitySet="tbl_financialyear">
+          <ScalarProperty Name="financialyear_id" ColumnName="financialyear_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="start_date" ColumnName="start_date" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IMSModel.tbl_financialyear">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="IMSModel.Store.sp_SelectFY">
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="IMSModel.Store.sp_UpdateFyear">
+            <ScalarProperty Name="modified_date" ParameterName="modified_date" Version="Current" />
+            <ScalarProperty Name="modified_by" ParameterName="modified_by" Version="Current" />
+            <ScalarProperty Name="end_date" ParameterName="end_date" Version="Current" />
+            <ScalarProperty Name="start_date" ParameterName="start_date" Version="Current" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" Version="Current" />
+            <ScalarProperty Name="financialyear_id" ParameterName="financialyear_id" Version="Current" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_godown">
+      <EntityTypeMapping TypeName="IMSModel.tbl_godown">
+        <MappingFragment StoreEntitySet="tbl_godown">
+          <ScalarProperty Name="godown_id" ColumnName="godown_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="godown_name" ColumnName="godown_name" />
+          <ScalarProperty Name="godown_address" ColumnName="godown_address" />
+          <ScalarProperty Name="contact_no" ColumnName="contact_no" />
+          <ScalarProperty Name="contact_person" ColumnName="contact_person" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IMSModel.tbl_godown">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="IMSModel.Store.sp_Selectgodown">
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="IMSModel.Store.sp_UpdateGodown">
+            <ScalarProperty Name="modified_date" ParameterName="modified_date" Version="Current" />
+            <ScalarProperty Name="modified_by" ParameterName="modified_by" Version="Current" />
+            <ScalarProperty Name="contact_person" ParameterName="contact_person" Version="Current" />
+            <ScalarProperty Name="contact_no" ParameterName="contact_no" Version="Current" />
+            <ScalarProperty Name="godown_address" ParameterName="godown_address" Version="Current" />
+            <ScalarProperty Name="godown_name" ParameterName="godown_name" Version="Current" />
+            <ScalarProperty Name="godown_id" ParameterName="godown_id" Version="Current" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" Version="Current" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="IMSModel.Store.sp_DeleteGodown">
+            <ScalarProperty Name="godown_id" ParameterName="godown_id" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_monytransaction">
+      <EntityTypeMapping TypeName="IMSModel.tbl_monytransaction">
+        <MappingFragment StoreEntitySet="tbl_monytransaction">
+          <ScalarProperty Name="monytransaction_id" ColumnName="monytransaction_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="transaction_typ_id" ColumnName="transaction_typ_id" />
+          <ScalarProperty Name="transaction_typ" ColumnName="transaction_typ" />
+          <ScalarProperty Name="paymentmode_id" ColumnName="paymentmode_id" />
+          <ScalarProperty Name="total_bil_amt" ColumnName="total_bil_amt" />
+          <ScalarProperty Name="given_amt" ColumnName="given_amt" />
+          <ScalarProperty Name="balance_amt" ColumnName="balance_amt" />
+          <ScalarProperty Name="in_out" ColumnName="in_out" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_party">
+      <EntityTypeMapping TypeName="IMSModel.tbl_party">
+        <MappingFragment StoreEntitySet="tbl_party">
+          <ScalarProperty Name="party_id" ColumnName="party_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="party_name" ColumnName="party_name" />
+          <ScalarProperty Name="party_address" ColumnName="party_address" />
+          <ScalarProperty Name="contact_no" ColumnName="contact_no" />
+          <ScalarProperty Name="gstin_no" ColumnName="gstin_no" />
+          <ScalarProperty Name="party_type" ColumnName="party_type" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IMSModel.tbl_party">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="IMSModel.Store.sp_SelectParty">
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="IMSModel.Store.sp_UpdateParty">
+            <ScalarProperty Name="modified_date" ParameterName="modified_date" Version="Current" />
+            <ScalarProperty Name="modified_by" ParameterName="modified_by" Version="Current" />
+            <ScalarProperty Name="gstin_no" ParameterName="gstin_no" Version="Current" />
+            <ScalarProperty Name="party_type" ParameterName="party_type" Version="Current" />
+            <ScalarProperty Name="contact_no" ParameterName="contact_no" Version="Current" />
+            <ScalarProperty Name="party_address" ParameterName="party_address" Version="Current" />
+            <ScalarProperty Name="party_name" ParameterName="party_name" Version="Current" />
+            <ScalarProperty Name="party_id" ParameterName="party_id" Version="Current" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" Version="Current" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="IMSModel.Store.sp_DeleteParty">
+            <ScalarProperty Name="party_id" ParameterName="party_id" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_paymentmode">
+      <EntityTypeMapping TypeName="IMSModel.tbl_paymentmode">
+        <MappingFragment StoreEntitySet="tbl_paymentmode">
+          <ScalarProperty Name="paymentode_id" ColumnName="paymentode_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="paymentmode_name" ColumnName="paymentmode_name" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IMSModel.tbl_paymentmode">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="IMSModel.Store.sp_SelectPM">
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="IMSModel.Store.sp_UpdatePMode">
+            <ScalarProperty Name="modified_date" ParameterName="modified_date" Version="Current" />
+            <ScalarProperty Name="modified_by" ParameterName="modified_by" Version="Current" />
+            <ScalarProperty Name="paymentmode_name" ParameterName="paymentmode_name" Version="Current" />
+            <ScalarProperty Name="paymentode_id" ParameterName="paymentode_id" Version="Current" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" Version="Current" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_product">
+      <EntityTypeMapping TypeName="IMSModel.tbl_product">
+        <MappingFragment StoreEntitySet="tbl_product">
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+          <ScalarProperty Name="godown_id" ColumnName="godown_id" />
+          <ScalarProperty Name="rack_id" ColumnName="rack_id" />
+          <ScalarProperty Name="tax_id" ColumnName="tax_id" />
+          <ScalarProperty Name="purchas_price" ColumnName="purchas_price" />
+          <ScalarProperty Name="sales_price" ColumnName="sales_price" />
+          <ScalarProperty Name="reorder_level" ColumnName="reorder_level" />
+          <ScalarProperty Name="product_name" ColumnName="product_name" />
+          <ScalarProperty Name="product_code" ColumnName="product_code" />
+          <ScalarProperty Name="hsn_code" ColumnName="hsn_code" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IMSModel.tbl_product">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="IMSModel.Store.sp_SelectProduct">
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="IMSModel.Store.sp_UpdateProduct">
+            <ScalarProperty Name="modified_date" ParameterName="modified_date" Version="Current" />
+            <ScalarProperty Name="modified_by" ParameterName="modified_by" Version="Current" />
+            <ScalarProperty Name="product_name" ParameterName="product_name" Version="Current" />
+            <ScalarProperty Name="hsn_code" ParameterName="hsn_code" Version="Current" />
+            <ScalarProperty Name="product_code" ParameterName="product_code" Version="Current" />
+            <ScalarProperty Name="sales_price" ParameterName="sales_price" Version="Current" />
+            <ScalarProperty Name="purchas_price" ParameterName="purchas_price" Version="Current" />
+            <ScalarProperty Name="unit_id" ParameterName="unit_id" Version="Current" />
+            <ScalarProperty Name="tax_id" ParameterName="tax_id" Version="Current" />
+            <ScalarProperty Name="godown_id" ParameterName="godown_id" Version="Current" />
+            <ScalarProperty Name="rack_id" ParameterName="rack_id" Version="Current" />
+            <ScalarProperty Name="category_id" ParameterName="category_id" Version="Current" />
+            <ScalarProperty Name="product_id" ParameterName="product_id" Version="Current" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" Version="Current" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="IMSModel.Store.sp_DeleteProduct">
+            <ScalarProperty Name="product_id" ParameterName="product_id" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_purchase">
+      <EntityTypeMapping TypeName="IMSModel.tbl_purchase">
+        <MappingFragment StoreEntitySet="tbl_purchase">
+          <ScalarProperty Name="purchase_id" ColumnName="purchase_id" />
+          <ScalarProperty Name="party_id" ColumnName="party_id" />
+          <ScalarProperty Name="financialyear_id" ColumnName="financialyear_id" />
+          <ScalarProperty Name="po_no" ColumnName="po_no" />
+          <ScalarProperty Name="total_tax" ColumnName="total_tax" />
+          <ScalarProperty Name="discount" ColumnName="discount" />
+          <ScalarProperty Name="actual_amount" ColumnName="actual_amount" />
+          <ScalarProperty Name="grand_total" ColumnName="grand_total" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_purchasedetails">
+      <EntityTypeMapping TypeName="IMSModel.tbl_purchasedetails">
+        <MappingFragment StoreEntitySet="tbl_purchasedetails">
+          <ScalarProperty Name="purchasedetails_id" ColumnName="purchasedetails_id" />
+          <ScalarProperty Name="purchase_id" ColumnName="purchase_id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="batch_id" ColumnName="batch_id" />
+          <ScalarProperty Name="tax_id" ColumnName="tax_id" />
+          <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+          <ScalarProperty Name="tax_amt" ColumnName="tax_amt" />
+          <ScalarProperty Name="dicount_amt" ColumnName="dicount_amt" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="purchase_rate" ColumnName="purchase_rate" />
+          <ScalarProperty Name="sale_rate" ColumnName="sale_rate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_purchasereturn">
+      <EntityTypeMapping TypeName="IMSModel.tbl_purchasereturn">
+        <MappingFragment StoreEntitySet="tbl_purchasereturn">
+          <ScalarProperty Name="purchasereturn_id" ColumnName="purchasereturn_id" />
+          <ScalarProperty Name="purchase_id" ColumnName="purchase_id" />
+          <ScalarProperty Name="batch_id" ColumnName="batch_id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+          <ScalarProperty Name="tax_id" ColumnName="tax_id" />
+          <ScalarProperty Name="tax_amt" ColumnName="tax_amt" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_rack">
+      <EntityTypeMapping TypeName="IMSModel.tbl_rack">
+        <MappingFragment StoreEntitySet="tbl_rack">
+          <ScalarProperty Name="rack_id" ColumnName="rack_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="rack_name" ColumnName="rack_name" />
+          <ScalarProperty Name="godown_id" ColumnName="godown_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IMSModel.tbl_rack">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="IMSModel.Store.sp_SelectRack">
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="IMSModel.Store.sp_UpdateRack">
+            <ScalarProperty Name="modified_date" ParameterName="modified_date" Version="Current" />
+            <ScalarProperty Name="modified_by" ParameterName="modified_by" Version="Current" />
+            <ScalarProperty Name="rack_name" ParameterName="rack_name" Version="Current" />
+            <ScalarProperty Name="godown_id" ParameterName="godown_id" Version="Current" />
+            <ScalarProperty Name="rack_id" ParameterName="rack_id" Version="Current" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" Version="Current" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="IMSModel.Store.sp_DeleteRack">
+            <ScalarProperty Name="rack_id" ParameterName="rack_id" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_sale">
+      <EntityTypeMapping TypeName="IMSModel.tbl_sale">
+        <MappingFragment StoreEntitySet="tbl_sale">
+          <ScalarProperty Name="sale_id" ColumnName="sale_id" />
+          <ScalarProperty Name="party_id" ColumnName="party_id" />
+          <ScalarProperty Name="financialyear_id" ColumnName="financialyear_id" />
+          <ScalarProperty Name="invoice_no" ColumnName="invoice_no" />
+          <ScalarProperty Name="total_tax" ColumnName="total_tax" />
+          <ScalarProperty Name="total_discount" ColumnName="total_discount" />
+          <ScalarProperty Name="actual_amount" ColumnName="actual_amount" />
+          <ScalarProperty Name="grand_total" ColumnName="grand_total" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_saledetails">
+      <EntityTypeMapping TypeName="IMSModel.tbl_saledetails">
+        <MappingFragment StoreEntitySet="tbl_saledetails">
+          <ScalarProperty Name="saledetails_id" ColumnName="saledetails_id" />
+          <ScalarProperty Name="sale_id" ColumnName="sale_id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="batch_id" ColumnName="batch_id" />
+          <ScalarProperty Name="tax_id" ColumnName="tax_id" />
+          <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+          <ScalarProperty Name="tax_amt" ColumnName="tax_amt" />
+          <ScalarProperty Name="dicount_amt" ColumnName="dicount_amt" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_salesreturn">
+      <EntityTypeMapping TypeName="IMSModel.tbl_salesreturn">
+        <MappingFragment StoreEntitySet="tbl_salesreturn">
+          <ScalarProperty Name="salesreturn_id" ColumnName="salesreturn_id" />
+          <ScalarProperty Name="sale_id" ColumnName="sale_id" />
+          <ScalarProperty Name="batch_id" ColumnName="batch_id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+          <ScalarProperty Name="tax_id" ColumnName="tax_id" />
+          <ScalarProperty Name="tax_amt" ColumnName="tax_amt" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_state">
+      <EntityTypeMapping TypeName="IMSModel.tbl_state">
+        <MappingFragment StoreEntitySet="tbl_state">
+          <ScalarProperty Name="state_id" ColumnName="state_id" />
+          <ScalarProperty Name="country_id" ColumnName="country_id" />
+          <ScalarProperty Name="state_name" ColumnName="state_name" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_stock">
+      <EntityTypeMapping TypeName="IMSModel.tbl_stock">
+        <MappingFragment StoreEntitySet="tbl_stock">
+          <ScalarProperty Name="stock_id" ColumnName="stock_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="batch_id" ColumnName="batch_id" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_stocktransaction">
+      <EntityTypeMapping TypeName="IMSModel.tbl_stocktransaction">
+        <MappingFragment StoreEntitySet="tbl_stocktransaction">
+          <ScalarProperty Name="stockt_id" ColumnName="stockt_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="stocktransaction_typ_id" ColumnName="stocktransaction_typ_id" />
+          <ScalarProperty Name="stocktransaction_typ" ColumnName="stocktransaction_typ" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="batch_id" ColumnName="batch_id" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+          <ScalarProperty Name="in_out" ColumnName="in_out" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_tax">
+      <EntityTypeMapping TypeName="IMSModel.tbl_tax">
+        <MappingFragment StoreEntitySet="tbl_tax">
+          <ScalarProperty Name="tax_id" ColumnName="tax_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="tax_name" ColumnName="tax_name" />
+          <ScalarProperty Name="tax_percentage" ColumnName="tax_percentage" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IMSModel.tbl_tax">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="IMSModel.Store.sp_SelectTax">
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="IMSModel.Store.sp_UpdateTax">
+            <ScalarProperty Name="modified_date" ParameterName="modified_date" Version="Current" />
+            <ScalarProperty Name="modified_by" ParameterName="modified_by" Version="Current" />
+            <ScalarProperty Name="tax_percentage" ParameterName="tax_percentage" Version="Current" />
+            <ScalarProperty Name="tax_name" ParameterName="tax_name" Version="Current" />
+            <ScalarProperty Name="tax_id" ParameterName="tax_id" Version="Current" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" Version="Current" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="IMSModel.Store.sp_DeleteTax">
+            <ScalarProperty Name="tax_id" ParameterName="tax_id" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_taxGroup">
+      <EntityTypeMapping TypeName="IMSModel.tbl_taxGroup">
+        <MappingFragment StoreEntitySet="tbl_taxGroup">
+          <ScalarProperty Name="taxGroup_id" ColumnName="taxGroup_id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="tax_id" ColumnName="tax_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_unit">
+      <EntityTypeMapping TypeName="IMSModel.tbl_unit">
+        <MappingFragment StoreEntitySet="tbl_unit">
+          <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="unit_name" ColumnName="unit_name" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IMSModel.tbl_unit">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="IMSModel.Store.sp_SelectUnit">
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="IMSModel.Store.sp_UpdateUnit">
+            <ScalarProperty Name="modified_date" ParameterName="modified_date" Version="Current" />
+            <ScalarProperty Name="modified_by" ParameterName="modified_by" Version="Current" />
+            <ScalarProperty Name="unit_name" ParameterName="unit_name" Version="Current" />
+            <ScalarProperty Name="unit_id" ParameterName="unit_id" Version="Current" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" Version="Current" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="IMSModel.Store.sp_DeleteUnit">
+            <ScalarProperty Name="unit_id" ParameterName="unit_id" />
+            <ScalarProperty Name="branch_id" ParameterName="branch_id" />
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="IMSModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_CategoryInsert" FunctionName="IMSModel.Store.sp_CategoryInsert" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="IMSModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="IMSModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_godowninsert" FunctionName="IMSModel.Store.sp_godowninsert" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="IMSModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="IMSModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_rackInsert" FunctionName="IMSModel.Store.sp_rackInsert" />
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="IMSModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_SelectCategory" FunctionName="IMSModel.Store.sp_SelectCategory">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSModel.sp_SelectCategory_Result">
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="category_name" ColumnName="category_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_UnitInsert" FunctionName="IMSModel.Store.sp_UnitInsert" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="IMSModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="sp_BatchInsert" FunctionName="IMSModel.Store.sp_BatchInsert" />
+    <FunctionImportMapping FunctionImportName="sp_ExpenseInsert" FunctionName="IMSModel.Store.sp_ExpenseInsert" />
+    <FunctionImportMapping FunctionImportName="sp_FyInsert" FunctionName="IMSModel.Store.sp_FyInsert" />
+    <FunctionImportMapping FunctionImportName="sp_PartyInsert" FunctionName="IMSModel.Store.sp_PartyInsert" />
+    <FunctionImportMapping FunctionImportName="sp_PaymentModeInsert" FunctionName="IMSModel.Store.sp_PaymentModeInsert" />
+    <FunctionImportMapping FunctionImportName="sp_ProductInsert" FunctionName="IMSModel.Store.sp_ProductInsert" />
+    <FunctionImportMapping FunctionImportName="sp_SelectRack" FunctionName="IMSModel.Store.sp_SelectRack">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSModel.sp_SelectRack_Result">
+          <ScalarProperty Name="rack_id" ColumnName="rack_id" />
+          <ScalarProperty Name="rack_name" ColumnName="rack_name" />
+          <ScalarProperty Name="godown_name" ColumnName="godown_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_taxInsert" FunctionName="IMSModel.Store.sp_taxInsert" />
+    <FunctionImportMapping FunctionImportName="sp_SelectBatch" FunctionName="IMSModel.Store.sp_SelectBatch">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSModel.sp_SelectBatch_Result">
+          <ScalarProperty Name="batch_id" ColumnName="batch_id" />
+          <ScalarProperty Name="batch_name" ColumnName="batch_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SelectExpense" FunctionName="IMSModel.Store.sp_SelectExpense">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSModel.sp_SelectExpense_Result">
+          <ScalarProperty Name="expense_id" ColumnName="expense_id" />
+          <ScalarProperty Name="expense_name" ColumnName="expense_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SelectFY" FunctionName="IMSModel.Store.sp_SelectFY">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSModel.sp_SelectFY_Result">
+          <ScalarProperty Name="financialyear_id" ColumnName="financialyear_id" />
+          <ScalarProperty Name="start_date" ColumnName="start_date" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Selectgodown" FunctionName="IMSModel.Store.sp_Selectgodown">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSModel.sp_Selectgodown_Result">
+          <ScalarProperty Name="godown_id" ColumnName="godown_id" />
+          <ScalarProperty Name="godown_name" ColumnName="godown_name" />
+          <ScalarProperty Name="godown_address" ColumnName="godown_address" />
+          <ScalarProperty Name="contact_no" ColumnName="contact_no" />
+          <ScalarProperty Name="contact_person" ColumnName="contact_person" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SelectParty" FunctionName="IMSModel.Store.sp_SelectParty">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSModel.sp_SelectParty_Result">
+          <ScalarProperty Name="party_id" ColumnName="party_id" />
+          <ScalarProperty Name="party_name" ColumnName="party_name" />
+          <ScalarProperty Name="party_address" ColumnName="party_address" />
+          <ScalarProperty Name="contact_no" ColumnName="contact_no" />
+          <ScalarProperty Name="gstin_no" ColumnName="gstin_no" />
+          <ScalarProperty Name="party_type" ColumnName="party_type" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SelectPM" FunctionName="IMSModel.Store.sp_SelectPM">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSModel.sp_SelectPM_Result">
+          <ScalarProperty Name="paymentode_id" ColumnName="paymentode_id" />
+          <ScalarProperty Name="paymentmode_name" ColumnName="paymentmode_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SelectProduct" FunctionName="IMSModel.Store.sp_SelectProduct">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSModel.sp_SelectProduct_Result">
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="product_name" ColumnName="product_name" />
+          <ScalarProperty Name="hsn_code" ColumnName="hsn_code" />
+          <ScalarProperty Name="category_name" ColumnName="category_name" />
+          <ScalarProperty Name="unit_name" ColumnName="unit_name" />
+          <ScalarProperty Name="godown_name" ColumnName="godown_name" />
+          <ScalarProperty Name="tax_name" ColumnName="tax_name" />
+          <ScalarProperty Name="product_code" ColumnName="product_code" />
+          <ScalarProperty Name="purchas_price" ColumnName="purchas_price" />
+          <ScalarProperty Name="sales_price" ColumnName="sales_price" />
+          <ScalarProperty Name="reorder_level" ColumnName="reorder_level" />
+          <ScalarProperty Name="rack_name" ColumnName="rack_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SelectTax" FunctionName="IMSModel.Store.sp_SelectTax">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSModel.sp_SelectTax_Result">
+          <ScalarProperty Name="tax_id" ColumnName="tax_id" />
+          <ScalarProperty Name="tax_name" ColumnName="tax_name" />
+          <ScalarProperty Name="tax_percentage" ColumnName="tax_percentage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SelectUnit" FunctionName="IMSModel.Store.sp_SelectUnit">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSModel.sp_SelectUnit_Result">
+          <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+          <ScalarProperty Name="unit_name" ColumnName="unit_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_UpdateUnit" FunctionName="IMSModel.Store.sp_UpdateUnit" />
+    <FunctionImportMapping FunctionImportName="sp_saveerror" FunctionName="IMSModel.Store.sp_saveerror" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateCategory" FunctionName="IMSModel.Store.sp_UpdateCategory" />
+    <FunctionImportMapping FunctionImportName="sp_Updatebatch" FunctionName="IMSModel.Store.sp_Updatebatch" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateExpense" FunctionName="IMSModel.Store.sp_UpdateExpense" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateFyear" FunctionName="IMSModel.Store.sp_UpdateFyear" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateGodown" FunctionName="IMSModel.Store.sp_UpdateGodown" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateParty" FunctionName="IMSModel.Store.sp_UpdateParty" />
+    <FunctionImportMapping FunctionImportName="sp_UpdatePMode" FunctionName="IMSModel.Store.sp_UpdatePMode" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateProduct" FunctionName="IMSModel.Store.sp_UpdateProduct" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateRack" FunctionName="IMSModel.Store.sp_UpdateRack" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateTax" FunctionName="IMSModel.Store.sp_UpdateTax" />
+    <FunctionImportMapping FunctionImportName="sp_Deletebatch" FunctionName="IMSModel.Store.sp_Deletebatch" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteCategory" FunctionName="IMSModel.Store.sp_DeleteCategory" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteExpense" FunctionName="IMSModel.Store.sp_DeleteExpense" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteFyear" FunctionName="IMSModel.Store.sp_DeleteFyear" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteGodown" FunctionName="IMSModel.Store.sp_DeleteGodown" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteParty" FunctionName="IMSModel.Store.sp_DeleteParty" />
+    <FunctionImportMapping FunctionImportName="sp_DeletePMode" FunctionName="IMSModel.Store.sp_DeletePMode" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteProduct" FunctionName="IMSModel.Store.sp_DeleteProduct" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteRack" FunctionName="IMSModel.Store.sp_DeleteRack" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteTax" FunctionName="IMSModel.Store.sp_DeleteTax" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteUnit" FunctionName="IMSModel.Store.sp_DeleteUnit" />
+    <EntitySetMapping Name="tbl_error_log">
+      <EntityTypeMapping TypeName="IMSModel.tbl_error_log">
+        <MappingFragment StoreEntitySet="tbl_error_log">
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="error_msg" ColumnName="error_msg" />
+          <ScalarProperty Name="error_type" ColumnName="error_type" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="error_log_id" ColumnName="error_log_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_role">
+      <EntityTypeMapping TypeName="IMSModel.tbl_role">
+        <MappingFragment StoreEntitySet="tbl_role">
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="role_name" ColumnName="role_name" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_User">
+      <EntityTypeMapping TypeName="IMSModel.tbl_User">
+        <MappingFragment StoreEntitySet="tbl_User">
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="locked_date" ColumnName="locked_date" />
+          <ScalarProperty Name="islocked" ColumnName="islocked" />
+          <ScalarProperty Name="last_login" ColumnName="last_login" />
+          <ScalarProperty Name="retry_attempts" ColumnName="retry_attempts" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="user_mobieno" ColumnName="user_mobieno" />
+          <ScalarProperty Name="user_Emai" ColumnName="user_Emai" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IMSModel.tbl_User">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="IMSModel.Store.sp_UserInsert">
+            <ScalarProperty Name="created_date" ParameterName="created_date" />
+            <ScalarProperty Name="created_by" ParameterName="created_by" />
+            <ScalarProperty Name="password" ParameterName="password" />
+            <ScalarProperty Name="user_mobieno" ParameterName="user_mobieno" />
+            <ScalarProperty Name="user_Emai" ParameterName="user_Emai" />
+            <ScalarProperty Name="user_name" ParameterName="user_name" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="IMSModel.Store.spAuthenticateUser">
+            <ScalarProperty Name="password" ParameterName="password" Version="Current" />
+            <ScalarProperty Name="user_name" ParameterName="user_name" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_userbranch">
+      <EntityTypeMapping TypeName="IMSModel.tbl_userbranch">
+        <MappingFragment StoreEntitySet="tbl_userbranch">
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="userbranch_id" ColumnName="userbranch_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IMSModel.tbl_userbranch">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="IMSModel.Store.sp_SelectUserRole">
+            <ScalarProperty Name="company_id" ParameterName="company_id" />
+          </InsertFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_userrole">
+      <EntityTypeMapping TypeName="IMSModel.tbl_userrole">
+        <MappingFragment StoreEntitySet="tbl_userrole">
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="userrole_id" ColumnName="userrole_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_CompanyInsert" FunctionName="IMSModel.Store.sp_CompanyInsert" />
+    <FunctionImportMapping FunctionImportName="sp_UserInsert" FunctionName="IMSModel.Store.sp_UserInsert" />
+    <FunctionImportMapping FunctionImportName="sp_SelectCountry" FunctionName="IMSModel.Store.sp_SelectCountry">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSModel.sp_SelectCountry_Result">
+          <ScalarProperty Name="country_id" ColumnName="country_id" />
+          <ScalarProperty Name="country_name" ColumnName="country_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="tbl_branch">
+      <EntityTypeMapping TypeName="IsTypeOf(IMSModel.tbl_branch)">
+        <MappingFragment StoreEntitySet="tbl_branch">
+          <ScalarProperty Name="branch_name" ColumnName="branch_name" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="fax_no" ColumnName="fax_no" />
+          <ScalarProperty Name="mobile_no" ColumnName="mobile_no" />
+          <ScalarProperty Name="telephone_no" ColumnName="telephone_no" />
+          <ScalarProperty Name="pincode" ColumnName="pincode" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="state_id" ColumnName="state_id" />
+          <ScalarProperty Name="country_id" ColumnName="country_id" />
+          <ScalarProperty Name="branch_address" ColumnName="branch_address" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spAuthenticateUser" FunctionName="IMSModel.Store.spAuthenticateUser" />
+    <FunctionImportMapping FunctionImportName="sp_AddUser" FunctionName="IMSModel.Store.sp_AddUser" />
+    <FunctionImportMapping FunctionImportName="sp_AddUser2" FunctionName="IMSModel.Store.sp_AddUser2" />
+    <FunctionImportMapping FunctionImportName="sp_SelectUserRole" FunctionName="IMSModel.Store.sp_SelectUserRole">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSModel.sp_SelectUserRole_Result">
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="role_name" ColumnName="role_name" />
+          <ScalarProperty Name="branch_name" ColumnName="branch_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_UpdateUser" FunctionName="IMSModel.Store.sp_UpdateUser" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteUser" FunctionName="IMSModel.Store.sp_DeleteUser" />
+    <FunctionImportMapping FunctionImportName="spAuthenticateUserRole" FunctionName="IMSModel.Store.spAuthenticateUserRole" />
+    <FunctionImportMapping FunctionImportName="sp_SelectCompany" FunctionName="IMSModel.Store.sp_SelectCompany">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSModel.sp_SelectCompany_Result">
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="company_name" ColumnName="company_name" />
+          <ScalarProperty Name="company_address" ColumnName="company_address" />
+          <ScalarProperty Name="country_id" ColumnName="country_id" />
+          <ScalarProperty Name="state_id" ColumnName="state_id" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="pincode" ColumnName="pincode" />
+          <ScalarProperty Name="logo" ColumnName="logo" />
+          <ScalarProperty Name="GSTIN" ColumnName="GSTIN" />
+          <ScalarProperty Name="telephone_no" ColumnName="telephone_no" />
+          <ScalarProperty Name="mobile_no" ColumnName="mobile_no" />
+          <ScalarProperty Name="fax_no" ColumnName="fax_no" />
+          <ScalarProperty Name="website" ColumnName="website" />
+          <ScalarProperty Name="owner_name" ColumnName="owner_name" />
+          <ScalarProperty Name="owner_address" ColumnName="owner_address" />
+          <ScalarProperty Name="owner_mobileno" ColumnName="owner_mobileno" />
+          <ScalarProperty Name="owner_emailid" ColumnName="owner_emailid" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_UpdateCompany" FunctionName="IMSModel.Store.sp_UpdateCompany" />
+  </EntityContainerMapping>
+</Mapping>

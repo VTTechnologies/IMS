@@ -1,0 +1,198 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="MasterReports.aspx.cs" Inherits="IMS.MasterReports" %>
+
+<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <%--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--%>
+    <script>
+        $(function () {
+
+            var hv = $("#" + '<%= hd1.ClientID %>').val();
+            var hvq = $("#" + '<%= hd2.ClientID %>').val();
+
+
+            $("#<%= txtStartDate.ClientID %>").datepicker(
+                {
+                    dateFormat: 'yy-mm-dd',
+                    minDate: new Date(hv),
+                    maxDate: new Date(hvq)
+                }
+                );
+        });
+
+        $(function () {
+          
+            $('[id*=lstProduct]').multiselect({
+                    includeSelectAllOption: true
+            });
+            $('[id*=lstVendor]').multiselect({
+                includeSelectAllOption: true
+            });
+          
+            var hv = $("#" + '<%= hd3.ClientID %>').val();
+            var hvq = $("#" + '<%= hd4.ClientID %>').val();
+
+
+            $("#<%= txtenddate.ClientID %>").datepicker(
+                {
+                    dateFormat: 'yy-mm-dd',
+                    minDate: new Date(hv),
+                    maxDate: new Date(hvq)
+                }
+                );
+        });
+    </script>
+
+    <style>
+        tr.GridPager td {
+            height: 26px;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        .GridPager a, .GridPager span {
+            display: block;
+            width: 20px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            margin: 0;
+            padding: 0;
+            font-size: 80%;
+        }
+
+        .GridPager a {
+            background-color: #f5f5f5;
+            color: #969696;
+            border: 1px solid #dddddd;
+            height: 20px;
+            font-size: 80%;
+        }
+
+        .GridPager span {
+            background-color: #ccdef4;
+            color: #000;
+            border: 1px solid #969696;
+            height: 20px;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="panel panel-default ">
+        <div class="panel-heading text-center">
+            <h2>Common Reports</h2>
+        </div>
+        <div class="panel-body">
+            <div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4 ">
+                                <div>
+                                    <div class="col-sm-10  ">
+                                        <label class="control-label">
+                                            Select Report                                    
+                                        </label>                                       
+                                       <asp:DropDownList ID="ddlReportType" runat="server" CssClass="form-control">
+                                            <asp:ListItem Text="Choose Vendor" Value="0" />
+                                           <asp:ListItem Text="Inventory Report" Value="1" />
+                                           <%--<asp:ListItem Text="Product-Wise Stock Report" />--%>
+                                        </asp:DropDownList>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" InitialValue="0" ControlToValidate="ddlReportType" ErrorMessage="Please Select Report Type" ForeColor="Red" ValidationGroup="search"></asp:RequiredFieldValidator>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div>
+                                    <div class="col-sm-10 ">
+                                        <label class="control-label">
+                                            Filter By                                    
+                                        </label>
+                                        <asp:DropDownList ID="ddlFilerBy" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlFilerBy_SelectedIndexChanged" >
+                                            <asp:ListItem Text="Choose Filter" Value="0"/>
+                                            <asp:ListItem Text="Product Wise" Value="1"/>
+                                            <asp:ListItem Text="Vendor Wise"  Value="2"/>
+                                            <asp:ListItem Text="Cutomer Wise" Value="3"/>
+                                        </asp:DropDownList>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" InitialValue="0" ControlToValidate="ddlFilerBy" ErrorMessage="Please Select Filter By" ForeColor="Red" ValidationGroup="search"></asp:RequiredFieldValidator>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div>
+                                <div id="Products" runat="server" visible="false">
+                                    <div class="col-sm-10  ">
+                                        <label class="control-label">
+                                            Products                                    
+                                        </label>
+                                       <asp:ListBox  ID="lstProduct" runat="server" CssClass="form-control" SelectionMode="Multiple">
+                                       </asp:ListBox>
+                                    </div>
+                                     </div>
+                                </div>
+                                 <div id="Vendors" runat="server" visible="false">
+                                    <div class="col-sm-10  ">
+                                        <label class="control-label">
+                                            Vendors                                  
+                                        </label>
+                                       <asp:ListBox  ID="lstVendor" runat="server" CssClass="form-control" SelectionMode="Multiple">                                            
+                                        </asp:ListBox>
+                                    </div>
+                                </div>
+                            </div>                        
+                             
+                        </div>
+                        <div class="row">   
+                            <div class="col-md-4 ">
+                                <div>
+                                    <div class="col-sm-10  ">
+                                        <label class="control-label">
+                                            From Date                                    
+                                        </label>
+                                        <asp:HiddenField ID="hd3" runat="server" />
+                                        <asp:HiddenField ID="hd4" runat="server" />
+                                        <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div class=" Fhorizontal ">
+                                    <div class="col-sm-10 ">
+                                        <label class="control-label">
+                                            To Date
+                                    
+                                        </label>
+                                        <asp:HiddenField ID="hd1" runat="server" />
+                                        <asp:HiddenField ID="hd2" runat="server" />
+                                        <asp:TextBox ID="txtenddate" runat="server" CssClass="form-control"></asp:TextBox>
+
+                                    </div>
+                                </div>
+                            </div>                           
+                        </div>
+                    </div>
+                </div>
+                    
+                <asp:Label ID="Label1" runat="server"></asp:Label>
+            </div>
+        </div>
+        <div class="panel-footer text-center">
+            <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary" ValidationGroup="search" OnClick="btnSearch_Click" Text="Search" />
+            <asp:Button ID="Button2" runat="server" CssClass="btn btn-primary" OnClick="btnClear_Click" Text="Clear" />
+        </div>
+
+        
+             <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+             <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>    
+             <rsweb:ReportViewer ID="ReportViewer1" runat="server" Height="900" Width="1205" ></rsweb:ReportViewer>
+            </div>
+                 </div>
+    </div>
+</asp:Content>
