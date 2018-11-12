@@ -1,0 +1,817 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using IMSBLL.EntityModel;
+using IMSBLL.DAL;
+using System.Configuration;
+
+namespace IMS.PurchaseFolder
+{
+    public partial class PurchaseReturn : System.Web.UI.Page
+    {
+        /// <summary>
+        /// Objects That are used in coding
+        /// </summary>
+        int companyId = 0, branchId = 0, financialYearId = 0;
+        string user_id = string.Empty;
+        IMS_TESTEntities context = new IMS_TESTEntities();
+        SqlHelper helper = new SqlHelper();
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["TestDBConnection"].ConnectionString);
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            SessionValue();
+            if (!IsPostBack)
+            {
+                if (ViewState["Details"] == null)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    dataTable.Columns.Add("purchasedetails_id");
+                    dataTable.Columns.Add("Product_id");
+                    dataTable.Columns.Add("batch_id");
+                    dataTable.Columns.Add("unit_id");
+                    dataTable.Columns.Add("tax_id");
+                    dataTable.Columns.Add("amount");
+                    dataTable.Columns.Add("dicount_amt");
+                    dataTable.Columns.Add("tax_amt");
+                    dataTable.Columns.Add("purchase_rate");
+                    dataTable.Columns.Add("quantity");
+                    dataTable.Columns.Add("product_name");
+                    dataTable.Columns.Add("unit_name");
+                    dataTable.Columns.Add("batch_name");
+                    dataTable.Columns.Add("tax_percentage");
+                    ViewState["Details"] = dataTable;
+                }
+                this.BindGrid();
+                ddlpaymentmodebind();
+            }
+        }
+        /// <summary>
+        /// All The Methods
+        /// </summary>
+        
+        #region Methods
+        [System.Web.Services.WebMethod]
+        public static string[] CheckQuantity(decimal enterdQuantity, int productid)
+        {
+            string[] status_Msg = new string[2]; 
+            try
+            {
+               
+                if (HttpContext.Current.Session["company_id"] != null && HttpContext.Current.Session["PurchaseId"]!=null)
+                {
+                    IMS_TESTEntities context = new IMS_TESTEntities();
+                   // int p_id=Convert.ToInt32(productid);
+                    int companyId = Convert.ToInt32(HttpContext.Current.Session["company_id"]);
+                    int a = Convert.ToInt32(HttpContext.Current.Session["PurchaseId"]);
+                    SqlHelper helper = new SqlHelper();
+                    var stockQuantity = context.tbl_stock.Where(s => s.company_id == companyId && s.product_id == productid).FirstOrDefault();
+                        //helper.checkusersdata24(companyId, Convert.ToInt32(productid));
+
+                    var returnQuantity = context.GetReturnQuantity(a, Constants.Purchase, productid).FirstOrDefault().Value;
+                    if (enterdQuantity <= returnQuantity) 
+                            {
+                                if (stockQuantity.qty > Convert.ToDecimal(enterdQuantity))
+                                {
+                                    status_Msg[0] = "false";
+                                    status_Msg[1] = "";
+                                    return status_Msg;
+                                }
+                                else
+                                {
+                                    status_Msg[0] = "true";
+                                    status_Msg[1] = "Insufficient Stock Quantity.";
+                                    return status_Msg;                                    
+                                }
+                            }
+                            else
+                            {
+                                status_Msg[0] = "false-2";
+                                status_Msg[1] = "Only "+ returnQuantity +" no of items remaining for the selected product.";
+                                return status_Msg;
+                            }
+                    //if (data < Convert.ToInt32(useroremail))
+                    //{
+
+                    //    return "true";
+                    //}
+                    //else
+                    //{
+                    //    return "false";
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
+            }
+            return status_Msg;
+        }
+        //public bool ProductChecker(int id)
+        //{
+        //    for (int i = 0; i <= gvpurchasedetails.Rows.Count - 1; i++)
+        //    {
+        //        int pid = Convert.ToInt32(gvpurchasedetails.Rows[i].Cells[2].Text);
+        //        decimal qty = Convert.ToDecimal(gvpurchasedetails.Rows[i].Cells[5].Text);
+
+        //        if (pid == id)
+        //        {
+        //            ddlproduct.ClearSelection();
+        //            ddlproduct.Items.FindByValue(pid.ToString()).Enabled = false;
+        //            return false;
+        //        }
+        //    }
+        //    return true;
+        //}
+       
+        public bool productvalid(int productid, decimal enterdQuantity,int count)
+        {
+            decimal totalqty = 0;
+            decimal availableqty = 0;
+            
+            decimal stockQuantity = Convert.ToDecimal(Session["quant"]);
+            for (int i = 0; i <= gvpurchasedetails.Rows.Count - 1; i++)
+            {
+                int pid = Convert.ToInt32(gvpurchasedetails.Rows[i].Cells[2].Text);
+                decimal gridQty = Convert.ToDecimal(gvpurchasedetails.Rows[i].Cells[5].Text);
+
+                if (pid == productid)
+                {
+                    if (count == 0)
+                    {
+                        ddlproduct.Items.Remove(ddlproduct.Items.FindByValue(pid.ToString()));
+                        //totalqty = gridQty + enterdQuantity + totalqty;
+                    }
+                   
+                }
+            }
+
+            if (stockQuantity < totalqty || stockQuantity < enterdQuantity)
+            {
+                lblcheckDoubleError.ForeColor = System.Drawing.Color.Red;
+                lblcheckDoubleError.Text = "Out Of Stock";
+                return false;
+            }
+            
+            else
+            {
+                availableqty = stockQuantity - enterdQuantity;
+                lblcheckDoubleError.ForeColor = System.Drawing.Color.Green;
+                lblcheckDoubleError.Text = "Avialable Quantity In Stock " + availableqty;
+                return true;
+            }
+            // if(total > avali)
+
+        }
+        public void ddlpaymentmodebind()
+        {
+            int c_id = Convert.ToInt32(Session["company_id"]);
+            List<tbl_paymentmode> cd = context.tbl_paymentmode.Where(x => x.status == true).ToList();
+            ddlPaymentMode.DataTextField = "paymentmode_name";
+            ddlPaymentMode.DataValueField = "paymentode_id";
+            ddlPaymentMode.DataSource = cd;
+            ddlPaymentMode.DataBind();
+        }
+        protected void BindGrid()
+        {
+            try
+            {
+                gvpurchasedetails.DataSource = (DataTable)ViewState["Details"];
+                gvpurchasedetails.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
+                //Do Logging
+            }
+        }
+        public void getpurchaseDetails()
+        {
+            
+            var purchase = context.tbl_purchase.Where(w => w.InvoiceNumber == txtPoNo.Text && w.company_id == companyId && w.branch_id == branchId).FirstOrDefault();
+            if (purchase == null)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Invoice does not exist, Please enter valid Invoice Number.','True');", true);
+                return;
+            }
+            Session["PurchaseId"] = purchase.purchase_id;
+            hdnPurchaseId.Value = purchase.purchase_id.ToString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "sp_SelectProductbyid";
+            cmd.Parameters.AddWithValue("@purchsae_id", Convert.ToInt32(hdnPurchaseId.Value));
+            cmd.Connection = con;
+            try
+            {
+
+                con.Open();
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(ds);
+                if (ds.Tables[0] != null)
+                {
+                    Session["table"] = ds.Tables[0];
+                    if (ds.Tables[0].Rows[0][0].ToString() == "Please Enter Proper Purhcase Order No")
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Please Enter Proper Purhcase Order No','False');", true);
+                    }
+                    else
+                    {
+                        ddlproduct.DataTextField = "product_name";
+                        ddlproduct.DataValueField = "product_id";
+                        ddlproduct.DataSource = ds.Tables[0];
+                        ddlproduct.DataBind();
+                        ddlproduct.Items.Insert(0, new ListItem("--Select Product--", "0"));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                ErrorLog.saveerror(ex);
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+        }
+        private void SessionValue()
+        {
+            user_id = Convert.ToString(Session["UserID"]);
+            companyId = Convert.ToInt32(Session["company_id"]);
+            branchId = Convert.ToInt32(Session["branch_id"]);
+            financialYearId = Convert.ToInt32(Session["financialyear_id"]);
+        }
+        public void calculation(decimal amt, decimal tax, decimal dis)
+        {
+            decimal tot = 0;
+            decimal tottax = 0;
+            decimal dec = 0;
+            decimal gtot = 0;
+            tot = Convert.ToDecimal(lblsubtotal.Text) + amt;
+            lblsubtotal.Text = tot.ToString("0.##");
+            tottax = Convert.ToDecimal(lblTaxAmount.Text) + tax;
+            lblTaxAmount.Text = tottax.ToString("0.##");
+            dec = Convert.ToDecimal(lblDiscountAmt.Text) + dis;
+            lblDiscountAmt.Text = dec.ToString("0.##");
+
+            gtot = Convert.ToDecimal(lblsubtotal.Text) + (Convert.ToDecimal(lblTaxAmount.Text) - Convert.ToDecimal(lblDiscountAmt.Text));
+            lblGrandTotal.Text = gtot.ToString("0.##");
+
+
+        }
+
+        public void clr()
+        {
+
+            ddlproduct.SelectedIndex = 0;
+            txtquantity.Text = "";
+        }
+
+        public void updatecal()
+        {
+            decimal a1 = Convert.ToDecimal(lblsubtotal.Text) - Convert.ToDecimal(ViewState["subtot"]);
+            decimal b1 = Convert.ToDecimal(lblDiscountAmt.Text) - Convert.ToDecimal(ViewState["discountamount"]);
+            decimal c = Convert.ToDecimal(lblTaxAmount.Text) - Convert.ToDecimal(ViewState["taxamount"]);
+            lblsubtotal.Text = a1.ToString();
+            lblDiscountAmt.Text = b1.ToString();
+            lblTaxAmount.Text = c.ToString();
+            decimal d = (a1 + c) - b1;
+            lblGrandTotal.Text = d.ToString();
+        }
+
+        protected void Save()
+        {
+            try
+            {
+                int purchaseId = Convert.ToInt32(hdnPurchaseId.Value);
+                if (purchaseId == 0)
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Please Enter Purchase No','False');", true);
+                    return;
+                }
+
+                var purchase = context.tbl_purchase.Where(pd => pd.purchase_id == purchaseId && pd.company_id == companyId && pd.branch_id == branchId).FirstOrDefault();
+                tbl_purchasereturn purchaseReturn = new tbl_purchasereturn();
+                purchaseReturn.purchase_id = purchaseId;
+                purchaseReturn.company_id = companyId;
+                purchaseReturn.branch_id = branchId;
+                purchaseReturn.financialyear_id = Convert.ToInt32(Session["financialyear_id"]);
+                purchaseReturn.InvoiceNumber = txtPoNo.Text;
+                purchaseReturn.given_amnt = Convert.ToDecimal(txtGivenAmt.Text);
+                purchaseReturn.balance_amnt = Convert.ToDecimal(txtBalanceAmt.Text);
+                purchaseReturn.paymentmode_id = Convert.ToInt32(ddlPaymentMode.SelectedValue);
+                purchaseReturn.status = true;
+                purchaseReturn.party_id = Convert.ToInt32(purchase.party_id);
+                purchaseReturn.total_tax = Convert.ToDecimal(lblTaxAmount.Text);
+                purchaseReturn.total_discount = Convert.ToDecimal(lblDiscountAmt.Text);
+                purchaseReturn.total_amount = Convert.ToDecimal(lblsubtotal.Text);
+                purchaseReturn.grand_total = Convert.ToDecimal(lblGrandTotal.Text);
+                purchaseReturn.created_by = user_id;
+                purchaseReturn.created_date = DateTime.Now;
+
+                for (int i = 0; i <= gvpurchasedetails.Rows.Count - 1; i++)
+                {
+                    int productId = Convert.ToInt32(gvpurchasedetails.Rows[i].Cells[2].Text);
+                    int batchId = Convert.ToInt32(gvpurchasedetails.Rows[i].Cells[4].Text);
+                    tbl_product product = context.tbl_product.Where(w => w.product_id == productId).FirstOrDefault();
+
+
+                    tbl_purchasereturndetails purchaseReturnDetails = new tbl_purchasereturndetails();
+                    purchaseReturnDetails.product_id = productId;
+                    purchaseReturnDetails.batch_id = batchId;
+                    purchaseReturnDetails.tax_id = product.tax_id;
+                    purchaseReturnDetails.unit_id = product.unit_id;
+                    purchaseReturnDetails.tax_amt = gvpurchasedetails.Rows[i].Cells[10].Text;
+                    purchaseReturnDetails.quantity = Convert.ToInt32(gvpurchasedetails.Rows[i].Cells[5].Text);
+                    purchaseReturnDetails.amount = Convert.ToDecimal(gvpurchasedetails.Rows[i].Cells[11].Text);
+                    purchaseReturnDetails.created_by = Convert.ToString(user_id);
+                    purchaseReturnDetails.created_date = Convert.ToDateTime(DateTime.Now);
+                    purchaseReturnDetails.status = true;
+
+                    tbl_stock stock = new tbl_stock();
+                    stock = context.tbl_stock.Where(w => w.company_id == companyId && w.branch_id == branchId && w.product_id == productId).FirstOrDefault();
+                    stock.qty = stock.qty - Convert.ToInt32(gvpurchasedetails.Rows[i].Cells[5].Text);
+                    stock.modified_by = Convert.ToString(user_id);
+                    stock.modified_date = Convert.ToDateTime(DateTime.Now);
+
+                    purchaseReturn.tbl_purchasereturndetails.Add(purchaseReturnDetails);
+                }
+
+                context.tbl_purchasereturn.Add(purchaseReturn);
+                context.SaveChanges();
+                int invoiceNumber = purchaseReturn.purchasereturn_id;
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('saved Successfully, You order number is " + invoiceNumber + "','True');", true);
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
+            }
+        }
+        #endregion
+
+
+        /// <summary>
+        /// All The Events That are used in this page
+        /// </summary>
+      
+        #region Events
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            ddlproduct.Items.Clear();
+            getpurchaseDetails();
+        }
+
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            dt = (DataTable)Session["table"];
+            DataView dv = new DataView(dt);
+            dv.RowFilter = "product_id =" + Convert.ToInt32(ddlproduct.SelectedValue);
+            DataTable dt1 = new DataTable();
+            dt1 = dv.ToTable();
+            try
+            {
+                if (hd.Value != "true")
+                {
+                    if (Convert.ToInt32(txtquantity.Text) > Convert.ToInt32(dt1.Rows[0]["quantity"].ToString()))
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Please Enter a Quantity Below This ','False');", true);
+                        return;
+                    }
+                    else
+                    {
+                        int purchase_details = Convert.ToInt32(dt.Rows[0]["purchasedetails_id"].ToString());
+                        string batch = dt.Rows[0]["batch_name"].ToString();
+                        string product_name = ddlproduct.SelectedItem.Text.Trim();
+                        dt.Rows[0]["quantity"] = txtquantity.Text;
+                        int tax_id = Convert.ToInt32(dt.Rows[0]["tax_id"]);
+                        int b = Convert.ToInt32(dt.Rows[0]["batch_id"]);
+                        int unit_id = Convert.ToInt32(dt.Rows[0]["unit_id"]);
+                        int p = Convert.ToInt32(ddlproduct.SelectedValue);
+                        string tax = dt.Rows[0]["tax_percentage"].ToString();
+                        string unit_name = dt.Rows[0]["unit_name"].ToString();
+                        decimal SubTotal = Convert.ToDecimal(txtquantity.Text) * Convert.ToDecimal(dt.Rows[0]["purchase_rate"].ToString());
+                        decimal a = SubTotal / 100;
+                        decimal discount_percent = decimal.Parse(dt.Rows[0]["dicount_amt"].ToString()) * 100 / decimal.Parse(dt.Rows[0]["amount"].ToString());
+                        decimal discountamt = a * Convert.ToDecimal(discount_percent.ToString("0.##"));
+                        decimal tax_amount = a * decimal.Parse(tax);
+                        decimal price = Convert.ToDecimal(dt.Rows[0]["purchase_rate"]);
+                        decimal quantity = Convert.ToDecimal(txtquantity.Text);
+                        var check_Quantity = CheckQuantity(quantity, p);
+                        if ((check_Quantity[0].ToString()) != "true")
+                        {
+
+
+                            DataTable tbl = (DataTable)ViewState["Details"];
+                            tbl.Rows.Add(purchase_details, p, b, unit_id, tax_id, SubTotal, discountamt, tax_amount, price, quantity, product_name, unit_name, batch, tax);
+                            ViewState["Details"] = tbl;
+                            this.BindGrid();
+                            clr();
+                            calculation(SubTotal, tax_amount, discountamt);
+                            ddlproduct.Items.Remove(ddlproduct.Items.FindByValue(p.ToString()));
+                            txtBalanceAmt.Enabled = true;
+                            txtGivenAmt.Enabled = true;
+                        }
+                    }
+                }
+                else
+                {
+                    lblcheckDoubleError.ForeColor = System.Drawing.Color.Red;
+                    lblcheckDoubleError.Text = "Insufficient  Quantity";
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
+                //Do Logging
+            }
+
+        }
+       
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
+        private void SaveLogic()
+        {
+            SqlTransaction transaction;
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = con;
+            cmd.CommandTimeout = 600000;
+            con.Open();
+            transaction = con.BeginTransaction("Transaction");
+            cmd.Transaction = transaction;
+            try
+            {
+                string date = DateTime.Today.ToString();
+                string user = Session["UserID"].ToString();
+                int c_id = Convert.ToInt32(Session["company_id"]);
+                int b_id = Convert.ToInt32(Session["branch_id"]);
+                int party_id = 0;
+                int a = Convert.ToInt32(hdnPurchaseId.Value);
+                if (a != null)
+                {
+                    //tbl_purchase p = new tbl_purchase();
+                    //p.company_id = c_id;
+                    //p.purchase_id = a;
+                    //// p.All2(p);
+                    var purchase = context.tbl_purchase.Where(pd => pd.purchase_id == a && pd.company_id == c_id).FirstOrDefault();
+                    party_id = Convert.ToInt32(purchase.party_id);
+
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Please Enter Purchase No','False');", true);
+                    return;
+                }
+
+
+                int Purchase_id = Convert.ToInt32(a);
+                if (Purchase_id != 0)
+                {
+
+                    decimal tax_amount = Convert.ToDecimal(lblTaxAmount.Text);
+                    decimal sub_total = Convert.ToDecimal(lblsubtotal.Text);
+                    decimal discount = Convert.ToDecimal(lblDiscountAmt.Text);
+                    decimal grandtotal = Convert.ToDecimal(lblGrandTotal.Text);
+
+                    //Purchase Return Main Table Insertion Code
+                    cmd.CommandText = "sp_insertpurchasereturnmain";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Purchase_id", Purchase_id);
+                    cmd.Parameters.AddWithValue("@branch_id", b_id);
+                    cmd.Parameters.AddWithValue("@company_id", c_id);
+                    cmd.Parameters.AddWithValue("@total_tax", tax_amount);
+                    cmd.Parameters.AddWithValue("@actual_amount", sub_total);
+                    cmd.Parameters.AddWithValue("@grand_total", grandtotal);
+                    cmd.Parameters.AddWithValue("@total_discount ", discount);
+                    cmd.Parameters.AddWithValue("@created_by", user);
+                    cmd.Parameters.AddWithValue("@created_date", DateTime.Today);
+                    cmd.Parameters.Add("@purchasereturnmain_id", SqlDbType.Int);
+                    cmd.Parameters["@purchasereturnmain_id"].Direction = ParameterDirection.Output;
+                    cmd.ExecuteNonQuery();
+                    Session["prmid"] = Convert.ToInt32(cmd.Parameters["@purchasereturnmain_id"].Value);
+                    cmd.Parameters.Clear();
+                }
+
+
+                int mcid = Convert.ToInt32(Session["prmid"]);
+
+                for (int i = 0; i <= gvpurchasedetails.Rows.Count - 1; i++)
+                {
+                    GridViewRow row = gvpurchasedetails.Rows[i];
+                    //Purchase Details Saving Code Start Here
+                    int salesedetail_id = Convert.ToInt32(row.Cells[12].Text);
+                    if (salesedetail_id != 0)
+                    {
+                        cmd.CommandText = "sp_insert_purchase_return";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@purchasereturnmain_id", mcid);
+                        cmd.Parameters.AddWithValue("@purchasedetails_id", salesedetail_id);
+                        cmd.Parameters.AddWithValue("@product_id", Convert.ToInt32(row.Cells[2].Text));
+                        cmd.Parameters.AddWithValue("@batch_id", Convert.ToInt32(row.Cells[4].Text));
+                        cmd.Parameters.AddWithValue("@tax_amt", Convert.ToDecimal(row.Cells[10].Text));
+                        cmd.Parameters.AddWithValue("@quantity", Convert.ToDecimal(row.Cells[5].Text));
+                        cmd.Parameters.AddWithValue("@amount", Convert.ToDecimal(row.Cells[11].Text));
+                        cmd.Parameters.AddWithValue("@created_by", user);
+                        cmd.Parameters.AddWithValue("@created_date", DateTime.Today);
+                        cmd.Connection = con;
+                        cmd.CommandTimeout = 600000;
+                        cmd.ExecuteNonQuery();
+                        cmd.Parameters.Clear();
+                    }
+
+                    // Stock & Stock Transaction Data Saving Code end
+
+                }
+
+
+
+
+                cmd.Parameters.Clear();
+
+                cmd.CommandText = "sp_InsertMonyTransaction";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@company_id", c_id);
+                cmd.Parameters.AddWithValue("@branch_id", b_id);
+                cmd.Parameters.AddWithValue("@party_id", party_id);
+                cmd.Parameters.AddWithValue("@given_amt", txtGivenAmt.Text);
+                cmd.Parameters.AddWithValue("@grand_total", lblGrandTotal.Text);
+                cmd.Parameters.AddWithValue("@balance_amt", txtBalanceAmt.Text);
+                cmd.Parameters.AddWithValue("@in_out", "In");
+                cmd.Parameters.AddWithValue("@paymentmode_id", ddlPaymentMode.SelectedValue);
+                cmd.Parameters.AddWithValue("@transaction_typ", "Purchase Return");
+                cmd.Parameters.AddWithValue("@transactio_type_id", mcid);
+                cmd.Parameters.AddWithValue("@created_by", user);
+                cmd.Parameters.AddWithValue("@created_date", DateTime.Today);
+                cmd.Connection = con;
+                cmd.CommandTimeout = 600000;
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                con.Close();
+
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Saved successfully','True');", true);
+
+
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
+                //Do Logging
+            }
+            finally
+            {
+                if (con != null && con.State != ConnectionState.Closed)
+                {
+                    con.Close();
+                }
+            }
+        }
+        protected void ddlproduct_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                lblcheckDoubleError.Text = string.Empty;
+                int c_id = Convert.ToInt32(Session["company_id"]);
+                int p_id = Convert.ToInt32(ddlproduct.SelectedValue);
+                var stockQuantity = context.tbl_stock.Where(s => s.company_id == companyId && s.product_id == p_id).FirstOrDefault();
+                //int data = helper.GetStockQuantity(Convert.ToInt32(HttpContext.Current.Session["company_id"]), Convert.ToInt32(p_id));
+                Session["quant"] = stockQuantity.qty;
+
+
+
+                lblcheckDoubleError.ForeColor = System.Drawing.Color.Green;
+                lblcheckDoubleError.Text = "Avialable Quantity In Stock " + stockQuantity.qty;
+                UpdatePanel1.Update();
+            }
+            catch (Exception ex)
+            {
+
+                ErrorLog.saveerror(ex);
+                //Do Logging
+            }
+        }
+
+        protected void gvpurchasedetails_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+
+
+                if (e.CommandName == "Delete row")
+                {
+                    getpurchaseDetails();
+                    GridViewRow grv = ((GridViewRow)((ImageButton)e.CommandSource).NamingContainer);
+
+                    ViewState["subtot"] = (grv.Cells[11].Text);
+                    ViewState["discountamount"] = (grv.Cells[8].Text);
+                    ViewState["taxamount"] = (grv.Cells[10].Text);
+
+                    int rowIndex = grv.RowIndex;
+
+
+                    ViewState["id"] = rowIndex;
+                    //ddlproduct.Items.Add(ddlproduct.Items.FindByValue(e.CommandArgument.ToString()));
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+                   // ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "none", "<script> $('#myModal').modal('show');</script>", false);
+
+                }
+                else if (e.CommandName == "Update Row")
+                {
+                    ddlproduct.Items.Clear();
+                    getpurchaseDetails();
+                    //ddlproduct.Items.Add(ddlproduct.Items.FindByValue(e.CommandArgument.ToString()));
+                    GridViewRow grv = ((GridViewRow)((ImageButton)e.CommandSource).NamingContainer);
+                    ViewState["id"] = grv.RowIndex;
+                    //ddlproduct.SelectedIndex = Convert.ToInt32(grv.Cells[2].Text);
+                    ddlproduct.SelectedValue = grv.Cells[2].Text.ToString();
+                    txtquantity.Text = grv.Cells[5].Text.ToString();
+                    btnUpdate.Visible = true;
+                    btnAdd.Visible = false;
+                   
+                    ViewState["subtot"] = (grv.Cells[11].Text);
+                    ViewState["discountamount"] = (grv.Cells[8].Text);
+                    ViewState["taxamount"] = (grv.Cells[10].Text);
+
+                }
+
+
+
+            }
+
+            catch (Exception ex)
+            {
+
+                ErrorLog.saveerror(ex);
+                //Do Logging
+            }
+        }
+
+        
+
+        protected void btnUpdate_Click(object sender, EventArgs e)
+        {
+
+            DataTable dt = new DataTable();
+            dt = (DataTable)Session["table"];
+            try
+            {
+
+
+
+                if (ViewState["Details"] != "")
+                {
+                   
+
+                    int purchase_details = Convert.ToInt32(dt.Rows[0]["purchasedetails_id"].ToString());
+                    string batch = dt.Rows[0]["batch_name"].ToString();
+                    string product_name = ddlproduct.SelectedItem.Text.Trim();
+                    dt.Rows[0]["quantity"] = txtquantity.Text;
+                    int tax_id = Convert.ToInt32(dt.Rows[0]["tax_id"]);
+                    int b = Convert.ToInt32(dt.Rows[0]["batch_id"]);
+                    int unit_id = Convert.ToInt32(dt.Rows[0]["unit_id"]);
+                    int p = Convert.ToInt32(ddlproduct.SelectedValue);
+                    string tax = dt.Rows[0]["tax_percentage"].ToString();
+                    string unit_name = dt.Rows[0]["unit_name"].ToString();
+                    decimal SubTotal = Convert.ToDecimal(txtquantity.Text) * Convert.ToDecimal(dt.Rows[0]["purchase_rate"].ToString());
+                    decimal a = SubTotal / 100;
+                    decimal discount_percent = decimal.Parse(dt.Rows[0]["dicount_amt"].ToString()) * 100 / decimal.Parse(dt.Rows[0]["amount"].ToString());
+                    decimal discountamt = a * Convert.ToDecimal(discount_percent.ToString("0.##"));
+                    decimal tax_amount = a * decimal.Parse(tax);
+                    decimal price = Convert.ToDecimal(dt.Rows[0]["purchase_rate"]);
+                    decimal quantity = Convert.ToDecimal(txtquantity.Text);
+                    var check_Quantity = CheckQuantity(quantity, p);
+                    if (check_Quantity[0].ToString() != "true")
+                    {
+                        DataTable dt1 = ViewState["Details"] as DataTable;
+                        int row = Convert.ToInt32(ViewState["id"]);
+                        dt1.Rows[row][0] = purchase_details;
+                        dt1.Rows[row][1] = p;
+                        dt1.Rows[row][2] = b;
+                        dt1.Rows[row][3] = unit_id;
+                        dt1.Rows[row][4] = tax_id;
+                        dt1.Rows[row][5] = SubTotal;
+                        dt1.Rows[row][6] = discountamt;
+                        dt1.Rows[row][7] = tax_amount;
+                        dt1.Rows[row][8] = price;
+                        dt1.Rows[row][9] = quantity;
+                        dt1.Rows[row][10] = product_name;
+                        dt1.Rows[row][11] = unit_name;
+                        dt1.Rows[row][12] = batch;
+                        dt1.Rows[row][13] = tax;
+
+                        gvpurchasedetails.DataSource = dt1;
+                        gvpurchasedetails.DataBind();
+
+                        clr();
+                        updatecal();
+                        calculation(SubTotal, tax_amount, discountamt);
+                        ddlproduct.Items.Remove(ddlproduct.Items.FindByValue(p.ToString()));
+                        btnAdd.Visible = true;
+                        btnUpdate.Visible = false;
+                    }
+
+
+
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                ErrorLog.saveerror(ex);
+                //Do Logging
+            }
+        }
+
+        protected void btnOk_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ViewState["total"] != "" && ViewState["dis"] != "" && ViewState["tax"] != "")
+                {
+                    updatecal();
+
+                    if (ViewState["Details"] != "")
+                    {
+
+                        DataTable dt = ViewState["Details"] as DataTable;
+                        int row = Convert.ToInt32(ViewState["id"]);
+                        dt.Rows[row].Delete();
+                        lblcheckDoubleError.Text = string.Empty;
+                        gvpurchasedetails.DataSource = dt;
+                        gvpurchasedetails.DataBind();
+                    }
+
+                 
+                }
+
+                else
+                {
+                    lblError.Text = "Row is empty";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                ErrorLog.saveerror(ex);
+                //Do Logging
+            }
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.Redirect("PurchaseReturn.aspx", false);
+            }
+            catch (Exception ex)
+            {
+
+                ErrorLog.saveerror(ex);
+                //Do Logging
+            }
+        }
+
+        protected void txtGivenAmt_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                //decimal a = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(txtGivenAmt.Text);
+                //txtBalanceAmt.Text = a.ToString();
+                decimal a=Convert.ToDecimal(lblGrandTotal.Text);
+                decimal b= Convert.ToDecimal(txtGivenAmt.Text);
+                if ( a<b)
+                {
+                    txtGivenAmt.Text = lblGrandTotal.Text;
+                    txtBalanceAmt.Text = "0";
+                }
+
+                else
+                {
+                    decimal c = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(txtGivenAmt.Text);
+                    txtBalanceAmt.Text = c.ToString();
+                }
+                UpdatePanel1.Update();
+            }
+            catch (Exception ex)
+            {
+
+                ErrorLog.saveerror(ex);
+                //Do Logging
+            }
+        }
+        #endregion
+    }
+}
