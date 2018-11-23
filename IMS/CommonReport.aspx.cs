@@ -60,7 +60,9 @@ namespace IMS.Reports
         protected void btnClear_Click(object sender, EventArgs e)
         {
             displayReportSection.Visible = false;
-            ddlReportType.SelectedIndex = 0;         
+            ddlReportType.SelectedIndex = 0;
+            ddlFilerBy.SelectedIndex = 0;
+            lstProduct.Items.Clear();
             txtStartDate.Text = string.Empty;
             txtenddate.Text = string.Empty;           
             ddlFilerBy.Enabled = true;
@@ -108,11 +110,8 @@ namespace IMS.Reports
                           new SqlParameter("@start_date",txtStartDate.Text),
                            new SqlParameter("@end_date",txtenddate.Text),
                           new SqlParameter("@FilterIds",filterIds)
-                    };
-
-                    reportDataSet = "ProductWiseStockDataSet";
-                    dataTable = "ProductWiseStockReport";
-                    CreateReport(connectionstring, "CommonReport", sqlParams, reportDataSet, dataTable);
+                    };                   
+                    CreateReport(connectionstring, "CommonReport", sqlParams);
                     break;
 
 
@@ -126,7 +125,7 @@ namespace IMS.Reports
                     };
                     reportDataSet = "CombineDataSet";
                     dataTable = "CombineDataTable";
-                    CreateReport(connectionstring, "CommonReport", sqlParams, reportDataSet, dataTable);
+                    CreateReport(connectionstring, "CommonReport", sqlParams);
                     break;
 
                 default:
@@ -151,40 +150,31 @@ namespace IMS.Reports
         }
 
     
-        public void CreateReport(String connectionstring, string storeProcedureName, SqlParameter[] parameter, string reportDataSource, string tableName)
-        {
-            using (SqlConnection con = new SqlConnection(connectionstring))
-            {
-                SqlCommand com = new SqlCommand();
-                com.Connection = con;
-                com.CommandType = CommandType.StoredProcedure;
-                com.CommandText = storeProcedureName;
-                if (parameter != null)
-                {
-                    com.Parameters.AddRange(parameter);
-                }
-                CommonDataSet ds = new CommonDataSet();
-                SqlDataAdapter da = new SqlDataAdapter(com);
-                da.Fill(ds, tableName);   
+        public void CreateReport(String connectionstring, string storeProcedureName, SqlParameter[] parameter)
+        {         
+            var ds = Common.FillDataSet(connectionstring, storeProcedureName, parameter);
+
+            if(ds!=null)
+            { 
+                if (ds.Tables["Table"].Rows.Count > 0)
+                { 
+                    lblCompanyName.Text = ds.Tables["Table"].Rows[0]["Company"].ToString();
+                    lblAddress.Text = ds.Tables["Table"].Rows[0]["CompanyAddress"].ToString();
+                    lblStartDate.Text = ds.Tables["Table"].Rows[0]["StartDate"].ToString();
+                    lblEndDate.Text = ds.Tables["Table"].Rows[0]["EndDate"].ToString();
+                    lblpartyname.Text = ds.Tables["Table"].Rows[0]["Party"].ToString();
+                lblpartyaddress.Text = ds.Tables["Table"].Rows[0]["PartyAddress"].ToString();
+                 } 
                 
-                           
-                grdreport.DataSource = ds.Tables[tableName];
-                grdreport.DataBind();               
 
-                for (int i = 0; i < ds.Tables[tableName].Rows.Count; i++)
-                {     
-
-                    lblCompanyName.Text = ds.Tables[tableName].Rows[i]["Company"].ToString();
-                    lblAddress.Text = ds.Tables[tableName].Rows[i]["CompanyAddress"].ToString();
-                   
-
-                    lbldate.Text = ds.Tables[tableName].Rows[i]["Date"].ToString();
-                    lblpartyname.Text = ds.Tables[tableName].Rows[i]["Party"].ToString();
-                    lblpartyaddress.Text = ds.Tables[tableName].Rows[i]["PartyAddress"].ToString();
-                    lblinvoiceno.Text = ds.Tables[tableName].Rows[i]["InvoiceNumber"].ToString();                   
-                }
-
-              
+                ds.Tables["Table"].Columns.Remove("Company");
+                ds.Tables["Table"].Columns.Remove("CompanyAddress");
+                ds.Tables["Table"].Columns.Remove("StartDate");
+                ds.Tables["Table"].Columns.Remove("EndDate");
+                ds.Tables["Table"].Columns.Remove("Party");
+                ds.Tables["Table"].Columns.Remove("PartyAddress");
+                grdreport.DataSource = ds.Tables["Table"];
+                grdreport.DataBind();
             }
         }
 
@@ -221,7 +211,34 @@ namespace IMS.Reports
             User_id = Convert.ToString(Session["UserID"]);
             companyId = Convert.ToInt32(Session["company_id"]);
             branchId = Convert.ToInt32(Session["branch_id"]);
-        }       
+        }
+
+        protected void grdreport_DataBound(object sender, EventArgs e)
+        {
+            int firstRowSpan = 2;
+            int secondRowSpan = 2;
+            for (int i = grdreport.Rows.Count - 2; i >= 0; i--)
+            {
+                GridViewRow currRow = grdreport.Rows[i];
+                GridViewRow prevRow = grdreport.Rows[i + 1];
+                if (currRow.Cells[1].Text == prevRow.Cells[1].Text)
+                {
+                    currRow.Cells[1].RowSpan = firstRowSpan;
+                    prevRow.Cells[1].Visible = false;
+                    firstRowSpan += 1;
+
+                    currRow.Cells[0].RowSpan = secondRowSpan;
+                    prevRow.Cells[0].Visible = false;
+                    secondRowSpan += 1;
+                }
+                else
+                {
+                    firstRowSpan = 2;
+                    secondRowSpan = 2;
+                }
+            }
+        }
+
         public void logo()
         {
             var logo = context.tbl_company.Where(w => w.company_id == companyId).FirstOrDefault();

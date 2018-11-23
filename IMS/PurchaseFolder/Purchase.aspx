@@ -120,11 +120,10 @@
                     <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                         <div class="col-sm-10 leftpadd0">
                             <label class="control-label">
-                                Vendor Receipt No.
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ForeColor="Red" Text="*" ValidationGroup="grop" ControlToValidate="txtPONo"></asp:RequiredFieldValidator>
+                                Vendor Receipt No. <span style="color:red">*</span> 
                             </label>
                             <asp:TextBox ID="txtPONo" runat="server" CssClass="form-control"></asp:TextBox>
-
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ForeColor="Red" Text="Please Enter Receipt No" ValidationGroup="grop" ControlToValidate="txtPONo"></asp:RequiredFieldValidator>
                         </div>
 
                     </div>
@@ -177,21 +176,20 @@
                             <div class="col-md-4 col-lg-2 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                                 <div class="col-sm-10 leftpadd0">
                                     <label class="control-label">
-                                        Quantity <span style="color:red">*</span>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Date is Required " ForeColor="Red" Text="*" ValidationGroup="grop" ControlToValidate="txtquantity"></asp:RequiredFieldValidator>
+                                        Quantity <span style="color:red">*</span>                                
                                     </label>
                                     <asp:TextBox ID="txtquantity" runat="server" CssClass="form-control"  onkeypress="return OnlyNumericEntry(event);"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Date is Required " ForeColor="Red" Text="Please Enter Quantity" ValidationGroup="grop" ControlToValidate="txtquantity"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator6" ValidationExpression="^\s*(?=.*[1-9])\d*(?:\.\d{1,5})?\s*$" runat="server" ValidationGroup="adf" Display="Dynamic" ForeColor="Red" ControlToValidate="txtquantity" ErrorMessage="Quantity should b greater then 0"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
                             <div class="col-md-4 col-lg-2 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                                 <div class="col-sm-10 leftpadd0">
                                     <label class="control-label">
-                                        Price Per Unit <span style="color:red">*</span>
-                                
+                                        Price Per Unit <span style="color:red">*</span>                                
                                     </label>
                                     <asp:TextBox ID="txtprice" runat="server" CssClass="form-control" ></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Price is Required " ForeColor="Red" Text="*" ValidationGroup="grop" ControlToValidate="txtprice"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Please Enter Price" ForeColor="Red" Text="" ValidationGroup="grop" ControlToValidate="txtprice"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator3" ValidationExpression="^\s*(?=.*[1-9])\d*(?:\.\d{1,5})?\s*$" runat="server" ValidationGroup="adf" Display="Dynamic" ForeColor="Red" ControlToValidate="txtprice" ErrorMessage="Price should b greater then 0"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
@@ -223,7 +221,7 @@
                                         Sales Price <span style="color:red">*</span>                                
                                     </label>
                                     <asp:TextBox ID="txtsalesprice" runat="server" CssClass="form-control"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ForeColor="Red" ErrorMessage="Sales Price is Required " Text="*" ValidationGroup="grop" ControlToValidate="txtsalesprice"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ForeColor="Red" ErrorMessage="Please Enter Sales Price" Text="" ValidationGroup="grop" ControlToValidate="txtsalesprice"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator5" ValidationExpression="^\s*(?=.*[1-9])\d*(?:\.\d{1,5})?\s*$" runat="server" ValidationGroup="adf" Display="Dynamic" ForeColor="Red" ControlToValidate="txtsalesprice" ErrorMessage="Sales Price should b greater then 0"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
@@ -359,7 +357,6 @@
                                             </label>
                                             <asp:TextBox ID="txtGivenAmt" runat="server" CssClass="form-control" OnTextChanged="txtGivenAmt_TextChanged" AutoPostBack="true" Enabled="false"  onkeypress="return OnlyNumericEntry(event);"></asp:TextBox>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ForeColor="Red" ControlToValidate="txtGivenAmt" ErrorMessage="Please Enter Given Amount"  ValidationGroup="savesale" ></asp:RequiredFieldValidator>
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtBalanceAmt" ErrorMessage="*" ValidationGroup="savesale" ForeColor="Red"></asp:RequiredFieldValidator>
                                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ForeColor="Red" ControlToValidate="txtGivenAmt" ErrorMessage="Given Amount Should be digits only" ValidationGroup="savesale" ValidationExpression="^\s*(?=.*[0-9])\d*(?:\.\d{1,5})?\s*$" Display="Dynamic">
                                             </asp:RegularExpressionValidator>
                                         </div>

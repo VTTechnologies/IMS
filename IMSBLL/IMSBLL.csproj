@@ -95,7 +95,7 @@
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\Purchase2.cs" />
-    <Compile Include="EntityModel\PurchaseOrPurchaseReturnReport_Result.cs">
+    <Compile Include="EntityModel\PurchaseOrPurchaseReturnReport1_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\PurchaseReturnReport_Result.cs">
@@ -107,7 +107,7 @@
     <Compile Include="EntityModel\SaleOrderReport_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\SaleOrSaleReturnReport_Result.cs">
+    <Compile Include="EntityModel\SaleOrSaleReturnReport1_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\SaleReport_Result.cs">
@@ -209,6 +209,9 @@
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\sp_SelectPrice_Result.cs">
+      <DependentUpon>IMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\sp_SelectProductbyid1_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\sp_SelectProductbyid_Result.cs">

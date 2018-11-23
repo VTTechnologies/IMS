@@ -11,7 +11,7 @@ namespace IMSBLL.EntityModel
 {
     using System;
     
-    public partial class PurchaseOrPurchaseReturnReport_Result
+    public partial class SaleOrSaleReturnReport1_Result
     {
         public string company_name { get; set; }
         public string party_name { get; set; }

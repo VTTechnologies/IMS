@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IMSBLL.EntityModel;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace IMSBLL.DAL
 {
@@ -60,7 +62,28 @@ namespace IMSBLL.DAL
             }
             return invoiceNumber;
        }
-    }
+
+
+        public static DataSet FillDataSet(String connectionstring, string storeProcedureName, SqlParameter[] parameter)
+        {
+            using (SqlConnection con = new SqlConnection(connectionstring))
+            {
+                SqlCommand com = new SqlCommand();
+                com.Connection = con;
+                com.CommandType = CommandType.StoredProcedure;
+                com.CommandText = storeProcedureName;
+                if (parameter != null)
+                {
+                    com.Parameters.AddRange(parameter);
+                }
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter(com);
+                da.Fill(ds);
+
+                return ds;
+            }
+        }
+        }
    public class InvoiceViewModel
    {
        public string InvoiceNumber { get; set; }

@@ -140,34 +140,29 @@ namespace IMS.PurchaseFolder
                                        partyaddress=c.party_address,
                                        partyname=c.party_name,
                                        owneremail=company.owner_emailid,
-                                       pincode=company.pincode
+                                       pincode=company.pincode,
+                                       invoiceNumber=p.InvoiceNumber
                           }).SingleOrDefault();
-          // from p in context.tbl_purchase join  context.tbl_party on  equals
-            //Scompany s = new Scompany();
-            //s.company_id = companyId;
-            //s.All(s);
-            lblCompanyName.Text = purchase.companyName;
-            lblAddress.Text = purchase.address;//s.company_address;
-            lblemail.Text = purchase.owneremail;//s.owner_emailid;
-            lblzipcode.Text = purchase.pincode;
-            int p_id = Convert.ToInt32(purchase.PartyId);
-            //tbl_party pa = new tbl_party();
-            //pa.company_id = companyId;
-            //pa.branch_id = branchId;
-            //pa.party_id = p_id;
-            //pa.party_type = "Vendor";
-            ////Shakeeb
-            ////pa.All3(pa);
-            lbldate.Text = purchase.createdate.ToString();
-            lblpartyname.Text = purchase.partyname;
-            lblpartyaddress.Text = purchase.partyaddress;
 
-            lblinvoiceno.Text = a.ToString(); //tblPurchase.purchase_id.ToString();
-            lblsubtotal.Text = purchase.actualamount.ToString();//tblPurchase.actual_amount.ToString();
-            lblTaxAmount.Text = purchase.totalTax.ToString();//tblPurchase.total_tax.ToString();
-            lblDiscountAmt.Text = purchase.balanceamt.ToString();//blPurchase.discount.ToString();
-            lblGrandTotal.Text = purchase.total.ToString(); //tblPurchase.grand_total.ToString();
+            if (purchase != null)
+            {
+                lblCompanyName.Text = purchase.companyName;
+                lblAddress.Text = purchase.address;
+                lblemail.Text = purchase.owneremail;
+                lblzipcode.Text = purchase.pincode;
+                int p_id = Convert.ToInt32(purchase.PartyId);
 
+                lbldate.Text = purchase.createdate.ToString();
+                lblpartyname.Text = purchase.partyname;
+                lblpartyaddress.Text = purchase.partyaddress;
+
+                lblinvoiceno.Text = purchase.invoiceNumber.ToString();
+                lblsubtotal.Text = purchase.actualamount.ToString();
+                lblTaxAmount.Text = purchase.totalTax.ToString();
+                lblDiscountAmt.Text = purchase.balanceamt.ToString();
+                lblGrandTotal.Text = purchase.total.ToString();
+            }
+                                                                                                                   
         }
     }
 }

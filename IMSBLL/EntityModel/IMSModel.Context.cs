@@ -3203,7 +3203,7 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("GetReturnQuantity", idParameter, forParameter, productIdParameter, companyIdParameter);
         }
     
-        public virtual ObjectResult<PurchaseOrPurchaseReturnReport_Result> PurchaseOrPurchaseReturnReport(Nullable<int> id, string fromTable)
+        public virtual int PurchaseOrPurchaseReturnReport(Nullable<int> id, string fromTable)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
@@ -3213,7 +3213,7 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("FromTable", fromTable) :
                 new ObjectParameter("FromTable", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PurchaseOrPurchaseReturnReport_Result>("PurchaseOrPurchaseReturnReport", idParameter, fromTableParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PurchaseOrPurchaseReturnReport", idParameter, fromTableParameter);
         }
     
         public virtual ObjectResult<Nullable<decimal>> GetBatchwiseQuantity(Nullable<int> batch_id, Nullable<int> product_id)
@@ -3297,7 +3297,7 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductReport_Result>("ProductReport", companyIdParameter);
         }
     
-        public virtual ObjectResult<SaleOrSaleReturnReport_Result> SaleOrSaleReturnReport(Nullable<int> id, string fromTable)
+        public virtual int SaleOrSaleReturnReport(Nullable<int> id, string fromTable)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
@@ -3307,7 +3307,7 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("FromTable", fromTable) :
                 new ObjectParameter("FromTable", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SaleOrSaleReturnReport_Result>("SaleOrSaleReturnReport", idParameter, fromTableParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SaleOrSaleReturnReport", idParameter, fromTableParameter);
         }
     
         [DbFunction("IMS_TESTEntities", "Split")]
@@ -3362,6 +3362,41 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("company_id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_product_relorderlevel_report_forcompany_only_Result1>("sp_product_relorderlevel_report_forcompany_only", company_idParameter);
+        }
+    
+        public virtual ObjectResult<PurchaseOrPurchaseReturnReport1_Result> PurchaseOrPurchaseReturnReport1(Nullable<int> id, string fromTable)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var fromTableParameter = fromTable != null ?
+                new ObjectParameter("FromTable", fromTable) :
+                new ObjectParameter("FromTable", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PurchaseOrPurchaseReturnReport1_Result>("PurchaseOrPurchaseReturnReport1", idParameter, fromTableParameter);
+        }
+    
+        public virtual ObjectResult<SaleOrSaleReturnReport1_Result> SaleOrSaleReturnReport1(Nullable<int> id, string fromTable)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var fromTableParameter = fromTable != null ?
+                new ObjectParameter("FromTable", fromTable) :
+                new ObjectParameter("FromTable", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SaleOrSaleReturnReport1_Result>("SaleOrSaleReturnReport1", idParameter, fromTableParameter);
+        }
+    
+        public virtual ObjectResult<sp_SelectProductbyid1_Result> sp_SelectProductbyid1(Nullable<int> purchsae_id)
+        {
+            var purchsae_idParameter = purchsae_id.HasValue ?
+                new ObjectParameter("purchsae_id", purchsae_id) :
+                new ObjectParameter("purchsae_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SelectProductbyid1_Result>("sp_SelectProductbyid1", purchsae_idParameter);
         }
     }
 }

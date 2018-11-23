@@ -524,8 +524,7 @@ namespace IMS
                     this.BindGrid();
                     lblcheckDoubleError.Text = string.Empty;
 
-                    clr();
-                    txtBalanceAmt.ReadOnly = false;
+                    clr();                   
                     txtGivenAmt.ReadOnly = false;
                     calculation(subTotal, tax_amount, discountamt);
                 }
@@ -689,7 +688,6 @@ namespace IMS
                             dr["Batch"] = ddlBatch.SelectedItem.Text.Trim();
                         clr();
                             calculation(subTotal, tax_amount, discountamt);
-                            txtBalanceAmt.Enabled = true;
                             txtGivenAmt.Enabled = true;
                             ViewState["Details"] = dt;
                            
@@ -790,9 +788,8 @@ namespace IMS
             Save();
             int a = Convert.ToInt32(Session["sale_id"]);
             if (a != 0 || Convert.ToString(a) == null)
-            {
-
-                Response.Redirect("printsale.aspx?id=" + a, false);
+            {              
+                Response.Write(String.Format("<script>window.open('{0}','_blank')</script>", ResolveUrl(string.Format("~/SalesFolder/printsale.aspx?id={0}", a))));
             }
         }
 

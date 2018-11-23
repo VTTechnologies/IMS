@@ -33,7 +33,7 @@ namespace IMS.PurchaseFolder
             {
                 bindgrid(0, "","", "");
                 ddlVendorbind();
-                getdate();
+                //getdate();
             }
         }
 
@@ -128,32 +128,32 @@ namespace IMS.PurchaseFolder
             }
         }
 
-        public void getdate()
-        {
-            try
-            {
-                ////Shakeeb
-                ////int c_id = Convert.ToInt32(Session["company_id"]);
-                ////tbl_purchase p = new tbl_purchase();
-                ////p.company_id = c_id;
-                ////p.All(p);
-                ////hd1.Value = p.startdate;
-                ////hd2.Value = p.enddate;
-                ////hd3.Value = p.startdate;
-                ////hd4.Value = p.enddate;
-                var finicialyear = context.tbl_financialyear.Where(f => f.company_id == companyId && f.status == true).SingleOrDefault();
-                hd1.Value = finicialyear.start_date;
-                hd2.Value = finicialyear.end_date;
-                hd3.Value = finicialyear.start_date;
-                hd4.Value = finicialyear.end_date;
+        //public void getdate()
+        //{
+        //    try
+        //    {
+        //        ////Shakeeb
+        //        ////int c_id = Convert.ToInt32(Session["company_id"]);
+        //        ////tbl_purchase p = new tbl_purchase();
+        //        ////p.company_id = c_id;
+        //        ////p.All(p);
+        //        ////hd1.Value = p.startdate;
+        //        ////hd2.Value = p.enddate;
+        //        ////hd3.Value = p.startdate;
+        //        ////hd4.Value = p.enddate;
+        //        var finicialyear = context.tbl_financialyear.Where(f => f.company_id == companyId && f.status == true).SingleOrDefault();
+        //        hd1.Value = finicialyear.start_date;
+        //        hd2.Value = finicialyear.end_date;
+        //        hd3.Value = finicialyear.start_date;
+        //        hd4.Value = finicialyear.end_date;
 
-            }
-            catch (Exception ex)
-            {
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                ErrorLog.saveerror(ex);
-            }
-        }
+        //        ErrorLog.saveerror(ex);
+        //    }
+        //}
 
         public void searchlogic()
         {
@@ -217,6 +217,7 @@ namespace IMS.PurchaseFolder
         {
             try
             {
+                GridViewRow grv = ((GridViewRow)((LinkButton)e.CommandSource).NamingContainer);
                 int id = Convert.ToInt32(e.CommandArgument);
                 if (e.CommandName == "Order")
                 {
@@ -232,6 +233,16 @@ namespace IMS.PurchaseFolder
                 {
                     //Response.Write(String.Format("<script>window.open('{0}','_blank')</script>", ResolveUrl(string.Format("~/Reports/ReportViewer.aspx?Id={0}&ReportName={1}", id, "PurchaseReturnReport"))));
                     Response.Write(String.Format("<script>window.open('{0}','_blank')</script>", ResolveUrl(string.Format("~/Reports/PurchaseSaleReturnReport.aspx?Id={0}&ReportName={1}", id, "PurchaseReturnReport"))));
+                }
+                else if (e.CommandName == "ViewORPayBalance")
+                {
+                    bool enablePayBalance = false;
+                   
+                    if (grv.Cells[5].Text != "0.00")
+                    {
+                        enablePayBalance = true;
+                    }
+                    Response.Redirect(string.Format("~/PurchaseFolder/ViewORPayBalancePurchase.aspx?Id={0}&ViewOrPayBalance={1}", id, enablePayBalance));
                 }
 
             }
@@ -253,6 +264,7 @@ namespace IMS.PurchaseFolder
             txtOrderNo.Text = string.Empty;
             txtStartDate.Text = string.Empty;
             txtenddate.Text = string.Empty;
+            bindgrid(Convert.ToInt32(ddlVendor.SelectedValue), txtOrderNo.Text, txtStartDate.Text, txtenddate.Text);
         }
         protected void btnExporttoexcel_Click(object sender, EventArgs e)
         {

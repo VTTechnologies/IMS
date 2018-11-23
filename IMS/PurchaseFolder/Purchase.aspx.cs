@@ -19,15 +19,25 @@ namespace IMS
         IMS_TESTEntities context = new IMS_TESTEntities();
         int companyId = 0, branchId = 0,financialYearId=0;
         string user_id = string.Empty;
-
+        bool viewOrPayBalance = false;
+        int purchase_Id = 0;
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["TestDBConnection"].ConnectionString);
         
         protected void Page_Load(object sender, EventArgs e)
         {
-
             try
             {
-                //txtdate.Text = DateTime.Now.ToString("mm/dd/yyyy");
+                if(Request.QueryString["ReportName"] !=null && Request.QueryString["Id"]!=null)
+                {
+                    viewOrPayBalance = Convert.ToBoolean(Request.QueryString["ReportName"]);
+                    purchase_Id = Convert.ToInt32(Request.QueryString["Id"]);
+
+                    if(viewOrPayBalance)
+                    {
+
+                    }
+                }
+                
                 SessionValue();
                 if (!IsPostBack)
                 {
@@ -497,7 +507,6 @@ namespace IMS
                     lblcheckDoubleError.Text = string.Empty;
 
                     clr();
-                    txtBalanceAmt.Enabled = true;
                     txtGivenAmt.Enabled = true;
                     calculation(subTotal, tax_amount, discountamt);
                 }
@@ -647,7 +656,6 @@ namespace IMS
 
                         clr();
                         calculation(subTotal, tax_amount, discountamt);
-                        txtBalanceAmt.Enabled = true;
                         txtGivenAmt.Enabled = true;
                         ViewState["Details"] = dt;
                         btnAdd.Visible = true;
@@ -932,8 +940,7 @@ namespace IMS
             int a = Convert.ToInt32(Session["p_id"]);
             if (a != 0 || Convert.ToString(a) == null)
             {
-
-                Response.Redirect("PrintPurchase.aspx?id=" + a, false);
+                Response.Write(String.Format("<script>window.open('{0}','_blank')</script>", ResolveUrl(string.Format("~/PurchaseFolder/PrintPurchase.aspx?id={0}",a))));
             }
         }
 
