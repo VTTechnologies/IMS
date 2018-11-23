@@ -3007,6 +3007,9 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           <Parameter Name="company_id" Type="int" Mode="In" />
           <Parameter Name="branch_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_SelectProductbyid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="purchsae_id" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_SelectPurchase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="company_id" Type="int" Mode="In" />
         </Function>
@@ -4821,7 +4824,7 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="ProductId" Mode="In" Type="Int32" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="PurchaseOrPurchaseReturnReport" ReturnType="Collection(IMS_TESTModel.PurchaseOrPurchaseReturnReport_Result)">
+          <FunctionImport Name="PurchaseOrPurchaseReturnReport">
             <Parameter Name="Id" Mode="In" Type="Int32" />
             <Parameter Name="FromTable" Mode="In" Type="String" />
           </FunctionImport>
@@ -4849,7 +4852,7 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           <FunctionImport Name="ProductReport" ReturnType="Collection(IMS_TESTModel.ProductReport_Result)">
           <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="SaleOrSaleReturnReport" ReturnType="Collection(IMS_TESTModel.SaleOrSaleReturnReport_Result)">
+          <FunctionImport Name="SaleOrSaleReturnReport">
             <Parameter Name="Id" Mode="In" Type="Int32" />
             <Parameter Name="FromTable" Mode="In" Type="String" />
           </FunctionImport>
@@ -5399,7 +5402,18 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="branch_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_product_relorderlevel_report_forcompany_only" ReturnType="Collection(IMS_TESTModel.sp_product_relorderlevel_report_forcompany_only_Result1)">
-            <Parameter Name="company_id" Mode="In" Type="Int32" />
+          <Parameter Name="company_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PurchaseOrPurchaseReturnReport1" ReturnType="Collection(IMS_TESTModel.PurchaseOrPurchaseReturnReport1_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="FromTable" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SaleOrSaleReturnReport1" ReturnType="Collection(IMS_TESTModel.SaleOrSaleReturnReport1_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="FromTable" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_SelectProductbyid1" ReturnType="Collection(IMS_TESTModel.sp_SelectProductbyid1_Result)">
+            <Parameter Name="purchsae_id" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_ActiveUser_Result">
@@ -5794,27 +5808,6 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           <Property Type="String" Name="batch_name" Nullable="true" MaxLength="50" />
           <Property Type="Decimal" Name="tax_percentage" Nullable="true" Precision="18" Scale="2" />
         </ComplexType>
-        <ComplexType Name="PurchaseOrPurchaseReturnReport_Result">
-          <Property Type="String" Name="company_name" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="party_name" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="party_address" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="contact_no" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="company_address" Nullable="true" MaxLength="1000" />
-          <Property Type="Decimal" Name="total_tax" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="Decimal" Name="total_discount" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="Decimal" Name="total_amount" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="Decimal" Name="grand_total" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="String" Name="InvoiceNumber" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="paymentmode_name" Nullable="true" MaxLength="1000" />
-          <Property Type="Decimal" Name="given_amnt" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="balance_amnt" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="String" Name="product_name" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="tax_amt" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="String" Name="batch_name" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="quantity" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="Decimal" Name="amount" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="DateTime" Name="created_date" Nullable="true" Precision="16" />
-        </ComplexType>
         <ComplexType Name="sp_selectbatchwisequantity1_Result">
           <Property Type="Int32" Name="batch_id" Nullable="true" />
           <Property Type="Decimal" Name="StockAvl" Nullable="true" Precision="38" Scale="0" />
@@ -5879,27 +5872,6 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           <Property Type="DateTime" Name="created_date" Nullable="true" Precision="16" />
           <Property Type="String" Name="modified_by" Nullable="true" MaxLength="500" />
           <Property Type="DateTime" Name="modified_date" Nullable="true" Precision="16" />
-        </ComplexType>
-        <ComplexType Name="SaleOrSaleReturnReport_Result">
-          <Property Type="String" Name="company_name" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="party_name" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="party_address" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="contact_no" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="company_address" Nullable="true" MaxLength="1000" />
-          <Property Type="Decimal" Name="total_tax" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="Decimal" Name="total_discount" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="Decimal" Name="total_amount" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="Decimal" Name="grand_total" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="String" Name="InvoiceNumber" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="paymentmode_name" Nullable="true" MaxLength="1000" />
-          <Property Type="Decimal" Name="given_amnt" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="Decimal" Name="balance_amnt" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="String" Name="product_name" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="tax_amt" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="String" Name="batch_name" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="quantity" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="Decimal" Name="amount" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="DateTime" Name="created_date" Nullable="true" Precision="16" />
         </ComplexType>
         <ComplexType Name="Split_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -8617,6 +8589,65 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           <Property Type="Int32" Name="quantity" Nullable="true" />
           <Property Type="String" Name="batch_name" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="PurchaseOrPurchaseReturnReport1_Result">
+          <Property Type="String" Name="company_name" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="party_name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="party_address" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="contact_no" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="company_address" Nullable="true" MaxLength="1000" />
+          <Property Type="Decimal" Name="total_tax" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="total_discount" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="total_amount" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="grand_total" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="InvoiceNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="paymentmode_name" Nullable="true" MaxLength="1000" />
+          <Property Type="Decimal" Name="given_amnt" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="balance_amnt" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="product_name" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="tax_amt" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="batch_name" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="quantity" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="amount" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="created_date" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="SaleOrSaleReturnReport1_Result">
+          <Property Type="String" Name="company_name" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="party_name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="party_address" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="contact_no" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="company_address" Nullable="true" MaxLength="1000" />
+          <Property Type="Decimal" Name="total_tax" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="total_discount" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="total_amount" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="grand_total" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="InvoiceNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="paymentmode_name" Nullable="true" MaxLength="1000" />
+          <Property Type="Decimal" Name="given_amnt" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="balance_amnt" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="product_name" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="tax_amt" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="batch_name" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="quantity" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="amount" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="created_date" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sp_SelectProductbyid1_Result">
+          <Property Type="Int32" Name="purchasedetails_id" Nullable="false" />
+          <Property Type="Int32" Name="product_id" Nullable="true" />
+          <Property Type="Int32" Name="batch_id" Nullable="true" />
+          <Property Type="Int32" Name="unit_id" Nullable="true" />
+          <Property Type="Int32" Name="tax_id" Nullable="true" />
+          <Property Type="Decimal" Name="amount" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="dicount_amt" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="tax_amt" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="purchase_rate" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="sale_price" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="quantity" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="product_name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="unit_name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="batch_name" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="tax_percentage" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9204,31 +9235,6 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="IMS_TESTModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="GetReturnQuantity" FunctionName="IMS_TESTModel.Store.GetReturnQuantity" />
-          <FunctionImportMapping FunctionImportName="PurchaseOrPurchaseReturnReport" FunctionName="IMS_TESTModel.Store.PurchaseOrPurchaseReturnReport">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="IMS_TESTModel.PurchaseOrPurchaseReturnReport_Result">
-                <ScalarProperty Name="company_name" ColumnName="company_name" />
-                <ScalarProperty Name="party_name" ColumnName="party_name" />
-                <ScalarProperty Name="party_address" ColumnName="party_address" />
-                <ScalarProperty Name="contact_no" ColumnName="contact_no" />
-                <ScalarProperty Name="company_address" ColumnName="company_address" />
-                <ScalarProperty Name="total_tax" ColumnName="total_tax" />
-                <ScalarProperty Name="total_discount" ColumnName="total_discount" />
-                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
-                <ScalarProperty Name="grand_total" ColumnName="grand_total" />
-                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
-                <ScalarProperty Name="paymentmode_name" ColumnName="paymentmode_name" />
-                <ScalarProperty Name="given_amnt" ColumnName="given_amnt" />
-                <ScalarProperty Name="balance_amnt" ColumnName="balance_amnt" />
-                <ScalarProperty Name="product_name" ColumnName="product_name" />
-                <ScalarProperty Name="tax_amt" ColumnName="tax_amt" />
-                <ScalarProperty Name="batch_name" ColumnName="batch_name" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="created_date" ColumnName="created_date" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetBatchwiseQuantity" FunctionName="IMS_TESTModel.Store.GetBatchwiseQuantity" />
           <FunctionImportMapping FunctionImportName="sp_selectbatchwisequantity1" FunctionName="IMS_TESTModel.Store.sp_selectbatchwisequantity">
             <ResultMapping>
@@ -9308,31 +9314,6 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
                 <ScalarProperty Name="created_date" ColumnName="created_date" />
                 <ScalarProperty Name="modified_by" ColumnName="modified_by" />
                 <ScalarProperty Name="modified_date" ColumnName="modified_date" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SaleOrSaleReturnReport" FunctionName="IMS_TESTModel.Store.SaleOrSaleReturnReport">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="IMS_TESTModel.SaleOrSaleReturnReport_Result">
-                <ScalarProperty Name="company_name" ColumnName="company_name" />
-                <ScalarProperty Name="party_name" ColumnName="party_name" />
-                <ScalarProperty Name="party_address" ColumnName="party_address" />
-                <ScalarProperty Name="contact_no" ColumnName="contact_no" />
-                <ScalarProperty Name="company_address" ColumnName="company_address" />
-                <ScalarProperty Name="total_tax" ColumnName="total_tax" />
-                <ScalarProperty Name="total_discount" ColumnName="total_discount" />
-                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
-                <ScalarProperty Name="grand_total" ColumnName="grand_total" />
-                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
-                <ScalarProperty Name="paymentmode_name" ColumnName="paymentmode_name" />
-                <ScalarProperty Name="given_amnt" ColumnName="given_amnt" />
-                <ScalarProperty Name="balance_amnt" ColumnName="balance_amnt" />
-                <ScalarProperty Name="product_name" ColumnName="product_name" />
-                <ScalarProperty Name="tax_amt" ColumnName="tax_amt" />
-                <ScalarProperty Name="batch_name" ColumnName="batch_name" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="created_date" ColumnName="created_date" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -10438,6 +10419,77 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
                 <ScalarProperty Name="Reorderlevel" ColumnName="Reorderlevel" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="batch_name" ColumnName="batch_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PurchaseOrPurchaseReturnReport1" FunctionName="IMS_TESTModel.Store.PurchaseOrPurchaseReturnReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMS_TESTModel.PurchaseOrPurchaseReturnReport1_Result">
+                <ScalarProperty Name="company_name" ColumnName="company_name" />
+                <ScalarProperty Name="party_name" ColumnName="party_name" />
+                <ScalarProperty Name="party_address" ColumnName="party_address" />
+                <ScalarProperty Name="contact_no" ColumnName="contact_no" />
+                <ScalarProperty Name="company_address" ColumnName="company_address" />
+                <ScalarProperty Name="total_tax" ColumnName="total_tax" />
+                <ScalarProperty Name="total_discount" ColumnName="total_discount" />
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="grand_total" ColumnName="grand_total" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="paymentmode_name" ColumnName="paymentmode_name" />
+                <ScalarProperty Name="given_amnt" ColumnName="given_amnt" />
+                <ScalarProperty Name="balance_amnt" ColumnName="balance_amnt" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="tax_amt" ColumnName="tax_amt" />
+                <ScalarProperty Name="batch_name" ColumnName="batch_name" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SaleOrSaleReturnReport1" FunctionName="IMS_TESTModel.Store.SaleOrSaleReturnReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMS_TESTModel.SaleOrSaleReturnReport1_Result">
+                <ScalarProperty Name="company_name" ColumnName="company_name" />
+                <ScalarProperty Name="party_name" ColumnName="party_name" />
+                <ScalarProperty Name="party_address" ColumnName="party_address" />
+                <ScalarProperty Name="contact_no" ColumnName="contact_no" />
+                <ScalarProperty Name="company_address" ColumnName="company_address" />
+                <ScalarProperty Name="total_tax" ColumnName="total_tax" />
+                <ScalarProperty Name="total_discount" ColumnName="total_discount" />
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="grand_total" ColumnName="grand_total" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="paymentmode_name" ColumnName="paymentmode_name" />
+                <ScalarProperty Name="given_amnt" ColumnName="given_amnt" />
+                <ScalarProperty Name="balance_amnt" ColumnName="balance_amnt" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="tax_amt" ColumnName="tax_amt" />
+                <ScalarProperty Name="batch_name" ColumnName="batch_name" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_SelectProductbyid1" FunctionName="IMS_TESTModel.Store.sp_SelectProductbyid">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMS_TESTModel.sp_SelectProductbyid1_Result">
+                <ScalarProperty Name="purchasedetails_id" ColumnName="purchasedetails_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="batch_id" ColumnName="batch_id" />
+                <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+                <ScalarProperty Name="tax_id" ColumnName="tax_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="dicount_amt" ColumnName="dicount_amt" />
+                <ScalarProperty Name="tax_amt" ColumnName="tax_amt" />
+                <ScalarProperty Name="purchase_rate" ColumnName="purchase_rate" />
+                <ScalarProperty Name="sale_price" ColumnName="sale_price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="unit_name" ColumnName="unit_name" />
+                <ScalarProperty Name="batch_name" ColumnName="batch_name" />
+                <ScalarProperty Name="tax_percentage" ColumnName="tax_percentage" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

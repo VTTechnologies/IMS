@@ -219,6 +219,7 @@
     <Content Include="Masters\Product.aspx" />
     <Content Include="Masters\User.aspx" />
     <Content Include="PurchaseFolder\PrintPurchase.aspx" />
+    <Content Include="PurchaseFolder\ViewORPayBalancePurchase.aspx" />
     <Content Include="PurchaseFolder\PurchaseReport.aspx" />
     <Content Include="PurchaseFolder\PurcahseRtrn.aspx" />
     <Content Include="PurchaseFolder\Purchase.aspx" />
@@ -266,6 +267,7 @@
     <Content Include="SalesFolder\Sale.aspx" />
     <Content Include="SalesFolder\SalesReport.aspx" />
     <Content Include="SalesFolder\SalesReturn.aspx" />
+    <Content Include="SalesFolder\ViewORPayBalanceSale.aspx" />
     <Content Include="Settings.aspx" />
     <Content Include="Masters\Tax.aspx" />
     <Content Include="Masters\Unit.aspx" />
@@ -441,6 +443,13 @@
     <Compile Include="PurchaseFolder\PrintPurchase.aspx.designer.cs">
       <DependentUpon>PrintPurchase.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PurchaseFolder\ViewORPayBalancePurchase.aspx.cs">
+      <DependentUpon>ViewORPayBalancePurchase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PurchaseFolder\ViewORPayBalancePurchase.aspx.designer.cs">
+      <DependentUpon>ViewORPayBalancePurchase.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PurchaseFolder\PurchaseManger.Master.cs">
       <DependentUpon>PurchaseManger.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -607,6 +616,13 @@
     <Compile Include="SalesFolder\SalesReturn.aspx.designer.cs">
       <DependentUpon>SalesReturn.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SalesFolder\ViewORPayBalanceSale.aspx.cs">
+      <DependentUpon>ViewORPayBalanceSale.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SalesFolder\ViewORPayBalanceSale.aspx.designer.cs">
+      <DependentUpon>ViewORPayBalanceSale.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Settings.aspx.cs">
       <DependentUpon>Settings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -644,6 +660,9 @@
     <Folder Include="Uploads\Logos\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Uploads\down.png" />
+    <Content Include="Uploads\mony.png" />
+    <Content Include="Uploads\up.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

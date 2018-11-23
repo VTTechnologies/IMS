@@ -25,7 +25,7 @@
     <script type='text/javascript'>
         $(function () {
             $("#<%=txtquantity.ClientID %>").keypress(function () {
-                 $("#<%=lblcheckDoubleError.ClientID%>").text('');
+                 <%--$("#<%=lblcheckDoubleError.ClientID%>").text('');--%>
             });
          });
          function openalert(msg, val) {
@@ -40,11 +40,13 @@
          }
 
          function OnlyNumericEntry(evt) {
+              <%--$("#<%=lblcheckDoubleError.ClientID%>").text('');--%>
              var charCode = (evt.which) ? evt.which : event.keyCode
              if (charCode != 46 && charCode > 31
                && (charCode < 48 || charCode > 57))
                  return false;
 
+             ValidateQuantity();
              return true;
          }
          function ValidateQuantity() {
@@ -66,10 +68,12 @@
                 case "true":
                     msg.style.display = "block";
                     msg.innerHTML = response.d[1];
+                    $("#<%=btnAdd.ClientID%>").prop('disabled', true);
                     break;
 
                 case "false":
                     msg.style.display = "none";
+                     $("#<%=btnAdd.ClientID%>").prop('disabled', false);
                     break;
             }
         }
@@ -119,7 +123,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px; margin-top: 10px">
+                        <%--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px; margin-top: 10px">
                             <asp:GridView ID="GrdOriginalSale" runat="server" CssClass="table" AutoGenerateColumns="false" BorderStyle="None" GridLines="Horizontal">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Sr.No">
@@ -139,7 +143,31 @@
                                 </Columns>
                                 <HeaderStyle BackColor="#428BCA" ForeColor="White" />
                             </asp:GridView>
-                        </div>
+                        </div>--%>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px; margin-top: 10px">
+                        <asp:GridView ID="GrdOriginalSale" runat="server" CssClass="table table-bordered " Font-Size="Small" AutoGenerateColumns="false" OnDataBound ="GrdOriginalSale_DataBound"  BorderStyle="None" GridLines="Horizontal" OnRowDataBound="GrdOriginalSale_RowDataBound">
+                            <Columns>   
+                                <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                            <ItemTemplate>
+                                 <asp:Image id="image" Visible="false" runat="server"/>
+                                </ItemTemplate>
+                        </asp:TemplateField>                             
+                                 <asp:BoundField DataField="Type" HeaderText="Type"></asp:BoundField>
+                                <asp:BoundField DataField="Product" HeaderText="Product"></asp:BoundField>
+                                <asp:BoundField DataField="Batch" HeaderText="Batch" ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs"></asp:BoundField>
+                                <asp:BoundField DataField="Date" HeaderText="Date" ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs"></asp:BoundField>
+                                <asp:BoundField DataField="Quantity" HeaderText="Quantity"></asp:BoundField>
+                                <asp:BoundField DataField="SaleRate" HeaderText="Sale Price" ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs"></asp:BoundField>
+                                <asp:BoundField DataField="DiscountAmnt" HeaderText="Discount" ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs"></asp:BoundField>                                
+                                <asp:BoundField DataField="TaxAmnt" HeaderText="Tax" ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs"></asp:BoundField>
+                               <asp:BoundField DataField="ProductAmount" HeaderText="Total" ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs"></asp:BoundField>
+                                 
+                            </Columns>   
+                           
+                            <HeaderStyle BackColor="#428BCA" ForeColor="White" />                         
+                        </asp:GridView>
+                    </div>
                     </div>
                     <div style="border: 1px solid black; margin-top: 10px; margin-bottom: 10px;"></div>
                     <div class="row">
@@ -309,12 +337,24 @@
                             </div>
                         </div>
                         <div class="row">
+                              <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 ">
+                            </div>
+                            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 leftpadd0 pull-right" style="padding: 0px;">
+                                    <div class="form-group pull-right">                                        
+                                        <div class="col-sm-12 leftpadd0">
+                                            <label class="control-label col-sm-9"></label>
+                                            <asp:Button ID="btnPayBack" Text="Pay Back" runat="server" CssClass="btn btn-primary" Visible="false" OnClick="btnPayBack_Click"></asp:Button>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
                             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 pull-right">
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 leftpadd0 pull-right" style="padding: 0px;">
                                     <div class="form-group">
                                         <div class="col-sm-12 leftpadd0">
                                             <label class="control-label col-sm-9">
-                                                Given Amount
+                                                Paid Amount
                                           <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtBalanceAmt" ErrorMessage="*" ValidationGroup="savesale" ForeColor="Red"></asp:RequiredFieldValidator>
                                             </label>
                                             <asp:TextBox ID="txtGivenAmt" runat="server" CssClass="form-control" AutoPostBack="true" Enabled="false" OnTextChanged="txtGivenAmt_TextChanged" onkeypress="return OnlyNumericEntry(event);"></asp:TextBox>
@@ -335,8 +375,8 @@
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtBalanceAmt" ErrorMessage="*" ValidationGroup="savesale" ForeColor="Red"></asp:RequiredFieldValidator>
                                             </label>
                                             <asp:TextBox ID="txtBalanceAmt" runat="server" CssClass="form-control" Enabled="false" onkeypress="return OnlyNumericEntry(event);"></asp:TextBox>
-                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ForeColor="Red" ControlToValidate="txtBalanceAmt" ErrorMessage="Balance Amount Should be digits only" ValidationGroup="savesale" ValidationExpression="^\s*(?=.*[0-9])\d*(?:\.\d{1,5})?\s*$" Display="Dynamic">
-                                            </asp:RegularExpressionValidator>
+                                           <%-- <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ForeColor="Red" ControlToValidate="txtBalanceAmt" ErrorMessage="Balance Amount Should be digits only" ValidationGroup="savesale" ValidationExpression="^\s*(?=.*[0-9])\d*(?:\.\d{1,5})?\s*$" Display="Dynamic">
+                                            </asp:RegularExpressionValidator>--%>
                                         </div>
                                     </div>
                                 </div>

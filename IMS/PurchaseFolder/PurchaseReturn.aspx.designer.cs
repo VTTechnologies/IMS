@@ -256,6 +256,15 @@ namespace IMS.PurchaseFolder {
         protected global::System.Web.UI.WebControls.DropDownList ddlPaymentMode;
         
         /// <summary>
+        /// btnGetRefund control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGetRefund;
+        
+        /// <summary>
         /// RequiredFieldValidator8 control.
         /// </summary>
         /// <remarks>

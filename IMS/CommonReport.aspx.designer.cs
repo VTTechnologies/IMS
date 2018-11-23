@@ -58,15 +58,6 @@ namespace IMS.Reports {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
-        /// lstpanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel lstpanel;
-        
-        /// <summary>
         /// Products control.
         /// </summary>
         /// <remarks>
@@ -256,22 +247,22 @@ namespace IMS.Reports {
         protected global::System.Web.UI.WebControls.Label lblemail;
         
         /// <summary>
-        /// lblinvoiceno control.
+        /// lblStartDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblinvoiceno;
+        protected global::System.Web.UI.WebControls.Label lblStartDate;
         
         /// <summary>
-        /// lbldate control.
+        /// lblEndDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbldate;
+        protected global::System.Web.UI.WebControls.Label lblEndDate;
         
         /// <summary>
         /// lblpartyname control.

@@ -9,12 +9,15 @@
             $('#btnprint').hide();
             window.print();
         }
-
+    
         $(function () {
             $('[id*=lstProduct]').multiselect({
                 includeSelectAllOption: true
             });
             $('[id*=lstVendor]').multiselect({
+                includeSelectAllOption: true
+            });
+            $('[id*=lstCustomers]').multiselect({
                 includeSelectAllOption: true
             });
         });
@@ -81,8 +84,8 @@
                                 </div>
                             </div>
 
-                            <asp:UpdatePanel ID="lstpanel" runat="server">
-                                <ContentTemplate>
+                            <%--<asp:UpdatePanel ID="lstpanel" runat="server">--%>
+                                <%--<ContentTemplate>--%>
                                     <div class="col-md-4 ">
                                         <div>
                                             <div id="Products" runat="server" visible="false">
@@ -111,8 +114,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
+                             <%--   </ContentTemplate>
+                            </asp:UpdatePanel>--%>
                         </div>
                         <div class="row">
                             <div class="col-md-4 ">
@@ -150,7 +153,7 @@
         </div>
 
         <div id="displayReportSection" runat="server" visible="false">
-            <asp:Panel id="reportSection" runat="server" ScrollBars="Horizontal">
+            <asp:Panel id="reportSection" runat="server" >
             <div class="row">
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <div id="invoice" class="pagestyle">                        
@@ -182,12 +185,9 @@
                             </div>
 
                             <div id="invoice-info">
-                                <h2>Invoice <strong>
-                                    <asp:Label ID="lblinvoiceno" runat="server"></asp:Label></strong>
-                                </h2>
-                                <h3>
-                                    <asp:Label ID="lbldate" runat="server"></asp:Label>
-                                </h3>
+                                 <strong>
+                                   Start Date: <asp:Label ID="lblStartDate" runat="server"></asp:Label> End Date: <asp:Label ID="lblEndDate" runat="server"></asp:Label>
+                               </strong>
                             </div>
 
                             <div class="vcard" id="client-details">
@@ -206,7 +206,7 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px; margin-top: 10px">
                                     
-                                    <asp:GridView ID="grdreport" runat="server" headerstyle-backcolor="#0033CC" AutoGenerateColumns="true" CssClass="table  " BorderStyle="None" GridLines="Horizontal">
+                                    <asp:GridView ID="grdreport" runat="server" OnDataBound ="grdreport_DataBound" headerstyle-backcolor="#0033CC" Font-Size="X-Small" AutoGenerateColumns="true" CssClass="table table-bordered" BorderStyle="Solid" GridLines="Horizontal">
 
                                      
                                         <HeaderStyle BackColor="#0033CC" ForeColor="White" />

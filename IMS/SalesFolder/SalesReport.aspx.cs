@@ -170,6 +170,7 @@ namespace IMS.SalesFolder
         {
             try
             {
+                GridViewRow grv = ((GridViewRow)((LinkButton)e.CommandSource).NamingContainer);
                 int id = Convert.ToInt32(e.CommandArgument);
                 if (e.CommandName == "Order")
                 {
@@ -185,7 +186,17 @@ namespace IMS.SalesFolder
                 {
                     //Response.Write(String.Format("<script>window.open('{0}','_blank')</script>", ResolveUrl(string.Format("~/Reports/ReportViewer.aspx?Id={0}&ReportName={1}", id, "SaleReturnReport"))));
                     Response.Write(String.Format("<script>window.open('{0}','_blank')</script>", ResolveUrl(string.Format("~/Reports/PurchaseSaleReturnReport.aspx?Id={0}&ReportName={1}", id, "SaleReturnReport"))));
-                }               
+                }
+                else if (e.CommandName == "ViewORPayBalance")
+                {
+                    bool enablePayBalance = false;
+
+                    if (grv.Cells[5].Text != "0.00")
+                    {
+                        enablePayBalance = true;
+                    }
+                    Response.Redirect(string.Format("~/SalesFolder/ViewORPayBalanceSale.aspx?Id={0}&ViewOrPayBalance={1}", id, enablePayBalance));
+                }
             }
             catch (Exception ex)
             {
