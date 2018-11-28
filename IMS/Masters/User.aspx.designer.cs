@@ -13,22 +13,22 @@ namespace IMS.Masters {
     public partial class WebForm1 {
         
         /// <summary>
-        /// form1 control.
+        /// bMaster control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor bMaster;
         
         /// <summary>
-        /// RequiredFieldValidator4 control.
+        /// lblStar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
+        protected global::System.Web.UI.WebControls.Label lblStar;
         
         /// <summary>
         /// txtFirstName control.
@@ -40,13 +40,22 @@ namespace IMS.Masters {
         protected global::System.Web.UI.WebControls.TextBox txtFirstName;
         
         /// <summary>
-        /// RequiredFieldValidator7 control.
+        /// RequiredFieldValidator4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
+        
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
         /// txtLastname control.
@@ -58,13 +67,22 @@ namespace IMS.Masters {
         protected global::System.Web.UI.WebControls.TextBox txtLastname;
         
         /// <summary>
-        /// rfPassword control.
+        /// RequiredFieldValidator7 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfPassword;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
+        
+        /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
         /// txtPassword control.
@@ -76,6 +94,15 @@ namespace IMS.Masters {
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
         
         /// <summary>
+        /// rfPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfPassword;
+        
+        /// <summary>
         /// RegularExpressionValidator4 control.
         /// </summary>
         /// <remarks>
@@ -85,13 +112,13 @@ namespace IMS.Masters {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator4;
         
         /// <summary>
-        /// RequiredFieldValidator3 control.
+        /// Label3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
+        protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
         /// txtUserEmail control.
@@ -101,6 +128,15 @@ namespace IMS.Masters {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtUserEmail;
+        
+        /// <summary>
+        /// RequiredFieldValidator3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
         
         /// <summary>
         /// lblcheckDoubleError control.
@@ -121,13 +157,13 @@ namespace IMS.Masters {
         protected global::System.Web.UI.WebControls.HiddenField hd;
         
         /// <summary>
-        /// RequiredFieldValidator2 control.
+        /// Label4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        protected global::System.Web.UI.WebControls.Label Label4;
         
         /// <summary>
         /// ddlRole control.
@@ -139,13 +175,22 @@ namespace IMS.Masters {
         protected global::System.Web.UI.WebControls.DropDownList ddlRole;
         
         /// <summary>
-        /// RequiredFieldValidator5 control.
+        /// RequiredFieldValidator2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        
+        /// <summary>
+        /// Label5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
         /// ddlBranch control.
@@ -157,13 +202,22 @@ namespace IMS.Masters {
         protected global::System.Web.UI.WebControls.DropDownList ddlBranch;
         
         /// <summary>
-        /// rfcontact control.
+        /// RequiredFieldValidator5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfcontact;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
+        
+        /// <summary>
+        /// Label6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label6;
         
         /// <summary>
         /// txtContactNo control.
@@ -173,6 +227,15 @@ namespace IMS.Masters {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtContactNo;
+        
+        /// <summary>
+        /// rfcontact control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfcontact;
         
         /// <summary>
         /// rgx control.
@@ -227,15 +290,6 @@ namespace IMS.Masters {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button1;
-        
-        /// <summary>
-        /// btnCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
         
         /// <summary>
         /// divalert control.
