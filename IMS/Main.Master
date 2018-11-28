@@ -8,16 +8,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Management System</title>
-    <!-- Core CSS - Include with every page -->
-     <link href="../assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <%--<link href="assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />--%>
+    <link href="assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="../assets/css/main-style.css" rel="stylesheet" />
-    <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
-    <link href="/resources/demos/style.css"  rel="stylesheet"/>
-    <script src="../assets/scripts/siminta.js"></script>
+    <link href="assets/css/main-style.css" rel="stylesheet" />
+    <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="/resources/demos/style.css" rel="stylesheet" />
+    <script src="assets/scripts/siminta.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/dataTables.bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.bootstrap.min.css" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -26,27 +24,17 @@
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script type="text/javascript"  src="assets/scripts/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="assets/scripts/bootstrap-datetimepicker.min.js"></script>
     <link href="assets/css/bootstrap-multiselect.css" rel="stylesheet" />
-    
-    <script src="assets/scripts/bootstrap-multiselect.js"></script>
- <%--   <script type="text/javascript">
-        $(function () {
-            $('#GridView1').prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable({
-                "responsive": true,
-                "sPaginationType": "full_numbers"
-            });
-        });
-    </script>--%>
-    <!-- Page-Level CSS -->
-    <link href="../assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
-    <script src="../assets/alert/alertify.js"></script>
-    <script src="../assets/alert/alertify.min.js"></script>
-    <link href="../assets/alert/css/alertify.css" rel="stylesheet" />
-    <link href="../assets/alert/css/alertify.min.css" rel="stylesheet" />
-    <link href="../assets/alert/css/themes/default.css" rel="stylesheet" />
-    <link href="../assets/alert/css/themes/default.min.css" rel="stylesheet" />
-    <link href="../assets/alert/css/themes/default.rtl.css" rel="stylesheet" />
+
+    <link href="assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <script src="assets/alert/alertify.js"></script>
+    <script src="assets/alert/alertify.min.js"></script>
+    <link href="assets/alert/css/alertify.css" rel="stylesheet" />
+    <link href="assets/alert/css/alertify.min.css" rel="stylesheet" />
+    <link href="assets/alert/css/themes/default.css" rel="stylesheet" />
+    <link href="assets/alert/css/themes/default.min.css" rel="stylesheet" />
+    <link href="assets/alert/css/themes/default.rtl.css" rel="stylesheet" />
     <script>
         function openalert(msg, val) {
             alertify.alert('Success', msg).setting({
@@ -182,8 +170,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="/Home.aspx"><asp:Label ID="lblIms" runat="server" Font-Bold="true" Style="padding: 0; font-size: 55px; color: white;" Text="!MSB!ZZ" Visible="false"></asp:Label></a>
-                    <a href="/Home.aspx"><asp:Image ID="imglogo" runat="server" Height="80px" Width="200px" /></a>
+                    <a href="/Home.aspx">
+                        <asp:Label ID="lblIms" runat="server" Font-Bold="true" Style="padding: 0; font-size: 55px; color: white;" Text="!MSB!ZZ" Visible="false"></asp:Label></a>
+                    <a href="/Home.aspx">
+                        <asp:Image ID="imglogo" runat="server" Height="80px" Width="200px" /></a>
                     <%--   <asp:Label ID="lblHeading" runat="server"  ></asp:Label>--%>
                     <%--<img src="assets/img/logo.png" alt="" />--%>
 
@@ -207,7 +197,7 @@
                 <ul class="nav navbar-top-links navbar-right">
                     <li><a href="Settings.aspx"><i class="fa fa-cog fa-3x"></i></a></li>
                     <!-- main dropdown -->
-                  <%--   <li class="dropdown">
+                    <%--   <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <span class="top-label label label-danger">
                                 <asp:Label ID="lblnotification" runat="server"></asp:Label></span><i class="fa fa-envelope fa-3x"></i>
@@ -472,7 +462,7 @@
                         <!--end search section-->
                     </li>--%>
                     <li id="liindex" runat="server">
-                        <a href="Home.aspx"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+                        <a href="../Home.aspx"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                     </li>
                     <%--<li id="licompany" runat="server">
                         <a href="Company.aspx"><i class="fa fa-building-o fa-fw"></i>Company</a>
@@ -481,14 +471,14 @@
                         <a href="Branch.aspx"><i class="fa fa-building fa-fw"></i>Branch</a>
                     </li>--%>
                     <li id="limaster" runat="server">
-                        <a href="Master.aspx"><i class="fa fa-bar-chart-o fa-fw"></i>Masters</a>
+                        <a href="../Master.aspx"><i class="fa fa-bar-chart-o fa-fw"></i>Masters</a>
 
                         <!-- second-level-items -->
                     </li>
                     <li id="lipurchase" runat="server">
                         <a href="../PurchaseFolder/Purchase.aspx"><i class="fa fa-list-alt fa-fw"></i>Purchase</a>
                     </li>
-                     <li id="lipurchasereturn" runat="server">
+                    <li id="lipurchasereturn" runat="server">
                         <a href="../PurchaseFolder/PurchaseReturn.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Purchase Return</a>
                     </li>
                     <li id="lisale" runat="server">
@@ -496,16 +486,16 @@
                     </li>
                     <li id="lisalereturn" runat="server">
                         <a href="../SalesFolder/salesReturn.aspx"><i class="fa fa-cart-plus fa-fw"></i>Sales Return</a>
-                    </li>    
-                     <li id="li1" runat="server">
+                    </li>
+                    <li id="li1" runat="server">
                         <%--<a href="MasterReports.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>--%>
-                         <a href="CommonReport.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>
-                    </li>                 
-                   <%-- <li id="liReport" runat="server">
+                        <a href="CommonReport.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>
+                    </li>
+                    <%-- <li id="liReport" runat="server">
 
                         <a href="Reports.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Reports</a>
                     </li>--%>
-                   <%-- <li tabindex="1"><span class="menu1">Reports </span>
+                    <%-- <li tabindex="1"><span class="menu1">Reports </span>
                         <ul class="submenu">
                             <li><a href="#" class="back">Back </a></li>
                             <li><a href="#" class="home">Products</a></li>
@@ -518,15 +508,19 @@
 
             <!-- end navbar side -->
             <div id="page-wrapper">
+                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
 
+                <div>
+                    <a href="Master.aspx" id="bMaster" runat="server" visible="false">
+                        <img src="assets/img/goback-5-w800.png" height="50" width="130" /></a>
+                    <iframe width="100%" height="1000" id="ifm" runat="server" frameborder="0" allowfullscreen="true" scrolling="yes" visible="false"></iframe>
+                </div>
 
                 <div class="footer ">
-
                     <div class="text-center ">
                         Copyrights © 2018 All Rights Reserved by <a href="http://www.vttechnologies.co/">VT Technology</a>
-
                     </div>
                 </div>
 

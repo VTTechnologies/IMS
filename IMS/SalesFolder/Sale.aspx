@@ -1,11 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="SalesManger.Master" AutoEventWireup="true" CodeBehind="Sale.aspx.cs" Inherits="IMS.Sales" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Sale.aspx.cs" Inherits="IMS.Sales" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <%--<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--%>
     <%--<asp:CheckBox ID="chk" runat="server" Text="If IGST" Font-Bold="true" CssClass="checkbox" />--%>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <%--<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="../assets/scripts/bootstrap-datetimepicker.min.js"></script>
     <script src="../assets/alert/alertify.js"></script>
     <script src="../assets/alert/alertify.min.js"></script>
@@ -13,7 +13,7 @@
     <link href="../assets/alert/css/alertify.min.css" rel="stylesheet" />
     <link href="../assets/alert/css/themes/default.css" rel="stylesheet" />
     <link href="../assets/alert/css/themes/default.min.css" rel="stylesheet" />
-    <link href="../assets/alert/css/themes/default.rtl.css" rel="stylesheet" />
+    <link href="../assets/alert/css/themes/default.rtl.css" rel="stylesheet" />--%>
     <script type='text/javascript'>
         function openModal() {
             $('#<%=myModal.ClientID%>').modal('show');
@@ -74,9 +74,6 @@
             }
         }--%>
     </script>
-
-
-
 
     <script type='text/javascript'>
 
