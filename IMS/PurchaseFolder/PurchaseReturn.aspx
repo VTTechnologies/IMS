@@ -1,22 +1,23 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PurchaseFolder/PurchaseManger.Master" AutoEventWireup="true" CodeBehind="PurchaseReturn.aspx.cs" Inherits="IMS.PurchaseFolder.PurchaseReturn" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="PurchaseReturn.aspx.cs" Inherits="IMS.PurchaseFolder.PurchaseReturn" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <%--<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">--%>
 
     <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>--%>
 
     <!-- Latest compiled JavaScript -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <%--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
     <%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>--%>
-    <script src="../assets/alert/alertify.js"></script>
+    <%--<script src="../assets/alert/alertify.js"></script>
     <script src="../assets/alert/alertify.min.js"></script>
     <link href="../assets/alert/css/alertify.css" rel="stylesheet" />
     <link href="../assets/alert/css/alertify.min.css" rel="stylesheet" />
     <link href="../assets/alert/css/themes/default.css" rel="stylesheet" />
     <link href="../assets/alert/css/themes/default.min.css" rel="stylesheet" />
-    <link href="../assets/alert/css/themes/default.rtl.css" rel="stylesheet" />
+    <link href="../assets/alert/css/themes/default.rtl.css" rel="stylesheet" />--%>
     <script>
         function openModal() {
             $('#<%=myModal.ClientID%>').modal('show');
@@ -94,6 +95,7 @@
         <div class="panel-body">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="row">
+                    <asp:Label ID="lblNote" runat="server" Text="Note: Please search by Sequence No. e.g. 0001" ForeColor="Red" Font-Size="13px"></asp:Label><br />
                     <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                         <div class="form-horizontal Fhorizontal">
                             <div class="col-sm-10 leftpadd0">
@@ -103,10 +105,16 @@
                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtPoNo" ErrorMessage="*" ForeColor="Red" ValidationGroup="searchvalidation"></asp:RequiredFieldValidator>
                                 </label>
                                 <asp:TextBox ID="txtPoNo" runat="server" CssClass="form-control" ValidationGroup="searchvalidation"></asp:TextBox>
+                                <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server"
+                                    ServiceMethod="GetPoNumbers"
+                                    MinimumPrefixLength="2"
+                                    CompletionInterval="100"
+                                    EnableCaching="false"
+                                    CompletionSetCount="10"
+                                    TargetControlID="txtPoNo"
+                                    FirstRowSelected="false"></ajaxToolkit:AutoCompleteExtender>
                             </div>
-
                         </div>
-
                     </div>
                     <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px; margin-top: 20px">
                         <div class="col-sm-10 leftpadd0">
