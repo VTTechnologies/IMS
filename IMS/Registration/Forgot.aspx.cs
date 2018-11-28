@@ -42,9 +42,9 @@ namespace IMS.Registration.form_1
                 //SmtpClient SmtpServer = new SmtpClient("relay-hosting.secureserver.net");
                 SmtpClient SmtpServer = new SmtpClient("webmail.imsbizz.com", 25);
                 StringBuilder sb = new StringBuilder();
-                mail.From = new MailAddress("no-replay@imsbizz.com", "IMS Bizz");
+                mail.From = new MailAddress("no-reply@imsbizz.com", "IMS Bizz");
                 mail.To.Add(email.Value);
-                mail.Subject =  dt.Rows[0]["username"].ToString()+"here's the link to reset your password";
+                mail.Subject =  dt.Rows[0]["username"].ToString()+" here's the link to reset your password";
                 string body = string.Empty;
                 using (StreamReader reader = new StreamReader(Server.MapPath("~/Registration/Forgotpassword.html")))
                 {
@@ -56,7 +56,7 @@ namespace IMS.Registration.form_1
                 body = body.Replace("{pid}", dt.Rows[0]["Passverify_ID"].ToString());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
-                NetworkCredential NetCrd = new NetworkCredential("no-replay@imsbizz.com", "Temp@1234");
+                NetworkCredential NetCrd = new NetworkCredential("no-reply@imsbizz.com", "Temp@1234");
                 SmtpServer.EnableSsl = false;
                 //SmtpServer.UseDefaultCredentials = true;
                 SmtpServer.UseDefaultCredentials = false;
@@ -115,7 +115,7 @@ namespace IMS.Registration.form_1
                 {
                     SendMail();
                     email.Value = "";
-                } 
+                }
             }
             catch (Exception ex)
             {
