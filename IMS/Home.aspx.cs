@@ -66,42 +66,42 @@ namespace IMS
                 if (orderTypeFlag == "Purchase")
                 {
                     details = (from s in context.tbl_purchase
-                               join p in context.tbl_party
-                               on s.company_id equals p.company_id
+                               join p in context.tbl_party on s.company_id equals p.company_id
+                               join pd in context.tbl_PurchasePaymentDetials on s.purchase_id equals pd.PurchaseId
                                where s.company_id == companyId && s.party_id == p.party_id && s.status == true && s.created_date >= startdate
                                && s.created_date <= DateTime.Now
                                select new DashboardOrderTableViewModel
                                {
                                    InvoiceNumber = s.InvoiceNumber,
                                    PartyName = p.party_name,
-                                   TotalTax = s.total_tax,
-                                   TotalAmount = s.total_amnt,
-                                   TotalDiscount = s.total_discount,
-                                   GrandTotal = s.grand_total,
-                                   GivenAmnt = s.given_amnt,
-                                   BalanceAmnt = s.balance_amnt,
+                                   TotalTax = pd.TaxAmount,
+                                   TotalAmount = pd.SubTotal,
+                                   TotalDiscount = pd.DiscountAmount,
+                                   GrandTotal = pd.GrandTotal,
+                                   GivenAmnt = pd.GivenAmnt,
+                                   BalanceAmnt = pd.BalanceAmnt,
                                    ID = s.purchase_id,
                                    Date = s.created_date
                                }).ToList();
-
 
                 }
                 else if (orderTypeFlag == "Sale")
                 {
                     details = (from s in context.tbl_sale
-                               join p in context.tbl_party on s.company_id equals p.company_id
+                               join p in context.tbl_party on s.company_id equals p.    company_id
+                               join sd in context.tbl_SalePaymentDetails on s.sale_id equals sd.SaleId
                                where s.company_id == companyId && s.company_id == companyId && s.party_id == p.party_id && s.status == true && s.created_date >= startdate
                                && s.created_date <= DateTime.Now
                                select new DashboardOrderTableViewModel
                                {
                                    InvoiceNumber = s.InvoiceNumber,
                                    PartyName = p.party_name,
-                                   TotalTax = s.total_tax,
-                                   TotalAmount = s.total_amount,
-                                   TotalDiscount = s.total_discount,
-                                   GrandTotal = s.grand_total,
-                                   GivenAmnt = s.given_amnt,
-                                   BalanceAmnt = s.balance_amnt,
+                                   TotalTax = sd.TaxAmount,
+                                   TotalAmount = sd.SubTotal,
+                                   TotalDiscount = sd.DiscountAmount,
+                                   GrandTotal = sd.GrandTotal,
+                                   GivenAmnt = sd.GivenAmnt,
+                                   BalanceAmnt = sd.BalanceAmnt,
                                    ID = s.sale_id,
                                    Date = s.created_date
                                }).ToList();

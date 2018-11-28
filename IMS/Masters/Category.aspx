@@ -118,7 +118,7 @@
                 </div>
                 <div class="panel-footer">
 
-                    <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " ValidationGroup="abc" Text="Save" OnClick="btnSave_Click" OnClientClick="this.disabled='true'; this.value='Processing...';" UseSubmitBehavior="false"/>
+                    <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " ValidationGroup="abc" Text="Save" OnClick="btnSave_Click" OnClientClick="DisableOnSave(this,'abc');" UseSubmitBehavior="false"/>
                     <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" ValidationGroup="abc" Text="Update" OnClick="btnUpdate_Click" Visible="false" />
                     <input class="btn btn-primary " type="button" value="Clear" onclick ="clearcategory()" />
                 </div>

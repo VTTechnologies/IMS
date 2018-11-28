@@ -29,6 +29,9 @@
     <script type="text/javascript"  src="assets/scripts/bootstrap-datetimepicker.min.js"></script>
     <link href="assets/css/bootstrap-multiselect.css" rel="stylesheet" />
     
+    <%--Create Common Function repository to handle Javascript Code--%>
+    <script src="../assets/src/CommonFuntion.js"></script>
+    
     <script src="assets/scripts/bootstrap-multiselect.js"></script>
  <%--   <script type="text/javascript">
         $(function () {

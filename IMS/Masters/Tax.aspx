@@ -139,7 +139,7 @@
                     </div>
                 </div>
                 <div class="panel-footer text-center">
-                    <asp:Button ID="btnSave" runat="server" ValidationGroup="tx" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" OnClientClick="this.disabled='true'; this.value='Processing...';" UseSubmitBehavior="false"/>
+                    <asp:Button ID="btnSave" runat="server" ValidationGroup="tx" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" OnClientClick="DisableOnSave(this,'tx');" UseSubmitBehavior="false"/>
 
                     <asp:Button ID="btnUpdate" runat="server" ValidationGroup="tx" CssClass="btn btn-primary" Text="Update" OnClick="btnUpdate_Click" Visible="false" />
                     <asp:Button ID="btnClear" runat="server" CssClass="btn btn-primary " Text="Clear" OnClick="btnClear_Click" />

@@ -67,60 +67,6 @@ namespace IMS.SalesFolder {
         protected global::System.Web.UI.WebControls.GridView GrdOriginalSale;
         
         /// <summary>
-        /// lblTotalAmnt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalAmnt;
-        
-        /// <summary>
-        /// lblTotalTax control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalTax;
-        
-        /// <summary>
-        /// lblTotalDiscount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalDiscount;
-        
-        /// <summary>
-        /// lblGrndTotal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblGrndTotal;
-        
-        /// <summary>
-        /// lblGivenAmnt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblGivenAmnt;
-        
-        /// <summary>
-        /// lblBalanceAmnt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBalanceAmnt;
-        
-        /// <summary>
         /// UpdatePanel1 control.
         /// </summary>
         /// <remarks>
@@ -202,6 +148,15 @@ namespace IMS.SalesFolder {
         protected global::System.Web.UI.WebControls.GridView gvsalesdetails;
         
         /// <summary>
+        /// lblTotalAmnt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalAmnt;
+        
+        /// <summary>
         /// lblsubtotal control.
         /// </summary>
         /// <remarks>
@@ -209,6 +164,24 @@ namespace IMS.SalesFolder {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblsubtotal;
+        
+        /// <summary>
+        /// lblResultSubTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblResultSubTotal;
+        
+        /// <summary>
+        /// lblTotalTax control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalTax;
         
         /// <summary>
         /// lblTaxAmount control.
@@ -220,6 +193,24 @@ namespace IMS.SalesFolder {
         protected global::System.Web.UI.WebControls.Label lblTaxAmount;
         
         /// <summary>
+        /// lblResultTotalTaxAmnt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblResultTotalTaxAmnt;
+        
+        /// <summary>
+        /// lblTotalDiscount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalDiscount;
+        
+        /// <summary>
         /// lblDiscountAmt control.
         /// </summary>
         /// <remarks>
@@ -229,13 +220,22 @@ namespace IMS.SalesFolder {
         protected global::System.Web.UI.WebControls.Label lblDiscountAmt;
         
         /// <summary>
-        /// gvTaxDetails control.
+        /// lblResultTotalDiscount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvTaxDetails;
+        protected global::System.Web.UI.WebControls.Label lblResultTotalDiscount;
+        
+        /// <summary>
+        /// lblOriginalGrndTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOriginalGrndTotal;
         
         /// <summary>
         /// lblGrandTotal control.
@@ -245,6 +245,24 @@ namespace IMS.SalesFolder {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblGrandTotal;
+        
+        /// <summary>
+        /// lblResultGrndTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblResultGrndTotal;
+        
+        /// <summary>
+        /// lblGivenAmnt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblGivenAmnt;
         
         /// <summary>
         /// ddlPaymentMode control.

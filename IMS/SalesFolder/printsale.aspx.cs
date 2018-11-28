@@ -127,20 +127,20 @@ namespace IMS.SalesFolder
         public void pagebind()
         {
             var sale = (from p in context.tbl_sale
-                            join c in context.tbl_party on p.party_id equals c.party_id
+                        join sd in context.tbl_SalePaymentDetails on p.sale_id equals sd.SaleId
+                        join c in context.tbl_party on p.party_id equals c.party_id
                             join m in context.tbl_monytransaction on p.sale_id equals m.transactio_type_id
                             join company in context.tbl_company on p.company_id equals company.company_id
                             where p.sale_id == a && p.company_id == companyId && p.status == true && c.party_type == "Customer"
                             select new
                             {
                                 PartyId = p.party_id,
-                                actualamount = p.total_amount,
+                                actualamount = sd.SubTotal,
                                 createdate = p.created_date,
-                                discount = p.total_discount,
-                                po_no = p.sale_id
-                                ,
-                                total = p.grand_total,
-                                totalTax = p.total_tax,
+                                discount = sd.DiscountAmount,
+                                po_no = p.sale_id,
+                                total = sd.GrandTotal,
+                                totalTax = sd.TaxAmount,
                                 name = c.party_name,
                                 balanceamt = m.balance_amt,
                                 givenamt = m.given_amt,

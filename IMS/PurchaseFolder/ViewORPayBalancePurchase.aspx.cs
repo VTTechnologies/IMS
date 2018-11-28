@@ -111,12 +111,10 @@ namespace IMS
                
                 txtBalanceAmnt.Text = balanceAmnt.ToString();
                 lblBalanceAmnt.Text = balanceAmnt.ToString();
-
                
 
                 gvpurchasedetails.DataSource = ds.Tables["Table"];
                 gvpurchasedetails.DataBind();
-
               
             }
         }
@@ -128,17 +126,14 @@ namespace IMS
                 lblError.Text = string.Empty;
                 if (ValidCalculation())
                 {
-                    tbl_purchase purchase = context.tbl_purchase.Where(w => w.purchase_id == purchase_Id).FirstOrDefault();
+                    tbl_PurchasePaymentDetials purchasePaymentDetails = context.tbl_PurchasePaymentDetials.Where(w => w.PurchaseId == purchase_Id).FirstOrDefault();
 
-                    purchase.given_amnt = Convert.ToDecimal(txtPaidAmnt.Text);
-                    purchase.balance_amnt = Convert.ToDecimal(txtBalanceAmnt.Text);
-                    purchase.modified_by = user_id;
-                    purchase.modified_date = DateTime.Now;
+                    purchasePaymentDetails.GivenAmnt = Convert.ToDecimal(txtPaidAmnt.Text);
+                    purchasePaymentDetails.BalanceAmnt = Convert.ToDecimal(txtBalanceAmnt.Text);
 
-
-                    context.tbl_purchase.Add(purchase);
+                    context.tbl_PurchasePaymentDetials.Add(purchasePaymentDetails);
                     context.SaveChanges();
-                    string order = purchase.InvoiceNumber;
+                    int? order = purchasePaymentDetails.PurchaseId;
                     ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Saved successfully, Your order number is " + order + "');", true);
                 }
                 else
@@ -227,10 +222,12 @@ namespace IMS
         }
 
         protected void btnGetRefund_Click(object sender, EventArgs e)
-        {
+        {           
             string balanceAmnt = txtBalanceAmnt.Text.Replace('-', ' ');
-            txtPaidAmnt.Text = balanceAmnt;
+            decimal paidAmnt = txtPaidAmnt.Text == "" ? 0 : Convert.ToDecimal(txtPaidAmnt.Text);
+            txtPaidAmnt.Text = (Convert.ToDecimal(balanceAmnt) + paidAmnt).ToString();
             txtBalanceAmnt.Text = "0";
+            btnGetRefund.Visible = false;
         }
 
         protected void btnSave_Click(object sender, System.EventArgs e)
@@ -242,22 +239,19 @@ namespace IMS
         {
             try
             {
-                //decimal balance =   Convert.ToDecimal(lblBalanceAmnt.Text) - Convert.ToDecimal(txtPaidAmnt.Text);
-                //txtBalanceAmnt.Text = balance.ToString();
-
-
+               
                 decimal remainingBalance = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(lblGivenAmnt.Text);
-
-                if (txtPaidAmnt.Text == "0" || string.IsNullOrEmpty(txtPaidAmnt.Text))
+                
+                if (remainingBalance < 0)
                 {
+                    btnGetRefund.Visible = true;
+                    txtBalanceAmnt.Text = (remainingBalance + Convert.ToDecimal(txtPaidAmnt.Text)).ToString();
+                }
+                else if (txtPaidAmnt.Text == "0" || string.IsNullOrEmpty(txtPaidAmnt.Text))
+                {
+                    btnGetRefund.Visible = false;
                     txtBalanceAmnt.Text = remainingBalance.ToString();
                     return;
-                }
-
-                if (Convert.ToDecimal(txtPaidAmnt.Text) > remainingBalance)
-                {
-                    txtPaidAmnt.Text = remainingBalance.ToString();
-                    txtBalanceAmnt.Text = "0";
                 }
                 else
                 {

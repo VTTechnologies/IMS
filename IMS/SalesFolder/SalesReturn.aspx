@@ -17,6 +17,7 @@
     <link href="../assets/alert/css/themes/default.css" rel="stylesheet" />
     <link href="../assets/alert/css/themes/default.min.css" rel="stylesheet" />
     <link href="../assets/alert/css/themes/default.rtl.css" rel="stylesheet" />
+    
     <script>
         function openModal() {
             $('#<%=myModal.ClientID%>').modal('show');
@@ -25,7 +26,7 @@
     <script type='text/javascript'>
         $(function () {
             $("#<%=txtquantity.ClientID %>").keypress(function () {
-                 <%--$("#<%=lblcheckDoubleError.ClientID%>").text('');--%>
+                 $("#<%=lblcheckDoubleError.ClientID%>").text('');
             });
          });
          function openalert(msg, val) {
@@ -71,7 +72,7 @@
                     $("#<%=btnAdd.ClientID%>").prop('disabled', true);
                     break;
 
-                case "false":
+                case "false":                    
                     msg.style.display = "none";
                      $("#<%=btnAdd.ClientID%>").prop('disabled', false);
                     break;
@@ -169,7 +170,7 @@
                         </asp:GridView>
                     </div>
                     </div>
-                    <div style="border: 1px solid black; margin-top: 10px; margin-bottom: 10px;"></div>
+                   <%-- <div style="border: 1px solid black; margin-top: 10px; margin-bottom: 10px;"></div>
                     <div class="row">
                         <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2 leftpadd0" style="padding: 0px;">
                             <label class="control-label">Total Amnt:</label>
@@ -195,21 +196,21 @@
                             <label class="control-label">Balance Amnt:</label>
                             <asp:Label ID="lblBalanceAmnt" runat="server" Text=""></asp:Label>
                         </div>
-                    </div>
+                    </div>--%>
                     <div style="border: 1px solid black; margin-top: 10px; margin-bottom: 10px;"></div>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
                         <div class="row">
                             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
-                                <div class="form-horizontal Fhorizontal">
+                                <%--<div class="form-horizontal Fhorizontal">--%>
                                     <div class="col-sm-10 leftpadd0">
                                         <label class="control-label">
                                             Select Product
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="ddlproduct" ErrorMessage="*" ForeColor="Red" ValidationGroup="addvalidation"></asp:RequiredFieldValidator>
                                         </label>
                                         <asp:DropDownList ID="ddlproduct" runat="server" CssClass="form-control" AppendDataBoundItems="true" AutoPostBack="true"></asp:DropDownList>
-                                    </div>
+                                    <%--</div>--%>
 
                                 </div>
                             </div>
@@ -270,7 +271,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <%--<div class="row">
                             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 pull-right">
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 leftpadd0 pull-right" style="padding: 0px;">
                                     <div class="form-group">
@@ -303,13 +304,65 @@
                                     <HeaderStyle BackColor="#428BCA" ForeColor="White" />
                                 </asp:GridView>
                             </div>
+                        </div>--%>
+                         <div class="row">
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 pull-right">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label class="control-label col-sm-3 text-center"></label>
+                                        <label class="control-label col-sm-3 text-center">Orig. Purchase</label>
+                                        <label class="control-label col-sm-3 text-center">Return</label>
+                                        <label class="control-label col-sm-3 text-center">Result</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 pull-right">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label class="control-label col-sm-3">Sub Total</label>
+
+                                        <asp:Label ID="lblTotalAmnt" runat="server" CssClass="control-label col-sm-3 text-center" Text="0"></asp:Label>
+                                        <asp:Label ID="lblsubtotal" runat="server" CssClass="control-label col-sm-3 text-center" Text="0"></asp:Label>
+                                        <asp:Label ID="lblResultSubTotal" runat="server" CssClass="control-label col-sm-3 text-center" Text="0"></asp:Label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 pull-right">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label class="control-label col-sm-3">Tax Amount</label>
+
+                                        <asp:Label ID="lblTotalTax" runat="server" CssClass="control-label col-sm-3 text-center" Text="0"></asp:Label>
+                                        <asp:Label ID="lblTaxAmount" runat="server" CssClass="control-label col-sm-3 text-center" Text="0"></asp:Label>
+                                        <asp:Label ID="lblResultTotalTaxAmnt" runat="server" CssClass="control-label col-sm-3 text-center" Text="0"></asp:Label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 pull-right">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label class="control-label col-sm-3 left">Disc. Amount</label>
+
+                                        <asp:Label ID="lblTotalDiscount" runat="server" CssClass="control-label col-sm-3 text-center" Text="0"></asp:Label>
+                                        <asp:Label ID="lblDiscountAmt" runat="server" CssClass="control-label col-sm-3 text-center" Text="0"></asp:Label>
+                                        <asp:Label ID="lblResultTotalDiscount" runat="server" CssClass="control-label col-sm-3 text-center" Text="0"></asp:Label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 pull-right">
                                 <div style="border: 1px solid black; margin-top: 10px; margin-bottom: 10px;"></div>
                             </div>
                         </div>
-                        <div class="row">
+                       <%-- <div class="row">
                             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 pull-right">
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 leftpadd0 pull-right" style="padding: 0px;">
                                     <div class="form-group">
@@ -320,9 +373,36 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>--%>
+                         <div class="row">
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 pull-right">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label class="control-label col-sm-3">Grand Total</label>
+
+                                        <asp:Label ID="lblOriginalGrndTotal" runat="server" CssClass="control-label col-sm-3 text-center" Text="0"></asp:Label>
+                                        <asp:Label ID="lblGrandTotal" Font-Bold="true" runat="server" CssClass="control-label col-sm-3 text-center" Text="0"></asp:Label>
+                                        <asp:Label ID="lblResultGrndTotal" runat="server" CssClass="control-label col-sm-3 text-center" Text="0"></asp:Label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <br />
                         <br />
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4 col-sm-4  col-xs-4  pull-right">
+                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 leftpadd0 pull-right" style="padding: 0px;">
+                                <div class="form-group">
+                                    <div class="col-sm-12 leftpadd0">
+                                        <asp:label class="control-label col-sm-9" runat="server" Font-Bold="true" Font-Size="Large">Given Amnt till Date:</asp:label>
+                                        <asp:Label class="control-label col-sm-3 text-center" ID="lblGivenAmnt" Font-Bold="true" runat="server" Text="" Font-Size="Large"></asp:Label>
+                                    </div>
+                                </div>
+                                     </div>
+                            </div>
+                        </div>
+                         <br />
                         <br />
                         <div class="row">
                             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 pull-right">
@@ -388,7 +468,7 @@
         </div>
 
         <div class="panel-footer leftpadd0">
-            <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " OnClick="btnSave_Click" Text="Save" ValidationGroup="savesale" OnClientClick="this.disabled='true'; this.value='Processing...';" UseSubmitBehavior="false"/>
+            <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " OnClick="btnSave_Click" Text="Save" ValidationGroup="savesale" OnClientClick="DisableOnSave(this,'savesale');" UseSubmitBehavior="false"/>
             <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-primary" OnClick="btnCancel_Click" Text="Cancel" />
 
             <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>

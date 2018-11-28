@@ -94,7 +94,6 @@
     <Compile Include="EntityModel\ProductReport_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\Purchase2.cs" />
     <Compile Include="EntityModel\PurchaseOrPurchaseReturnReport1_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
@@ -333,6 +332,12 @@
     <Compile Include="EntityModel\tbl_purchaseHistory.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModel\tbl_PurchasePaymentDetials.cs">
+      <DependentUpon>IMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\tbl_PurchasePaymentDetialsHistory.cs">
+      <DependentUpon>IMSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModel\tbl_purchasereturn.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
@@ -361,6 +366,12 @@
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\tbl_saleHistory.cs">
+      <DependentUpon>IMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\tbl_SalePaymentDetails.cs">
+      <DependentUpon>IMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\tbl_SalePaymentDetailsHistory.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\tbl_salereturn.cs">

@@ -275,20 +275,26 @@ namespace IMS
                 tbl_sale sale = new tbl_sale();
                 sale.company_id = companyId;
                 sale.branch_id = branchId;
-                sale.financialyear_id = financialYearId;
-                sale.given_amnt = Convert.ToDecimal(txtGivenAmt.Text);
-                sale.balance_amnt = Convert.ToDecimal(txtBalanceAmt.Text);
+                sale.financialyear_id = financialYearId;               
                 sale.paymentmode_id = Convert.ToInt32(ddlPaymentMode.SelectedValue);
                 sale.status = true;
                 sale.party_id = Convert.ToInt32(ddlVendor.SelectedValue);
                 sale.InvoiceNumber = txtSONo.Text;
-                sale.sale_date = DateTime.Parse(txtdate.Text, new CultureInfo("en-US"));
-                sale.total_tax = Convert.ToDecimal(lblTaxAmount.Text);
-                sale.total_discount = Convert.ToDecimal(lblDiscountAmt.Text);
-                sale.total_amount = Convert.ToDecimal(lblsubtotal.Text);
-                sale.grand_total = Convert.ToDecimal(lblGrandTotal.Text);
+                sale.sale_date = DateTime.Parse(txtdate.Text, new CultureInfo("en-US"));               
                 sale.created_by = User_id;
                 sale.created_date = DateTime.Now;
+
+                //insert into Sale Payment Details 
+                tbl_SalePaymentDetails salePaymentDetails = new tbl_SalePaymentDetails();
+                salePaymentDetails.TaxAmount = Convert.ToDecimal(lblTaxAmount.Text);
+                salePaymentDetails.DiscountAmount = Convert.ToDecimal(lblDiscountAmt.Text);
+                salePaymentDetails.SubTotal = Convert.ToDecimal(lblsubtotal.Text);
+                salePaymentDetails.GrandTotal = Convert.ToDecimal(lblGrandTotal.Text);
+                salePaymentDetails.PaidAmnt = Convert.ToDecimal(txtGivenAmt.Text);
+                salePaymentDetails.GivenAmnt = Convert.ToDecimal(txtGivenAmt.Text);
+                salePaymentDetails.BalanceAmnt = Convert.ToDecimal(txtBalanceAmt.Text);
+                salePaymentDetails.FromTable = "Sale";
+                sale.tbl_SalePaymentDetails.Add(salePaymentDetails);
 
                 for (int i = 0; i <= gvSalesdetails.Rows.Count - 1; i++)
                 {

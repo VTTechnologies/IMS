@@ -19,16 +19,13 @@ namespace IMSBLL.EntityModel
         {
             this.tbl_ActualSalesTaxAndPrice = new HashSet<tbl_ActualSalesTaxAndPrice>();
             this.tbl_saledetails = new HashSet<tbl_saledetails>();
+            this.tbl_SalePaymentDetails = new HashSet<tbl_SalePaymentDetails>();
             this.tbl_salereturn = new HashSet<tbl_salereturn>();
         }
     
         public int sale_id { get; set; }
         public Nullable<int> party_id { get; set; }
         public Nullable<int> financialyear_id { get; set; }
-        public Nullable<decimal> total_tax { get; set; }
-        public Nullable<decimal> total_discount { get; set; }
-        public Nullable<decimal> total_amount { get; set; }
-        public Nullable<decimal> grand_total { get; set; }
         public Nullable<bool> status { get; set; }
         public string created_by { get; set; }
         public Nullable<System.DateTime> created_date { get; set; }
@@ -38,8 +35,6 @@ namespace IMSBLL.EntityModel
         public Nullable<int> branch_id { get; set; }
         public string InvoiceNumber { get; set; }
         public Nullable<int> paymentmode_id { get; set; }
-        public Nullable<decimal> given_amnt { get; set; }
-        public Nullable<decimal> balance_amnt { get; set; }
         public Nullable<System.DateTime> sale_date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -51,6 +46,8 @@ namespace IMSBLL.EntityModel
         public virtual tbl_paymentmode tbl_paymentmode { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_saledetails> tbl_saledetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_SalePaymentDetails> tbl_SalePaymentDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_salereturn> tbl_salereturn { get; set; }
     }

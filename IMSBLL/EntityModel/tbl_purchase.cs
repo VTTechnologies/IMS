@@ -19,6 +19,7 @@ namespace IMSBLL.EntityModel
         {
             this.tbl_ActualPurchaseTaxAndPrice = new HashSet<tbl_ActualPurchaseTaxAndPrice>();
             this.tbl_purchasedetails = new HashSet<tbl_purchasedetails>();
+            this.tbl_PurchasePaymentDetials = new HashSet<tbl_PurchasePaymentDetials>();
             this.tbl_purchasereturn = new HashSet<tbl_purchasereturn>();
         }
     
@@ -26,10 +27,6 @@ namespace IMSBLL.EntityModel
         public Nullable<int> party_id { get; set; }
         public Nullable<int> financialyear_id { get; set; }
         public string po_no { get; set; }
-        public Nullable<decimal> total_tax { get; set; }
-        public Nullable<decimal> total_discount { get; set; }
-        public Nullable<decimal> total_amnt { get; set; }
-        public Nullable<decimal> grand_total { get; set; }
         public Nullable<bool> status { get; set; }
         public string created_by { get; set; }
         public Nullable<System.DateTime> created_date { get; set; }
@@ -40,8 +37,6 @@ namespace IMSBLL.EntityModel
         public Nullable<int> branch_id { get; set; }
         public string InvoiceNumber { get; set; }
         public Nullable<int> PaymentMode_id { get; set; }
-        public Nullable<decimal> given_amnt { get; set; }
-        public Nullable<decimal> balance_amnt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_ActualPurchaseTaxAndPrice> tbl_ActualPurchaseTaxAndPrice { get; set; }
@@ -56,6 +51,8 @@ namespace IMSBLL.EntityModel
         public virtual tbl_paymentmode tbl_paymentmode { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_purchasedetails> tbl_purchasedetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_PurchasePaymentDetials> tbl_PurchasePaymentDetials { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_purchasereturn> tbl_purchasereturn { get; set; }
     }

@@ -87,28 +87,36 @@ namespace IMS
         {
             try
             {
+                
                 tbl_purchase purchase = new tbl_purchase();
                 purchase.company_id = companyId;
                 purchase.branch_id = branchId;
                 purchase.financialyear_id = financialYearId;
                 purchase.InvoiceNumber = lblInvoice.Text;
-                purchase.given_amnt = Convert.ToDecimal(txtGivenAmt.Text);
-                purchase.balance_amnt = Convert.ToDecimal(txtBalanceAmt.Text);
+               
                 purchase.PaymentMode_id = Convert.ToInt32(ddlPaymentMode.SelectedValue);
                 purchase.status = true;
                 purchase.party_id = Convert.ToInt32(ddlVendor.SelectedValue);
                 purchase.Po_Date = DateTime.Parse(txtdate.Text, new CultureInfo("en-US"));             
                 purchase.po_no = txtPONo.Text;
-                purchase.total_tax = Convert.ToDecimal(lblTaxAmount.Text);
-                purchase.total_discount = Convert.ToDecimal(lblDiscountAmt.Text);
-                purchase.total_amnt = Convert.ToDecimal(lblsubtotal.Text);
-                purchase.grand_total = Convert.ToDecimal(lblGrandTotal.Text);
+               
                 purchase.created_by = user_id;
-                purchase.created_date = DateTime.Now;                
+                purchase.created_date = DateTime.Now;
+
+                //insert into Purchase Payment Details 
+                tbl_PurchasePaymentDetials purchasePaymentDetail = new tbl_PurchasePaymentDetials();
+                purchasePaymentDetail.TaxAmount = Convert.ToDecimal(lblTaxAmount.Text);
+                purchasePaymentDetail.DiscountAmount = Convert.ToDecimal(lblDiscountAmt.Text);
+                purchasePaymentDetail.SubTotal = Convert.ToDecimal(lblsubtotal.Text);
+                purchasePaymentDetail.GrandTotal = Convert.ToDecimal(lblGrandTotal.Text);
+                purchasePaymentDetail.PaidAmnt = Convert.ToDecimal(txtPaidAmt.Text);
+                purchasePaymentDetail.GivenAmnt = Convert.ToDecimal(txtPaidAmt.Text);
+                purchasePaymentDetail.BalanceAmnt = Convert.ToDecimal(txtBalanceAmt.Text);
+                purchasePaymentDetail.FromTable = "Purchase";
+                purchase.tbl_PurchasePaymentDetials.Add(purchasePaymentDetail);
 
                 for (int i = 0; i <= gvpurchasedetails.Rows.Count - 1; i++)
-                {
-                    
+                {                    
                     int productId = Convert.ToInt32(gvpurchasedetails.Rows[i].Cells[2].Text);
                     int batchId = Convert.ToInt32(gvpurchasedetails.Rows[i].Cells[4].Text);
                     tbl_product product = context.tbl_product.Where(w => w.product_id == productId).FirstOrDefault();
@@ -300,7 +308,7 @@ namespace IMS
 
                 }
 
-                //context.sp_InsertMonyTransaction(companyId, branchId, Convert.ToInt32(ddlVendor.SelectedValue), Convert.ToDecimal(txtGivenAmt.Text),Convert.ToDecimal(lblGrandTotal.Text), Convert.ToDecimal(txtBalanceAmt.Text), "Out", Convert.ToInt32(ddlPaymentMode),
+                //context.sp_InsertMonyTransaction(companyId, branchId, Convert.ToInt32(ddlVendor.SelectedValue), Convert.ToDecimal(txtPaidAmt.Text),Convert.ToDecimal(lblGrandTotal.Text), Convert.ToDecimal(txtBalanceAmt.Text), "Out", Convert.ToInt32(ddlPaymentMode),
                 //    "Purchase",Convert.ToInt32(purchaseId), User_id, DateTime.Today);
 
                 cmd.Parameters.Clear();
@@ -309,7 +317,7 @@ namespace IMS
                 cmd.Parameters.AddWithValue("@company_id", companyId);
                 cmd.Parameters.AddWithValue("@branch_id", branchId);
                 cmd.Parameters.AddWithValue("@party_id", ddlVendor.SelectedValue);
-                cmd.Parameters.AddWithValue("@given_amt", txtGivenAmt.Text);
+                cmd.Parameters.AddWithValue("@given_amt", txtPaidAmt.Text);
                 cmd.Parameters.AddWithValue("@grand_total", lblGrandTotal.Text);
                 cmd.Parameters.AddWithValue("@balance_amt", txtBalanceAmt.Text);
                 cmd.Parameters.AddWithValue("@in_out", "Out");
@@ -352,7 +360,7 @@ namespace IMS
             txtDiscount.Text = string.Empty;
             txtsalesprice.Text = string.Empty;
             txtTaxpercentage.Text = string.Empty;
-            txtGivenAmt.Text = string.Empty;
+            txtPaidAmt.Text = string.Empty;
             txtBalanceAmt.Text = string.Empty;
         }
         public void ClearAll()
@@ -367,7 +375,7 @@ namespace IMS
             txtDiscount.Text = string.Empty; 
             txtsalesprice.Text = string.Empty;
             txtBalanceAmt.Text = string.Empty;
-            txtGivenAmt.Text = string.Empty;
+            txtPaidAmt.Text = string.Empty;
         }
 
         public void updatecal()
@@ -507,7 +515,7 @@ namespace IMS
                     lblcheckDoubleError.Text = string.Empty;
 
                     clr();
-                    txtGivenAmt.Enabled = true;
+                    txtPaidAmt.Enabled = true;
                     calculation(subTotal, tax_amount, discountamt);
                 }
             }
@@ -554,7 +562,7 @@ namespace IMS
 
             //        clr();
             //        txtBalanceAmt.Enabled = true;
-            //        txtGivenAmt.Enabled = true;
+            //        txtPaidAmt.Enabled = true;
             //        calculation(SubTotal, b, discountamt);
             //        lblbatch.Visible = false;
             //    }
@@ -616,7 +624,7 @@ namespace IMS
         }
         protected void btnUpdate_Click(object sender, System.EventArgs e)
         {
-            txtGivenAmt.Text = string.Empty;
+            txtPaidAmt.Text = string.Empty;
             txtBalanceAmt.Text = string.Empty;
             lblcheckDoubleError.Text = string.Empty;
             ddlproduct.Enabled = true;
@@ -656,7 +664,7 @@ namespace IMS
 
                         clr();
                         calculation(subTotal, tax_amount, discountamt);
-                        txtGivenAmt.Enabled = true;
+                        txtPaidAmt.Enabled = true;
                         ViewState["Details"] = dt;
                         btnAdd.Visible = true;
                         btnUpdate.Visible = false;
@@ -903,16 +911,16 @@ namespace IMS
                 //decimal a = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(txtGivenAmt.Text);
                 //txtBalanceAmt.Text = a.ToString();
                 decimal a = Convert.ToDecimal(lblGrandTotal.Text);
-                decimal b = Convert.ToDecimal(txtGivenAmt.Text);
+                decimal b = Convert.ToDecimal(txtPaidAmt.Text);
                 if (a < b)
                 {
-                    txtGivenAmt.Text = lblGrandTotal.Text;
+                    txtPaidAmt.Text = lblGrandTotal.Text;
                     txtBalanceAmt.Text = "0";
                 }
 
                 else
                 {
-                    decimal c = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(txtGivenAmt.Text);
+                    decimal c = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(txtPaidAmt.Text);
                     txtBalanceAmt.Text = c.ToString();
                 }
                 UpdatePanel2.Update();

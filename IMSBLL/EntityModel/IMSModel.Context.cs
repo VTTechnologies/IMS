@@ -51,6 +51,8 @@ namespace IMSBLL.EntityModel
         public virtual DbSet<tbl_purchasedetails> tbl_purchasedetails { get; set; }
         public virtual DbSet<tbl_purchasedetailsHistory> tbl_purchasedetailsHistory { get; set; }
         public virtual DbSet<tbl_purchaseHistory> tbl_purchaseHistory { get; set; }
+        public virtual DbSet<tbl_PurchasePaymentDetials> tbl_PurchasePaymentDetials { get; set; }
+        public virtual DbSet<tbl_PurchasePaymentDetialsHistory> tbl_PurchasePaymentDetialsHistory { get; set; }
         public virtual DbSet<tbl_purchasereturn> tbl_purchasereturn { get; set; }
         public virtual DbSet<tbl_purchasereturndetails> tbl_purchasereturndetails { get; set; }
         public virtual DbSet<tbl_purchasereturndetailsHistory> tbl_purchasereturndetailsHistory { get; set; }
@@ -61,6 +63,8 @@ namespace IMSBLL.EntityModel
         public virtual DbSet<tbl_saledetails> tbl_saledetails { get; set; }
         public virtual DbSet<tbl_saledetailsHistory> tbl_saledetailsHistory { get; set; }
         public virtual DbSet<tbl_saleHistory> tbl_saleHistory { get; set; }
+        public virtual DbSet<tbl_SalePaymentDetails> tbl_SalePaymentDetails { get; set; }
+        public virtual DbSet<tbl_SalePaymentDetailsHistory> tbl_SalePaymentDetailsHistory { get; set; }
         public virtual DbSet<tbl_salereturn> tbl_salereturn { get; set; }
         public virtual DbSet<tbl_salereturndetails> tbl_salereturndetails { get; set; }
         public virtual DbSet<tbl_salereturndetailsHistory> tbl_salereturndetailsHistory { get; set; }

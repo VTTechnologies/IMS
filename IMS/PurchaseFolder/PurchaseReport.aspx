@@ -170,17 +170,18 @@
                         </asp:BoundField>
                         <asp:BoundField DataField="InvoiceNumber" HeaderText="Invoice Number"></asp:BoundField>
                         <asp:BoundField DataField="party_name" HeaderText="Vendor"></asp:BoundField>      
-                         <asp:BoundField DataField="Po_Date" HeaderText="Purchase Date"></asp:BoundField>          
+                         <asp:BoundField DataField="Po_Date" HeaderText="Purchase Date"></asp:BoundField>      
+                        <asp:BoundField DataField="PaidAmnt" HeaderText="Paid Amnt"></asp:BoundField>    
                          <asp:BoundField DataField="given_amnt" HeaderText="Given Amnt"></asp:BoundField>
                         <asp:BoundField DataField="balance_amnt" HeaderText="Balance Amnt"></asp:BoundField>            
                         <asp:BoundField DataField="grand_total" HeaderText="Grand Total "></asp:BoundField>                                           
                         <asp:TemplateField ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <%--<asp:ImageButton ID="btnimg_update" runat="server" CommandName="Select" CommandArgument='<%# Eval("purchase_id") %>' />--%>
-                                <asp:LinkButton ID="LinkButton4" runat="server" CommandName="Order" CommandArgument='<%# Eval("purchase_id") %>' CssClass="btn btn-success"><i class="fa fa-edit"  aria-hidden="true"> Original Order</i></asp:LinkButton>
-                                 <asp:LinkButton ID="LinkButton5" runat="server" CommandName="Invoice" CommandArgument='<%# Eval("purchase_id") %>' CssClass="btn btn-danger"><i class="fa fa-edit" aria-hidden="true"> Combine Invoice</i></asp:LinkButton>
-                                <asp:LinkButton ID="LinkButton6" runat="server" CommandName="Return" CommandArgument='<%# Eval("purchase_id") %>' CssClass="btn btn-warning"><i class="fa fa-edit" aria-hidden="true"> Return</i></asp:LinkButton>
-                                <asp:LinkButton ID="LinkPayBalance" runat="server" CommandName="ViewORPayBalance" CommandArgument='<%# Eval("purchase_id") %>' CssClass="btn btn-primary"><i class="fa fa-edit" aria-hidden="true"> View/Pay Balance</i></asp:LinkButton>
+                                <asp:LinkButton ID="LinkButton4" runat="server" CommandName="Order" Font-Size="Small" CommandArgument='<%# Eval("purchase_id") %>' CssClass="btn btn-success"><i class="fa fa-edit"  aria-hidden="true"> Original Order</i></asp:LinkButton>
+                                 <asp:LinkButton ID="LinkButton5" runat="server" CommandName="Invoice" Font-Size="Small" CommandArgument='<%# Eval("purchase_id") %>' CssClass="btn btn-danger"><i class="fa fa-edit" aria-hidden="true"> Combine Invoice</i></asp:LinkButton>
+                                <asp:LinkButton ID="LinkButton6" runat="server" CommandName="Return" Font-Size="Small" CommandArgument='<%# Eval("purchase_id") %>' CssClass="btn btn-warning"><i class="fa fa-edit" aria-hidden="true"> Return</i></asp:LinkButton>
+                                <asp:LinkButton ID="LinkPayBalance" runat="server" CommandName="ViewORPayBalance" Font-Size="Small" CommandArgument='<%# Eval("purchase_id") %>' CssClass="btn btn-primary"><i class="fa fa-edit" aria-hidden="true"> View/Pay Balance</i></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
 

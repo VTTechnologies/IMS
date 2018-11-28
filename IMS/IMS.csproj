@@ -202,6 +202,7 @@
     <Content Include="assets\plugins\Jquery-ui\jquery-ui.min.css" />
     <Content Include="assets\plugins\Jquery-ui\LICENSE.txt" />
     <Content Include="assets\scripts\bootstrap-multiselect.js" />
+    <Content Include="assets\src\CommonFuntion.js" />
     <Content Include="assets\src\jquery-customselect.css" />
     <Content Include="assets\src\jquery-customselect.js" />
     <Content Include="Barcode.aspx" />

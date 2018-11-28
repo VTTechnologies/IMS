@@ -67,60 +67,6 @@ namespace IMS.PurchaseFolder {
         protected global::System.Web.UI.WebControls.GridView GrdOriginalPurchase;
         
         /// <summary>
-        /// lblTotalAmnt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalAmnt;
-        
-        /// <summary>
-        /// lblTotalTax control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalTax;
-        
-        /// <summary>
-        /// lblTotalDiscount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalDiscount;
-        
-        /// <summary>
-        /// lblGrndTotal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblGrndTotal;
-        
-        /// <summary>
-        /// lblGivenAmnt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblGivenAmnt;
-        
-        /// <summary>
-        /// lblBalanceAmnt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBalanceAmnt;
-        
-        /// <summary>
         /// UpdatePanel1 control.
         /// </summary>
         /// <remarks>
@@ -202,6 +148,15 @@ namespace IMS.PurchaseFolder {
         protected global::System.Web.UI.WebControls.GridView gvpurchasedetails;
         
         /// <summary>
+        /// lblTotalAmnt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalAmnt;
+        
+        /// <summary>
         /// lblsubtotal control.
         /// </summary>
         /// <remarks>
@@ -209,6 +164,24 @@ namespace IMS.PurchaseFolder {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblsubtotal;
+        
+        /// <summary>
+        /// lblResultSubTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblResultSubTotal;
+        
+        /// <summary>
+        /// lblTotalTax control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalTax;
         
         /// <summary>
         /// lblTaxAmount control.
@@ -220,6 +193,24 @@ namespace IMS.PurchaseFolder {
         protected global::System.Web.UI.WebControls.Label lblTaxAmount;
         
         /// <summary>
+        /// lblResultTotalTaxAmnt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblResultTotalTaxAmnt;
+        
+        /// <summary>
+        /// lblTotalDiscount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalDiscount;
+        
+        /// <summary>
         /// lblDiscountAmt control.
         /// </summary>
         /// <remarks>
@@ -227,6 +218,15 @@ namespace IMS.PurchaseFolder {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDiscountAmt;
+        
+        /// <summary>
+        /// lblResultTotalDiscount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblResultTotalDiscount;
         
         /// <summary>
         /// gvTaxDetails control.
@@ -238,6 +238,15 @@ namespace IMS.PurchaseFolder {
         protected global::System.Web.UI.WebControls.GridView gvTaxDetails;
         
         /// <summary>
+        /// lblOriginalGrndTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOriginalGrndTotal;
+        
+        /// <summary>
         /// lblGrandTotal control.
         /// </summary>
         /// <remarks>
@@ -245,6 +254,24 @@ namespace IMS.PurchaseFolder {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblGrandTotal;
+        
+        /// <summary>
+        /// lblResultGrndTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblResultGrndTotal;
+        
+        /// <summary>
+        /// lblGivenAmnt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblGivenAmnt;
         
         /// <summary>
         /// ddlPaymentMode control.
@@ -265,6 +292,15 @@ namespace IMS.PurchaseFolder {
         protected global::System.Web.UI.WebControls.Button btnGetRefund;
         
         /// <summary>
+        /// txtPaidAmt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPaidAmt;
+        
+        /// <summary>
         /// RequiredFieldValidator8 control.
         /// </summary>
         /// <remarks>
@@ -272,15 +308,6 @@ namespace IMS.PurchaseFolder {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
-        
-        /// <summary>
-        /// txtGivenAmt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGivenAmt;
         
         /// <summary>
         /// RegularExpressionValidator1 control.
@@ -292,15 +319,6 @@ namespace IMS.PurchaseFolder {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
         
         /// <summary>
-        /// RequiredFieldValidator7 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
-        
-        /// <summary>
         /// txtBalanceAmt control.
         /// </summary>
         /// <remarks>
@@ -310,13 +328,13 @@ namespace IMS.PurchaseFolder {
         protected global::System.Web.UI.WebControls.TextBox txtBalanceAmt;
         
         /// <summary>
-        /// RegularExpressionValidator2 control.
+        /// RequiredFieldValidator7 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
         
         /// <summary>
         /// btnSave control.

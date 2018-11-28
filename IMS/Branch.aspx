@@ -191,7 +191,7 @@
                             </div>
                         </div>
                         <div class="panel-footer  text-center">
-                            <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " ValidationGroup="abc" OnClick="btnSave_Click" Text="Save" OnClientClick="this.disabled='true'; this.value='Processing...';" UseSubmitBehavior="false"/>
+                            <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " ValidationGroup="abc" OnClick="btnSave_Click" Text="Save" OnClientClick="DisableOnSave(this,'abc');" UseSubmitBehavior="false"/>
                             <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary " ValidationGroup="abc" OnClick="btnUpdate_Click" Text="Update" Visible="false" />
                             <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-primary " Text="Cancel" OnClick="btnCancel_Click" />
 

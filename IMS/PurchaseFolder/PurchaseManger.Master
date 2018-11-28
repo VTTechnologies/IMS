@@ -17,6 +17,8 @@
 
     <!-- Page-Level CSS -->
     <link href="../assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
+     <%--Create Common Function repository to handle Javascript Code--%>
+    <script src="../assets/src/CommonFuntion.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

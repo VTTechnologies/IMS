@@ -431,7 +431,7 @@
         
     <div class="panel-footer leftpadd0">
 
-        <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" ValidationGroup="savesale" OnClientClick="this.disabled='true'; this.value='Processing...';" UseSubmitBehavior="false"/>
+        <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" ValidationGroup="savesale" OnClientClick="DisableOnSave(this,'savesale');" UseSubmitBehavior="false"/>
         <asp:Button ID="btnclear" runat="server" CssClass="btn btn-primary " Text="Cancel" OnClick="btnclear_Click" />
         <asp:Button ID="btnPrint" runat="server" CssClass="btn btn-primary " Text="Save & Print" OnClick="btnPrint_Click" />
     </div>

@@ -16,14 +16,8 @@ namespace IMSBLL.EntityModel
     {
         public string tax_name { get; set; }
         public string unit_name { get; set; }
-        public Nullable<decimal> total_tax { get; set; }
-        public Nullable<decimal> total_discount { get; set; }
-        public Nullable<decimal> total_amount { get; set; }
-        public Nullable<decimal> grand_total { get; set; }
         public Nullable<bool> status { get; set; }
-        public Nullable<decimal> given_amnt { get; set; }
         public string InvoiceNumber { get; set; }
-        public Nullable<decimal> balance_amnt { get; set; }
         public Nullable<System.DateTime> sale_date { get; set; }
         public string product_code { get; set; }
         public Nullable<decimal> tax_percent { get; set; }
@@ -37,5 +31,12 @@ namespace IMSBLL.EntityModel
         public string start_date { get; set; }
         public string end_date { get; set; }
         public int sale_id { get; set; }
+        public Nullable<decimal> SubTotal { get; set; }
+        public Nullable<decimal> TaxAmount { get; set; }
+        public Nullable<decimal> GrandTotal { get; set; }
+        public Nullable<decimal> DiscountAmount { get; set; }
+        public Nullable<decimal> GivenAmnt { get; set; }
+        public Nullable<decimal> BalanceAmnt { get; set; }
+        public string FromTable { get; set; }
     }
 }

@@ -125,16 +125,17 @@ namespace IMS.PurchaseFolder
             ////Shakeeb
             ////p.All2(p);
             var purchase= (from p in  context.tbl_purchase
-            join c in  context.tbl_party on p.party_id equals c.party_id           
-            join company in context.tbl_company on p.company_id equals company.company_id
+            join c in  context.tbl_party on p.party_id equals c.party_id
+                           join pd in context.tbl_PurchasePaymentDetials on p.purchase_id equals pd.PurchaseId
+                           join company in context.tbl_company on p.company_id equals company.company_id
                            where p.purchase_id == a && p.company_id == companyId && p.status == true && c.party_type == "Vendor"
-                          select new { PartyId = p.party_id, actualamount = p.total_amnt, createdate = p.created_date, discount = p.total_amnt, po_no = p.po_no
+                          select new { PartyId = p.party_id, actualamount = pd.SubTotal, createdate = p.created_date, discount = pd.DiscountAmount, po_no = p.po_no
                           ,
-                                       total = p.grand_total,
-                                       totalTax = p.total_tax,
+                                       total = pd.GrandTotal,
+                                       totalTax = pd.TaxAmount,
                                        name = c.party_name,
-                                       balanceamt = p.balance_amnt,
-                                       givenamt = p.given_amnt,
+                                       balanceamt = pd.BalanceAmnt,
+                                       givenamt = pd.GivenAmnt,
                                        companyName=company.company_name,
                                        address=company.company_address,
                                        partyaddress=c.party_address,
