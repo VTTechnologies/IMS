@@ -30,25 +30,7 @@ namespace IMS
                 F_yearcheck();
             }
         }
-        //public void Test(string PageName)
-        //{
-        //    try
-        //    {
-        //        if (PageName == "Product")
-        //        {
-        //            ifm.Attributes.Add("src", "../Masters/Product.aspx");
-        //        }
-        //        ifm.Visible = true;
-        //        //ifm.Attributes.Add("src", "../Masters/Product.aspx");
-        //        //main.Visible = false;
-        //        bMaster.Visible = true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ErrorLog.saveerror(ex);
-        //    }
 
-        //}
         public void F_yearcheck()
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["TestDBConnection"].ConnectionString);

@@ -209,7 +209,6 @@
     <Content Include="Masters\Batch.aspx" />
     <Content Include="Masters\Category.aspx" />
     <Content Include="Company.aspx" />
-    <Content Include="Masters\CategoryMasterModal.aspx" />
     <Content Include="Masters\Expense.aspx" />
     <Content Include="Masters\FinincialYear.aspx" />
     <Content Include="Masters\Godown.aspx" />
@@ -365,13 +364,6 @@
     </Compile>
     <Compile Include="Company.aspx.designer.cs">
       <DependentUpon>Company.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Masters\CategoryMasterModal.aspx.cs">
-      <DependentUpon>CategoryMasterModal.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Masters\CategoryMasterModal.aspx.designer.cs">
-      <DependentUpon>CategoryMasterModal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Masters\Expense.aspx.cs">
       <DependentUpon>Expense.aspx</DependentUpon>

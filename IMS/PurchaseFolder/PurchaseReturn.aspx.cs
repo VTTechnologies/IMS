@@ -56,30 +56,6 @@ namespace IMS.PurchaseFolder
         /// </summary>
 
         #region Methods
-
-        //added by ather
-
-        [System.Web.Script.Services.ScriptMethod()]
-        [System.Web.Services.WebMethod]
-        public static List<string> GetPoNumbers(string prefixText, int count)
-       {
-            IMS_TESTEntities context = new IMS_TESTEntities();
-            using (SqlConnection conn = new SqlConnection())
-            {
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["TestDBConnection"].ConnectionString;
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    int year = DateTime.Now.Year;
-                    prefixText = year.ToString() + "P" + prefixText;
-                    var result = context.tbl_purchase.Where(p => p.InvoiceNumber.Contains(prefixText) && p.company_id == companyId);
-                    List<string> customers = new List<string>();
-                    customers = result.Select(p => p.InvoiceNumber).ToList<string>();
-                    return customers;
-                }
-            }
-        }
-        //end ather code
-
         [System.Web.Services.WebMethod]
         public static string[] ValidateQuantity(decimal enterdQuantity, int productid, int purchaseId)
         {

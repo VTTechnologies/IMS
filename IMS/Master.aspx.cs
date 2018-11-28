@@ -24,15 +24,17 @@ namespace IMS
 
         protected void btncategory_Click(object sender, EventArgs e)
         {
+
+
             try
             {
-                Response.Redirect("~/Masters/Category.aspx");
-                //ifm.Visible = true;
-                //ifm.Attributes.Add("src", "../Masters/Category.aspx");
-                //main.Visible = false;
-                //bMaster.Visible = true;
+                ifm.Visible = true;
+                ifm.Attributes.Add("src", "../Masters/Category.aspx");
+                main.Visible = false;
+                bMaster.Visible = true;
             }
-            catch(Exception ex)
+
+             catch(Exception ex)
             {
                 ErrorLog.saveerror(ex);
             }
@@ -40,13 +42,13 @@ namespace IMS
 
         protected void btnumit_Click(object sender, EventArgs e)
         {
+
             try
             {
-                Response.Redirect("~/Masters/Unit.aspx");
-                //ifm.Visible = true;
-                //ifm.Attributes.Add("src", "../Masters/Unit.aspx");
-                //main.Visible = false;
-                //bMaster.Visible = true;
+                ifm.Visible = true;
+                ifm.Attributes.Add("src", "../Masters/Unit.aspx");
+                main.Visible = false;
+                bMaster.Visible = true;
             }
 
              catch(Exception ex)
@@ -59,11 +61,11 @@ namespace IMS
         {
             try
             {
-                Response.Redirect("~/Masters/Godown.aspx");
-                //ifm.Visible = true;
-                //ifm.Attributes.Add("src", "~/Masters/Godown.aspx");
-                //main.Visible = false;
-                //bMaster.Visible = true;
+
+                ifm.Visible = true;
+                ifm.Attributes.Add("src", "~/Masters/Godown.aspx");
+                main.Visible = false;
+                bMaster.Visible = true;
             }
              catch(Exception ex)
             {
@@ -73,13 +75,13 @@ namespace IMS
 
         protected void btnrack_Click(object sender, EventArgs e)
         {
+
             try
             {
-                Response.Redirect("~/Masters/Rack.aspx");
-                //ifm.Visible = true;
-                //ifm.Attributes.Add("src", "~/Masters/Rack.aspx");
-                //main.Visible = false;
-                //bMaster.Visible = true;
+                ifm.Visible = true;
+                ifm.Attributes.Add("src", "~/Masters/Rack.aspx");
+                main.Visible = false;
+                bMaster.Visible = true;
             }
              catch(Exception ex)
             {
@@ -89,13 +91,13 @@ namespace IMS
 
         protected void btntax_Click(object sender, EventArgs e)
         {
+
             try
             {
-                Response.Redirect("~/Masters/Tax.aspx");
-                //ifm.Visible = true;
-                //ifm.Attributes.Add("src", "~/Masters/Tax.aspx");
-                //main.Visible = false;
-                //bMaster.Visible = true;
+                ifm.Visible = true;
+                ifm.Attributes.Add("src", "~/Masters/Tax.aspx");
+                main.Visible = false;
+                bMaster.Visible = true;
             }
              catch(Exception ex)
             {
@@ -107,11 +109,10 @@ namespace IMS
         {
             try
             {
-                Response.Redirect("~/Masters/FinincialYear.aspx");
-                //ifm.Visible = true;
-                //ifm.Attributes.Add("src", "~/Masters/FinincialYear.aspx");
-                //main.Visible = false;
-                //bMaster.Visible = true;
+                ifm.Visible = true;
+                ifm.Attributes.Add("src", "~/Masters/FinincialYear.aspx");
+                main.Visible = false;
+                bMaster.Visible = true;
             }
              catch(Exception ex)
             {
@@ -124,11 +125,10 @@ namespace IMS
 
             try
             {
-                Response.Redirect("~/Masters/Batch.aspx");
-                //ifm.Visible = true;
-                //ifm.Attributes.Add("src", "~/Masters/Batch.aspx");
-                //main.Visible = false;
-                //bMaster.Visible = true;
+                ifm.Visible = true;
+                ifm.Attributes.Add("src", "~/Masters/Batch.aspx");
+                main.Visible = false;
+                bMaster.Visible = true;
             }
              catch(Exception ex)
             {
@@ -138,13 +138,13 @@ namespace IMS
 
         protected void btnpaymentmode_Click(object sender, EventArgs e)
         {
+
             try
             {
-                Response.Redirect("~/Masters/PaymentMode.aspx");
-                //ifm.Visible = true;
-                //ifm.Attributes.Add("src", "~/Masters/PaymentMode.aspx");
-                //main.Visible = false;
-                //bMaster.Visible = true;
+                ifm.Visible = true;
+                ifm.Attributes.Add("src", "~/Masters/PaymentMode.aspx");
+                main.Visible = false;
+                bMaster.Visible = true;
             }
              catch(Exception ex)
             {
@@ -156,13 +156,12 @@ namespace IMS
         {
             try
             {
-                Response.Redirect("~/Masters/Party.aspx");
-                //ifm.Visible = true;
-                //ifm.Attributes.Add("src", "../Masters/Party.aspx");
-                //main.Visible = false;
-                //bMaster.Visible = true;
+                ifm.Visible = true;
+                ifm.Attributes.Add("src", "../Masters/Party.aspx");
+                main.Visible = false;
+                bMaster.Visible = true;
             }
-            catch(Exception ex)
+             catch(Exception ex)
             {
                 ErrorLog.saveerror(ex);
             }
@@ -172,11 +171,10 @@ namespace IMS
         {
             try
             {
-                Response.Redirect("~/Masters/Product.aspx");
-                //ifm.Visible = true;
-                //ifm.Attributes.Add("src", "../Masters/Product.aspx");
-                //main.Visible = false;
-                //bMaster.Visible = true;
+                ifm.Visible = true;
+                ifm.Attributes.Add("src", "../Masters/Product.aspx");
+                main.Visible = false;
+                bMaster.Visible = true;
             }
              catch(Exception ex)
             {
@@ -187,13 +185,14 @@ namespace IMS
 
         protected void btnexpenses_Click(object sender, EventArgs e)
         {
+
+
             try
             {
-                Response.Redirect("~/Masters/Expense.aspx");
-                //ifm.Visible = true;
-                //ifm.Attributes.Add("src", "~/Masters/Expense.aspx");
-                //main.Visible = false;
-                //bMaster.Visible = true;
+                ifm.Visible = true;
+                ifm.Attributes.Add("src", "~/Masters/Expense.aspx");
+                main.Visible = false;
+                bMaster.Visible = true;
             }
              catch(Exception ex)
             {
@@ -205,11 +204,10 @@ namespace IMS
         {
             try
             {
-                Response.Redirect("~/Masters/Branch.aspx");
-                //ifm.Visible = true;
-                //ifm.Attributes.Add("src", "../Branch.aspx");
-                //main.Visible = false;
-                //bMaster.Visible = true;
+                ifm.Visible = true;
+                ifm.Attributes.Add("src", "../Branch.aspx");
+                main.Visible = false;
+                bMaster.Visible = true;
             }
              catch(Exception ex)
             {
@@ -219,13 +217,14 @@ namespace IMS
 
         protected void btnUser_Click(object sender, EventArgs e)
         {
+
+
             try
             {
-                Response.Redirect("~/Masters/User.aspx");
-                //ifm.Visible = true;
-                //ifm.Attributes.Add("src", "../Masters/User.aspx");
-                //main.Visible = false;
-                //bMaster.Visible = true;
+                ifm.Visible = true;
+                ifm.Attributes.Add("src", "../Masters/User.aspx");
+                main.Visible = false;
+                bMaster.Visible = true;
             }
              catch(Exception ex)
             {

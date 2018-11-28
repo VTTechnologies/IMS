@@ -1,25 +1,27 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Purchase.aspx.cs" Inherits="IMS.Purchase" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="PurchaseManger.Master" AutoEventWireup="true" CodeBehind="Purchase.aspx.cs" Inherits="IMS.Purchase" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    
-    <%--<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--%>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
 
     <%--<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>--%>
-    <%--<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="../assets/scripts/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+     <script src="../assets/scripts/bootstrap-datetimepicker.min.js"></script>
     <script src="../assets/alert/alertify.js"></script>
     <script src="../assets/alert/alertify.min.js"></script>
     <link href="../assets/alert/css/alertify.css" rel="stylesheet" />
     <link href="../assets/alert/css/alertify.min.css" rel="stylesheet" />
     <link href="../assets/alert/css/themes/default.css" rel="stylesheet" />
     <link href="../assets/alert/css/themes/default.min.css" rel="stylesheet" />
-    <link href="../assets/alert/css/themes/default.rtl.css" rel="stylesheet" />--%>
-    
-    <%--<script src="../assets/src/jquery-customselect.js"></script>
-    <link href="../assets/src/jquery-customselect.css" rel="stylesheet" />--%>
+    <link href="../assets/alert/css/themes/default.rtl.css" rel="stylesheet" />
 
+    
+    <script src="../assets/src/jquery-customselect.js"></script>
+    <link href="../assets/src/jquery-customselect.css" rel="stylesheet" />
     <script type='text/javascript'>
 
         function openModal() {
@@ -50,6 +52,8 @@
 
         }
     </script>
+
+
     <script type='text/javascript'>
      
         //$(function () {
@@ -87,7 +91,6 @@
                     }});
         });
 </script>
-
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="panel panel-default ">

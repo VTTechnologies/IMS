@@ -13,15 +13,6 @@ namespace IMS.PurchaseFolder {
     public partial class PurchaseReturn {
         
         /// <summary>
-        /// lblNote control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNote;
-        
-        /// <summary>
         /// hdnPurchaseId control.
         /// </summary>
         /// <remarks>
@@ -47,15 +38,6 @@ namespace IMS.PurchaseFolder {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPoNo;
-        
-        /// <summary>
-        /// AutoCompleteExtender1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender AutoCompleteExtender1;
         
         /// <summary>
         /// btnSearch control.

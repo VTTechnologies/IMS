@@ -56,28 +56,6 @@ namespace IMS.SalesFolder
 
 
         #region Methods
-        //added by ather
-
-        [System.Web.Script.Services.ScriptMethod()]
-        [System.Web.Services.WebMethod]
-        public static List<string> GetPoNumbers(string prefixText, int count)
-        {
-            IMS_TESTEntities context = new IMS_TESTEntities();
-            using (SqlConnection conn = new SqlConnection())
-            {
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["TestDBConnection"].ConnectionString;
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    int year = DateTime.Now.Year;
-                    prefixText = year.ToString() + "S" + prefixText;
-                    var result = context.tbl_sale.Where(p => p.InvoiceNumber.Contains(prefixText) && p.company_id == companyId);
-                    List<string> customers = new List<string>();
-                    customers = result.Select(p => p.InvoiceNumber).ToList<string>();
-                    return customers;
-                }
-            }
-        }
-        //end ather code
         private void SessionValue()
         {
             if (Session["UserID"] == null || Session["company_id"] == null || Session["branch_id"] == null || Session["financialyear_id"] == null)

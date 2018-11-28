@@ -1,13 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Master.aspx.cs" Inherits="IMS.Master" %>
 
-<%--<%@ MasterType VirtualPath="~/Main.Master" %>--%>
-
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <div class="padd20">
     </div>
     <div>
@@ -165,7 +165,9 @@
         </div>
         <div>
 
+            <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
             <asp:LinkButton ID="lnk1" runat="server" Style="display: none"></asp:LinkButton>
+
             <cc1:ModalPopupExtender ID="mymodel1" runat="server" PopupControlID="pnl1" TargetControlID="lnk1" CancelControlID="btnclose">
             </cc1:ModalPopupExtender>
 
@@ -188,6 +190,9 @@
                 </div>
             </asp:Panel>
 
+
+
+
             <div class="modal fade" id="unitModel" role="dialog">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -208,6 +213,7 @@
             </div>
         </div>
         <div>
+
             <a href="Master.aspx" id="bMaster" runat="server" visible="false">
                 <img src="assets/img/goback-5-w800.png" height="50" width="130" /></a>
             <iframe width="100%" height="1000" id="ifm" runat="server" frameborder="0" allowfullscreen="true" scrolling="yes" visible="false"></iframe>
@@ -215,7 +221,7 @@
     </div>
 
 
-   <%-- <script src="../assets/plugins/jquery-1.10.2.js"></script>
+ <%--   <script src="../assets/plugins/jquery-1.10.2.js"></script>
     <script src="../assets/plugins/bootstrap/bootstrap.min.js"></script>
     <script src="../assets/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="../assets/plugins/pace/pace.js"></script>
