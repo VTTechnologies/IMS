@@ -107,6 +107,8 @@
     <Content Include="assets\alert\css\themes\semantic.rtl.css" />
     <Content Include="assets\alert\css\themes\semantic.rtl.min.css" />
     <Content Include="assets\css\bootstrap-multiselect.css" />
+    <Content Include="assets\datatable\jquery-3.3.1.js" />
+    <Content Include="assets\datatable\jquery.dataTables.min.js" />
     <Content Include="assets\font-awesome1\fonts\font-awesome-4.7.0.zip" />
     <Content Include="assets\font-awesome1\fonts\fontawesome-webfont.eot" />
     <Content Include="assets\font-awesome1\fonts\fontawesome-webfont.svg" />
@@ -708,6 +710,7 @@
     <Content Include="assets\Homeasst\fonts\themify.eot" />
     <Content Include="assets\Homeasst\fonts\themify.ttf" />
     <Content Include="assets\Homeasst\fonts\themify.woff" />
+    <Content Include="assets\datatable\dataTables.min.css" />
     <None Include="Properties\PublishProfiles\Ims profile.pubxml" />
     <None Include="Properties\PublishProfiles\IMS.pubxml" />
     <Content Include="Reports\CommonDataSet.xsc">
