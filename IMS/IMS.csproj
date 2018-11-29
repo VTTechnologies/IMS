@@ -220,6 +220,7 @@
     <Content Include="Masters\PaymentMode.aspx" />
     <Content Include="Masters\Product.aspx" />
     <Content Include="Masters\User.aspx" />
+    <Content Include="Masters\BatchMasterModel.aspx" />
     <Content Include="PurchaseFolder\PrintPurchase.aspx" />
     <Content Include="PurchaseFolder\ViewORPayBalancePurchase.aspx" />
     <Content Include="PurchaseFolder\PurchaseReport.aspx" />
@@ -443,6 +444,13 @@
     </Compile>
     <Compile Include="Masters\User.aspx.designer.cs">
       <DependentUpon>User.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\BatchMasterModel.aspx.cs">
+      <DependentUpon>BatchMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\BatchMasterModel.aspx.designer.cs">
+      <DependentUpon>BatchMasterModel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseFolder\PrintPurchase.aspx.cs">
