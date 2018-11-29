@@ -314,7 +314,7 @@
                 </div>
                 <div class="panel-footer text-center">
 
-                    <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" ValidationGroup="godwn" OnClientClick="DisableOnSave(this,'godwn');" UseSubmitBehavior="false"/>
+                    <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" ValidationGroup="godwn" OnClientClick="this.disabled='true'; this.value='Processing...';" UseSubmitBehavior="false"/>
                     <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" OnClick="btnUpdate_Click" Visible="false" ValidationGroup="godwn" />
                     <input class="btn btn-primary " type="button" value="Clear" onclick="cleartextboxes();" />
                      <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" style="float:right" />

@@ -161,7 +161,7 @@
                                     <div class="col-sm-7">
                                         <asp:TextBox ID="txtName" runat="server" onchange="CheckDouble()" CssClass="form-control" ></asp:TextBox>
                                         <asp:Label ID="lblcheckDoubleError" runat="server"></asp:Label>
-                                   <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Name  is required" ControlToValidate="txtName" ValidationGroup="grp" ForeColor="Red"></asp:RequiredFieldValidator>
+                                   <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Name  is required" ControlToValidate="txtName" ForeColor="Red"></asp:RequiredFieldValidator>
 
                                          </div>
                                 </div>
@@ -172,7 +172,7 @@
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" ValidationGroup="grp" OnClientClick="DisableOnSave(this,'grp');" UseSubmitBehavior="false"/>
+                    <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" OnClientClick="this.disabled='true'; this.value='Processing...';" UseSubmitBehavior="false"/>
                     <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" OnClick="btnUpdate_Click" Visible="false" />  
                    <input class="btn btn-primary " type="button"  value="Clear" onclick="cleartextboxes();" />
                      <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" style="float:right" />

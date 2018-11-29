@@ -234,7 +234,7 @@
                     </div>
                 </div>
                 <div class="panel-footer text-center">
-                    <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" ValidationGroup="rck" OnClientClick="DisableOnSave(this,'rck');" UseSubmitBehavior="false" />
+                    <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" ValidationGroup="rck" OnClientClick="this.disabled='true'; this.value='Processing...';" UseSubmitBehavior="false" />
                     <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" OnClick="btnUpdate_Click" Visible="false" ValidationGroup="rck"  />  
                        <asp:Button ID="btnClear" runat="server" CssClass="btn btn-primary " Text="Clear" OnClick="btnClear_Click"   />
                      <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" style="float:right" />
