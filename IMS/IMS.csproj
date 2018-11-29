@@ -214,6 +214,7 @@
     <Content Include="Company.aspx" />
     <Content Include="Masters\CategoryMasterModal.aspx" />
     <Content Include="Masters\Expense.aspx" />
+    <Content Include="Masters\ExpenseMasterModel.aspx" />
     <Content Include="Masters\FinincialYear.aspx" />
     <Content Include="Masters\Godown.aspx" />
     <Content Include="Home.aspx" />
@@ -383,6 +384,13 @@
     </Compile>
     <Compile Include="Masters\Expense.aspx.designer.cs">
       <DependentUpon>Expense.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\ExpenseMasterModel.aspx.cs">
+      <DependentUpon>ExpenseMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\ExpenseMasterModel.aspx.designer.cs">
+      <DependentUpon>ExpenseMasterModel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Masters\FinincialYear.aspx.cs">
       <DependentUpon>FinincialYear.aspx</DependentUpon>
