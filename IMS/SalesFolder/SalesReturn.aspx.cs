@@ -49,15 +49,6 @@ namespace IMS.SalesFolder
                 ddlpaymentmodebind();
             }
         }
-
-        /// <summary>
-        /// All The Methods That are used in coding
-        /// </summary>
-
-
-        #region Methods
-        //added by ather
-
         [System.Web.Script.Services.ScriptMethod()]
         [System.Web.Services.WebMethod]
         public static List<string> GetPoNumbers(string prefixText, int count)
@@ -77,7 +68,15 @@ namespace IMS.SalesFolder
                 }
             }
         }
-        //end ather code
+
+
+
+        /// <summary>
+        /// All The Methods That are used in coding
+        /// </summary>
+
+
+        #region Methods
         private void SessionValue()
         {
             if (Session["UserID"] == null || Session["company_id"] == null || Session["branch_id"] == null || Session["financialyear_id"] == null)

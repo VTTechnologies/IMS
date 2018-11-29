@@ -51,18 +51,10 @@ namespace IMS.PurchaseFolder
                 ddlpaymentmodebind();
             }
         }
-        /// <summary>
-        /// All The Methods
-        /// </summary>
-
-        #region Methods
-
-        //added by ather
-
         [System.Web.Script.Services.ScriptMethod()]
         [System.Web.Services.WebMethod]
         public static List<string> GetPoNumbers(string prefixText, int count)
-       {
+        {
             IMS_TESTEntities context = new IMS_TESTEntities();
             using (SqlConnection conn = new SqlConnection())
             {
@@ -79,7 +71,11 @@ namespace IMS.PurchaseFolder
             }
         }
         //end ather code
+        /// <summary>
+        /// All The Methods
+        /// </summary>
 
+        #region Methods
         [System.Web.Services.WebMethod]
         public static string[] ValidateQuantity(decimal enterdQuantity, int productid, int purchaseId)
         {
