@@ -2,11 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
-        $(function () {
-            $('#GridView1').prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable({
-                "responsive": true,
-                "sPaginationType": "full_numbers"
-            });
+        $(document).ready(function () {
+            $('#<%= GridView1.ClientID %>').DataTable();
         });
     </script>
     <script type='text/javascript'>
@@ -51,7 +48,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid">
-        div>
+        <div>
             <a href="../Master.aspx" id="bMaster" runat="server">
                 <img src="../assets/img/goback-5-w800.png" height="50" width="130" /></a>
         </div>
@@ -100,7 +97,7 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="table-responsive" style="overflow-x: hidden">
-                    <asp:GridView ID="GridView1" runat="server" overflow="hidden" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowCommand="GridView1_RowCommand" DataKeyNames="expense_id" AutoGenerateColumns="False" CssClass="table table table-striped table-bordered table-hover" SelectedIndex="1">
+                    <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" overflow="hidden" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowCommand="GridView1_RowCommand" DataKeyNames="expense_id" AutoGenerateColumns="False" CssClass="table table table-striped table-bordered table-hover" SelectedIndex="1">
                         <Columns>
                             <asp:BoundField DataField="expense_name" HeaderText="Expense Name"></asp:BoundField>
 

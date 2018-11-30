@@ -259,6 +259,17 @@ namespace IMS
         {
             clr();
         }
+
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+
+            //check if the row is the header row
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+                //add the thead and tbody section programatically
+                e.Row.TableSection = TableRowSection.TableHeader;
+            }
+        }
         #endregion
     }
 }
