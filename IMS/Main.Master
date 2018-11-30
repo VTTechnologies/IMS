@@ -11,29 +11,17 @@
 
 
      <!-- Core CSS - Include with every page -->
-    <link href="assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <%--<link href="assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />--%>
-    <link href="assets/css/style.css" rel="stylesheet" />
-   <%-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
-    <link href="assets/css/main-style.css" rel="stylesheet" />
-
-
-      <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/dataTables.bootstrap.min.css" />
-    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.bootstrap.min.css" />
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-
+    <link href="../assets/css/style.css" rel="stylesheet" />
+    <%-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
+    <link href="../assets/css/main-style.css" rel="stylesheet" />
 
     <!-- Page-Level CSS -->
-    <link href="assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <link href="../assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
      <%--Create Common Function repository to handle Javascript Code--%>
-    <script src="assets/src/CommonFuntion.js"></script>
+    <script src="../assets/src/CommonFuntion.js"></script>
 
 
 
@@ -452,29 +440,48 @@
 
             <!-- navbar side -->
 
-        <nav class="navbar-default navbar-static-side" role="navigation">
-                <!-- sidebar-collapse -->
-                <div class="sidebar-collapse">
-                    <!-- side-menu -->
-                    <ul class="nav" id="side-menu">
-                        <li>
-                            <!-- user image section-->
-                            <div class="user-section">
-                                <div class="user-section-inner">
-                                    <img src="../assets/img/user.jpg" alt="">
+            <div class="main-content">
+                <a href="#" data-toggle=".container" id="sidebar-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </a>
+                <div class="content">
+                </div>
+            </div>
+            <div id="sidebar">
+                <ul class="menu">
+
+                    <li>
+                        <!-- user image section-->
+                        <div class="user-section">
+                            <div class="user-section-inner" style="margin: auto; clear: left">
+                                <img src="../assets/img/user.jpg" alt="">
+                            </div>
+                            <div class="user-info">
+                                <div>
+                                    <asp:Label ID="lblusername" runat="server" Font-Bold="true" Style="padding: 0;"></asp:Label>
                                 </div>
-                                <div class="user-info">
-                                    <div>
-                                        <asp:Label ID="lblusername" runat="server" Font-Bold="true"></asp:Label></div>
-                                    <div class="user-text-online">
-                                        <span class="user-circle-online btn btn-success btn-circle "></span>&nbsp;Online
-                                    </div>
+                                <div class="user-text-online">
+                                    <span class="user-circle-online btn btn-success btn-circle " style="padding: 6px; display: inline-block"></span>&nbsp;Online
                                 </div>
                             </div>
-                            <!--end user image section-->
-                        </li>
-
-                          <li id="liindex" runat="server">
+                        </div>
+                        <!--end user image section-->
+                    </li>
+                    <%-- <li class="sidebar-search">
+                        <!-- search section-->
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <!--end search section-->
+                    </li>--%>
+                    <li id="liindex" runat="server">
                         <a href="../Home.aspx"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                     </li>
                     <%--<li id="licompany" runat="server">
@@ -504,14 +511,20 @@
                         <%--<a href="MasterReports.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>--%>
                         <a href="CommonReport.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>
                     </li>
+                    <%-- <li id="liReport" runat="server">
 
-
-                    </ul>
-                    <!-- end side-menu -->
-                </div>
-                <!-- end sidebar-collapse -->
-            </nav>
-            
+                        <a href="Reports.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Reports</a>
+                    </li>--%>
+                    <%-- <li tabindex="1"><span class="menu1">Reports </span>
+                        <ul class="submenu">
+                            <li><a href="#" class="back">Back </a></li>
+                            <li><a href="#" class="home">Products</a></li>
+                            <li><a href="#" class="users">Daily</a></li>
+                            <li><a href="#" class="signout">Weekly</a></li>
+                        </ul>
+                    </li>--%>
+                </ul>
+            </div>
                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <!-- end navbar side -->
             <div id="page-wrapper">
