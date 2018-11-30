@@ -53,7 +53,6 @@ namespace IMS
 
             GridView1.DataSource = dt;// context.sp_SelectCategory(c_id, b_id);
             GridView1.DataBind();
-           // GridView1.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
 
         [System.Web.Services.WebMethod]
@@ -252,18 +251,5 @@ namespace IMS
         }
 
         #endregion
-
-        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-
-                //check if the row is the header row
-            if (e.Row.RowType == DataControlRowType.Header)
-            {
-                //add the thead and tbody section programatically
-                e.Row.TableSection = TableRowSection.TableHeader;
-            }
-        }
-
-      
     }
 }

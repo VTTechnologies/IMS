@@ -875,13 +875,6 @@ namespace IMS.PurchaseFolder
         {
             try
             {
-                //check if the row is the header row
-                if (e.Row.RowType == DataControlRowType.Header)
-                {
-                    //add the thead and tbody section programatically
-                    e.Row.TableSection = TableRowSection.TableHeader;
-                }
-
                 if (e.Row.RowType == DataControlRowType.DataRow)
                 {
                     Image img = (Image)e.Row.FindControl("image");
