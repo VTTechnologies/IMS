@@ -45,11 +45,8 @@
          }
     </script>
     <script type="text/javascript">
-        $(function () {
-            $('#GridView1').prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable({
-                "responsive": true,
-                "sPaginationType": "full_numbers"
-            });
+        $(document).ready(function () {
+            $('#<%= GridView1.ClientID %>').DataTable();
         });
         var txt = $("<%=txtGodownName.ClientID%>");
 
@@ -159,7 +156,7 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div>
-                    <asp:GridView ID="GridView1" runat="server" DataKeyNames="godown_id" OnRowCommand="GridView1_RowCommand" AutoGenerateColumns="false" CssClass="table table-responsive table-striped table-bordered table-hover" SelectedIndex="0">
+                    <asp:GridView ID="GridView1" OnRowDataBound="GridView1_RowDataBound" runat="server" DataKeyNames="godown_id" OnRowCommand="GridView1_RowCommand" AutoGenerateColumns="false" CssClass="table table-responsive table-striped table-bordered table-hover" SelectedIndex="0">
                         <Columns>
                             <asp:BoundField DataField="godown_name" HeaderText="Godown Name"></asp:BoundField>
                             <asp:BoundField DataField="godown_address" HeaderText="Address" ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs"></asp:BoundField>

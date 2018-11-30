@@ -220,6 +220,7 @@
     <Content Include="Masters\Party.aspx" />
     <Content Include="Masters\PaymentMode.aspx" />
     <Content Include="Masters\Product.aspx" />
+    <Content Include="Masters\TaxGroup.aspx" />
     <Content Include="Masters\User.aspx" />
     <Content Include="Masters\BatchMasterModel.aspx" />
     <Content Include="PurchaseFolder\PrintPurchase.aspx" />
@@ -445,6 +446,13 @@
     </Compile>
     <Compile Include="Masters\Product.aspx.designer.cs">
       <DependentUpon>Product.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\TaxGroup.aspx.cs">
+      <DependentUpon>TaxGroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masters\TaxGroup.aspx.designer.cs">
+      <DependentUpon>TaxGroup.aspx</DependentUpon>
     </Compile>
     <Compile Include="Masters\User.aspx.cs">
       <DependentUpon>User.aspx</DependentUpon>

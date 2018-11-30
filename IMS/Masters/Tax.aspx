@@ -7,11 +7,8 @@
         }
     </script>
     <script type="text/javascript">
-        $(function () {
-            $('#GridView1').prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable({
-                "responsive": true,
-                "sPaginationType": "full_numbers"
-            });
+        $(document).ready(function () {
+            $('#<%= GridView1.ClientID %>').DataTable();
         });
         function validdiscount() {
             if ($('#<%=txtTaxPercent.ClientID%>').val() > 100) {
@@ -133,7 +130,7 @@
             <div class="row">
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <div>
-                        <asp:GridView ID="GridView1" runat="server" OnRowCommand="GridView1_RowCommand" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" DataKeyNames="tax_id" CssClass="table table table-striped table-bordered table-hover" AutoGenerateColumns="false" SelectedIndex="0">
+                        <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" OnRowCommand="GridView1_RowCommand" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" DataKeyNames="tax_id" CssClass="table table table-striped table-bordered table-hover" AutoGenerateColumns="false" SelectedIndex="0">
                             <Columns>
                                 <asp:BoundField DataField="tax_name" HeaderText="Tax Name"></asp:BoundField>
                                 <asp:BoundField DataField="tax_percentage" HeaderText="Tax Percent"></asp:BoundField>
