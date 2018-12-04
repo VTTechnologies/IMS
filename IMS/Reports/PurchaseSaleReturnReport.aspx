@@ -42,8 +42,8 @@
     <link href="../assets/alert/css/themes/default.css" rel="stylesheet" />
     <link href="../assets/alert/css/themes/default.min.css" rel="stylesheet" />
     <link href="../assets/alert/css/themes/default.rtl.css" rel="stylesheet" />
-    <link href="../SalesFolder/invoicedesign/styles/bauhaus.css" rel="stylesheet" type="text/css" />
-    <link href="../SalesFolder/invoicedesign/styles/bauhaus_print.css" media="print" rel="stylesheet" type="text/css" />
+    <link href="../assets/invoicedesign/styles/bauhaus.css" rel="stylesheet" />
+    <link href="../assets/invoicedesign/styles/bauhaus_print.css" rel="stylesheet" />   
   <script type="text/javascript">
       function PrintPage() {
           $('#btnprint').hide();

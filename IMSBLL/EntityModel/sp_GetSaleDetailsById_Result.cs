@@ -30,7 +30,7 @@ namespace IMSBLL.EntityModel
         public Nullable<decimal> discount_percent { get; set; }
         public Nullable<decimal> given_amnt { get; set; }
         public Nullable<decimal> balance_amnt { get; set; }
-        public Nullable<decimal> total_amount { get; set; }
+        public Nullable<decimal> total_amnt { get; set; }
         public Nullable<decimal> total_discount { get; set; }
         public Nullable<decimal> total_tax { get; set; }
         public Nullable<decimal> grand_total { get; set; }

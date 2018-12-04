@@ -21,5 +21,6 @@ namespace IMSBLL.EntityModel
         public string product_code { get; set; }
         public Nullable<int> Reorderlevel { get; set; }
         public Nullable<int> quantity { get; set; }
+        public string batch_name { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace IMSBLL.EntityModel
         public Nullable<decimal> dicount_amt { get; set; }
         public Nullable<decimal> tax_amt { get; set; }
         public Nullable<decimal> purchase_rate { get; set; }
-        public Nullable<decimal> sale_rate { get; set; }
+        public Nullable<decimal> sale_price { get; set; }
         public Nullable<decimal> quantity { get; set; }
         public string product_name { get; set; }
         public string unit_name { get; set; }
