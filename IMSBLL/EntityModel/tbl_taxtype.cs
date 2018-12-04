@@ -12,16 +12,16 @@ namespace IMSBLL.EntityModel
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_taxgroup
+    public partial class tbl_taxtype
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_taxgroup()
+        public tbl_taxtype()
         {
             this.tbl_taxdetails = new HashSet<tbl_taxdetails>();
         }
     
-        public int group_id { get; set; }
-        public string group_name { get; set; }
+        public int type_id { get; set; }
+        public string type_name { get; set; }
         public Nullable<int> company_id { get; set; }
         public Nullable<int> branch_id { get; set; }
         public Nullable<bool> status { get; set; }

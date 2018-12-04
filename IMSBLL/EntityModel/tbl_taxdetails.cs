@@ -12,27 +12,19 @@ namespace IMSBLL.EntityModel
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_taxgroup
+    public partial class tbl_taxdetails
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_taxgroup()
-        {
-            this.tbl_taxdetails = new HashSet<tbl_taxdetails>();
-        }
-    
-        public int group_id { get; set; }
-        public string group_name { get; set; }
-        public Nullable<int> company_id { get; set; }
-        public Nullable<int> branch_id { get; set; }
+        public int taxdetails_id { get; set; }
+        public Nullable<int> group_id { get; set; }
+        public Nullable<int> type_id { get; set; }
+        public Nullable<decimal> tax_percentage { get; set; }
         public Nullable<bool> status { get; set; }
         public string created_by { get; set; }
         public Nullable<System.DateTime> created_date { get; set; }
         public string modified_by { get; set; }
         public Nullable<System.DateTime> modified_date { get; set; }
     
-        public virtual tbl_branch tbl_branch { get; set; }
-        public virtual tbl_company tbl_company { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_taxdetails> tbl_taxdetails { get; set; }
+        public virtual tbl_taxgroup tbl_taxgroup { get; set; }
+        public virtual tbl_taxtype tbl_taxtype { get; set; }
     }
 }

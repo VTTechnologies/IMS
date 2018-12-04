@@ -74,7 +74,9 @@ namespace IMSBLL.EntityModel
         public virtual DbSet<tbl_stocktransaction> tbl_stocktransaction { get; set; }
         public virtual DbSet<tbl_subscription> tbl_subscription { get; set; }
         public virtual DbSet<tbl_tax> tbl_tax { get; set; }
-        public virtual DbSet<tbl_taxGroup> tbl_taxGroup { get; set; }
+        public virtual DbSet<tbl_taxdetails> tbl_taxdetails { get; set; }
+        public virtual DbSet<tbl_taxgroup> tbl_taxgroup { get; set; }
+        public virtual DbSet<tbl_taxtype> tbl_taxtype { get; set; }
         public virtual DbSet<tbl_unit> tbl_unit { get; set; }
         public virtual DbSet<tbl_User> tbl_User { get; set; }
         public virtual DbSet<tbl_userbranch> tbl_userbranch { get; set; }

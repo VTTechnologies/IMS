@@ -401,7 +401,13 @@
     <Compile Include="EntityModel\tbl_tax.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\tbl_taxGroup.cs">
+    <Compile Include="EntityModel\tbl_taxdetails.cs">
+      <DependentUpon>IMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\tbl_taxgroup.cs">
+      <DependentUpon>IMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\tbl_taxtype.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\tbl_unit.cs">

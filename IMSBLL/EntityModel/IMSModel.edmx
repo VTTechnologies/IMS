@@ -835,13 +835,42 @@
           <Property Name="modified_date" Type="smalldatetime" />
           <Property Name="tax_percentage" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
-        <EntityType Name="tbl_taxGroup">
+        <EntityType Name="tbl_taxdetails">
           <Key>
-            <PropertyRef Name="taxGroup_id" />
+            <PropertyRef Name="taxdetails_id" />
           </Key>
-          <Property Name="taxGroup_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="product_id" Type="int" />
-          <Property Name="tax_id" Type="int" />
+          <Property Name="taxdetails_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="group_id" Type="int" />
+          <Property Name="type_id" Type="int" />
+          <Property Name="tax_percentage" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="status" Type="bit" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="500" />
+          <Property Name="created_date" Type="smalldatetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="500" />
+          <Property Name="modified_date" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="tbl_taxgroup">
+          <Key>
+            <PropertyRef Name="group_id" />
+          </Key>
+          <Property Name="group_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="group_name" Type="nvarchar" MaxLength="500" />
+          <Property Name="company_id" Type="int" />
+          <Property Name="branch_id" Type="int" />
+          <Property Name="status" Type="bit" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="500" />
+          <Property Name="created_date" Type="smalldatetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="500" />
+          <Property Name="modified_date" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="tbl_taxtype">
+          <Key>
+            <PropertyRef Name="type_id" />
+          </Key>
+          <Property Name="type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type_name" Type="nvarchar" MaxLength="500" />
+          <Property Name="company_id" Type="int" />
+          <Property Name="branch_id" Type="int" />
           <Property Name="status" Type="bit" />
           <Property Name="created_by" Type="nvarchar" MaxLength="500" />
           <Property Name="created_date" Type="smalldatetime" />
@@ -1900,27 +1929,75 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_taxGr__produ__2180FB33">
-          <End Role="tbl_product" Type="Self.tbl_product" Multiplicity="0..1" />
-          <End Role="tbl_taxGroup" Type="Self.tbl_taxGroup" Multiplicity="*" />
+        <Association Name="FK__tbl_taxde__group__420DC656">
+          <End Role="tbl_taxgroup" Type="Self.tbl_taxgroup" Multiplicity="0..1" />
+          <End Role="tbl_taxdetails" Type="Self.tbl_taxdetails" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tbl_product">
-              <PropertyRef Name="product_id" />
+            <Principal Role="tbl_taxgroup">
+              <PropertyRef Name="group_id" />
             </Principal>
-            <Dependent Role="tbl_taxGroup">
-              <PropertyRef Name="product_id" />
+            <Dependent Role="tbl_taxdetails">
+              <PropertyRef Name="group_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_taxGr__tax_i__22751F6C">
-          <End Role="tbl_tax" Type="Self.tbl_tax" Multiplicity="0..1" />
-          <End Role="tbl_taxGroup" Type="Self.tbl_taxGroup" Multiplicity="*" />
+        <Association Name="FK__tbl_taxde__type___4301EA8F">
+          <End Role="tbl_taxtype" Type="Self.tbl_taxtype" Multiplicity="0..1" />
+          <End Role="tbl_taxdetails" Type="Self.tbl_taxdetails" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tbl_tax">
-              <PropertyRef Name="tax_id" />
+            <Principal Role="tbl_taxtype">
+              <PropertyRef Name="type_id" />
             </Principal>
-            <Dependent Role="tbl_taxGroup">
-              <PropertyRef Name="tax_id" />
+            <Dependent Role="tbl_taxdetails">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_taxgr__branc__3F3159AB">
+          <End Role="tbl_branch" Type="Self.tbl_branch" Multiplicity="0..1" />
+          <End Role="tbl_taxgroup" Type="Self.tbl_taxgroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_branch">
+              <PropertyRef Name="branch_id" />
+            </Principal>
+            <Dependent Role="tbl_taxgroup">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_taxgr__compa__3E3D3572">
+          <End Role="tbl_company" Type="Self.tbl_company" Multiplicity="0..1" />
+          <End Role="tbl_taxgroup" Type="Self.tbl_taxgroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="tbl_taxgroup">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_taxty__branc__2D12A970">
+          <End Role="tbl_branch" Type="Self.tbl_branch" Multiplicity="0..1" />
+          <End Role="tbl_taxtype" Type="Self.tbl_taxtype" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_branch">
+              <PropertyRef Name="branch_id" />
+            </Principal>
+            <Dependent Role="tbl_taxtype">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_taxty__compa__2C1E8537">
+          <End Role="tbl_company" Type="Self.tbl_company" Multiplicity="0..1" />
+          <End Role="tbl_taxtype" Type="Self.tbl_taxtype" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="tbl_taxtype">
+              <PropertyRef Name="company_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3435,7 +3512,9 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           <EntitySet Name="tbl_stocktransaction" EntityType="Self.tbl_stocktransaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_subscription" EntityType="Self.tbl_subscription" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_tax" EntityType="Self.tbl_tax" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tbl_taxGroup" EntityType="Self.tbl_taxGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_taxdetails" EntityType="Self.tbl_taxdetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_taxgroup" EntityType="Self.tbl_taxgroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_taxtype" EntityType="Self.tbl_taxtype" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_unit" EntityType="Self.tbl_unit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User" EntityType="Self.tbl_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_userbranch" EntityType="Self.tbl_userbranch" Schema="dbo" store:Type="Tables" />
@@ -3804,13 +3883,29 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <End Role="tbl_company" EntitySet="tbl_company" />
             <End Role="tbl_tax" EntitySet="tbl_tax" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_taxGr__produ__2180FB33" Association="Self.FK__tbl_taxGr__produ__2180FB33">
-            <End Role="tbl_product" EntitySet="tbl_product" />
-            <End Role="tbl_taxGroup" EntitySet="tbl_taxGroup" />
+          <AssociationSet Name="FK__tbl_taxde__group__420DC656" Association="Self.FK__tbl_taxde__group__420DC656">
+            <End Role="tbl_taxgroup" EntitySet="tbl_taxgroup" />
+            <End Role="tbl_taxdetails" EntitySet="tbl_taxdetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_taxGr__tax_i__22751F6C" Association="Self.FK__tbl_taxGr__tax_i__22751F6C">
-            <End Role="tbl_tax" EntitySet="tbl_tax" />
-            <End Role="tbl_taxGroup" EntitySet="tbl_taxGroup" />
+          <AssociationSet Name="FK__tbl_taxde__type___4301EA8F" Association="Self.FK__tbl_taxde__type___4301EA8F">
+            <End Role="tbl_taxtype" EntitySet="tbl_taxtype" />
+            <End Role="tbl_taxdetails" EntitySet="tbl_taxdetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_taxgr__branc__3F3159AB" Association="Self.FK__tbl_taxgr__branc__3F3159AB">
+            <End Role="tbl_branch" EntitySet="tbl_branch" />
+            <End Role="tbl_taxgroup" EntitySet="tbl_taxgroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_taxgr__compa__3E3D3572" Association="Self.FK__tbl_taxgr__compa__3E3D3572">
+            <End Role="tbl_company" EntitySet="tbl_company" />
+            <End Role="tbl_taxgroup" EntitySet="tbl_taxgroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_taxty__branc__2D12A970" Association="Self.FK__tbl_taxty__branc__2D12A970">
+            <End Role="tbl_branch" EntitySet="tbl_branch" />
+            <End Role="tbl_taxtype" EntitySet="tbl_taxtype" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_taxty__compa__2C1E8537" Association="Self.FK__tbl_taxty__compa__2C1E8537">
+            <End Role="tbl_company" EntitySet="tbl_company" />
+            <End Role="tbl_taxtype" EntitySet="tbl_taxtype" />
           </AssociationSet>
           <AssociationSet Name="FK__tbl_unit__branch__2F10007B" Association="Self.FK__tbl_unit__branch__2F10007B">
             <End Role="tbl_branch" EntitySet="tbl_branch" />
@@ -4985,7 +5080,9 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           <EntitySet Name="tbl_stocktransaction" EntityType="IMS_TESTModel.tbl_stocktransaction" />
           <EntitySet Name="tbl_subscription" EntityType="IMS_TESTModel.tbl_subscription" />
           <EntitySet Name="tbl_tax" EntityType="IMS_TESTModel.tbl_tax" />
-          <EntitySet Name="tbl_taxGroup" EntityType="IMS_TESTModel.tbl_taxGroup" />
+          <EntitySet Name="tbl_taxdetails" EntityType="IMS_TESTModel.tbl_taxdetails" />
+          <EntitySet Name="tbl_taxgroup" EntityType="IMS_TESTModel.tbl_taxgroup" />
+          <EntitySet Name="tbl_taxtype" EntityType="IMS_TESTModel.tbl_taxtype" />
           <EntitySet Name="tbl_unit" EntityType="IMS_TESTModel.tbl_unit" />
           <EntitySet Name="tbl_User" EntityType="IMS_TESTModel.tbl_User" />
           <EntitySet Name="tbl_userbranch" EntityType="IMS_TESTModel.tbl_userbranch" />
@@ -5125,6 +5222,14 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <End Role="tbl_branch" EntitySet="tbl_branch" />
             <End Role="tbl_tax" EntitySet="tbl_tax" />
           </AssociationSet>
+          <AssociationSet Name="FK__tbl_taxgr__branc__3F3159AB" Association="IMS_TESTModel.FK__tbl_taxgr__branc__3F3159AB">
+            <End Role="tbl_branch" EntitySet="tbl_branch" />
+            <End Role="tbl_taxgroup" EntitySet="tbl_taxgroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_taxty__branc__2D12A970" Association="IMS_TESTModel.FK__tbl_taxty__branc__2D12A970">
+            <End Role="tbl_branch" EntitySet="tbl_branch" />
+            <End Role="tbl_taxtype" EntitySet="tbl_taxtype" />
+          </AssociationSet>
           <AssociationSet Name="FK__tbl_unit__branch__2F10007B" Association="IMS_TESTModel.FK__tbl_unit__branch__2F10007B">
             <End Role="tbl_branch" EntitySet="tbl_branch" />
             <End Role="tbl_unit" EntitySet="tbl_unit" />
@@ -5232,6 +5337,14 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           <AssociationSet Name="FK__tbl_tax__company__4222D4EF" Association="IMS_TESTModel.FK__tbl_tax__company__4222D4EF">
             <End Role="tbl_company" EntitySet="tbl_company" />
             <End Role="tbl_tax" EntitySet="tbl_tax" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_taxgr__compa__3E3D3572" Association="IMS_TESTModel.FK__tbl_taxgr__compa__3E3D3572">
+            <End Role="tbl_company" EntitySet="tbl_company" />
+            <End Role="tbl_taxgroup" EntitySet="tbl_taxgroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_taxty__compa__2C1E8537" Association="IMS_TESTModel.FK__tbl_taxty__compa__2C1E8537">
+            <End Role="tbl_company" EntitySet="tbl_company" />
+            <End Role="tbl_taxtype" EntitySet="tbl_taxtype" />
           </AssociationSet>
           <AssociationSet Name="FK__tbl_unit__compan__2E1BDC42" Association="IMS_TESTModel.FK__tbl_unit__compan__2E1BDC42">
             <End Role="tbl_company" EntitySet="tbl_company" />
@@ -5377,10 +5490,6 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <End Role="tbl_product" EntitySet="tbl_product" />
             <End Role="tbl_stocktransaction" EntitySet="tbl_stocktransaction" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_taxGr__produ__2180FB33" Association="IMS_TESTModel.FK__tbl_taxGr__produ__2180FB33">
-            <End Role="tbl_product" EntitySet="tbl_product" />
-            <End Role="tbl_taxGroup" EntitySet="tbl_taxGroup" />
-          </AssociationSet>
           <AssociationSet Name="FK_tbl_purchasereturndetails_tbl_product" Association="IMS_TESTModel.FK_tbl_purchasereturndetails_tbl_product">
             <End Role="tbl_product" EntitySet="tbl_product" />
             <End Role="tbl_purchasereturndetails" EntitySet="tbl_purchasereturndetails" />
@@ -5469,9 +5578,13 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <End Role="tbl_User" EntitySet="tbl_User" />
             <End Role="tbl_subscription" EntitySet="tbl_subscription" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_taxGr__tax_i__22751F6C" Association="IMS_TESTModel.FK__tbl_taxGr__tax_i__22751F6C">
-            <End Role="tbl_tax" EntitySet="tbl_tax" />
-            <End Role="tbl_taxGroup" EntitySet="tbl_taxGroup" />
+          <AssociationSet Name="FK__tbl_taxde__group__420DC656" Association="IMS_TESTModel.FK__tbl_taxde__group__420DC656">
+            <End Role="tbl_taxgroup" EntitySet="tbl_taxgroup" />
+            <End Role="tbl_taxdetails" EntitySet="tbl_taxdetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_taxde__type___4301EA8F" Association="IMS_TESTModel.FK__tbl_taxde__type___4301EA8F">
+            <End Role="tbl_taxtype" EntitySet="tbl_taxtype" />
+            <End Role="tbl_taxdetails" EntitySet="tbl_taxdetails" />
           </AssociationSet>
           <AssociationSet Name="FK__tbl_userb__user___267ABA7A" Association="IMS_TESTModel.FK__tbl_userb__user___267ABA7A">
             <End Role="tbl_User" EntitySet="tbl_User" />
@@ -6182,6 +6295,8 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           <NavigationProperty Name="tbl_stock" Relationship="IMS_TESTModel.FK__tbl_stock__branc__5FB337D6" FromRole="tbl_branch" ToRole="tbl_stock" />
           <NavigationProperty Name="tbl_stocktransaction" Relationship="IMS_TESTModel.FK__tbl_stock__branc__656C112C" FromRole="tbl_branch" ToRole="tbl_stocktransaction" />
           <NavigationProperty Name="tbl_tax" Relationship="IMS_TESTModel.FK__tbl_tax__branch___4316F928" FromRole="tbl_branch" ToRole="tbl_tax" />
+          <NavigationProperty Name="tbl_taxgroup" Relationship="IMS_TESTModel.FK__tbl_taxgr__branc__3F3159AB" FromRole="tbl_branch" ToRole="tbl_taxgroup" />
+          <NavigationProperty Name="tbl_taxtype" Relationship="IMS_TESTModel.FK__tbl_taxty__branc__2D12A970" FromRole="tbl_branch" ToRole="tbl_taxtype" />
           <NavigationProperty Name="tbl_unit" Relationship="IMS_TESTModel.FK__tbl_unit__branch__2F10007B" FromRole="tbl_branch" ToRole="tbl_unit" />
           <NavigationProperty Name="tbl_userbranch" Relationship="IMS_TESTModel.FK__tbl_userb__branc__276EDEB3" FromRole="tbl_branch" ToRole="tbl_userbranch" />
           <NavigationProperty Name="tbl_purchasereturn" Relationship="IMS_TESTModel.FK_tbl_purchasereturn_tbl_branch" FromRole="tbl_branch" ToRole="tbl_purchasereturn" />
@@ -6258,6 +6373,8 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           <NavigationProperty Name="tbl_stocktransaction" Relationship="IMS_TESTModel.FK__tbl_stock__compa__6477ECF3" FromRole="tbl_company" ToRole="tbl_stocktransaction" />
           <NavigationProperty Name="tbl_subscription" Relationship="IMS_TESTModel.FK__tbl_subsc__compa__28ED12D1" FromRole="tbl_company" ToRole="tbl_subscription" />
           <NavigationProperty Name="tbl_tax" Relationship="IMS_TESTModel.FK__tbl_tax__company__4222D4EF" FromRole="tbl_company" ToRole="tbl_tax" />
+          <NavigationProperty Name="tbl_taxgroup" Relationship="IMS_TESTModel.FK__tbl_taxgr__compa__3E3D3572" FromRole="tbl_company" ToRole="tbl_taxgroup" />
+          <NavigationProperty Name="tbl_taxtype" Relationship="IMS_TESTModel.FK__tbl_taxty__compa__2C1E8537" FromRole="tbl_company" ToRole="tbl_taxtype" />
           <NavigationProperty Name="tbl_unit" Relationship="IMS_TESTModel.FK__tbl_unit__compan__2E1BDC42" FromRole="tbl_company" ToRole="tbl_unit" />
           <NavigationProperty Name="tbl_userbranch" Relationship="IMS_TESTModel.FK__tbl_userb__compa__29221CFB" FromRole="tbl_company" ToRole="tbl_userbranch" />
           <NavigationProperty Name="tbl_purchasereturn" Relationship="IMS_TESTModel.FK_tbl_purchasereturn_tbl_company" FromRole="tbl_company" ToRole="tbl_purchasereturn" />
@@ -6551,7 +6668,6 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           <NavigationProperty Name="tbl_purchasedetails" Relationship="IMS_TESTModel.FK__tbl_purch__produ__787EE5A0" FromRole="tbl_product" ToRole="tbl_purchasedetails" />
           <NavigationProperty Name="tbl_stock" Relationship="IMS_TESTModel.FK__tbl_stock__produ__60A75C0F" FromRole="tbl_product" ToRole="tbl_stock" />
           <NavigationProperty Name="tbl_stocktransaction" Relationship="IMS_TESTModel.FK__tbl_stock__produ__66603565" FromRole="tbl_product" ToRole="tbl_stocktransaction" />
-          <NavigationProperty Name="tbl_taxGroup" Relationship="IMS_TESTModel.FK__tbl_taxGr__produ__2180FB33" FromRole="tbl_product" ToRole="tbl_taxGroup" />
           <NavigationProperty Name="tbl_purchasereturndetails" Relationship="IMS_TESTModel.FK_tbl_purchasereturndetails_tbl_product" FromRole="tbl_product" ToRole="tbl_purchasereturndetails" />
           <NavigationProperty Name="tbl_saledetails" Relationship="IMS_TESTModel.FK_tbl_saledetails_tbl_product" FromRole="tbl_product" ToRole="tbl_saledetails" />
           <NavigationProperty Name="tbl_salereturndetails" Relationship="IMS_TESTModel.FK_tbl_salereturndetails_tbl_product" FromRole="tbl_product" ToRole="tbl_salereturndetails" />
@@ -7124,22 +7240,56 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           <NavigationProperty Name="tbl_purchasereturndetails" Relationship="IMS_TESTModel.FK_tbl_purchasereturndetails_tbl_tax" FromRole="tbl_tax" ToRole="tbl_purchasereturndetails" />
           <NavigationProperty Name="tbl_saledetails" Relationship="IMS_TESTModel.FK_tbl_saledetails_tbl_tax" FromRole="tbl_tax" ToRole="tbl_saledetails" />
           <NavigationProperty Name="tbl_salereturndetails" Relationship="IMS_TESTModel.FK_tbl_salereturndetails_tbl_tax" FromRole="tbl_tax" ToRole="tbl_salereturndetails" />
-          <NavigationProperty Name="tbl_taxGroup" Relationship="IMS_TESTModel.FK__tbl_taxGr__tax_i__22751F6C" FromRole="tbl_tax" ToRole="tbl_taxGroup" />
         </EntityType>
-        <EntityType Name="tbl_taxGroup">
+        <EntityType Name="tbl_taxdetails">
           <Key>
-            <PropertyRef Name="taxGroup_id" />
+            <PropertyRef Name="taxdetails_id" />
           </Key>
-          <Property Name="taxGroup_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="product_id" Type="Int32" />
-          <Property Name="tax_id" Type="Int32" />
+          <Property Name="taxdetails_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="group_id" Type="Int32" />
+          <Property Name="type_id" Type="Int32" />
+          <Property Name="tax_percentage" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="status" Type="Boolean" />
           <Property Name="created_by" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="created_date" Type="DateTime" Precision="0" />
           <Property Name="modified_by" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="modified_date" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="tbl_product" Relationship="IMS_TESTModel.FK__tbl_taxGr__produ__2180FB33" FromRole="tbl_taxGroup" ToRole="tbl_product" />
-          <NavigationProperty Name="tbl_tax" Relationship="IMS_TESTModel.FK__tbl_taxGr__tax_i__22751F6C" FromRole="tbl_taxGroup" ToRole="tbl_tax" />
+          <NavigationProperty Name="tbl_taxgroup" Relationship="IMS_TESTModel.FK__tbl_taxde__group__420DC656" FromRole="tbl_taxdetails" ToRole="tbl_taxgroup" />
+          <NavigationProperty Name="tbl_taxtype" Relationship="IMS_TESTModel.FK__tbl_taxde__type___4301EA8F" FromRole="tbl_taxdetails" ToRole="tbl_taxtype" />
+        </EntityType>
+        <EntityType Name="tbl_taxgroup">
+          <Key>
+            <PropertyRef Name="group_id" />
+          </Key>
+          <Property Name="group_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="group_name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="company_id" Type="Int32" />
+          <Property Name="branch_id" Type="Int32" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="created_by" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="created_date" Type="DateTime" Precision="0" />
+          <Property Name="modified_by" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tbl_branch" Relationship="IMS_TESTModel.FK__tbl_taxgr__branc__3F3159AB" FromRole="tbl_taxgroup" ToRole="tbl_branch" />
+          <NavigationProperty Name="tbl_company" Relationship="IMS_TESTModel.FK__tbl_taxgr__compa__3E3D3572" FromRole="tbl_taxgroup" ToRole="tbl_company" />
+          <NavigationProperty Name="tbl_taxdetails" Relationship="IMS_TESTModel.FK__tbl_taxde__group__420DC656" FromRole="tbl_taxgroup" ToRole="tbl_taxdetails" />
+        </EntityType>
+        <EntityType Name="tbl_taxtype">
+          <Key>
+            <PropertyRef Name="type_id" />
+          </Key>
+          <Property Name="type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type_name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="company_id" Type="Int32" />
+          <Property Name="branch_id" Type="Int32" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="created_by" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="created_date" Type="DateTime" Precision="0" />
+          <Property Name="modified_by" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tbl_branch" Relationship="IMS_TESTModel.FK__tbl_taxty__branc__2D12A970" FromRole="tbl_taxtype" ToRole="tbl_branch" />
+          <NavigationProperty Name="tbl_company" Relationship="IMS_TESTModel.FK__tbl_taxty__compa__2C1E8537" FromRole="tbl_taxtype" ToRole="tbl_company" />
+          <NavigationProperty Name="tbl_taxdetails" Relationship="IMS_TESTModel.FK__tbl_taxde__type___4301EA8F" FromRole="tbl_taxtype" ToRole="tbl_taxdetails" />
         </EntityType>
         <EntityType Name="tbl_unit">
           <Key>
@@ -7690,6 +7840,30 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__tbl_taxgr__branc__3F3159AB">
+          <End Type="IMS_TESTModel.tbl_branch" Role="tbl_branch" Multiplicity="0..1" />
+          <End Type="IMS_TESTModel.tbl_taxgroup" Role="tbl_taxgroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_branch">
+              <PropertyRef Name="branch_id" />
+            </Principal>
+            <Dependent Role="tbl_taxgroup">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_taxty__branc__2D12A970">
+          <End Type="IMS_TESTModel.tbl_branch" Role="tbl_branch" Multiplicity="0..1" />
+          <End Type="IMS_TESTModel.tbl_taxtype" Role="tbl_taxtype" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_branch">
+              <PropertyRef Name="branch_id" />
+            </Principal>
+            <Dependent Role="tbl_taxtype">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__tbl_unit__branch__2F10007B">
           <End Type="IMS_TESTModel.tbl_branch" Role="tbl_branch" Multiplicity="0..1" />
           <End Type="IMS_TESTModel.tbl_unit" Role="tbl_unit" Multiplicity="*" />
@@ -8010,6 +8184,30 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
               <PropertyRef Name="company_id" />
             </Principal>
             <Dependent Role="tbl_tax">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_taxgr__compa__3E3D3572">
+          <End Type="IMS_TESTModel.tbl_company" Role="tbl_company" Multiplicity="0..1" />
+          <End Type="IMS_TESTModel.tbl_taxgroup" Role="tbl_taxgroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="tbl_taxgroup">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_taxty__compa__2C1E8537">
+          <End Type="IMS_TESTModel.tbl_company" Role="tbl_company" Multiplicity="0..1" />
+          <End Type="IMS_TESTModel.tbl_taxtype" Role="tbl_taxtype" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="tbl_taxtype">
               <PropertyRef Name="company_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -8446,18 +8644,6 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_taxGr__produ__2180FB33">
-          <End Type="IMS_TESTModel.tbl_product" Role="tbl_product" Multiplicity="0..1" />
-          <End Type="IMS_TESTModel.tbl_taxGroup" Role="tbl_taxGroup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="tbl_taxGroup">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tbl_purchasereturndetails_tbl_product">
           <End Type="IMS_TESTModel.tbl_product" Role="tbl_product" Multiplicity="0..1" />
           <End Type="IMS_TESTModel.tbl_purchasereturndetails" Role="tbl_purchasereturndetails" Multiplicity="*" />
@@ -8722,15 +8908,27 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_taxGr__tax_i__22751F6C">
-          <End Type="IMS_TESTModel.tbl_tax" Role="tbl_tax" Multiplicity="0..1" />
-          <End Type="IMS_TESTModel.tbl_taxGroup" Role="tbl_taxGroup" Multiplicity="*" />
+        <Association Name="FK__tbl_taxde__group__420DC656">
+          <End Type="IMS_TESTModel.tbl_taxgroup" Role="tbl_taxgroup" Multiplicity="0..1" />
+          <End Type="IMS_TESTModel.tbl_taxdetails" Role="tbl_taxdetails" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tbl_tax">
-              <PropertyRef Name="tax_id" />
+            <Principal Role="tbl_taxgroup">
+              <PropertyRef Name="group_id" />
             </Principal>
-            <Dependent Role="tbl_taxGroup">
-              <PropertyRef Name="tax_id" />
+            <Dependent Role="tbl_taxdetails">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_taxde__type___4301EA8F">
+          <End Type="IMS_TESTModel.tbl_taxtype" Role="tbl_taxtype" Multiplicity="0..1" />
+          <End Type="IMS_TESTModel.tbl_taxdetails" Role="tbl_taxdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_taxtype">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="tbl_taxdetails">
+              <PropertyRef Name="type_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -10468,17 +10666,48 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbl_taxGroup">
-            <EntityTypeMapping TypeName="IMS_TESTModel.tbl_taxGroup">
-              <MappingFragment StoreEntitySet="tbl_taxGroup">
+          <EntitySetMapping Name="tbl_taxdetails">
+            <EntityTypeMapping TypeName="IMS_TESTModel.tbl_taxdetails">
+              <MappingFragment StoreEntitySet="tbl_taxdetails">
                 <ScalarProperty Name="modified_date" ColumnName="modified_date" />
                 <ScalarProperty Name="modified_by" ColumnName="modified_by" />
                 <ScalarProperty Name="created_date" ColumnName="created_date" />
                 <ScalarProperty Name="created_by" ColumnName="created_by" />
                 <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="tax_id" ColumnName="tax_id" />
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="taxGroup_id" ColumnName="taxGroup_id" />
+                <ScalarProperty Name="tax_percentage" ColumnName="tax_percentage" />
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+                <ScalarProperty Name="taxdetails_id" ColumnName="taxdetails_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_taxgroup">
+            <EntityTypeMapping TypeName="IMS_TESTModel.tbl_taxgroup">
+              <MappingFragment StoreEntitySet="tbl_taxgroup">
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="group_name" ColumnName="group_name" />
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_taxtype">
+            <EntityTypeMapping TypeName="IMS_TESTModel.tbl_taxtype">
+              <MappingFragment StoreEntitySet="tbl_taxtype">
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="type_name" ColumnName="type_name" />
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

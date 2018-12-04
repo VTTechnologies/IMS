@@ -22,7 +22,6 @@ namespace IMSBLL.EntityModel
             this.tbl_purchasereturndetails = new HashSet<tbl_purchasereturndetails>();
             this.tbl_saledetails = new HashSet<tbl_saledetails>();
             this.tbl_salereturndetails = new HashSet<tbl_salereturndetails>();
-            this.tbl_taxGroup = new HashSet<tbl_taxGroup>();
         }
     
         public int tax_id { get; set; }
@@ -48,7 +47,5 @@ namespace IMSBLL.EntityModel
         public virtual ICollection<tbl_saledetails> tbl_saledetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_salereturndetails> tbl_salereturndetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_taxGroup> tbl_taxGroup { get; set; }
     }
 }
