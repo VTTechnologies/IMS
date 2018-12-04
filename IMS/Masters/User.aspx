@@ -3,18 +3,16 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <script type="text/javascript">
-        $(function () {
-            $('#GridView1').prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable({
-                "responsive": true,
-                "sPaginationType": "full_numbers"
-            });
-        });
-
+   
         function openalert(msg) {
             alertify.alert('Alert', msg)
 
 
         }
+
+        $(document).ready(function () {
+            $('#<%= GridView1.ClientID %>').DataTable();
+        });
     </script>
     <script type='text/javascript'>
         function openModal() {
@@ -94,8 +92,8 @@
         }
     </script>
 
-</asp:Content>
 
+</asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid">
@@ -254,7 +252,7 @@
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
 
 
-                    <asp:GridView ID="GridView1" runat="server" DataKeyNames="userbranch_id" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" CssClass="table table table-striped table-bordered table-hover">
+                    <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" DataKeyNames="userbranch_id" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" CssClass="table table table-striped table-bordered table-hover">
 
                         <Columns>
                             <asp:BoundField DataField="first_name" HeaderText="First Name"></asp:BoundField>

@@ -20,11 +20,8 @@
     </script>
     <script type="text/javascript">
 
-        $(function () {
-            $('#GridView1').prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable({
-                "responsive": true,
-                "sPaginationType": "full_numbers"
-            });
+        $(document).ready(function () {
+            $('#<%= grvlist.ClientID %>').DataTable();
         });
     </script>
     <script type="text/javascript">
@@ -99,7 +96,7 @@
         </div>
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
             <div>
-                <asp:GridView ID="grvlist" runat="server" OnRowCommand="grvlist_RowCommand" DataKeyNames="paymentode_id" SelectedIndex="0" OnSelectedIndexChanged="grvlist_SelectedIndexChanged" AutoGenerateColumns="false" CssClass="table table-striped table-bordered table-hover">
+                <asp:GridView ID="grvlist" OnRowDataBound="GridView1_RowDataBound" runat="server" OnRowCommand="grvlist_RowCommand" DataKeyNames="paymentode_id" SelectedIndex="0" OnSelectedIndexChanged="grvlist_SelectedIndexChanged" AutoGenerateColumns="false" CssClass="table table-striped table-bordered table-hover">
                     <Columns>
                         <asp:BoundField DataField="paymentmode_name" HeaderText="Name"></asp:BoundField>
                         <asp:TemplateField HeaderText="Update">

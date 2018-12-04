@@ -15,9 +15,12 @@ namespace IMSBLL.EntityModel
     {
         public int purchase_id { get; set; }
         public Nullable<int> party_id { get; set; }
-        public string po_no { get; set; }
+        public string InvoiceNumber { get; set; }
         public Nullable<decimal> grand_total { get; set; }
-        public string Date { get; set; }
+        public string Po_Date { get; set; }
         public string party_name { get; set; }
+        public Nullable<decimal> paidAmnt { get; set; }
+        public Nullable<decimal> given_amnt { get; set; }
+        public Nullable<decimal> balance_amnt { get; set; }
     }
 }

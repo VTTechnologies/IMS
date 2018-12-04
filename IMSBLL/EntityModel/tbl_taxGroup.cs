@@ -12,18 +12,25 @@ namespace IMSBLL.EntityModel
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_taxGroup
+    public partial class tbl_taxgroup
     {
-        public int taxGroup_id { get; set; }
-        public Nullable<int> product_id { get; set; }
-        public Nullable<int> tax_id { get; set; }
+        public tbl_taxgroup()
+        {
+            this.tbl_taxdetails = new HashSet<tbl_taxdetails>();
+        }
+    
+        public int group_id { get; set; }
+        public string group_name { get; set; }
+        public Nullable<int> company_id { get; set; }
+        public Nullable<int> branch_id { get; set; }
         public Nullable<bool> status { get; set; }
         public string created_by { get; set; }
         public Nullable<System.DateTime> created_date { get; set; }
         public string modified_by { get; set; }
         public Nullable<System.DateTime> modified_date { get; set; }
     
-        public virtual tbl_product tbl_product { get; set; }
-        public virtual tbl_tax tbl_tax { get; set; }
+        public virtual tbl_branch tbl_branch { get; set; }
+        public virtual tbl_company tbl_company { get; set; }
+        public virtual ICollection<tbl_taxdetails> tbl_taxdetails { get; set; }
     }
 }

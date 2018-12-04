@@ -2,14 +2,23 @@
 
 <%--<!DOCTYPE html>--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    
+    
+<%--    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/dataTables.bootstrap.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/dataTables.bootstrap.min.js"></script>--%>
+   <%-- <script src="../assets/datatable/jquery-3.3.1.js"></script>
+    <script src="../assets/datatable/jquery.dataTables.min.js"></script>
+    <link href="../assets/datatable/dataTables.min.css" rel="stylesheet" />--%>
     <script type="text/javascript">
 
-        $(function () {
-            $('#GridView1').prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable({
-                "responsive": true,
-                "sPaginationType": "full_numbers"
-            });
-        });
+
+        $(document).ready(function () {
+            $('#<%= GridView1.ClientID %>').DataTable();
+     });
     </script>
     <script type='text/javascript'>
         function openModal() {
@@ -112,8 +121,8 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div>
-                    <asp:GridView ID="GridView1" runat="server" OnRowCommand="GridView1_RowCommand" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" DataKeyNames="category_id"
-                        CssClass="table table table-striped table-bordered table-hover" AutoGenerateColumns="False" SelectedIndex="0">
+                    <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" OnRowCommand="GridView1_RowCommand" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" DataKeyNames="category_id"
+                        CssClass="table table table-striped table-bordered table-responsive table-hover" AutoGenerateColumns="False" SelectedIndex="0">
                         <Columns>
                             <asp:BoundField DataField="category_name" HeaderText="Category Name"></asp:BoundField>
                             <asp:TemplateField HeaderText="Update">
@@ -170,13 +179,16 @@
     <link href="../assets/css/main-style.css" rel="stylesheet" />
     <!-- Page-Level CSS -->
     <script src="../assets/scripts/main.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/dataTables.bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.bootstrap.min.css" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    
+    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/dataTables.bootstrap.min.css" />
+
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/dataTables.bootstrap.min.js"></script>
+
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>

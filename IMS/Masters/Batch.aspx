@@ -8,9 +8,17 @@
         function openModal() {
             $('#<%=myModal.ClientID%>').modal('show');
         }
+
+
+        $(document).ready(function () {
+            $('#<%= GridView1.ClientID %>').DataTable();
+        });
     </script>
 
     <script type="text/javascript">
+     
+
+
 
         function CheckDouble() {
             try {
@@ -107,7 +115,7 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div>
-                    <asp:GridView ID="GridView1" runat="server" DataKeyNames="batch_id" OnRowCommand="GridView1_RowCommand" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" SelectedIndex="0" AutoGenerateColumns="False" CssClass="table table-bordered ">
+                    <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" DataKeyNames="batch_id" OnRowCommand="GridView1_RowCommand" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" SelectedIndex="0" AutoGenerateColumns="False" CssClass="table table-bordered ">
                         <Columns>
                             <asp:BoundField DataField="batch_name" HeaderText="Batch Name"></asp:BoundField>
 

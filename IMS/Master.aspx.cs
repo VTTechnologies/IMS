@@ -91,7 +91,7 @@ namespace IMS
         {
             try
             {
-                Response.Redirect("~/Masters/Tax.aspx");
+                Response.Redirect("~/Masters/TaxType.aspx");
                 //ifm.Visible = true;
                 //ifm.Attributes.Add("src", "~/Masters/Tax.aspx");
                 //main.Visible = false;
@@ -205,7 +205,7 @@ namespace IMS
         {
             try
             {
-                Response.Redirect("~/Masters/Branch.aspx");
+                Response.Redirect("~/Branch.aspx");
                 //ifm.Visible = true;
                 //ifm.Attributes.Add("src", "../Branch.aspx");
                 //main.Visible = false;

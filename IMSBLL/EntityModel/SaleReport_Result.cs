@@ -23,7 +23,6 @@ namespace IMSBLL.EntityModel
         public Nullable<decimal> dicount_amt { get; set; }
         public Nullable<decimal> quantity { get; set; }
         public Nullable<decimal> amount { get; set; }
-        public Nullable<decimal> price { get; set; }
         public string created_by { get; set; }
         public Nullable<System.DateTime> created_date { get; set; }
         public Nullable<bool> status { get; set; }

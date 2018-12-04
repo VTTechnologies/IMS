@@ -82,22 +82,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IMSModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\InventoryReport_Result.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityModel\Party.cs" />
-    <Compile Include="EntityModel\PaymentBalanceReport_Result.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityModel\PaymentMode.cs" />
     <Compile Include="EntityModel\Product.cs" />
     <Compile Include="EntityModel\ProductReport_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\PurchaseOrPurchaseReturnReport1_Result.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModel\PurchaseReturnReport_Result.cs">
+    <Compile Include="EntityModel\PurchaseOrPurchaseReturnReport_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\Rack.cs" />
@@ -106,7 +97,7 @@
     <Compile Include="EntityModel\SaleOrderReport_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\SaleOrSaleReturnReport1_Result.cs">
+    <Compile Include="EntityModel\SaleOrSaleReturnReport_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\SaleReport_Result.cs">
@@ -150,25 +141,13 @@
     <Compile Include="EntityModel\sp_product_relorderlevel_report_companybranch_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\sp_product_relorderlevel_report_companybranch_Result1.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityModel\sp_product_relorderlevel_report_forcompany_only_Result.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModel\sp_product_relorderlevel_report_forcompany_only_Result1.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\sp_Register_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\sp_SalesreturnProduct_Result.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityModel\sp_selectbatchbyproduct_Result.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModel\sp_selectbatchwisequantity1_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\sp_selectbatchwisequantity_Result.cs">
@@ -210,9 +189,6 @@
     <Compile Include="EntityModel\sp_SelectPrice_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\sp_SelectProductbyid1_Result.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityModel\sp_SelectProductbyid_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
@@ -226,9 +202,6 @@
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\sp_SelectPurchaseinvoice_Result.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModel\sp_SelectPurchase_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\sp_SelectRack_Result.cs">
@@ -401,7 +374,13 @@
     <Compile Include="EntityModel\tbl_tax.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\tbl_taxGroup.cs">
+    <Compile Include="EntityModel\tbl_taxdetails.cs">
+      <DependentUpon>IMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\tbl_taxgroup.cs">
+      <DependentUpon>IMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\tbl_taxtype.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\tbl_unit.cs">

@@ -14,7 +14,6 @@ namespace IMSBLL.EntityModel
     
     public partial class tbl_purchase
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbl_purchase()
         {
             this.tbl_ActualPurchaseTaxAndPrice = new HashSet<tbl_ActualPurchaseTaxAndPrice>();
@@ -38,7 +37,6 @@ namespace IMSBLL.EntityModel
         public string InvoiceNumber { get; set; }
         public Nullable<int> PaymentMode_id { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_ActualPurchaseTaxAndPrice> tbl_ActualPurchaseTaxAndPrice { get; set; }
         public virtual tbl_branch tbl_branch { get; set; }
         public virtual tbl_branch tbl_branch1 { get; set; }
@@ -49,11 +47,8 @@ namespace IMSBLL.EntityModel
         public virtual tbl_party tbl_party { get; set; }
         public virtual tbl_party tbl_party1 { get; set; }
         public virtual tbl_paymentmode tbl_paymentmode { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_purchasedetails> tbl_purchasedetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_PurchasePaymentDetials> tbl_PurchasePaymentDetials { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_purchasereturn> tbl_purchasereturn { get; set; }
     }
 }
