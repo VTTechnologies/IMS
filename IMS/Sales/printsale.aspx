@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PurchaseSaleReturnReport.aspx.cs" Inherits="IMS.Reports.PurchaseSaleReturnReport" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="printsale.aspx.cs" Inherits="IMS.Sales.printsale" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-   <title>IMS</title>
+    <title>IMS</title>
     <style>
         .pagestyle {
             background-color: #fff;
@@ -15,7 +15,7 @@
             margin: 0 auto 3em auto;
             padding: 10px 20px;
             position: relative;
-            width: 1200px;
+            width: 660px;
         }
      
     </style>
@@ -53,12 +53,14 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-         <div id="invoice" class="pagestyle">
+        <div>
+       
+                <div id="invoice" class="pagestyle">
                      <asp:Panel ID="printpanel" runat="server">
                 <div id="invoice-header">
-                   <asp:Image ID="imglogo" runat="server" Height="150" Width="300" />
-                     <asp:Label ID="lblIms" runat="server" Font-Bold="true" style="padding: 0;font-size: 55px;"  Text="!MSB!ZZ" Visible="false"></asp:Label>
+                    <asp:Image ID="imglogo" runat="server" Height="150" Width="300" />
+                    <asp:Label ID="lblIms" runat="server" Font-Bold="true" style="padding: 0;font-size: 55px;"  Text="!MSB!ZZ" Visible="false"></asp:Label>
+                  
                     <div class="vcard" id="company-address">
                         <div class="fn org">
                             <h2>
@@ -107,23 +109,24 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px; margin-top: 10px">
-                        <asp:GridView ID="grdreport" runat="server" headerstyle-backcolor="#428bca" AutoGenerateColumns="false" CssClass="table  " BorderStyle="None" GridLines="Horizontal">
+                        <asp:GridView ID="GridView1" runat="server" headerstyle-backcolor="#151313" AutoGenerateColumns="false" CssClass="table  " BorderStyle="None" GridLines="Horizontal">
                             <Columns>
                                 <asp:TemplateField HeaderText="SR.No" ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs">
                                     <ItemTemplate>
                                         <%#Container.DataItemIndex+1 %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                 <asp:BoundField DataField="Product_id" HeaderText="Product id" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
                                 <asp:BoundField DataField="product_name" HeaderText="Product"></asp:BoundField>
                                 <asp:BoundField DataField="quantity" HeaderText="Quantity"></asp:BoundField>
-                                <asp:BoundField DataField="batch_name" HeaderText="Batch"></asp:BoundField>
-                                <asp:BoundField DataField="tax_amt" HeaderText="Tax"></asp:BoundField>
-                                <asp:BoundField DataField="given_amnt" HeaderText="Given Amnt"></asp:BoundField>
-                                <asp:BoundField DataField="balance_amnt" HeaderText="Balance Amnt"></asp:BoundField>
+                                <asp:BoundField DataField="price" HeaderText="Price"></asp:BoundField>
+                                <asp:BoundField DataField="dicount_amt" HeaderText="Discount Amount"></asp:BoundField>
+                                <asp:BoundField DataField="tax_percentage" HeaderText="Tax"></asp:BoundField>
+                                <asp:BoundField DataField="tax_amt" HeaderText="Tax Amount"></asp:BoundField>
                                 <asp:BoundField DataField="amount" HeaderText="Total"></asp:BoundField>
 
                             </Columns>
-                            <HeaderStyle BackColor="#428bca" ForeColor="White" />
+                            <HeaderStyle BackColor="#151313" ForeColor="White" />
                         </asp:GridView>
                     </div>
                 </div>
@@ -195,7 +198,10 @@
                 <input type="button" class="btn btn-danger" id="btnprint" value="print"  OnClick="javascript: PrintPage();" />
             </div>
             </div>
-    </div>
+            
+   
+          
+        </div>
     </form>
 </body>
 </html>

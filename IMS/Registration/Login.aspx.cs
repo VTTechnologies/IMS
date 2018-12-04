@@ -143,11 +143,11 @@ namespace IMS.Registration
                                 string returnUrl = Request.QueryString["ReturnUrl"];
                                 if (role.Equals("Purchase Manager"))
                                 {
-                                    returnUrl = "PurchaseFolder/Purchase.aspx";
+                                    returnUrl = "Purchases/Purchase.aspx";
                                 }
                                 else if (role == "Sales Manager")
                                 {
-                                    returnUrl = "SalesFolder/Sale.aspx";
+                                    returnUrl = "Sales/Sale.aspx";
                                 }
                                 else if (role == "Manager" || role == "")
                                 {

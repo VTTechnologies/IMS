@@ -14,6 +14,6 @@ namespace IMSBLL.EntityModel
     public partial class sp_selectbatchwisequantity_Result
     {
         public Nullable<int> batch_id { get; set; }
-        public Nullable<int> StockAvl { get; set; }
+        public Nullable<decimal> StockAvl { get; set; }
     }
 }

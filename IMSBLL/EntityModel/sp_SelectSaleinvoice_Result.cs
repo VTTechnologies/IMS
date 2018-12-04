@@ -17,7 +17,7 @@ namespace IMSBLL.EntityModel
         public Nullable<decimal> actual_amount { get; set; }
         public string Date { get; set; }
         public Nullable<decimal> total_discount { get; set; }
-        public string invoice_no { get; set; }
+        public string InvoiceNumber { get; set; }
         public Nullable<decimal> grand_total { get; set; }
         public Nullable<decimal> total_tax { get; set; }
         public string party_name { get; set; }

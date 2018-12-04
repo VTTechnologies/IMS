@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PurchaseSaleReturnReport.aspx.cs" Inherits="IMS.Reports.PurchaseSaleReturnReport" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PrintPurchase.aspx.cs" Inherits="IMS.PrintPurchase" %>
 
 <!DOCTYPE html>
 
@@ -15,7 +15,7 @@
             margin: 0 auto 3em auto;
             padding: 10px 20px;
             position: relative;
-            width: 1200px;
+            width: 660px;
         }
      
     </style>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px; margin-top: 10px">
-                        <asp:GridView ID="grdreport" runat="server" headerstyle-backcolor="#428bca" AutoGenerateColumns="false" CssClass="table  " BorderStyle="None" GridLines="Horizontal">
+                        <asp:GridView ID="GridView1" runat="server" headerstyle-backcolor="#151313" AutoGenerateColumns="false" CssClass="table  " BorderStyle="None" GridLines="Horizontal">
                             <Columns>
                                 <asp:TemplateField HeaderText="SR.No" ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs">
                                     <ItemTemplate>
@@ -115,15 +115,15 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="product_name" HeaderText="Product"></asp:BoundField>
-                                <asp:BoundField DataField="quantity" HeaderText="Quantity"></asp:BoundField>
-                                <asp:BoundField DataField="batch_name" HeaderText="Batch"></asp:BoundField>
-                                <asp:BoundField DataField="tax_amt" HeaderText="Tax"></asp:BoundField>
-                                <asp:BoundField DataField="given_amnt" HeaderText="Given Amnt"></asp:BoundField>
-                                <asp:BoundField DataField="balance_amnt" HeaderText="Balance Amnt"></asp:BoundField>
+                                <asp:BoundField DataField="Quantity" HeaderText="Quantity"></asp:BoundField>
+                                <asp:BoundField DataField="purchase_rate" HeaderText="Price"></asp:BoundField>
+                                <asp:BoundField DataField="dicount_amt" HeaderText="Discount Amount"></asp:BoundField>
+                                <asp:BoundField DataField="tax_percentage" HeaderText="Tax"></asp:BoundField>
+                                <asp:BoundField DataField="tax_amt" HeaderText="Tax Amount"></asp:BoundField>
                                 <asp:BoundField DataField="amount" HeaderText="Total"></asp:BoundField>
 
                             </Columns>
-                            <HeaderStyle BackColor="#428bca" ForeColor="White" />
+                            <HeaderStyle BackColor="#151313" ForeColor="White" />
                         </asp:GridView>
                     </div>
                 </div>

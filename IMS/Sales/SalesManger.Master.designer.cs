@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IMS {
+namespace IMS.Sales {
     
     
-    public partial class Main {
+    public partial class SalesManger {
         
         /// <summary>
         /// head control.
@@ -31,6 +31,15 @@ namespace IMS {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        
+        /// <summary>
         /// lblIms control.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,15 @@ namespace IMS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imglogo;
+        
+        /// <summary>
+        /// lidashboard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lidashboard;
         
         /// <summary>
         /// btnLogout control.
@@ -67,49 +85,13 @@ namespace IMS {
         protected global::System.Web.UI.WebControls.Label lblusername;
         
         /// <summary>
-        /// liindex control.
+        /// li2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liindex;
-        
-        /// <summary>
-        /// limaster control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl limaster;
-        
-        /// <summary>
-        /// lipurchase control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lipurchase;
-        
-        /// <summary>
-        /// lipurchasereturn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lipurchasereturn;
-        
-        /// <summary>
-        /// lipurchaseReport control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lipurchaseReport;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li2;
         
         /// <summary>
         /// lisale control.
@@ -130,31 +112,13 @@ namespace IMS {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lisalereturn;
         
         /// <summary>
-        /// lisaleReport control.
+        /// lisalesreport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lisaleReport;
-        
-        /// <summary>
-        /// li1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li1;
-        
-        /// <summary>
-        /// ScriptManager1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lisalesreport;
         
         /// <summary>
         /// ContentPlaceHolder1 control.
