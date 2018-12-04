@@ -103,6 +103,15 @@ namespace IMS {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lipurchasereturn;
         
         /// <summary>
+        /// lipurchaseReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lipurchaseReport;
+        
+        /// <summary>
         /// lisale control.
         /// </summary>
         /// <remarks>
@@ -119,6 +128,15 @@ namespace IMS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lisalereturn;
+        
+        /// <summary>
+        /// lisaleReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lisaleReport;
         
         /// <summary>
         /// li1 control.

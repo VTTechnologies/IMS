@@ -74,7 +74,9 @@ namespace IMSBLL.EntityModel
         public virtual DbSet<tbl_stocktransaction> tbl_stocktransaction { get; set; }
         public virtual DbSet<tbl_subscription> tbl_subscription { get; set; }
         public virtual DbSet<tbl_tax> tbl_tax { get; set; }
-        public virtual DbSet<tbl_taxGroup> tbl_taxGroup { get; set; }
+        public virtual DbSet<tbl_taxdetails> tbl_taxdetails { get; set; }
+        public virtual DbSet<tbl_taxgroup> tbl_taxgroup { get; set; }
+        public virtual DbSet<tbl_taxtype> tbl_taxtype { get; set; }
         public virtual DbSet<tbl_unit> tbl_unit { get; set; }
         public virtual DbSet<tbl_User> tbl_User { get; set; }
         public virtual DbSet<tbl_userbranch> tbl_userbranch { get; set; }
@@ -82,6 +84,160 @@ namespace IMSBLL.EntityModel
         public virtual DbSet<Tbl_VerifyResetPass> Tbl_VerifyResetPass { get; set; }
         public virtual DbSet<View_PurchaseDetails> View_PurchaseDetails { get; set; }
         public virtual DbSet<View_SaleDetails> View_SaleDetails { get; set; }
+    
+        public virtual ObjectResult<CommonReport_Result> CommonReport(string reportType, Nullable<int> companyId, string filterIds, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date)
+        {
+            var reportTypeParameter = reportType != null ?
+                new ObjectParameter("ReportType", reportType) :
+                new ObjectParameter("ReportType", typeof(string));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var filterIdsParameter = filterIds != null ?
+                new ObjectParameter("FilterIds", filterIds) :
+                new ObjectParameter("FilterIds", typeof(string));
+    
+            var start_dateParameter = start_date.HasValue ?
+                new ObjectParameter("start_date", start_date) :
+                new ObjectParameter("start_date", typeof(System.DateTime));
+    
+            var end_dateParameter = end_date.HasValue ?
+                new ObjectParameter("end_date", end_date) :
+                new ObjectParameter("end_date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommonReport_Result>("CommonReport", reportTypeParameter, companyIdParameter, filterIdsParameter, start_dateParameter, end_dateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> GetBatchwiseQuantity(Nullable<int> batch_id, Nullable<int> product_id)
+        {
+            var batch_idParameter = batch_id.HasValue ?
+                new ObjectParameter("batch_id", batch_id) :
+                new ObjectParameter("batch_id", typeof(int));
+    
+            var product_idParameter = product_id.HasValue ?
+                new ObjectParameter("product_id", product_id) :
+                new ObjectParameter("product_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("GetBatchwiseQuantity", batch_idParameter, product_idParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> GetReturnQuantity(Nullable<int> id, string @for, Nullable<int> productId, Nullable<int> companyId)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var forParameter = @for != null ?
+                new ObjectParameter("For", @for) :
+                new ObjectParameter("For", typeof(string));
+    
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("GetReturnQuantity", idParameter, forParameter, productIdParameter, companyIdParameter);
+        }
+    
+        public virtual int InventoryReport(Nullable<int> companyId, Nullable<int> partyId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var partyIdParameter = partyId.HasValue ?
+                new ObjectParameter("PartyId", partyId) :
+                new ObjectParameter("PartyId", typeof(int));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InventoryReport", companyIdParameter, partyIdParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual int PaymentBalanceReport(Nullable<int> companyId, Nullable<int> partyId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var partyIdParameter = partyId.HasValue ?
+                new ObjectParameter("PartyId", partyId) :
+                new ObjectParameter("PartyId", typeof(int));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PaymentBalanceReport", companyIdParameter, partyIdParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<ProductReport_Result> ProductReport(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductReport_Result>("ProductReport", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<PurchaseOrPurchaseReturnReport_Result> PurchaseOrPurchaseReturnReport(Nullable<int> id, string fromTable)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var fromTableParameter = fromTable != null ?
+                new ObjectParameter("FromTable", fromTable) :
+                new ObjectParameter("FromTable", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PurchaseOrPurchaseReturnReport_Result>("PurchaseOrPurchaseReturnReport", idParameter, fromTableParameter);
+        }
+    
+        public virtual ObjectResult<SaleOrderReport_Result> SaleOrderReport(Nullable<int> saleId)
+        {
+            var saleIdParameter = saleId.HasValue ?
+                new ObjectParameter("SaleId", saleId) :
+                new ObjectParameter("SaleId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SaleOrderReport_Result>("SaleOrderReport", saleIdParameter);
+        }
+    
+        public virtual ObjectResult<SaleOrSaleReturnReport_Result> SaleOrSaleReturnReport(Nullable<int> id, string fromTable)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var fromTableParameter = fromTable != null ?
+                new ObjectParameter("FromTable", fromTable) :
+                new ObjectParameter("FromTable", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SaleOrSaleReturnReport_Result>("SaleOrSaleReturnReport", idParameter, fromTableParameter);
+        }
+    
+        public virtual ObjectResult<SaleReport_Result> SaleReport(Nullable<int> saledetails_id)
+        {
+            var saledetails_idParameter = saledetails_id.HasValue ?
+                new ObjectParameter("saledetails_id", saledetails_id) :
+                new ObjectParameter("saledetails_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SaleReport_Result>("SaleReport", saledetails_idParameter);
+        }
     
         public virtual ObjectResult<sp_ActiveUser_Result> sp_ActiveUser(Nullable<int> userid, string uniqueid)
         {
@@ -147,6 +303,27 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("last_name", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AddUser2", user_nameParameter, user_emailidParameter, user_mobilenoParameter, passwordParameter, role_idParameter, branch_idParameter, company_idParameter, statusParameter, created_byParameter, created_dateParameter, first_nameParameter, last_nameParameter);
+        }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
         }
     
         public virtual int sp_BatchInsert(Nullable<int> company_id, Nullable<int> branch_id, string batch_name, Nullable<bool> status, string created_by, Nullable<System.DateTime> created_date, string modified_by, Nullable<System.DateTime> modified_date)
@@ -327,6 +504,27 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("last_name", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CompanyInsert", company_nameParameter, owner_emailidParameter, owner_mobilenoParameter, country_idParameter, pincodeParameter, created_byParameter, created_dateParameter, first_nameParameter, last_nameParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
         }
     
         public virtual ObjectResult<sp_dashboarddata_Result> sp_dashboarddata(Nullable<int> conpanyid)
@@ -581,6 +779,19 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteUser", company_idParameter, userbranch_idParameter, user_idParameter, branch_idParameter);
         }
     
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
         public virtual int sp_ExpenseInsert(Nullable<int> company_id, Nullable<int> branch_id, string expense_name, Nullable<bool> status, string created_by, Nullable<System.DateTime> created_date, string modified_by, Nullable<System.DateTime> modified_date)
         {
             var company_idParameter = company_id.HasValue ?
@@ -656,6 +867,24 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Sp_GetExistsMobile", user_mobienoParameter);
         }
     
+        public virtual ObjectResult<sp_GetPurchaseDetailsById_Result> sp_GetPurchaseDetailsById(Nullable<int> purchsae_id)
+        {
+            var purchsae_idParameter = purchsae_id.HasValue ?
+                new ObjectParameter("purchsae_id", purchsae_id) :
+                new ObjectParameter("purchsae_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetPurchaseDetailsById_Result>("sp_GetPurchaseDetailsById", purchsae_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetSaleDetailsById_Result> sp_GetSaleDetailsById(Nullable<int> saleId)
+        {
+            var saleIdParameter = saleId.HasValue ?
+                new ObjectParameter("saleId", saleId) :
+                new ObjectParameter("saleId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSaleDetailsById_Result>("sp_GetSaleDetailsById", saleIdParameter);
+        }
+    
         public virtual int sp_godowninsert(Nullable<int> company_id, Nullable<int> branch_id, string godown_name, string godown_address, string contact_no, string contact_person, Nullable<bool> status, string created_by, Nullable<System.DateTime> created_date, string modified_by, Nullable<System.DateTime> modified_date)
         {
             var company_idParameter = company_id.HasValue ?
@@ -703,6 +932,32 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("modified_date", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_godowninsert", company_idParameter, branch_idParameter, godown_nameParameter, godown_addressParameter, contact_noParameter, contact_personParameter, statusParameter, created_byParameter, created_dateParameter, modified_byParameter, modified_dateParameter);
+        }
+    
+        public virtual int sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
         }
     
         public virtual int sp_insert_purchase_return(Nullable<int> purchasedetails_id, Nullable<int> purchasereturn_id, Nullable<int> batch_id, Nullable<int> product_id, Nullable<decimal> tax_amt, Nullable<decimal> quantity, Nullable<decimal> amount, string created_by, string created_date)
@@ -1162,6 +1417,28 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_planall_Result>("sp_planall");
         }
     
+        public virtual ObjectResult<sp_product_relorderlevel_report_companybranch_Result> sp_product_relorderlevel_report_companybranch(Nullable<int> company_id, Nullable<int> branch_id)
+        {
+            var company_idParameter = company_id.HasValue ?
+                new ObjectParameter("company_id", company_id) :
+                new ObjectParameter("company_id", typeof(int));
+    
+            var branch_idParameter = branch_id.HasValue ?
+                new ObjectParameter("branch_id", branch_id) :
+                new ObjectParameter("branch_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_product_relorderlevel_report_companybranch_Result>("sp_product_relorderlevel_report_companybranch", company_idParameter, branch_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_product_relorderlevel_report_forcompany_only_Result> sp_product_relorderlevel_report_forcompany_only(Nullable<int> company_id)
+        {
+            var company_idParameter = company_id.HasValue ?
+                new ObjectParameter("company_id", company_id) :
+                new ObjectParameter("company_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_product_relorderlevel_report_forcompany_only_Result>("sp_product_relorderlevel_report_forcompany_only", company_idParameter);
+        }
+    
         public virtual int sp_ProductInsert(Nullable<int> company_id, Nullable<int> branch_id, Nullable<int> category_id, Nullable<int> unit_id, Nullable<int> godown_id, Nullable<int> rack_id, Nullable<int> tax_id, Nullable<int> reorder_level, string product_name, string product_code, string hsn_code, Nullable<decimal> purchas_price, Nullable<decimal> sales_price, Nullable<bool> status, string created_by, Nullable<System.DateTime> created_date, string modified_by, Nullable<System.DateTime> modified_date)
         {
             var company_idParameter = company_id.HasValue ?
@@ -1237,6 +1514,19 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("modified_date", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ProductInsert", company_idParameter, branch_idParameter, category_idParameter, unit_idParameter, godown_idParameter, rack_idParameter, tax_idParameter, reorder_levelParameter, product_nameParameter, product_codeParameter, hsn_codeParameter, purchas_priceParameter, sales_priceParameter, statusParameter, created_byParameter, created_dateParameter, modified_byParameter, modified_dateParameter);
+        }
+    
+        public virtual ObjectResult<sp_productwithquantity_Result> sp_productwithquantity(Nullable<int> company_id, Nullable<int> branch_id)
+        {
+            var company_idParameter = company_id.HasValue ?
+                new ObjectParameter("company_id", company_id) :
+                new ObjectParameter("company_id", typeof(int));
+    
+            var branch_idParameter = branch_id.HasValue ?
+                new ObjectParameter("branch_id", branch_id) :
+                new ObjectParameter("branch_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_productwithquantity_Result>("sp_productwithquantity", company_idParameter, branch_idParameter);
         }
     
         public virtual int sp_PurchaseDetailinsert(Nullable<int> product_id, Nullable<int> purchase_id, Nullable<int> batch_id, Nullable<int> user_id, string created_date, Nullable<decimal> tax_amt, Nullable<decimal> dicount_amt, Nullable<decimal> quantity, Nullable<decimal> amount, Nullable<decimal> purchase_rate, Nullable<decimal> sale_rate, ObjectParameter purchasedetails_id)
@@ -1451,6 +1741,23 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Register_Result>("sp_Register", company_nameParameter, first_nameParameter, last_nameParameter, owner_emailidParameter, owner_mobilenoParameter, user_passwordParameter, country_idParameter, pincodeParameter, created_byParameter, created_dateParameter, start_dateParameter, end_dateParameter, uniqueidentityParameter);
         }
     
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
         public virtual int sp_salereturn(Nullable<int> sale_id, Nullable<int> saledetails_id, Nullable<int> product_id, Nullable<int> batch_id, Nullable<decimal> tax_amt, Nullable<decimal> dicount_amt, Nullable<int> quantity, Nullable<decimal> amount, Nullable<decimal> price, string created_by, string created_date)
         {
             var sale_idParameter = sale_id.HasValue ?
@@ -1592,6 +1899,15 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("InvoiceNumber", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Salesinsert", company_idParameter, branch_idParameter, party_idParameter, invoice_noParameter, total_taxParameter, actual_amountParameter, grand_totalParameter, total_discountParameter, created_byParameter, created_dateParameter, invoiceNumberParameter, sale_id);
+        }
+    
+        public virtual int sp_SalesreturnProduct(Nullable<int> salereturnmain_id)
+        {
+            var salereturnmain_idParameter = salereturnmain_id.HasValue ?
+                new ObjectParameter("salereturnmain_id", salereturnmain_id) :
+                new ObjectParameter("salereturnmain_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SalesreturnProduct", salereturnmain_idParameter);
         }
     
         public virtual int sp_saveerror(Nullable<int> company_id, Nullable<int> branch_id, string error_type, string error_msg, string created_by, Nullable<System.DateTime> created_date)
@@ -1842,13 +2158,13 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SelectProductbyid_Result>("sp_SelectProductbyid", purchsae_idParameter);
         }
     
-        public virtual ObjectResult<sp_SelectPurchase_Result> sp_SelectPurchase(Nullable<int> company_id)
+        public virtual int sp_SelectPurchase(Nullable<int> company_id)
         {
             var company_idParameter = company_id.HasValue ?
                 new ObjectParameter("company_id", company_id) :
                 new ObjectParameter("company_id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SelectPurchase_Result>("sp_SelectPurchase", company_idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SelectPurchase", company_idParameter);
         }
     
         public virtual ObjectResult<sp_selectpurchasebatch_Result> sp_selectpurchasebatch(Nullable<int> purchase_id, Nullable<int> product_id)
@@ -2948,6 +3264,11 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateUser", userbranch_idParameter, user_idParameter, user_nameParameter, user_emailidParameter, user_mobilenoParameter, role_idParameter, branch_idParameter, company_idParameter, statusParameter, modified_byParameter, modified_dateParameter, first_nameParameter, last_nameParameter);
         }
     
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
         public virtual ObjectResult<Nullable<int>> spAuthenticateUser(string user_name, string password)
         {
             var user_nameParameter = user_name != null ?
@@ -3013,307 +3334,6 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SpGetExistsMobile", mobilenoParameter);
         }
     
-        public virtual ObjectResult<InventoryReport_Result> InventoryReport(Nullable<int> companyId, Nullable<int> partyId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
-        {
-            var companyIdParameter = companyId.HasValue ?
-                new ObjectParameter("CompanyId", companyId) :
-                new ObjectParameter("CompanyId", typeof(int));
-    
-            var partyIdParameter = partyId.HasValue ?
-                new ObjectParameter("PartyId", partyId) :
-                new ObjectParameter("PartyId", typeof(int));
-    
-            var startDateParameter = startDate.HasValue ?
-                new ObjectParameter("StartDate", startDate) :
-                new ObjectParameter("StartDate", typeof(System.DateTime));
-    
-            var endDateParameter = endDate.HasValue ?
-                new ObjectParameter("EndDate", endDate) :
-                new ObjectParameter("EndDate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InventoryReport_Result>("InventoryReport", companyIdParameter, partyIdParameter, startDateParameter, endDateParameter);
-        }
-    
-        public virtual ObjectResult<PurchaseReturnReport_Result> PurchaseReturnReport(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PurchaseReturnReport_Result>("PurchaseReturnReport", idParameter);
-        }
-    
-        public virtual ObjectResult<SaleOrderReport_Result> SaleOrderReport(Nullable<int> saleId)
-        {
-            var saleIdParameter = saleId.HasValue ?
-                new ObjectParameter("SaleId", saleId) :
-                new ObjectParameter("SaleId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SaleOrderReport_Result>("SaleOrderReport", saleIdParameter);
-        }
-    
-        public virtual ObjectResult<SaleReport_Result> SaleReport(Nullable<int> saledetails_id)
-        {
-            var saledetails_idParameter = saledetails_id.HasValue ?
-                new ObjectParameter("saledetails_id", saledetails_id) :
-                new ObjectParameter("saledetails_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SaleReport_Result>("SaleReport", saledetails_idParameter);
-        }
-    
-        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual int sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual int sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_productwithquantity_Result> sp_productwithquantity(Nullable<int> company_id, Nullable<int> branch_id)
-        {
-            var company_idParameter = company_id.HasValue ?
-                new ObjectParameter("company_id", company_id) :
-                new ObjectParameter("company_id", typeof(int));
-    
-            var branch_idParameter = branch_id.HasValue ?
-                new ObjectParameter("branch_id", branch_id) :
-                new ObjectParameter("branch_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_productwithquantity_Result>("sp_productwithquantity", company_idParameter, branch_idParameter);
-        }
-    
-        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var new_diagramnameParameter = new_diagramname != null ?
-                new ObjectParameter("new_diagramname", new_diagramname) :
-                new ObjectParameter("new_diagramname", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
-        }
-    
-        public virtual ObjectResult<sp_SalesreturnProduct_Result> sp_SalesreturnProduct(Nullable<int> salereturnmain_id)
-        {
-            var salereturnmain_idParameter = salereturnmain_id.HasValue ?
-                new ObjectParameter("salereturnmain_id", salereturnmain_id) :
-                new ObjectParameter("salereturnmain_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SalesreturnProduct_Result>("sp_SalesreturnProduct", salereturnmain_idParameter);
-        }
-    
-        public virtual int sp_upgraddiagrams()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
-    
-        public virtual ObjectResult<Nullable<decimal>> GetReturnQuantity(Nullable<int> id, string @for, Nullable<int> productId, Nullable<int> companyId)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            var forParameter = @for != null ?
-                new ObjectParameter("For", @for) :
-                new ObjectParameter("For", typeof(string));
-    
-            var productIdParameter = productId.HasValue ?
-                new ObjectParameter("ProductId", productId) :
-                new ObjectParameter("ProductId", typeof(int));
-    
-            var companyIdParameter = companyId.HasValue ?
-                new ObjectParameter("CompanyId", companyId) :
-                new ObjectParameter("CompanyId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("GetReturnQuantity", idParameter, forParameter, productIdParameter, companyIdParameter);
-        }
-    
-        public virtual int PurchaseOrPurchaseReturnReport(Nullable<int> id, string fromTable)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            var fromTableParameter = fromTable != null ?
-                new ObjectParameter("FromTable", fromTable) :
-                new ObjectParameter("FromTable", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PurchaseOrPurchaseReturnReport", idParameter, fromTableParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<decimal>> GetBatchwiseQuantity(Nullable<int> batch_id, Nullable<int> product_id)
-        {
-            var batch_idParameter = batch_id.HasValue ?
-                new ObjectParameter("batch_id", batch_id) :
-                new ObjectParameter("batch_id", typeof(int));
-    
-            var product_idParameter = product_id.HasValue ?
-                new ObjectParameter("product_id", product_id) :
-                new ObjectParameter("product_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("GetBatchwiseQuantity", batch_idParameter, product_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_selectbatchwisequantity1_Result> sp_selectbatchwisequantity1(Nullable<int> batch_id, Nullable<int> product_id)
-        {
-            var batch_idParameter = batch_id.HasValue ?
-                new ObjectParameter("batch_id", batch_id) :
-                new ObjectParameter("batch_id", typeof(int));
-    
-            var product_idParameter = product_id.HasValue ?
-                new ObjectParameter("product_id", product_id) :
-                new ObjectParameter("product_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_selectbatchwisequantity1_Result>("sp_selectbatchwisequantity1", batch_idParameter, product_idParameter);
-        }
-    
-        public virtual ObjectResult<CommonReport_Result> CommonReport(string reportType, Nullable<int> companyId, string filterIds, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date)
-        {
-            var reportTypeParameter = reportType != null ?
-                new ObjectParameter("ReportType", reportType) :
-                new ObjectParameter("ReportType", typeof(string));
-    
-            var companyIdParameter = companyId.HasValue ?
-                new ObjectParameter("CompanyId", companyId) :
-                new ObjectParameter("CompanyId", typeof(int));
-    
-            var filterIdsParameter = filterIds != null ?
-                new ObjectParameter("FilterIds", filterIds) :
-                new ObjectParameter("FilterIds", typeof(string));
-    
-            var start_dateParameter = start_date.HasValue ?
-                new ObjectParameter("start_date", start_date) :
-                new ObjectParameter("start_date", typeof(System.DateTime));
-    
-            var end_dateParameter = end_date.HasValue ?
-                new ObjectParameter("end_date", end_date) :
-                new ObjectParameter("end_date", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommonReport_Result>("CommonReport", reportTypeParameter, companyIdParameter, filterIdsParameter, start_dateParameter, end_dateParameter);
-        }
-    
-        public virtual ObjectResult<PaymentBalanceReport_Result> PaymentBalanceReport(Nullable<int> companyId, Nullable<int> partyId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
-        {
-            var companyIdParameter = companyId.HasValue ?
-                new ObjectParameter("CompanyId", companyId) :
-                new ObjectParameter("CompanyId", typeof(int));
-    
-            var partyIdParameter = partyId.HasValue ?
-                new ObjectParameter("PartyId", partyId) :
-                new ObjectParameter("PartyId", typeof(int));
-    
-            var startDateParameter = startDate.HasValue ?
-                new ObjectParameter("StartDate", startDate) :
-                new ObjectParameter("StartDate", typeof(System.DateTime));
-    
-            var endDateParameter = endDate.HasValue ?
-                new ObjectParameter("EndDate", endDate) :
-                new ObjectParameter("EndDate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PaymentBalanceReport_Result>("PaymentBalanceReport", companyIdParameter, partyIdParameter, startDateParameter, endDateParameter);
-        }
-    
-        public virtual ObjectResult<ProductReport_Result> ProductReport(Nullable<int> companyId)
-        {
-            var companyIdParameter = companyId.HasValue ?
-                new ObjectParameter("CompanyId", companyId) :
-                new ObjectParameter("CompanyId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductReport_Result>("ProductReport", companyIdParameter);
-        }
-    
-        public virtual int SaleOrSaleReturnReport(Nullable<int> id, string fromTable)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            var fromTableParameter = fromTable != null ?
-                new ObjectParameter("FromTable", fromTable) :
-                new ObjectParameter("FromTable", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SaleOrSaleReturnReport", idParameter, fromTableParameter);
-        }
-    
         [DbFunction("IMS_TESTEntities", "Split")]
         public virtual IQueryable<Split_Result> Split(string list, string splitOn)
         {
@@ -3326,81 +3346,6 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("SplitOn", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Split_Result>("[IMS_TESTEntities].[Split](@List, @SplitOn)", listParameter, splitOnParameter);
-        }
-    
-        public virtual ObjectResult<sp_GetPurchaseDetailsById_Result> sp_GetPurchaseDetailsById(Nullable<int> purchsae_id)
-        {
-            var purchsae_idParameter = purchsae_id.HasValue ?
-                new ObjectParameter("purchsae_id", purchsae_id) :
-                new ObjectParameter("purchsae_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetPurchaseDetailsById_Result>("sp_GetPurchaseDetailsById", purchsae_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_GetSaleDetailsById_Result> sp_GetSaleDetailsById(Nullable<int> saleId)
-        {
-            var saleIdParameter = saleId.HasValue ?
-                new ObjectParameter("saleId", saleId) :
-                new ObjectParameter("saleId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSaleDetailsById_Result>("sp_GetSaleDetailsById", saleIdParameter);
-        }
-    
-        public virtual ObjectResult<sp_product_relorderlevel_report_companybranch_Result1> sp_product_relorderlevel_report_companybranch(Nullable<int> company_id, Nullable<int> branch_id)
-        {
-            var company_idParameter = company_id.HasValue ?
-                new ObjectParameter("company_id", company_id) :
-                new ObjectParameter("company_id", typeof(int));
-    
-            var branch_idParameter = branch_id.HasValue ?
-                new ObjectParameter("branch_id", branch_id) :
-                new ObjectParameter("branch_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_product_relorderlevel_report_companybranch_Result1>("sp_product_relorderlevel_report_companybranch", company_idParameter, branch_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_product_relorderlevel_report_forcompany_only_Result1> sp_product_relorderlevel_report_forcompany_only(Nullable<int> company_id)
-        {
-            var company_idParameter = company_id.HasValue ?
-                new ObjectParameter("company_id", company_id) :
-                new ObjectParameter("company_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_product_relorderlevel_report_forcompany_only_Result1>("sp_product_relorderlevel_report_forcompany_only", company_idParameter);
-        }
-    
-        public virtual ObjectResult<PurchaseOrPurchaseReturnReport1_Result> PurchaseOrPurchaseReturnReport1(Nullable<int> id, string fromTable)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            var fromTableParameter = fromTable != null ?
-                new ObjectParameter("FromTable", fromTable) :
-                new ObjectParameter("FromTable", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PurchaseOrPurchaseReturnReport1_Result>("PurchaseOrPurchaseReturnReport1", idParameter, fromTableParameter);
-        }
-    
-        public virtual ObjectResult<SaleOrSaleReturnReport1_Result> SaleOrSaleReturnReport1(Nullable<int> id, string fromTable)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            var fromTableParameter = fromTable != null ?
-                new ObjectParameter("FromTable", fromTable) :
-                new ObjectParameter("FromTable", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SaleOrSaleReturnReport1_Result>("SaleOrSaleReturnReport1", idParameter, fromTableParameter);
-        }
-    
-        public virtual ObjectResult<sp_SelectProductbyid1_Result> sp_SelectProductbyid1(Nullable<int> purchsae_id)
-        {
-            var purchsae_idParameter = purchsae_id.HasValue ?
-                new ObjectParameter("purchsae_id", purchsae_id) :
-                new ObjectParameter("purchsae_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SelectProductbyid1_Result>("sp_SelectProductbyid1", purchsae_idParameter);
         }
     }
 }

@@ -21,7 +21,6 @@ namespace IMSBLL.EntityModel
         public string ProductName { get; set; }
         public Nullable<System.DateTime> InvoiceDate { get; set; }
         public Nullable<decimal> quantity { get; set; }
-        public Nullable<decimal> price { get; set; }
         public Nullable<decimal> dicount_amt { get; set; }
         public Nullable<decimal> tax_amt { get; set; }
         public Nullable<decimal> tax_percentage { get; set; }

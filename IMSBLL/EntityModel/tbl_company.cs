@@ -38,6 +38,8 @@ namespace IMSBLL.EntityModel
             this.tbl_stocktransaction = new HashSet<tbl_stocktransaction>();
             this.tbl_subscription = new HashSet<tbl_subscription>();
             this.tbl_tax = new HashSet<tbl_tax>();
+            this.tbl_taxgroup = new HashSet<tbl_taxgroup>();
+            this.tbl_taxtype = new HashSet<tbl_taxtype>();
             this.tbl_unit = new HashSet<tbl_unit>();
             this.tbl_userbranch = new HashSet<tbl_userbranch>();
             this.tbl_purchasereturn = new HashSet<tbl_purchasereturn>();
@@ -116,6 +118,10 @@ namespace IMSBLL.EntityModel
         public virtual ICollection<tbl_subscription> tbl_subscription { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_tax> tbl_tax { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_taxgroup> tbl_taxgroup { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_taxtype> tbl_taxtype { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_unit> tbl_unit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

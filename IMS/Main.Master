@@ -9,63 +9,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Management System</title>
 
+     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+     <script type="text/javascript" src="/assets/scripts/bootstrap-multiselect.js"></script>
+     <script type="text/javascript" src="/assets/alert/alertify.js"></script>
+    <script type="text/javascript" src="/assets/alert/alertify.min.js"></script>
+    <script type="text/javascript" src="/assets/src/jquery-customselect.js"></script>
+     <script type="text/javascript" src="/assets/src/CommonFuntion.js"></script>
+
 
      <!-- Core CSS - Include with every page -->
-    <link href="assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <%--<link href="assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />--%>
-    <link href="assets/css/style.css" rel="stylesheet" />
-   <%-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
-    <link href="assets/css/main-style.css" rel="stylesheet" />
-
-
+    <link href="/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    <link href="/assets/css/main-style.css" rel="stylesheet" />
       <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/dataTables.bootstrap.min.css" />
-    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.bootstrap.min.css" />
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.bootstrap.min.css" /> 
+    <link href="/assets/css/bootstrap-multiselect.css" rel="stylesheet" />
+    <link href="/assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
+     <link type="text/css" href="/assets/alert/css/alertify.css" rel="stylesheet" />
+    <link type="text/css" href="/assets/alert/css/alertify.min.css" rel="stylesheet" />  
+    <link type="text/css" href="/assets/alert/css/themes/default.css" rel="stylesheet" />
+    <link type="text/css" href="/assets/alert/css/themes/default.min.css" rel="stylesheet" />
+    <link type="text/css" href="/assets/alert/css/themes/default.rtl.css" rel="stylesheet" />    
+     <link type="text/css" href="/assets/src/jquery-customselect.css" rel="stylesheet" />
+     
 
-
-
-    <!-- Page-Level CSS -->
-    <link href="assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
-     <%--Create Common Function repository to handle Javascript Code--%>
-    <script src="assets/src/CommonFuntion.js"></script>
-
-
-
-   <%-- <link href="assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="assets/css/style.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="assets/css/main-style.css" rel="stylesheet" />
-    <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
-    <link href="/resources/demos/style.css" rel="stylesheet" />
-    <script src="assets/scripts/siminta.js"></script>
-    <link href="assets/datatable/dataTables.min.css" rel="stylesheet" />
-    <script src="assets/datatable/jquery.dataTables.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/dataTables.bootstrap.min.css" />
-    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.bootstrap.min.css" />
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="assets/scripts/bootstrap-datetimepicker.min.js"></script>
-    <link href="assets/css/bootstrap-multiselect.css" rel="stylesheet" />
-
-    <link href="assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
-    <script src="assets/alert/alertify.js"></script>
-    <script src="assets/alert/alertify.min.js"></script>
-    <link href="assets/alert/css/alertify.css" rel="stylesheet" />
-    <link href="assets/alert/css/alertify.min.css" rel="stylesheet" />
-    <link href="assets/alert/css/themes/default.css" rel="stylesheet" />
-    <link href="assets/alert/css/themes/default.min.css" rel="stylesheet" />
-    <link href="assets/alert/css/themes/default.rtl.css" rel="stylesheet" />--%>
+     
+  
     <script>
         function openalert(msg, val) {
             alertify.alert('Success', msg).setting({
@@ -197,7 +172,7 @@
                 <!-- navbar-header -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                        <span class="icon-bar">Toggle navigation</span>
+                        <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -489,17 +464,23 @@
                         <!-- second-level-items -->
                     </li>
                     <li id="lipurchase" runat="server">
-                        <a href="../PurchaseFolder/Purchase.aspx"><i class="fa fa-list-alt fa-fw"></i>Purchase</a>
+                        <a href="../Purchases/Purchase.aspx"><i class="fa fa-list-alt fa-fw"></i>Purchase</a>
                     </li>
                     <li id="lipurchasereturn" runat="server">
-                        <a href="../PurchaseFolder/PurchaseReturn.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Purchase Return</a>
+                        <a href="../Purchases/PurchaseReturn.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Purchase Return</a>
                     </li>
+                           <li id="lipurchaseReport" runat="server">
+                               <a href="../Purchases/PurchaseReport.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Purchase Report</a>
+                        </li>
                     <li id="lisale" runat="server">
-                        <a href="../SalesFolder/Sale.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Sale</a>
+                        <a href="../Sales/Sale.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Sale</a>
                     </li>
                     <li id="lisalereturn" runat="server">
-                        <a href="../SalesFolder/salesReturn.aspx"><i class="fa fa-cart-plus fa-fw"></i>Sales Return</a>
+                        <a href="../Sales/salesReturn.aspx"><i class="fa fa-cart-plus fa-fw"></i>Sales Return</a>
                     </li>
+                        <li id="lisaleReport" runat="server">
+                               <a href="../Sales/SalesReport.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Sale Report</a>
+                        </li>
                     <li id="li1" runat="server">
                         <%--<a href="MasterReports.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>--%>
                         <a href="CommonReport.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>
@@ -532,17 +513,10 @@
                 </div>
 
 
-                <%-- <script src="assets/plugins/jquery-1.10.2.js"></script>
-                <script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
-                <script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
-                <script src="assets/plugins/pace/pace.js"></script>
-                <script src="assets/scripts/siminta.js"></script>--%>
-                <%--<!-- Page-Level Plugin Scripts-->
-                <script src="assets/plugins/morris/raphael-2.1.0.min.js"></script>
-                <script src="assets/plugins/morris/morris.js"></script>
-                <script src="assets/scripts/dashboard-demo.js"></script>--%>
+               
             </div>
         </div>
     </form>
+   
 </body>
 </html>
