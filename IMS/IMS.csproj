@@ -207,12 +207,13 @@
     <Content Include="assets\src\jquery-customselect.js" />
     <Content Include="Barcode.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="MasterModals\GodownMasterModel.aspx" />
     <Content Include="Masters\Batch.aspx" />
     <Content Include="Masters\Category.aspx" />
     <Content Include="Company.aspx" />
-    <Content Include="Masters\CategoryMasterModal.aspx" />
+    <Content Include="MasterModals\CategoryMasterModal.aspx" />
     <Content Include="Masters\Expense.aspx" />
-    <Content Include="Masters\ExpenseMasterModel.aspx" />
+    <Content Include="MasterModals\ExpenseMasterModel.aspx" />
     <Content Include="Masters\FinincialYear.aspx" />
     <Content Include="Masters\Godown.aspx" />
     <Content Include="Home.aspx" />
@@ -221,7 +222,9 @@
     <Content Include="Masters\PaymentMode.aspx" />
     <Content Include="Masters\Product.aspx" />
     <Content Include="Masters\User.aspx" />
-    <Content Include="Masters\BatchMasterModel.aspx" />
+    <Content Include="MasterModals\BatchMasterModel.aspx" />
+    <Content Include="MasterModals\PartyMasterModel.aspx" />
+    <Content Include="MasterModals\ProductMasterModel.aspx" />
     <Content Include="PurchaseFolder\PrintPurchase.aspx" />
     <Content Include="PurchaseFolder\ViewORPayBalancePurchase.aspx" />
     <Content Include="PurchaseFolder\PurchaseReport.aspx" />
@@ -229,6 +232,7 @@
     <Content Include="PurchaseFolder\Purchase.aspx" />
     <Content Include="Masters\Rack.aspx" />
     <Content Include="PurchaseFolder\PurchaseReturn.aspx" />
+    <Content Include="MasterModals\RackMasterModel.aspx" />
     <Content Include="Registration\EmailVerification.html" />
     <Content Include="Registration\Forgot.aspx" />
     <Content Include="Registration\Forgotpassword.html" />
@@ -239,9 +243,9 @@
     <Content Include="Registration\WelcomePage.aspx" />
     <Content Include="MasterReports.aspx" />
     <Content Include="CommonReport.aspx" />
-    <Content Include="Reports\CombineReport.aspx" />
-    <Content Include="Reports\PurchaseSaleReturnReport.aspx" />
-    <Content Include="Reports\ReportViewer.aspx" />
+    <Content Include="Masters\Reports\CombineReport.aspx" />
+    <Content Include="Masters\Reports\PurchaseSaleReturnReport.aspx" />
+    <Content Include="Masters\Reports\ReportViewer.aspx" />
     <Content Include="SalesFolder\invoicedesign\base.css" />
     <Content Include="SalesFolder\invoicedesign\index.html" />
     <Content Include="SalesFolder\invoicedesign\print.css" />
@@ -345,6 +349,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MasterModals\GodownMasterModel.aspx.cs">
+      <DependentUpon>GodownMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModals\GodownMasterModel.aspx.designer.cs">
+      <DependentUpon>GodownMasterModel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="imagehandler.ashx.cs">
       <DependentUpon>imagehandler.ashx</DependentUpon>
     </Compile>
@@ -369,11 +380,11 @@
     <Compile Include="Company.aspx.designer.cs">
       <DependentUpon>Company.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Masters\CategoryMasterModal.aspx.cs">
+    <Compile Include="MasterModals\CategoryMasterModal.aspx.cs">
       <DependentUpon>CategoryMasterModal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Masters\CategoryMasterModal.aspx.designer.cs">
+    <Compile Include="MasterModals\CategoryMasterModal.aspx.designer.cs">
       <DependentUpon>CategoryMasterModal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Masters\Expense.aspx.cs">
@@ -383,11 +394,11 @@
     <Compile Include="Masters\Expense.aspx.designer.cs">
       <DependentUpon>Expense.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Masters\ExpenseMasterModel.aspx.cs">
+    <Compile Include="MasterModals\ExpenseMasterModel.aspx.cs">
       <DependentUpon>ExpenseMasterModel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Masters\ExpenseMasterModel.aspx.designer.cs">
+    <Compile Include="MasterModals\ExpenseMasterModel.aspx.designer.cs">
       <DependentUpon>ExpenseMasterModel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Masters\FinincialYear.aspx.cs">
@@ -453,12 +464,26 @@
     <Compile Include="Masters\User.aspx.designer.cs">
       <DependentUpon>User.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Masters\BatchMasterModel.aspx.cs">
+    <Compile Include="MasterModals\BatchMasterModel.aspx.cs">
       <DependentUpon>BatchMasterModel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Masters\BatchMasterModel.aspx.designer.cs">
+    <Compile Include="MasterModals\BatchMasterModel.aspx.designer.cs">
       <DependentUpon>BatchMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\PartyMasterModel.aspx.cs">
+      <DependentUpon>PartyMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModals\PartyMasterModel.aspx.designer.cs">
+      <DependentUpon>PartyMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\ProductMasterModel.aspx.cs">
+      <DependentUpon>ProductMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModals\ProductMasterModel.aspx.designer.cs">
+      <DependentUpon>ProductMasterModel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseFolder\PrintPurchase.aspx.cs">
@@ -517,6 +542,13 @@
     <Compile Include="PurchaseFolder\PurchaseReturn.aspx.designer.cs">
       <DependentUpon>PurchaseReturn.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MasterModals\RackMasterModel.aspx.cs">
+      <DependentUpon>RackMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModals\RackMasterModel.aspx.designer.cs">
+      <DependentUpon>RackMasterModel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Registration\Forgot.aspx.cs">
       <DependentUpon>Forgot.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -573,7 +605,7 @@
     <Compile Include="CommonReport.aspx.designer.cs">
       <DependentUpon>CommonReport.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reports\CommonDataSet.Designer.cs">
+    <Compile Include="Masters\Reports\CommonDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CommonDataSet.xsd</DependentUpon>
@@ -585,25 +617,25 @@
     <Compile Include="MasterReports.aspx.designer.cs">
       <DependentUpon>MasterReports.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reports\CombineReport.aspx.cs">
+    <Compile Include="Masters\Reports\CombineReport.aspx.cs">
       <DependentUpon>CombineReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Reports\CombineReport.aspx.designer.cs">
+    <Compile Include="Masters\Reports\CombineReport.aspx.designer.cs">
       <DependentUpon>CombineReport.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reports\PurchaseSaleReturnReport.aspx.cs">
+    <Compile Include="Masters\Reports\PurchaseSaleReturnReport.aspx.cs">
       <DependentUpon>PurchaseSaleReturnReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Reports\PurchaseSaleReturnReport.aspx.designer.cs">
+    <Compile Include="Masters\Reports\PurchaseSaleReturnReport.aspx.designer.cs">
       <DependentUpon>PurchaseSaleReturnReport.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportViewer.aspx.cs">
+    <Compile Include="Masters\Reports\ReportViewer.aspx.cs">
       <DependentUpon>ReportViewer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Reports\ReportViewer.aspx.designer.cs">
+    <Compile Include="Masters\Reports\ReportViewer.aspx.designer.cs">
       <DependentUpon>ReportViewer.aspx</DependentUpon>
     </Compile>
     <Compile Include="SalesFolder\printsale.aspx.cs">
@@ -676,6 +708,27 @@
     <Compile Include="Branch.aspx.designer.cs">
       <DependentUpon>Branch.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MasterModals\TaxMasterModel.aspx.cs">
+      <DependentUpon>TaxMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModals\TaxMasterModel.aspx.designer.cs">
+      <DependentUpon>TaxMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\UnitMasterModel.aspx.cs">
+      <DependentUpon>UnitMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModals\UnitMasterModel.aspx.designer.cs">
+      <DependentUpon>UnitMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\UserMasterModel.aspx.cs">
+      <DependentUpon>UserMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModals\UserMasterModel.aspx.designer.cs">
+      <DependentUpon>UserMasterModel.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
@@ -685,9 +738,12 @@
     <Folder Include="Uploads\Logos\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MasterModals\TaxMasterModel.aspx" />
+    <Content Include="MasterModals\UnitMasterModel.aspx" />
     <Content Include="Uploads\down.png" />
     <Content Include="Uploads\mony.png" />
     <Content Include="Uploads\up.png" />
+    <Content Include="MasterModals\UserMasterModel.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -718,15 +774,15 @@
     <Content Include="assets\Homeasst\fonts\themify.woff" />
     <None Include="Properties\PublishProfiles\Ims profile.pubxml" />
     <None Include="Properties\PublishProfiles\IMS.pubxml" />
-    <Content Include="Reports\CommonDataSet.xsc">
+    <Content Include="Masters\Reports\CommonDataSet.xsc">
       <DependentUpon>CommonDataSet.xsd</DependentUpon>
     </Content>
-    <None Include="Reports\CommonDataSet.xsd">
+    <None Include="Masters\Reports\CommonDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>CommonDataSet.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="Reports\CommonDataSet.xss">
+    <Content Include="Masters\Reports\CommonDataSet.xss">
       <DependentUpon>CommonDataSet.xsd</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
@@ -743,10 +799,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\CombineReport.rdlc" />
-    <EmbeddedResource Include="Reports\InventoryReport.rdlc" />
-    <EmbeddedResource Include="Reports\ProductWiseStockReport.rdlc" />
-    <EmbeddedResource Include="Reports\PurchaseSaleReturnReport.rdlc" />
+    <EmbeddedResource Include="Masters\Reports\CombineReport.rdlc" />
+    <EmbeddedResource Include="Masters\Reports\InventoryReport.rdlc" />
+    <EmbeddedResource Include="Masters\Reports\ProductWiseStockReport.rdlc" />
+    <EmbeddedResource Include="Masters\Reports\PurchaseSaleReturnReport.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
