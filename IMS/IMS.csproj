@@ -207,12 +207,20 @@
     <Content Include="assets\src\jquery-customselect.js" />
     <Content Include="Barcode.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="MasterModals\BatchMasterModel.aspx" />
+    <Content Include="MasterModals\CategoryMasterModal.aspx" />
+    <Content Include="MasterModals\ExpenseMasterModel.aspx" />
+    <Content Include="MasterModals\GodownMasterModel.aspx" />
+    <Content Include="MasterModals\PartyMasterModel.aspx" />
+    <Content Include="MasterModals\ProductMasterModel.aspx" />
+    <Content Include="MasterModals\RackMasterModel.aspx" />
+    <Content Include="MasterModals\TaxMasterModel.aspx" />
+    <Content Include="MasterModals\UnitMasterModel.aspx" />
+    <Content Include="MasterModals\UserMasterModel.aspx" />
     <Content Include="Masters\Batch.aspx" />
     <Content Include="Masters\Category.aspx" />
     <Content Include="Company.aspx" />
-    <Content Include="Masters\CategoryMasterModal.aspx" />
     <Content Include="Masters\Expense.aspx" />
-    <Content Include="Masters\ExpenseMasterModel.aspx" />
     <Content Include="Masters\FinincialYear.aspx" />
     <Content Include="Masters\Godown.aspx" />
     <Content Include="Home.aspx" />
@@ -223,7 +231,6 @@
     <Content Include="Masters\TaxGroup.aspx" />
     <Content Include="Masters\TaxType.aspx" />
     <Content Include="Masters\User.aspx" />
-    <Content Include="Masters\BatchMasterModel.aspx" />
     <Content Include="Purchases\PrintPurchase.aspx" />
     <Content Include="Purchases\ViewORPayBalancePurchase.aspx" />
     <Content Include="Purchases\PurchaseReport.aspx" />
@@ -350,6 +357,66 @@
     <Compile Include="imagehandler.ashx.cs">
       <DependentUpon>imagehandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="MasterModals\BatchMasterModel.aspx.cs">
+      <DependentUpon>BatchMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\BatchMasterModel.aspx.designer.cs">
+      <DependentUpon>BatchMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\CategoryMasterModal.aspx.cs">
+      <DependentUpon>CategoryMasterModal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\CategoryMasterModal.aspx.designer.cs">
+      <DependentUpon>CategoryMasterModal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\ExpenseMasterModel.aspx.cs">
+      <DependentUpon>ExpenseMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\ExpenseMasterModel.aspx.designer.cs">
+      <DependentUpon>ExpenseMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\GodownMasterModel.aspx.cs">
+      <DependentUpon>GodownMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\GodownMasterModel.aspx.designer.cs">
+      <DependentUpon>GodownMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\PartyMasterModel.aspx.cs">
+      <DependentUpon>PartyMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\PartyMasterModel.aspx.designer.cs">
+      <DependentUpon>PartyMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\ProductMasterModel.aspx.cs">
+      <DependentUpon>ProductMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\ProductMasterModel.aspx.designer.cs">
+      <DependentUpon>ProductMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\RackMasterModel.aspx.cs">
+      <DependentUpon>RackMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\RackMasterModel.aspx.designer.cs">
+      <DependentUpon>RackMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\TaxMasterModel.aspx.cs">
+      <DependentUpon>TaxMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\TaxMasterModel.aspx.designer.cs">
+      <DependentUpon>TaxMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\UnitMasterModel.aspx.cs">
+      <DependentUpon>UnitMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\UnitMasterModel.aspx.designer.cs">
+      <DependentUpon>UnitMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\UserMasterModel.aspx.cs">
+      <DependentUpon>UserMasterModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModals\UserMasterModel.aspx.designer.cs">
+      <DependentUpon>UserMasterModel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Masters\Batch.aspx.cs">
       <DependentUpon>Batch.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -371,26 +438,12 @@
     <Compile Include="Company.aspx.designer.cs">
       <DependentUpon>Company.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Masters\CategoryMasterModal.aspx.cs">
-      <DependentUpon>CategoryMasterModal.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Masters\CategoryMasterModal.aspx.designer.cs">
-      <DependentUpon>CategoryMasterModal.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Masters\Expense.aspx.cs">
       <DependentUpon>Expense.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Masters\Expense.aspx.designer.cs">
       <DependentUpon>Expense.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Masters\ExpenseMasterModel.aspx.cs">
-      <DependentUpon>ExpenseMasterModel.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Masters\ExpenseMasterModel.aspx.designer.cs">
-      <DependentUpon>ExpenseMasterModel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Masters\FinincialYear.aspx.cs">
       <DependentUpon>FinincialYear.aspx</DependentUpon>
@@ -468,13 +521,6 @@
     </Compile>
     <Compile Include="Masters\User.aspx.designer.cs">
       <DependentUpon>User.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Masters\BatchMasterModel.aspx.cs">
-      <DependentUpon>BatchMasterModel.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Masters\BatchMasterModel.aspx.designer.cs">
-      <DependentUpon>BatchMasterModel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchases\PrintPurchase.aspx.cs">
