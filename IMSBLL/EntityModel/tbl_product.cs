@@ -14,7 +14,6 @@ namespace IMSBLL.EntityModel
     
     public partial class tbl_product
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbl_product()
         {
             this.tbl_ActualPurchaseTaxAndPrice = new HashSet<tbl_ActualPurchaseTaxAndPrice>();
@@ -47,9 +46,7 @@ namespace IMSBLL.EntityModel
         public string modified_by { get; set; }
         public Nullable<System.DateTime> modified_date { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_ActualPurchaseTaxAndPrice> tbl_ActualPurchaseTaxAndPrice { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_ActualSalesTaxAndPrice> tbl_ActualSalesTaxAndPrice { get; set; }
         public virtual tbl_branch tbl_branch { get; set; }
         public virtual tbl_category tbl_category { get; set; }
@@ -58,17 +55,11 @@ namespace IMSBLL.EntityModel
         public virtual tbl_rack tbl_rack { get; set; }
         public virtual tbl_tax tbl_tax { get; set; }
         public virtual tbl_unit tbl_unit { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_purchasedetails> tbl_purchasedetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_stock> tbl_stock { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_stocktransaction> tbl_stocktransaction { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_purchasereturndetails> tbl_purchasereturndetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_saledetails> tbl_saledetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_salereturndetails> tbl_salereturndetails { get; set; }
     }
 }
