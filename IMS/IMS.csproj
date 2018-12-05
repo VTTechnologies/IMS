@@ -107,6 +107,7 @@
     <Content Include="assets\alert\css\themes\semantic.rtl.css" />
     <Content Include="assets\alert\css\themes\semantic.rtl.min.css" />
     <Content Include="assets\css\bootstrap-multiselect.css" />
+    <Content Include="assets\css\chosen.css" />
     <Content Include="assets\font-awesome1\fonts\font-awesome-4.7.0.zip" />
     <Content Include="assets\font-awesome1\fonts\fontawesome-webfont.eot" />
     <Content Include="assets\font-awesome1\fonts\fontawesome-webfont.svg" />
@@ -202,6 +203,8 @@
     <Content Include="assets\plugins\Jquery-ui\jquery-ui.min.css" />
     <Content Include="assets\plugins\Jquery-ui\LICENSE.txt" />
     <Content Include="assets\scripts\bootstrap-multiselect.js" />
+    <Content Include="assets\scripts\chosen.jquery.js" />
+    <Content Include="assets\scripts\jquery.min.js" />
     <Content Include="assets\src\CommonFuntion.js" />
     <Content Include="assets\src\jquery-customselect.css" />
     <Content Include="assets\src\jquery-customselect.js" />
@@ -359,60 +362,70 @@
     </Compile>
     <Compile Include="MasterModals\BatchMasterModel.aspx.cs">
       <DependentUpon>BatchMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterModals\BatchMasterModel.aspx.designer.cs">
       <DependentUpon>BatchMasterModel.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterModals\CategoryMasterModal.aspx.cs">
       <DependentUpon>CategoryMasterModal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterModals\CategoryMasterModal.aspx.designer.cs">
       <DependentUpon>CategoryMasterModal.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterModals\ExpenseMasterModel.aspx.cs">
       <DependentUpon>ExpenseMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterModals\ExpenseMasterModel.aspx.designer.cs">
       <DependentUpon>ExpenseMasterModel.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterModals\GodownMasterModel.aspx.cs">
       <DependentUpon>GodownMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterModals\GodownMasterModel.aspx.designer.cs">
       <DependentUpon>GodownMasterModel.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterModals\PartyMasterModel.aspx.cs">
       <DependentUpon>PartyMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterModals\PartyMasterModel.aspx.designer.cs">
       <DependentUpon>PartyMasterModel.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterModals\ProductMasterModel.aspx.cs">
       <DependentUpon>ProductMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterModals\ProductMasterModel.aspx.designer.cs">
       <DependentUpon>ProductMasterModel.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterModals\RackMasterModel.aspx.cs">
       <DependentUpon>RackMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterModals\RackMasterModel.aspx.designer.cs">
       <DependentUpon>RackMasterModel.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterModals\TaxMasterModel.aspx.cs">
       <DependentUpon>TaxMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterModals\TaxMasterModel.aspx.designer.cs">
       <DependentUpon>TaxMasterModel.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterModals\UnitMasterModel.aspx.cs">
       <DependentUpon>UnitMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterModals\UnitMasterModel.aspx.designer.cs">
       <DependentUpon>UnitMasterModel.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterModals\UserMasterModel.aspx.cs">
       <DependentUpon>UserMasterModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterModals\UserMasterModel.aspx.designer.cs">
       <DependentUpon>UserMasterModel.aspx</DependentUpon>
