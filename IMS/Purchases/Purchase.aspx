@@ -1,30 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Purchase.aspx.cs" Inherits="IMS.Purchase" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    
-    <%--<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--%>
-
-    <%--<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>--%>
-    <%--<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="../assets/scripts/bootstrap-datetimepicker.min.js"></script>
-    <script src="../assets/alert/alertify.js"></script>
-    <script src="../assets/alert/alertify.min.js"></script>
-    <link href="../assets/alert/css/alertify.css" rel="stylesheet" />
-    <link href="../assets/alert/css/alertify.min.css" rel="stylesheet" />
-    <link href="../assets/alert/css/themes/default.css" rel="stylesheet" />
-    <link href="../assets/alert/css/themes/default.min.css" rel="stylesheet" />
-    <link href="../assets/alert/css/themes/default.rtl.css" rel="stylesheet" />--%>
-   
 
     <script type='text/javascript'>
 
         function openModal() {
             $('#<%=myModal.ClientID%>').modal('show');
         }
-        
-       
+
+
 
         function openalert(msg) {
             debugger;
@@ -34,7 +18,7 @@
 
         }
 
-       
+
 
         function OnlyNumericEntry(evt) {
 
@@ -50,42 +34,67 @@
         }
     </script>
     <script type='text/javascript'>
-     
+
         //$(function () {
-           
+
         //        $('[id*=txtdate]').datepicker({
         //            changeMonth: true,
         //            changeYear: true,
         //            format: "dd/mm/yyyy",
         //            language: "tr"
         //        });
-           
+
         //});
 
         function validdiscount() {
             if ($('#<%=txtDiscount.ClientID%>').val() > 100) {
-                    $('#<%=txtDiscount.ClientID%>').val('100');
-                }
+                $('#<%=txtDiscount.ClientID%>').val('100');
+            }
         }
-    
+
     </script>
-    <script>
-        $(function() {
-            $("#ddlVendor").customselect({
-                "csclass":"custom-select",  // Class to match
-                "search": true, // Is searchable?
-                "numitems":     4,    // Number of results per page
-                "searchblank":  false,// Search blank value options?
-                "showblank":    true, // Show blank value options?
-                "searchvalue":  false,// Search option values?
-                "hoveropen":    false,// Open the select on hover?
-                "emptytext":    "",   // Change empty option text to a set value
-                "showdisabled": false,// Show disabled options
-                "mobilecheck":  function() {// Mobile check function / boolean
-                    //return navigator.platform && navigator.userAgent.match(/(android|<a href="https://www.jqueryscript.net/tags.php?/iphone/">iphone</a>|ipad|blackberry)/i);
-                    }});
-        });
-</script>
+
+    <style>
+        a img {
+            border: none;
+        }
+
+        ol li {
+            list-style: decimal outside;
+        }
+
+        div.container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 0;
+        }
+
+        div.side-by-side {
+            width: 100%;
+            /*margin-bottom: 1em;*/
+        }
+
+            div.side-by-side > div {
+                float: left;
+                width: 100%;
+            }
+
+                div.side-by-side > div > em {
+                    margin-bottom: 10px;
+                    display: block;
+                }
+
+        .clearfix:after {
+            content: "\0020";
+            display: block;
+            height: 0;
+            clear: both;
+            overflow: hidden;
+            visibility: hidden;
+        }
+    </style>
+
+    <script src="../assets/scripts/chosen.jquery.js"></script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -97,17 +106,21 @@
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="row">
                     <div class="text-center">
-                          <asp:Label ID="lblInvoice" runat="server"  ForeColor="Red"></asp:Label>
+                        <asp:Label ID="lblInvoice" runat="server" ForeColor="Red"></asp:Label>
                     </div>
                     <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                         <div class="form-horizontal Fhorizontal">
                             <div class="col-sm-10 leftpadd0">
                                 <label class="control-label">
-                                    Select Vendor <span style="color:red">*</span>                                      
+                                    Select Vendor <span style="color: red">*</span>
                                 </label>
-                                <asp:DropDownList ID="ddlVendor" runat="server" CssClass="form-control">
-                                    <asp:ListItem Text="Choose Vendor" />
-                                </asp:DropDownList>
+                                <div class="container">
+                                    <div class="side-by-side clearfix">
+                                        <asp:DropDownList runat="server" ID="ddlVendor" CssClass="form-control">
+                                            <asp:ListItem Text="--Select Vendor--" Value="0" />
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*" ForeColor="Red" Text="Please Select Vendor" ValidationGroup="grop" ControlToValidate="ddlVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             </div>
 
@@ -116,7 +129,7 @@
                     <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                         <div class="col-sm-10 leftpadd0">
                             <label class="control-label">
-                                Vendor Receipt No. <span style="color:red">*</span> 
+                                Vendor Receipt No. <span style="color: red">*</span>
                             </label>
                             <asp:TextBox ID="txtPONo" runat="server" CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ForeColor="Red" Text="Please Enter Receipt No" ValidationGroup="grop" ControlToValidate="txtPONo"></asp:RequiredFieldValidator>
@@ -127,11 +140,11 @@
                         <div class="form-group">
                             <div class="col-sm-10 leftpadd0">
                                 <label class="control-label">
-                                    Date <span style="color:red">*</span>                                            
+                                    Date <span style="color: red">*</span>
                                 </label>
                                 <asp:HiddenField ID="hd1" runat="server" />
                                 <asp:HiddenField ID="hd2" runat="server" />
-                                <asp:TextBox ID="txtdate" runat ="server" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="txtdate" runat="server" CssClass="form-control"></asp:TextBox>
                                 <ajaxToolkit:CalendarExtender ID="CalendarExtender1" TargetControlID="txtdate" runat="server" />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Date is Required " ForeColor="Red" Text="Please Select Date" ValidationGroup="grop" ControlToValidate="txtdate"></asp:RequiredFieldValidator>
                             </div>
@@ -147,10 +160,14 @@
                         <div class="row">
                             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                                 <div class="col-sm-10 leftpadd0">
-                                    <label class="control-label">Select Product <span style="color:red">*</span></label>
-                                    <asp:DropDownList ID="ddlproduct"  runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlproduct_SelectedIndexChanged" AutoPostBack="true">
-                                        <asp:ListItem Text="Choose Product" />
-                                    </asp:DropDownList>
+                                    <label class="control-label">Select Product <span style="color: red">*</span></label>
+                                    <div class="container">
+                                        <div class="side-by-side clearfix">
+                                            <asp:DropDownList runat="server" ID="ddlproduct" CssClass="form-control">
+                                                <asp:ListItem Text="--Select Product--" Value="0" />
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="Please Select Product" ForeColor="Red" Text="Please Select Product" ValidationGroup="grop" ControlToValidate="ddlproduct" InitialValue="0"></asp:RequiredFieldValidator>
                                 </div>
 
@@ -158,23 +175,27 @@
                             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                                 <div class="col-sm-10 leftpadd0">
                                     <label class="control-label">
-                                        Select Batch <span style="color:red">*</span>
-                              <asp:Label ID="lblbatch" runat="server" Text="*" Visible="false" ForeColor="Red"></asp:Label>
-                                       
+                                        Select Batch <span style="color: red">*</span>
+                                        <asp:Label ID="lblbatch" runat="server" Text="*" Visible="false" ForeColor="Red"></asp:Label>
+
                                     </label>
-                                    <asp:DropDownList ID="ddlBatch" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlBatch_SelectedIndexChanged" AutoPostBack="true">
-                                        <asp:ListItem Text="Choose Batch" />
-                                    </asp:DropDownList>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="Please Select Product" ForeColor="Red" Text="Please Select Product" ValidationGroup="grop" ControlToValidate="ddlBatch" InitialValue="0"></asp:RequiredFieldValidator>
+                                    <div class="container">
+                                        <div class="side-by-side clearfix">
+                                            <asp:DropDownList runat="server" ID="ddlBatch" CssClass="form-control">
+                                                <asp:ListItem Text="--Select Batch--" Value="0" />
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="Please Select Batch" ForeColor="Red" Text="Please Select Product" ValidationGroup="grop" ControlToValidate="ddlBatch" InitialValue="0"></asp:RequiredFieldValidator>
 
                                 </div>
                             </div>
                             <div class="col-md-4 col-lg-2 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                                 <div class="col-sm-10 leftpadd0">
                                     <label class="control-label">
-                                        Quantity <span style="color:red">*</span>                                
+                                        Quantity <span style="color: red">*</span>
                                     </label>
-                                    <asp:TextBox ID="txtquantity" runat="server" CssClass="form-control"  onkeypress="return OnlyNumericEntry(event);"></asp:TextBox>
+                                    <asp:TextBox ID="txtquantity" runat="server" CssClass="form-control" onkeypress="return OnlyNumericEntry(event);"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Date is Required " ForeColor="Red" Text="Please Enter Quantity" ValidationGroup="grop" ControlToValidate="txtquantity"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator6" ValidationExpression="^\s*(?=.*[1-9])\d*(?:\.\d{1,5})?\s*$" runat="server" ValidationGroup="adf" Display="Dynamic" ForeColor="Red" ControlToValidate="txtquantity" ErrorMessage="Quantity should b greater then 0"></asp:RegularExpressionValidator>
                                 </div>
@@ -182,9 +203,9 @@
                             <div class="col-md-4 col-lg-2 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                                 <div class="col-sm-10 leftpadd0">
                                     <label class="control-label">
-                                        Price Per Unit <span style="color:red">*</span>                                
+                                        Price Per Unit <span style="color: red">*</span>
                                     </label>
-                                    <asp:TextBox ID="txtprice" runat="server" CssClass="form-control" ></asp:TextBox>
+                                    <asp:TextBox ID="txtprice" runat="server" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Please Enter Price" ForeColor="Red" Text="" ValidationGroup="grop" ControlToValidate="txtprice"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator3" ValidationExpression="^\s*(?=.*[1-9])\d*(?:\.\d{1,5})?\s*$" runat="server" ValidationGroup="adf" Display="Dynamic" ForeColor="Red" ControlToValidate="txtprice" ErrorMessage="Price should b greater then 0"></asp:RegularExpressionValidator>
                                 </div>
@@ -197,7 +218,7 @@
                                     <label class="control-label">
                                         Discount %                           
                                     </label>
-                                    <asp:TextBox ID="txtDiscount" runat="server" CssClass="form-control" onchange="validdiscount();"  ></asp:TextBox>
+                                    <asp:TextBox ID="txtDiscount" runat="server" CssClass="form-control" onchange="validdiscount();"></asp:TextBox>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator4" ValidationExpression="^\s*(?=.*[0-9])\d*(?:\.\d{1,5})?\s*$" runat="server" ValidationGroup="adf" Display="Dynamic" ForeColor="Red" ControlToValidate="txtDiscount" ErrorMessage="Discount should b greater then 0"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
@@ -206,7 +227,7 @@
                                     <label class="control-label">
                                         Tax %
                                     </label>
-                                    <asp:TextBox ID="txtTaxpercentage" runat="server" CssClass="form-control" ></asp:TextBox>
+                                    <asp:TextBox ID="txtTaxpercentage" runat="server" CssClass="form-control"></asp:TextBox>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator7" ValidationExpression="^\s*(?=.*[0-9])\d*(?:\.\d{1,5})?\s*$" runat="server" ValidationGroup="adf" Display="Dynamic" ForeColor="Red" ControlToValidate="txtTaxpercentage" ErrorMessage="Discount could not be negative"></asp:RegularExpressionValidator>
 
                                 </div>
@@ -214,7 +235,7 @@
                             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                                 <div class="col-sm-10 leftpadd0">
                                     <label class="control-label">
-                                        Sales Price <span style="color:red">*</span>                                
+                                        Sales Price <span style="color: red">*</span>
                                     </label>
                                     <asp:TextBox ID="txtsalesprice" runat="server" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ForeColor="Red" ErrorMessage="Please Enter Sales Price" Text="" ValidationGroup="grop" ControlToValidate="txtsalesprice"></asp:RequiredFieldValidator>
@@ -234,7 +255,7 @@
                     <asp:Label ID="lblcheckDoubleError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
                     <div class="col-md-4 col-lg-2 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px; margin-top: 20px">
                         <div class="col-sm-10 leftpadd0">
-                            <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" ValidationGroup="grop"  CssClass="btn btn-primary" Text="Add" Width="100px" />
+                            <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" ValidationGroup="grop" CssClass="btn btn-primary" Text="Add" Width="100px" />
                             <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click" ValidationGroup="grop" CssClass="btn btn-primary" Width="100px" Visible="false" />
                         </div>
                     </div>
@@ -349,10 +370,10 @@
                                     <div class="form-group">
                                         <div class="col-sm-12 leftpadd0">
                                             <label class="control-label col-sm-9">
-                                                Given Amount <span style="color:red">*</span>                                          
+                                                Given Amount <span style="color: red">*</span>
                                             </label>
-                                            <asp:TextBox ID="txtPaidAmt" runat="server" CssClass="form-control" OnTextChanged="txtGivenAmt_TextChanged" AutoPostBack="true" Enabled="false"  onkeypress="return OnlyNumericEntry(event);"></asp:TextBox>
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ForeColor="Red" ControlToValidate="txtPaidAmt" ErrorMessage="Please Enter Given Amount"  ValidationGroup="savesale" ></asp:RequiredFieldValidator>
+                                            <asp:TextBox ID="txtPaidAmt" runat="server" CssClass="form-control" OnTextChanged="txtGivenAmt_TextChanged" AutoPostBack="true" Enabled="false" onkeypress="return OnlyNumericEntry(event);"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ForeColor="Red" ControlToValidate="txtPaidAmt" ErrorMessage="Please Enter Given Amount" ValidationGroup="savesale"></asp:RequiredFieldValidator>
                                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ForeColor="Red" ControlToValidate="txtPaidAmt" ErrorMessage="Given Amount Should be digits only" ValidationGroup="savesale" ValidationExpression="^\s*(?=.*[0-9])\d*(?:\.\d{1,5})?\s*$" Display="Dynamic">
                                             </asp:RegularExpressionValidator>
                                         </div>
@@ -370,7 +391,7 @@
                                             </label>
                                             <asp:TextBox ID="txtBalanceAmt" runat="server" CssClass="form-control" Enabled="false" onkeypress="return OnlyNumericEntry(event);"></asp:TextBox>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtBalanceAmt" ErrorMessage="Please Enter Balance Amount" ValidationGroup="savesale" ForeColor="Red"></asp:RequiredFieldValidator>
-                                           <%-- <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ForeColor="Red" ControlToValidate="txtBalanceAmt" ErrorMessage="Balance Amount Should be digits only" ValidationGroup="savesale" ValidationExpression="^\s*(?=.*[0-9])\d*(?:\.\d{1,5})?\s*$" Display="Dynamic">
+                                            <%-- <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ForeColor="Red" ControlToValidate="txtBalanceAmt" ErrorMessage="Balance Amount Should be digits only" ValidationGroup="savesale" ValidationExpression="^\s*(?=.*[0-9])\d*(?:\.\d{1,5})?\s*$" Display="Dynamic">
                                             </asp:RegularExpressionValidator>--%>
                                         </div>
                                     </div>
@@ -382,8 +403,8 @@
             </div>
             <%--<div style="border:1px solid black"></div>--%>
         </div>
-        <div class="panel-footer "> 
-            <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click"  ValidationGroup="savesale" OnClientClick="DisableOnSave(this,'savesale');"  UseSubmitBehavior="false"/>
+        <div class="panel-footer ">
+            <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" ValidationGroup="savesale" OnClientClick="DisableOnSave(this,'savesale');" UseSubmitBehavior="false" />
             <%-- <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-primary " Text="Cancel" OnClick="btnCancel_Click" />--%>
             <asp:Button ID="btnclear" runat="server" CssClass="btn btn-primary " Text="Cancel" OnClick="btnclear_Click" />
             <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
@@ -407,6 +428,22 @@
                 </div>
             </div>
         </div>
+
+        <script type="text/javascript">
+            $('#<%= ddlproduct.ClientID %>').chosen();
+            $("#<%= ddlproduct.ClientID %>-deselect").chosen(
+                { allow_single_deselect: true });
+        </script>
+        <script type="text/javascript">
+            $('#<%= ddlVendor.ClientID %>').chosen();
+            $("#<%= ddlVendor.ClientID %>-deselect").chosen(
+                { allow_single_deselect: true });
+        </script>
+        <script type="text/javascript">
+            $('#<%= ddlBatch.ClientID %>').chosen();
+            $("#<%= ddlBatch.ClientID %>-deselect").chosen(
+                { allow_single_deselect: true });
+        </script>
 
         <%-- <a href="PurchaseHome.aspx">PurchaseHome.aspx</a>--%>
     </div>

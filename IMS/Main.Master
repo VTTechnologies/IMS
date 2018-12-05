@@ -9,38 +9,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Management System</title>
 
-     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-      <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-     <script type="text/javascript" src="/assets/scripts/bootstrap-multiselect.js"></script>
-     <script type="text/javascript" src="/assets/alert/alertify.js"></script>
+    <script type="text/javascript" src="/assets/scripts/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="/assets/alert/alertify.js"></script>
     <script type="text/javascript" src="/assets/alert/alertify.min.js"></script>
     <script type="text/javascript" src="/assets/src/jquery-customselect.js"></script>
-     <script type="text/javascript" src="/assets/src/CommonFuntion.js"></script>
+    <script type="text/javascript" src="/assets/src/CommonFuntion.js"></script>
 
 
-     <!-- Core CSS - Include with every page -->
+    <!-- Core CSS - Include with every page -->
     <link href="/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
     <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="/assets/css/style.css" rel="stylesheet" />
     <link href="/assets/css/main-style.css" rel="stylesheet" />
-      <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/dataTables.bootstrap.min.css" />
-    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.bootstrap.min.css" /> 
+    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/dataTables.bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.bootstrap.min.css" />
     <link href="/assets/css/bootstrap-multiselect.css" rel="stylesheet" />
     <link href="/assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
-     <link type="text/css" href="/assets/alert/css/alertify.css" rel="stylesheet" />
-    <link type="text/css" href="/assets/alert/css/alertify.min.css" rel="stylesheet" />  
+    <link type="text/css" href="/assets/alert/css/alertify.css" rel="stylesheet" />
+    <link type="text/css" href="/assets/alert/css/alertify.min.css" rel="stylesheet" />
     <link type="text/css" href="/assets/alert/css/themes/default.css" rel="stylesheet" />
     <link type="text/css" href="/assets/alert/css/themes/default.min.css" rel="stylesheet" />
-    <link type="text/css" href="/assets/alert/css/themes/default.rtl.css" rel="stylesheet" />    
-     <link type="text/css" href="/assets/src/jquery-customselect.css" rel="stylesheet" />
-     
+    <link type="text/css" href="/assets/alert/css/themes/default.rtl.css" rel="stylesheet" />
+    <link type="text/css" href="/assets/src/jquery-customselect.css" rel="stylesheet" />
 
-     
-  
+    <link href="assets/css/chosen.css" rel="stylesheet" />
+    <script src="assets/scripts/jquery.min.js"></script>
+
     <script>
         function openalert(msg, val) {
             alertify.alert('Success', msg).setting({
@@ -69,7 +69,7 @@
         });
     </script>
 
-  <%--  <style>
+    <%--  <style>
         .open-sidebar {
             left: 0px;
         }
@@ -427,7 +427,7 @@
 
             <!-- navbar side -->
 
-        <nav class="navbar-default navbar-static-side" role="navigation">
+            <nav class="navbar-default navbar-static-side" role="navigation">
                 <!-- sidebar-collapse -->
                 <div class="sidebar-collapse">
                     <!-- side-menu -->
@@ -440,7 +440,8 @@
                                 </div>
                                 <div class="user-info">
                                     <div>
-                                        <asp:Label ID="lblusername" runat="server" Font-Bold="true"></asp:Label></div>
+                                        <asp:Label ID="lblusername" runat="server" Font-Bold="true"></asp:Label>
+                                    </div>
                                     <div class="user-text-online">
                                         <span class="user-circle-online btn btn-success btn-circle "></span>&nbsp;Online
                                     </div>
@@ -449,42 +450,42 @@
                             <!--end user image section-->
                         </li>
 
-                          <li id="liindex" runat="server">
-                        <a href="../Home.aspx"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
-                    </li>
-                    <%--<li id="licompany" runat="server">
+                        <li id="liindex" runat="server">
+                            <a href="../Home.aspx"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+                        </li>
+                        <%--<li id="licompany" runat="server">
                         <a href="Company.aspx"><i class="fa fa-building-o fa-fw"></i>Company</a>
                     </li>
                      <li id="libranch" runat="server">
                         <a href="Branch.aspx"><i class="fa fa-building fa-fw"></i>Branch</a>
                     </li>--%>
-                    <li id="limaster" runat="server">
-                        <a href="../Master.aspx"><i class="fa fa-bar-chart-o fa-fw"></i>Masters</a>
+                        <li id="limaster" runat="server">
+                            <a href="../Master.aspx"><i class="fa fa-bar-chart-o fa-fw"></i>Masters</a>
 
-                        <!-- second-level-items -->
-                    </li>
-                    <li id="lipurchase" runat="server">
-                        <a href="../Purchases/Purchase.aspx"><i class="fa fa-list-alt fa-fw"></i>Purchase</a>
-                    </li>
-                    <li id="lipurchasereturn" runat="server">
-                        <a href="../Purchases/PurchaseReturn.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Purchase Return</a>
-                    </li>
-                           <li id="lipurchaseReport" runat="server">
-                               <a href="../Purchases/PurchaseReport.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Purchase Report</a>
+                            <!-- second-level-items -->
                         </li>
-                    <li id="lisale" runat="server">
-                        <a href="../Sales/Sale.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Sale</a>
-                    </li>
-                    <li id="lisalereturn" runat="server">
-                        <a href="../Sales/salesReturn.aspx"><i class="fa fa-cart-plus fa-fw"></i>Sales Return</a>
-                    </li>
+                        <li id="lipurchase" runat="server">
+                            <a href="../Purchases/Purchase.aspx"><i class="fa fa-list-alt fa-fw"></i>Purchase</a>
+                        </li>
+                        <li id="lipurchasereturn" runat="server">
+                            <a href="../Purchases/PurchaseReturn.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Purchase Return</a>
+                        </li>
+                        <li id="lipurchaseReport" runat="server">
+                            <a href="../Purchases/PurchaseReport.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Purchase Report</a>
+                        </li>
+                        <li id="lisale" runat="server">
+                            <a href="../Sales/Sale.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Sale</a>
+                        </li>
+                        <li id="lisalereturn" runat="server">
+                            <a href="../Sales/salesReturn.aspx"><i class="fa fa-cart-plus fa-fw"></i>Sales Return</a>
+                        </li>
                         <li id="lisaleReport" runat="server">
-                               <a href="../Sales/SalesReport.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Sale Report</a>
+                            <a href="../Sales/SalesReport.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Sale Report</a>
                         </li>
-                    <li id="li1" runat="server">
-                        <%--<a href="MasterReports.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>--%>
-                        <a href="CommonReport.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>
-                    </li>
+                        <li id="li1" runat="server">
+                            <%--<a href="MasterReports.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>--%>
+                            <a href="CommonReport.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>
+                        </li>
 
 
                     </ul>
@@ -492,15 +493,15 @@
                 </div>
                 <!-- end sidebar-collapse -->
             </nav>
-            
-               <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <!-- end navbar side -->
             <div id="page-wrapper">
-             
+
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
 
-               <%-- <div>
+                <%-- <div>
                     <a href="Master.aspx" id="bMaster" runat="server" visible="false">
                         <img src="assets/img/goback-5-w800.png" height="50" width="130" /></a>
                     <iframe width="100%" height="1000" id="ifm" runat="server" frameborder="0" allowfullscreen="true" scrolling="yes" visible="false"></iframe>
@@ -513,10 +514,10 @@
                 </div>
 
 
-               
+
             </div>
         </div>
     </form>
-   
+
 </body>
 </html>
