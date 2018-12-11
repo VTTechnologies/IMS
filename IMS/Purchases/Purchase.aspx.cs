@@ -952,6 +952,26 @@ namespace IMS
             }
         }
 
+        protected void btnClsFilter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        protected void btn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lblModalHeader.Text = "Add Product";
+                //ModalIfram.Attributes.Add("src", "~/MasterModals/ProductMasterModel.aspx");
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "Pop", "AddSrcToIfram();", true);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
 
 
     }

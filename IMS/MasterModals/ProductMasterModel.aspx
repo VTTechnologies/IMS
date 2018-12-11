@@ -1,107 +1,98 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="ProductMasterModel.aspx.cs" Inherits="IMS.ProductMasterModel" %>
+﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="ProductMasterModel.aspx.cs" Inherits="IMS.ProductMasterModel" %>
 
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<html>
+<head>
+    <title>IMS</title>
+    
+    <link href="../assets/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/chosen.css" rel="stylesheet" />
+        
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="../assets/plugins/bootstrap/bootstrap.js"></script>
+    <script src="../assets/scripts/chosen.jquery.js"></script>
 
-    <script type="text/javascript">
-    </script>
-    <script type='text/javascript'>
-        function openModal() {
-            $('#<%=myModal.ClientID%>').modal('show');
+    <style>
+
+        .input-group-addons {
+            padding: 6px 10px;
+            font-weight: normal;
+            line-height: 1;
+            color: #555555;
+            text-align: center;
+            background-color: #428bca;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            width: 1%;
+            white-space: nowrap;
+            vertical-align: middle;
+            line-height: 1;
+            /*border-radius: 3px;*/
         }
-    </script>
-    <script type="text/javascript">
 
-        function CheckDouble() {
-            $.ajax({
-                type: "POST",
-                url: '<%= ResolveUrl("~/Masters/Product.aspx/CheckDouble") %>', // this for calling the web method function in cs code.  
-                data: '{useroremail: "' + $("#<%=txtProductCode.ClientID%>")[0].value + '" }',// user name or email value  
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess,
-                failure: function (response) {
-                    alert(response);
-                }
-            });
+        .input-group-addons,
+        .input-group .form-control {
+            display: table-cell;
+            height: 30px;
         }
-        function OnSuccess(response) {
-            var msg = $("#<%=lblcheckDoubleError.ClientID%>")[0];
-            var hd3 = $("#<%=hde.ClientID%>")[0];
-            switch (response.d) {
-                case "true":
-                    msg.style.display = "block";
-                    msg.style.color = "red";
-                    msg.innerHTML = "This Product Code name already Exists";
-                    hd3.value = true;
-                    break;
-                case "false":
-                    msg.style.display = "none";
-                    hd3.value = false;
-                    break;
+
+
+        .input-group-sm > .form-control,
+        .input-group-sm > .input-group-addons,
+        .input-group-sm > .input-group-btn > .btn {
+            height: 30px;
+            /*padding: 5px 10px;*/
+            font-size: 12px;
+            line-height: 1.5;
+            border-radius: 3px;
+        }
+
+        a img {
+            border: none;
+        }
+
+        ol li {
+            list-style: decimal outside;
+        }
+
+        div.container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 0;
+        }
+
+        div.side-by-side {
+            width: 100%;
+            /*margin-bottom: 1em;*/
+        }
+
+            div.side-by-side > div {
+                float: left;
+                width: 100%;
             }
-        }
 
-
-        function OnlyNumericEntry(evt) {
-
-
-
-            var charCode = (evt.which) ? evt.which : event.keyCode
-            if (charCode != 46 && charCode > 31
-              && (charCode < 48 || charCode > 57))
-                return false;
-
-            return true;
-
-        }
-
-    </script>
-    <script type="text/javascript">
-
-        function CheckDouble1() {
-            $.ajax({
-                type: "POST",
-                url: '<%= ResolveUrl("~/Masters/Product.aspx/CheckDouble1") %>', // this for calling the web method function in cs code.  
-                data: '{useroremail: "' + $("#<%=txtProductName.ClientID%>")[0].value + '" }',// user name or email value  
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess1,
-                failure: function (response) {
-                    alert(response);
+                div.side-by-side > div > em {
+                    margin-bottom: 10px;
+                    display: block;
                 }
-            });
-        }
-        function OnSuccess1(response) {
-            var msg = $("#<%=Label1.ClientID%>")[0];
-            var hd1 = $("#<%=hd.ClientID%>")[0];
-            switch (response.d) {
-                case "true":
-                    msg.style.display = "block";
-                    msg.style.color = "red";
-                    msg.innerHTML = "This Product name already Exists";
-                    hd1.value = true;
-                    break;
-                case "false":
-                    msg.style.display = "none";
-                    hd1.value = false;
-                    break;
-            }
-        }
-    </script>
 
-</asp:Content>
+        .clearfix:after {
+            content: "\0020";
+            display: block;
+            height: 0;
+            clear: both;
+            overflow: hidden;
+            visibility: hidden;
+        }
+    </style>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container-fluid">
-        <div>
-            <a href="../Master.aspx" id="bMaster" runat="server">
-                <img src="../assets/img/goback-5-w800.png" height="50" width="130" /></a>
-        </div>
-        <div class="panel panel-default ">
-            <div class="panel-heading text-center">
-                <h1>Product Master</h1>
-            </div>
+</head>
+
+<body>
+    <form runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <div class="container-fluid">
+            <div class="panel panel-default ">
             <div class="panel-body">
                 <div class="form-horizontal">
                     <div class="col-md-12">
@@ -113,9 +104,15 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-7">
-                                    <asp:DropDownList ID="ddlCategory" runat="server" CssClass="form-control">
-                                        <asp:ListItem Text="Choose Category" />
-                                    </asp:DropDownList>
+                                    <div class="input-group input-group-xs">
+                                        <asp:DropDownList ID="ddlCategory" runat="server" CssClass="form-control">
+                                            <asp:ListItem Text="Choose Category" />
+                                        </asp:DropDownList>
+                                        <span class="input-group-addons">
+                                            <a href="javascript:AddSrcToIfram('c')">
+                                                <asp:Label ID="Label12" runat="server" Text="+" Font-Bold="true" Font-Size="20px" ForeColor="White"></asp:Label></a>
+                                        </span>
+                                    </div>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ValidationGroup="adf" InitialValue="0" Display="Dynamic" runat="server" ErrorMessage="Select Category" ControlToValidate="ddlCategory" ForeColor="Red"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
@@ -128,9 +125,15 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-7">
-                                    <asp:DropDownList ID="ddlUnit" runat="server" CssClass="form-control">
-                                        <asp:ListItem Text="Choose Unit" />
-                                    </asp:DropDownList>
+                                    <div class="input-group input-group-xs">
+                                        <asp:DropDownList ID="ddlUnit" runat="server" CssClass="form-control">
+                                            <asp:ListItem Text="Choose Unit" />
+                                        </asp:DropDownList>
+                                        <span class="input-group-addons">
+                                            <a href="javascript:AddSrcToIfram('u')">
+                                                <asp:Label ID="Label13" runat="server" Text="+" Font-Bold="true" Font-Size="20px" ForeColor="White"></asp:Label></a>
+                                        </span>
+                                    </div>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ValidationGroup="adf" InitialValue="0" Display="Dynamic" ErrorMessage="Select Unit" ControlToValidate="ddlUnit" ForeColor="Red"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
@@ -147,9 +150,15 @@
                                             </label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <asp:DropDownList ID="ddlGodown" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlGodown_SelectedIndexChanged" AutoPostBack="true">
-                                                <asp:ListItem Text="Choose godown" Value="0" />
-                                            </asp:DropDownList>
+                                            <div class="input-group input-group-xs">
+                                                <asp:DropDownList ID="ddlGodown" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlGodown_SelectedIndexChanged" AutoPostBack="true">
+                                                    <asp:ListItem Text="Choose godown" Value="0" />
+                                                </asp:DropDownList>
+                                                <span class="input-group-addons">
+                                                    <a href="javascript:AddSrcToIfram('g')">
+                                                        <asp:Label ID="Label14" runat="server" Text="+" Font-Bold="true" Font-Size="20px" ForeColor="White"></asp:Label></a>
+                                                </span>
+                                            </div>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" InitialValue="0" ValidationGroup="adf" runat="server" Display="Dynamic" ErrorMessage="Select Godown" ControlToValidate="ddlGodown" ForeColor="Red"></asp:RequiredFieldValidator>
                                         </div>
                                     </div>
@@ -162,9 +171,15 @@
                                             </label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <asp:DropDownList ID="ddlRack" runat="server" CssClass="form-control">
-                                                <asp:ListItem Text="Choose Rack" Value="0" />
-                                            </asp:DropDownList>
+                                            <div class="input-group input-group-xs">
+                                                <asp:DropDownList ID="ddlRack" runat="server" CssClass="form-control">
+                                                    <asp:ListItem Text="Choose Rack" Value="0" />
+                                                </asp:DropDownList>
+                                                <span class="input-group-addons">
+                                                    <a href="javascript:AddSrcToIfram('r')">
+                                                        <asp:Label ID="Label15" runat="server" Text="+" Font-Bold="true" Font-Size="20px" ForeColor="White"></asp:Label></a>
+                                                </span>
+                                            </div>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" InitialValue="0" ValidationGroup="adf" runat="server" Display="Dynamic" ErrorMessage="Select Rack" ControlToValidate="ddlRack" ForeColor="Red"></asp:RequiredFieldValidator>
                                             <asp:Label ID="lblrackerror" runat="server" ForeColor="Red"></asp:Label>
                                         </div>
@@ -182,6 +197,15 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-7">
+                                    <%--<div class="input-group input-group-xs">
+                                        <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control">
+                                            <asp:ListItem Text="Choose Rack" Value="0" />
+                                        </asp:DropDownList>
+                                        <span class="input-group-addons">
+                                            <a href="javascript:AddSrcToIfram('t')">
+                                                <asp:Label ID="Label16" runat="server" Text="+" Font-Bold="true" Font-Size="20px" ForeColor="White"></asp:Label></a>
+                                        </span>
+                                    </div>--%>
                                     <asp:DropDownList ID="ddlTax" runat="server" CssClass="form-control">
                                         <asp:ListItem Text="Choose Tax" />
                                     </asp:DropDownList>
@@ -289,7 +313,6 @@
             </div>
             <div class="panel-footer text-center">
                 <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" ValidationGroup="adf" />
-                <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" OnClick="btnUpdate_Click" Visible="false" ValidationGroup="adf" />
                 <asp:Button ID="btnClear" runat="server" CssClass="btn btn-primary" Text="Clear" OnClick="Button1_Click" />
                 <%--<asp:Button ID="btnCancel" runat="server" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" Style="float: right" />--%>
             </div>
@@ -300,23 +323,167 @@
                 <asp:Label ID="lblAlert" runat="server"></asp:Label>
             </div>
         </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog" runat="server">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Alert</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Do You want to delete This Unit? </p>
-                </div>
-                <div class="modal-footer">
-                    <asp:Button ID="btnYes" runat="server" Text="Yes" CssClass="btn btn-primary" OnClick="btnYes_Click" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog" runat="server">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Alert</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Do You want to delete This Unit? </p>
+                    </div>
+                    <div class="modal-footer">
+                        <asp:Button ID="btnYes" runat="server" Text="Yes" CssClass="btn btn-primary" OnClick="btnYes_Click" />
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" role="dialog" id="AddModal" runat="server">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <center><h2><asp:Label ID="lblModalHeader" runat="server"></asp:Label></h2></center>
+                </div>
+                <div class="modal-body">
+                    <iframe id="ModalIfram" runat="server" width="100%" height="350px" scrolling="yes" frameborder="0" allowfullscreen="true"></iframe>
+                </div>
+                <%--<div class="modal-footer">
+                        modal footer
+                    </div>--%>
+            </div>
+        </div>
     </div>
-</asp:Content>
+
+        <script>
+        function openModal() {
+            $('#<%=myModal.ClientID%>').modal('show');
+        }
+
+        function CheckDouble() {
+            $.ajax({
+                type: "POST",
+                url: '<%= ResolveUrl("~/Masters/Product.aspx/CheckDouble") %>', // this for calling the web method function in cs code.  
+                data: '{useroremail: "' + $("#<%=txtProductCode.ClientID%>")[0].value + '" }',// user name or email value  
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccess,
+                failure: function (response) {
+                    alert(response);
+                }
+            });
+        }
+
+        function OnSuccess(response) {
+            var msg = $("#<%=lblcheckDoubleError.ClientID%>")[0];
+            var hd3 = $("#<%=hde.ClientID%>")[0];
+            switch (response.d) {
+                case "true":
+                    msg.style.display = "block";
+                    msg.style.color = "red";
+                    msg.innerHTML = "This Product Code name already Exists";
+                    hd3.value = true;
+                    break;
+                case "false":
+                    msg.style.display = "none";
+                    hd3.value = false;
+                    break;
+            }
+        }
+
+        function OnlyNumericEntry(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode != 46 && charCode > 31
+              && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+
+        function CheckDouble1() {
+            $.ajax({
+                type: "POST",
+                url: '<%= ResolveUrl("~/Masters/Product.aspx/CheckDouble1") %>', // this for calling the web method function in cs code.  
+                data: '{useroremail: "' + $("#<%=txtProductName.ClientID%>")[0].value + '" }',// user name or email value  
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccess1,
+                failure: function (response) {
+                    alert(response);
+                }
+            });
+        }
+
+        function OnSuccess1(response) {
+            var msg = $("#<%=Label1.ClientID%>")[0];
+            var hd1 = $("#<%=hd.ClientID%>")[0];
+            switch (response.d) {
+                case "true":
+                    msg.style.display = "block";
+                    msg.style.color = "red";
+                    msg.innerHTML = "This Product name already Exists";
+                    hd1.value = true;
+                    break;
+                case "false":
+                    msg.style.display = "none";
+                    hd1.value = false;
+                    break;
+            }
+        }
+
+        function AddSrcToIfram(val) {
+            debugger;
+            if (val == 'c') {
+                $('#<%=lblModalHeader.ClientID%>').text("Add Category");
+                $('#<%=ModalIfram.ClientID%>').attr("src", "../MasterModals/CategoryMasterModal.aspx")
+            }
+            if (val == 'u') {
+                $('#<%=lblModalHeader.ClientID%>').text("Add Unit");
+                $('#<%=ModalIfram.ClientID%>').attr("src", "../MasterModals/UnitMasterModel.aspx")
+            }
+            if (val == 'g') {
+                $('#<%=lblModalHeader.ClientID%>').text("Add Godown");
+                $('#<%=ModalIfram.ClientID%>').attr("src", "../MasterModals/GodownMasterModel.aspx")
+            }
+            if (val == 'r') {
+                $('#<%=lblModalHeader.ClientID%>').text("Add Rack");
+                $('#<%=ModalIfram.ClientID%>').attr("src", "../MasterModals/RackMasterModel.aspx")
+            }
+            if (val == 't') {
+                $('#<%=lblModalHeader.ClientID%>').text("Add Tax");
+                $('#<%=ModalIfram.ClientID%>').attr("src", "../MasterModals/TaxMasterModel.aspx")
+            }
+            $('#<%= AddModal.ClientID %>').modal('show');
+        }
+
+        $('#<%= ddlCategory.ClientID %>').chosen();
+            $("#<%= ddlCategory.ClientID %>-deselect").chosen(
+                { allow_single_deselect: true });
+
+            $('#<%= ddlUnit.ClientID %>').chosen();
+            $("#<%= ddlUnit.ClientID %>-deselect").chosen(
+                { allow_single_deselect: true });
+
+            $('#<%= ddlGodown.ClientID %>').chosen();
+            $("#<%= ddlGodown.ClientID %>-deselect").chosen(
+                { allow_single_deselect: true });
+
+            $('#<%= ddlRack.ClientID %>').chosen();
+            $("#<%= ddlRack.ClientID %>-deselect").chosen(
+            { allow_single_deselect: true });
+
+            $('#<%= ddlTax.ClientID %>').chosen();
+            $("#<%= ddlTax.ClientID %>-deselect").chosen(
+                { allow_single_deselect: true });
+
+    </script>
+
+    </form>
+</body>
+</html>

@@ -1,132 +1,84 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Sale.aspx.cs" Inherits="IMS.Sale" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <%--<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--%>
-    <%--<asp:CheckBox ID="chk" runat="server" Text="If IGST" Font-Bold="true" CssClass="checkbox" />--%>
-    <%--<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="../assets/scripts/bootstrap-datetimepicker.min.js"></script>
-    <script src="../assets/alert/alertify.js"></script>
-    <script src="../assets/alert/alertify.min.js"></script>
-    <link href="../assets/alert/css/alertify.css" rel="stylesheet" />
-    <link href="../assets/alert/css/alertify.min.css" rel="stylesheet" />
-    <link href="../assets/alert/css/themes/default.css" rel="stylesheet" />
-    <link href="../assets/alert/css/themes/default.min.css" rel="stylesheet" />
-    <link href="../assets/alert/css/themes/default.rtl.css" rel="stylesheet" />--%>
-    <script type='text/javascript'>
-        function openModal() {
-            $('#<%=myModal.ClientID%>').modal('show');
+
+    <style>
+        .input-group{
+            height:35px !important;
+        }
+        .input-group-addons {
+            padding: 6px 10px;
+            font-weight: normal;
+            line-height: 1;
+            color: #555555;
+            text-align: center;
+            background-color: #428bca;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            width: 1%;
+            white-space: nowrap;
+            vertical-align: middle;
+            line-height: 1;
+            /*border-radius: 3px;*/
+        }
+
+        .input-group-addons,
+        .input-group .form-control {
+            display: table-cell;
+            height: 30px;
         }
 
 
-        function openalert(msg) {
-           
-            alertify.alert('Success', msg).setting({
-                'onok': function () { window.location.href = "Sale.aspx"; }
-            });
-
+        .input-group-sm > .form-control,
+        .input-group-sm > .input-group-addons,
+        .input-group-sm > .input-group-btn > .btn {
+            height: 30px;
+            /*padding: 5px 10px;*/
+            font-size: 12px;
+            line-height: 1.5;
+            border-radius: 3px;
         }
 
-
-        function OnlyNumericEntry(evt) {
-
-            $('#<%=lblcheckDoubleError.ClientID%>').text('');
-
-            var charCode = (evt.which) ? evt.which : event.keyCode
-            if (charCode != 46 && charCode > 31
-              && (charCode < 48 || charCode > 57))
-                return false;
-
-            return true;
-
+        a img {
+            border: none;
         }
 
-
-        <%--function CheckDouble() {
-            $.ajax({
-                type: "POST",
-                url: '<%= ResolveUrl("~/Sales/Sale.aspx/CheckDouble") %>', // this for calling the web method function in cs code.  
-                data: '{useroremail: "' + $("#<%=txtquantity.ClientID%>")[0].value + '",productid: "' + $("#<%=ddlproduct.ClientID%>")[0].value + '" }',// user name or email value  
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess,
-                failure: function (response) {
-                    alert(response);
-                }
-            });
+        ol li {
+            list-style: decimal outside;
         }
-        function OnSuccess(response) {
-            var msg = $("#<%=lblcheckDoubleError.ClientID%>")[0];
-            var hd1 = $("#<%=hd.ClientID%>")[0];
-            switch (response.d) {
-                case "true":
 
-                    msg.style.display = "block";
-                    msg.style.color = "red";
-                    msg.innerHTML = "Insufficient  Quantity";
-                    hd1.value = true;
-                    break;
-                case "false":
-                    msg.style.display = "none";
-                    hd1.value = false;
-                    break;
+        div.container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 0;
+        }
+
+        div.side-by-side {
+            width: 100%;
+            /*margin-bottom: 1em;*/
+        }
+
+            div.side-by-side > div {
+                float: left;
+                width: 100%;
             }
-        }--%>
-    </script>
 
-    <script type='text/javascript'>
-
-       
-
-            <%--  var hv = $("#" + '<%= hd1.ClientID %>').val();
-            var hvq = $("#" + '<%= hd2.ClientID %>').val();
-
-
-            $("#<%= txtdate.ClientID %>").datepicker(
-                {
-
-                    minDate: new Date(hv),
-                    maxDate: new Date(hvq)
+                div.side-by-side > div > em {
+                    margin-bottom: 10px;
+                    display: block;
                 }
-                );--%>
 
-            //$(function () {
-            //    $('[id*=txtdate]').datepicker({
-            //        changeMonth: true,
-            //        changeYear: true,
-            //        format: "dd/mm/yyyy",
-            //        language: "tr"
-            //    });
-            //});
-
-       
-       <%-- $(function () {
-
-            var hv = $("#" + '<%= hd1.ClientID %>').val();
-             var hvq = $("#" + '<%= hd2.ClientID %>').val();
-
-
-             $("#<%= txtdate.ClientID %>").datepicker(
-                 {
-
-                     minDate: new Date(hv),
-                     maxDate: new Date(hvq)
-                 }
-                 );
-
-          
-        });--%>
-
-        function validdiscount() {
-            if ($('#<%=txtDiscount.ClientID%>').val() > 100) {
-                $('#<%=txtDiscount.ClientID%>').val('100');
-            }
+        .clearfix:after {
+            content: "\0020";
+            display: block;
+            height: 0;
+            clear: both;
+            overflow: hidden;
+            visibility: hidden;
         }
+    </style>
 
-        
-        
-    </script>
+    <script src="../assets/scripts/chosen.jquery.js"></script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -137,18 +89,31 @@
         <div class="panel-body">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="row">
-                     <div class="text-center">
-                          <asp:Label ID="lblInvoice" runat="server"  ForeColor="Red"></asp:Label>
+                    <div class="text-center">
+                        <asp:Label ID="lblInvoice" runat="server" ForeColor="Red"></asp:Label>
                     </div>
                     <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                         <div class="form-horizontal Fhorizontal">
                             <div class="col-sm-10 leftpadd0">
-                                <label class="control-label">Select Customer <span style="color:red">*</span>                                    
+                                <label class="control-label">
+                                    Select Customer <span style="color: red">*</span>
                                 </label>
-                                <asp:DropDownList ID="ddlVendor" runat="server" CssClass="form-control">                                   
-                                </asp:DropDownList>
-                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="ddlVendor" ErrorMessage="Please Select Customer" InitialValue="0" ForeColor="Red" ValidationGroup="salevalidtion"></asp:RequiredFieldValidator>                                 
-                                 
+                                <div class="container">
+                                    <div class="side-by-side clearfix">
+                                        <div class="input-group">
+                                            <asp:DropDownList ID="ddlVendor" runat="server" CssClass="form-control">
+                                            </asp:DropDownList>
+                                            <span class="input-group-addons">
+                                                <%--<asp:Button ID="btn" runat="server" Text="Show" OnClick="btn_Click" />--%>
+                                                <a href="javascript:AddSrcToIfram('c')">
+                                                    <asp:Label ID="Label1" runat="server" Text="+" Font-Bold="true" Font-Size="20px" ForeColor="White"></asp:Label>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="ddlVendor" ErrorMessage="Please Select Customer" InitialValue="0" ForeColor="Red" ValidationGroup="salevalidtion"></asp:RequiredFieldValidator>
+
                             </div>
 
                         </div>
@@ -168,10 +133,10 @@
                         <div class="form-group">
                             <div class="col-sm-10 leftpadd0">
                                 <label class="control-label">
-                                    Date <span style="color:red">*</span>                                     
-                                </label>                               
-                                   <asp:TextBox ID="txtdate" runat="server" CssClass="form-control"></asp:TextBox>
-                                 <ajaxToolkit:CalendarExtender ID="CalendarExtender1" TargetControlID="txtdate" runat="server" />
+                                    Date <span style="color: red">*</span>
+                                </label>
+                                <asp:TextBox ID="txtdate" runat="server" CssClass="form-control"></asp:TextBox>
+                                <ajaxToolkit:CalendarExtender ID="CalendarExtender1" TargetControlID="txtdate" runat="server" />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtdate" ErrorMessage="Please Select Date" ForeColor="Red" ValidationGroup="salevalidtion"></asp:RequiredFieldValidator>
                                 <asp:HiddenField ID="hd1" runat="server" />
                                 <asp:HiddenField ID="hd2" runat="server" />
@@ -181,12 +146,9 @@
                 </div>
                 <div style="border: 1px solid black; margin-top: 10px; margin-bottom: 10px;"></div>
 
-
-
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
                         <div class="row">
-
                             <%--  <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                         <div class="col-sm-10 leftpadd0">
                             <label class="control-label">Barcode</label>
@@ -195,37 +157,59 @@
                     </div>--%>
                             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                                 <div class="col-sm-10 leftpadd0">
-                                    <label class="control-label">Select Product <span style="color:red">*</span>
-                                                                           </label>
-                                     
-                                    <asp:DropDownList ID="ddlproduct" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlproduct_SelectedIndexChanged">
-                                        <asp:ListItem Text="Choose Product" />
-                                    </asp:DropDownList>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="ddlproduct" ErrorMessage="Please Select Product" InitialValue="0" ForeColor="Red" ValidationGroup="salevalidtion"></asp:RequiredFieldValidator>                                 
+                                    <label class="control-label">
+                                        Select Product <span style="color: red">*</span>
+                                    </label>
+                                    <div class="container">
+                                        <div class="side-by-side clearfix">
+                                            <div class="input-group input-group-xs">
+                                                <asp:DropDownList ID="ddlproduct" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlproduct_SelectedIndexChanged">
+                                                    <asp:ListItem Text="Choose Product" />
+                                                </asp:DropDownList>
+                                                <span class="input-group-addons">
+                                                    <%--<asp:Button ID="btn" runat="server" Text="Show"/>--%>
+                                                    <a href="javascript:AddSrcToIfram('p')">
+                                                        <asp:Label ID="Label2" runat="server" Text="+" Font-Bold="true" Font-Size="20px" ForeColor="White"></asp:Label>
+                                                    </a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="ddlproduct" ErrorMessage="Please Select Product" InitialValue="0" ForeColor="Red" ValidationGroup="salevalidtion"></asp:RequiredFieldValidator>
                                 </div>
-
                             </div>
-                                   <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
+                            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                                 <div class="col-sm-10 leftpadd0">
                                     <label class="control-label">
-                                        Select Batch <span style="color:red">*</span>
-                              <asp:Label ID="lblbatch" runat="server" Text="*" Visible="false" ForeColor="Red"></asp:Label>
-                                       
+                                        Select Batch <span style="color: red">*</span>
+                                        <asp:Label ID="lblbatch" runat="server" Text="*" Visible="false" ForeColor="Red"></asp:Label>
                                     </label>
-                                    <asp:DropDownList ID="ddlBatch" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlBatch_SelectedIndexChanged"  AutoPostBack="true">
-                                        <asp:ListItem Text="Choose Batch" />
-                                    </asp:DropDownList>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="ddlBatch" InitialValue="0" ErrorMessage="Please Select Batch" ForeColor="Red" ValidationGroup="salevalidtion"></asp:RequiredFieldValidator>
+                                    <div class="container">
+                                        <div class="side-by-side clearfix">
+                                            <div class="input-group input-group-xs">
+                                                <asp:DropDownList ID="ddlBatch" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlBatch_SelectedIndexChanged" AutoPostBack="true">
+                                                    <asp:ListItem Text="Choose Batch" />
+                                                </asp:DropDownList>
+                                                <span class="input-group-addons">
+                                                    <%--<asp:Button ID="btn" runat="server" Text="Show" OnClick="btn_Click" />--%>
+                                                    <a href="javascript:AddSrcToIfram('b')">
+                                                        <asp:Label ID="Label3" runat="server" Text="+" Font-Bold="true" Font-Size="20px" ForeColor="White"></asp:Label>
+                                                    </a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="ddlBatch" InitialValue="0" ErrorMessage="Please Select Batch" ForeColor="Red" ValidationGroup="salevalidtion"></asp:RequiredFieldValidator>
                                     <asp:Label ID="lblbatcherror" runat="server" ForeColor="Red"></asp:Label>
                                 </div>
                             </div>
                             <div class="col-md-4 col-lg-2 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                                 <div class="col-sm-10 leftpadd0">
                                     <label class="control-label">
-                                        Quantity <span style="color:red">*</span>                                        
+                                        Quantity <span style="color: red">*</span>
                                     </label>
                                     <asp:TextBox ID="txtquantity" runat="server" CssClass="form-control" onkeypress="return OnlyNumericEntry(event);"></asp:TextBox>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtquantity" ErrorMessage="Please Enter Quantity" ForeColor="Red" ValidationGroup="salevalidtion"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtquantity" ErrorMessage="Please Enter Quantity" ForeColor="Red" ValidationGroup="salevalidtion"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator4" ValidationExpression="^\s*(?=.*[1-9])\d*(?:\.\d{1,5})?\s*$" runat="server" ValidationGroup="adf" Display="Dynamic" ForeColor="Red" ControlToValidate="txtquantity" ErrorMessage="Quantity should be greater then 0"></asp:RegularExpressionValidator>
                                     <asp:Label ID="lblcheckDoubleError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
                                     <asp:HiddenField ID="hd" runat="server" />
@@ -234,7 +218,7 @@
                             <div class="col-md-4 col-lg-2 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                                 <div class="col-sm-10 leftpadd0">
                                     <label class="control-label">
-                                        Price <span style="color:red">*</span>                                         
+                                        Price <span style="color: red">*</span>
                                     </label>
                                     <asp:TextBox ID="txtprice" runat="server" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtprice" ErrorMessage="Please Enter Price" ForeColor="Red" ValidationGroup="salevalidtion"></asp:RequiredFieldValidator>
@@ -242,11 +226,9 @@
 
                                 </div>
                             </div>
-                           
-
                         </div>
                         <div class="row">
-                             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
+                            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                                 <div class="col-sm-10 leftpadd0">
                                     <label class="control-label">
                                         Discount %
@@ -305,7 +287,7 @@
                             <asp:BoundField DataField="Tax" HeaderText="Tax" ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs"></asp:BoundField>
                             <asp:BoundField DataField="Tax Amount" HeaderText="Tax Amount" ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs"></asp:BoundField>
                             <asp:BoundField DataField="Sub Total" HeaderText="Total" ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs"></asp:BoundField>
-                             <asp:BoundField DataField="batch_id" HeaderText="Batch id" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
+                            <asp:BoundField DataField="batch_id" HeaderText="Batch id" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
                             <asp:TemplateField HeaderText="Update">
                                 <ItemTemplate>
                                     <asp:ImageButton CommandName="Update Row" ID="btnimg_update" runat="server" ImageUrl="~/assets/img/edit.png" />
@@ -395,10 +377,11 @@
                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 leftpadd0 pull-right" style="padding: 0px;">
                                 <div class="form-group">
                                     <div class="col-sm-12 leftpadd0">
-                                        <label class="control-label col-sm-9">Given Amount <span style="color:red">*</span>  
+                                        <label class="control-label col-sm-9">
+                                            Given Amount <span style="color: red">*</span>
                                         </label>
                                         <asp:TextBox ID="txtGivenAmt" runat="server" CssClass="form-control" ReadOnly="true" onkeypress="return OnlyNumericEntry(event);" OnTextChanged="txtGivenAmt_TextChanged" AutoPostBack="true"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ForeColor="Red" ControlToValidate="txtGivenAmt" ErrorMessage="Please Enter Given Amount"  ValidationGroup="savesale" ></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ForeColor="Red" ControlToValidate="txtGivenAmt" ErrorMessage="Please Enter Given Amount" ValidationGroup="savesale"></asp:RequiredFieldValidator>
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ForeColor="Red" ControlToValidate="txtGivenAmt" ErrorMessage="Given Amount Should be digits only" ValidationGroup="savesale" ValidationExpression="^\s*(?=.*[1-9])\d*(?:\.\d{1,5})?\s*$" Display="Dynamic">
                                         </asp:RegularExpressionValidator>
                                     </div>
@@ -411,10 +394,11 @@
                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 leftpadd0 pull-right" style="padding: 0px;">
                                 <div class="form-group">
                                     <div class="col-sm-12 leftpadd0">
-                                        <label class="control-label col-sm-9">Balance Amount                                              
+                                        <label class="control-label col-sm-9">
+                                            Balance Amount                                              
                                         </label>
                                         <asp:TextBox ID="txtBalanceAmt" runat="server" CssClass="form-control" ReadOnly="true" onkeypress="return OnlyNumericEntry(event);"></asp:TextBox>
-                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtBalanceAmt" ForeColor="Red"  ErrorMessage="Please Enter Balance Amount"  ValidationGroup="savesale" ></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtBalanceAmt" ForeColor="Red" ErrorMessage="Please Enter Balance Amount" ValidationGroup="savesale"></asp:RequiredFieldValidator>
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ForeColor="Red" ControlToValidate="txtGivenAmt" ErrorMessage="Balance Amount Should be digits only" ValidationExpression="^\s*(?=.*[1-9])\d*(?:\.\d{1,5})?\s*$" Display="Dynamic" ValidationGroup="savesale">
                                         </asp:RegularExpressionValidator>
                                     </div>
@@ -425,13 +409,13 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
-        
-    <div class="panel-footer leftpadd0">
 
-        <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" ValidationGroup="savesale" OnClientClick="DisableOnSave(this,'savesale');" UseSubmitBehavior="false"/>
-        <asp:Button ID="btnclear" runat="server" CssClass="btn btn-primary " Text="Cancel" OnClick="btnclear_Click" />
-        <asp:Button ID="btnPrint" runat="server" CssClass="btn btn-primary " Text="Save & Print" OnClick="btnPrint_Click" />
-    </div>
+        <div class="panel-footer leftpadd0">
+
+            <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" ValidationGroup="savesale" OnClientClick="DisableOnSave(this,'savesale');" UseSubmitBehavior="false" />
+            <asp:Button ID="btnclear" runat="server" CssClass="btn btn-primary " Text="Cancel" OnClick="btnclear_Click" />
+            <asp:Button ID="btnPrint" runat="server" CssClass="btn btn-primary " Text="Save & Print" OnClick="btnPrint_Click" />
+        </div>
         <%--<div style="border:1px solid black"></div>--%>
     </div>
 
@@ -454,5 +438,86 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" role="dialog" id="AddModal" runat="server">
+        <div class="modal-dialog" style="height: 650px">
+            <div class="modal-content" style="height: 90%">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <center><h3><asp:Label ID="lblModalHeader" runat="server"></asp:Label></h3></center>
+                </div>
+                <div class="modal-body" style="height: 90%">
+                    <iframe id="ModalIfram" runat="server" width="100%" height="90%" scrolling="yes" frameborder="0" allowfullscreen="true"></iframe>
+                </div>
+                <%--<div class="modal-footer">
+                        modal footer
+                    </div>--%>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        function openModal() {
+            $('#<%=myModal.ClientID%>').modal('show');
+        }
+
+        function openalert(msg) {
+
+            alertify.alert('Success', msg).setting({
+                'onok': function () { window.location.href = "Sale.aspx"; }
+            });
+        }
+
+        function OnlyNumericEntry(evt) {
+
+            $('#<%=lblcheckDoubleError.ClientID%>').text('');
+
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode != 46 && charCode > 31
+              && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+
+        function validdiscount() {
+            if ($('#<%=txtDiscount.ClientID%>').val() > 100) {
+                $('#<%=txtDiscount.ClientID%>').val('100');
+            }
+        }
+
+        function AddSrcToIfram(val) {
+            if (val == 'c') {
+                $('#<%=lblModalHeader.ClientID%>').text("Add Customer");
+                $('#<%=ModalIfram.ClientID%>').attr("src", "../MasterModals/PartyMasterModel.aspx")
+            }
+            if (val == 'p') {
+                $('#<%=lblModalHeader.ClientID%>').text("Add Product");
+                $('#<%=ModalIfram.ClientID%>').attr("src", "../MasterModals/ProductMasterModel.aspx")
+            }
+            if (val == 'b') {
+                $('#<%=lblModalHeader.ClientID%>').text("Add Batch");
+                $('#<%=ModalIfram.ClientID%>').attr("src", "../MasterModals/BatchMasterModel.aspx")
+            }
+            $('#<%= AddModal.ClientID %>').modal('show');
+        }
+
+
+        $('#<%= ddlproduct.ClientID %>').chosen();
+        $("#<%= ddlproduct.ClientID %>-deselect").chosen(
+            { allow_single_deselect: true });
+
+        $('#<%= ddlVendor.ClientID %>').chosen();
+        $("#<%= ddlVendor.ClientID %>-deselect").chosen(
+        { allow_single_deselect: true });
+
+
+        $('#<%= ddlBatch.ClientID %>').chosen();
+        $("#<%= ddlBatch.ClientID %>-deselect").chosen(
+            { allow_single_deselect: true });
+
+    </script>
 
 </asp:Content>
