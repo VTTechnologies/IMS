@@ -295,7 +295,6 @@ namespace IMS
             {
                 lblcheckDoubleError.Text = String.Empty;
                 btnSave.Visible = true;
-                btnUpdate.Visible = false;
                 divalert.Visible = false;
                 clr();
                 ViewState["gridrow"] = null;

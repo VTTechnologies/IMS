@@ -1,6 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="CategoryMasterModal.aspx.cs" Inherits="IMS.Masters.CategoryMasterModal" %>
+﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="CategoryMasterModal.aspx.cs" Inherits="IMS.Masters.CategoryMasterModal" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>IMS</title>
+    <link href="../assets/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="../assets/scripts/jquery.min.js"></script>
+
     <script type="text/javascript">
 
         $(function () {
@@ -9,13 +14,11 @@
                 "sPaginationType": "full_numbers"
             });
         });
-    </script>
-    <script type='text/javascript'>
+
         function openModal() {
             $('#<%=myModal.ClientID%>').modal('show');
         }
-    </script>
-    <script type="text/javascript">
+
         function CheckDouble() {
             $.ajax({
                 type: "POST",
@@ -51,25 +54,17 @@
             cleartextboxes();
             $("#<%=txtCategoryName.ClientID%>").focus();
         }
-    </script>
-    <script type="text/javascript">
         // Reference the textbox and call its focus function
         var txt = $("<%=txtCategoryName.ClientID%>");
 
         txt.focus();
     </script>
-</asp:Content>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+</head>
+<body>  
+    <form runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div class="container-fluid">
-        <div>
-            <a href="../Master.aspx" id="bMaster" runat="server">
-                <img src="../assets/img/goback-5-w800.png" height="50" width="130" /></a>
-        </div>
         <div class="panel panel-default text-center">
-            <div class="panel-heading">
-                <h1>Category Master</h1>
-            </div>
             <div class="panel-body">
                 <div class="form-horizontal">
                     <div class="col-md-12">
@@ -109,7 +104,6 @@
         </div>
         
     </div>
-
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog" runat="server">
         <div class="modal-dialog modal-sm">
@@ -128,4 +122,8 @@
             </div>
         </div>
     </div>
-</asp:Content>
+    </form>
+</body>
+</html>
+
+

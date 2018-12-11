@@ -154,7 +154,6 @@ namespace IMS
             {
                 lblcheckDoubleError.Text = string.Empty;
                 btnSave.Visible = true;
-                btnUpdate.Visible = false;
                 divalert.Visible = false;
                 txtUnitName.Text = string.Empty;
                 ViewState["gridrow"] = null;
