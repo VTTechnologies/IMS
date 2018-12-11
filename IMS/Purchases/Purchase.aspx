@@ -2,59 +2,40 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <script type='text/javascript'>
-
-        function openModal() {
-            $('#<%=myModal.ClientID%>').modal('show');
-        }
-
-
-
-        function openalert(msg) {
-            debugger;
-            alertify.alert('Success', msg).setting({
-                'onok': function () { window.location.href = "Purchase.aspx"; }
-            });
-
-        }
-
-
-
-        function OnlyNumericEntry(evt) {
-
-
-
-            var charCode = (evt.which) ? evt.which : event.keyCode
-            if (charCode != 46 && charCode > 31
-              && (charCode < 48 || charCode > 57))
-                return false;
-
-            return true;
-
-        }
-    </script>
-    <script type='text/javascript'>
-
-        //$(function () {
-
-        //        $('[id*=txtdate]').datepicker({
-        //            changeMonth: true,
-        //            changeYear: true,
-        //            format: "dd/mm/yyyy",
-        //            language: "tr"
-        //        });
-
-        //});
-
-        function validdiscount() {
-            if ($('#<%=txtDiscount.ClientID%>').val() > 100) {
-                $('#<%=txtDiscount.ClientID%>').val('100');
-            }
-        }
-
-    </script>
-
     <style>
+        .input-group-addons {
+            padding: 6px 10px;
+            font-weight: normal;
+            line-height: 1;
+            color: #555555;
+            text-align: center;
+            background-color: #428bca;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            width: 1%;
+            white-space: nowrap;
+            vertical-align: middle;
+            line-height: 1;
+            /*border-radius: 3px;*/
+        }
+
+        .input-group-addons,
+        .input-group .form-control {
+            display: table-cell;
+            height: 30px;
+        }
+
+
+        .input-group-sm > .form-control,
+        .input-group-sm > .input-group-addons,
+        .input-group-sm > .input-group-btn > .btn {
+            height: 30px;
+            /*padding: 5px 10px;*/
+            font-size: 12px;
+            line-height: 1.5;
+            border-radius: 3px;
+        }
+
         a img {
             border: none;
         }
@@ -92,6 +73,18 @@
             overflow: hidden;
             visibility: hidden;
         }
+
+
+        /*.row.no-gutter {
+            margin-left: 2px;
+            margin-right: 2px;
+        }
+
+            .row.no-gutter [class*='col-']:not(:first-child),
+            .row.no-gutter [class*='col-']:not(:last-child) {
+                padding-right: 2px;
+                padding-left: 2px;
+            }*/
     </style>
 
     <script src="../assets/scripts/chosen.jquery.js"></script>
@@ -116,9 +109,17 @@
                                 </label>
                                 <div class="container">
                                     <div class="side-by-side clearfix">
-                                        <asp:DropDownList runat="server" ID="ddlVendor" CssClass="form-control">
-                                            <asp:ListItem Text="--Select Vendor--" Value="0" />
-                                        </asp:DropDownList>
+                                        <div class="input-group input-group-xs">
+                                            <asp:DropDownList runat="server" ID="ddlVendor" CssClass="form-control">
+                                                <asp:ListItem Text="--Select Vendor--" Value="0" />
+                                            </asp:DropDownList>
+                                            <span class="input-group-addons">
+                                                <%--<asp:Button ID="btn" runat="server" Text="Show" OnClick="btn_Click" />--%>
+                                                <a href="javascript:AddSrcToIfram('v')">
+                                                    <asp:Label ID="Label1" runat="server" Text="+" Font-Bold="true" Font-Size="20px" ForeColor="White"></asp:Label>
+                                                </a>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*" ForeColor="Red" Text="Please Select Vendor" ValidationGroup="grop" ControlToValidate="ddlVendor" InitialValue="0"></asp:RequiredFieldValidator>
@@ -134,7 +135,6 @@
                             <asp:TextBox ID="txtPONo" runat="server" CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ForeColor="Red" Text="Please Enter Receipt No" ValidationGroup="grop" ControlToValidate="txtPONo"></asp:RequiredFieldValidator>
                         </div>
-
                     </div>
                     <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 leftpadd0" style="padding: 0px;">
                         <div class="form-group">
@@ -150,9 +150,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
                 <div style="border: 1px solid black; margin-top: 10px; margin-bottom: 10px;"></div>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
@@ -163,9 +160,18 @@
                                     <label class="control-label">Select Product <span style="color: red">*</span></label>
                                     <div class="container">
                                         <div class="side-by-side clearfix">
-                                            <asp:DropDownList runat="server" ID="ddlproduct" CssClass="form-control">
-                                                <asp:ListItem Text="--Select Product--" Value="0" />
-                                            </asp:DropDownList>
+                                            <div class="input-group input-group-xs">
+                                                <asp:DropDownList runat="server" ID="ddlproduct" CssClass="form-control">
+                                                    <asp:ListItem Text="--Select Product--" Value="0" />
+                                                </asp:DropDownList>
+                                                <span class="input-group-addons">
+                                                    <%--<asp:Button ID="btn" runat="server" Text="Show" OnClick="btn_Click" />--%>
+                                                    <a href="javascript:AddSrcToIfram('p')">
+                                                        <asp:Label ID="lblplussign" runat="server" Text="+" Font-Bold="true" Font-Size="20px" ForeColor="White"></asp:Label>
+                                                        <%--<i class="fa fa-plus-square-o" aria-hidden="true" ></i>--%>
+                                                    </a>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="Please Select Product" ForeColor="Red" Text="Please Select Product" ValidationGroup="grop" ControlToValidate="ddlproduct" InitialValue="0"></asp:RequiredFieldValidator>
@@ -181,9 +187,19 @@
                                     </label>
                                     <div class="container">
                                         <div class="side-by-side clearfix">
-                                            <asp:DropDownList runat="server" ID="ddlBatch" CssClass="form-control">
-                                                <asp:ListItem Text="--Select Batch--" Value="0" />
-                                            </asp:DropDownList>
+                                            <div class="input-group input-group-xs">
+                                                <asp:DropDownList runat="server" ID="ddlBatch" CssClass="form-control">
+                                                    <asp:ListItem Text="--Select Batch--" Value="0" />
+                                                </asp:DropDownList>
+                                                <span class="input-group-addons">
+                                                    <%--<asp:Button ID="btn" runat="server" Text="Show" OnClick="btn_Click" />--%>
+                                                    <a href="javascript:AddSrcToIfram('b')">
+                                                        <asp:Label ID="Label2" runat="server" Text="+" Font-Bold="true" Font-Size="20px" ForeColor="White"></asp:Label>
+                                                        <%--<i class="fa fa-plus-square-o" aria-hidden="true" ></i>--%>
+                                                    </a>
+                                                </span>
+                                            </div>
+
                                         </div>
                                     </div>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="Please Select Batch" ForeColor="Red" Text="Please Select Product" ValidationGroup="grop" ControlToValidate="ddlBatch" InitialValue="0"></asp:RequiredFieldValidator>
@@ -429,22 +445,97 @@
             </div>
         </div>
 
-        <script type="text/javascript">
-            $('#<%= ddlproduct.ClientID %>').chosen();
-            $("#<%= ddlproduct.ClientID %>-deselect").chosen(
-                { allow_single_deselect: true });
-        </script>
-        <script type="text/javascript">
-            $('#<%= ddlVendor.ClientID %>').chosen();
-            $("#<%= ddlVendor.ClientID %>-deselect").chosen(
-                { allow_single_deselect: true });
-        </script>
-        <script type="text/javascript">
-            $('#<%= ddlBatch.ClientID %>').chosen();
-            $("#<%= ddlBatch.ClientID %>-deselect").chosen(
-                { allow_single_deselect: true });
-        </script>
+
+        <div class="modal fade" role="dialog" id="AddModal" runat="server">
+            <div class="modal-dialog" style="height: 650px">
+                <div class="modal-content" style="height: 90%">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <center><h3><asp:Label ID="lblModalHeader" runat="server"></asp:Label></h3></center>
+                    </div>
+                    <div class="modal-body" style="height: 90%">
+                        <iframe id="ModalIfram" runat="server" width="100%" height="90%" scrolling="yes" frameborder="0" allowfullscreen="true"></iframe>
+                    </div>
+                    <%--<div class="modal-footer">
+                        modal footer
+                    </div>--%>
+                </div>
+            </div>
+        </div>
 
         <%-- <a href="PurchaseHome.aspx">PurchaseHome.aspx</a>--%>
     </div>
+
+    <script type="text/javascript">
+
+        function openModal() {
+            $('#<%=myModal.ClientID%>').modal('show');
+        }
+
+        function openalert(msg) {
+            debugger;
+            alertify.alert('Success', msg).setting({
+                'onok': function () { window.location.href = "Purchase.aspx"; }
+            });
+        }
+
+        function OnlyNumericEntry(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode != 46 && charCode > 31
+              && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+
+        //$(function () {
+
+        //        $('[id*=txtdate]').datepicker({
+        //            changeMonth: true,
+        //            changeYear: true,
+        //            format: "dd/mm/yyyy",
+        //            language: "tr"
+        //        });
+
+        //});
+
+        function validdiscount() {
+            if ($('#<%=txtDiscount.ClientID%>').val() > 100) {
+                $('#<%=txtDiscount.ClientID%>').val('100');
+            }
+        }
+
+        function AddSrcToIfram(val) {
+            if (val == 'v') {
+                $('#<%=lblModalHeader.ClientID%>').text("Add Vender");
+                $('#<%=ModalIfram.ClientID%>').attr("src", "../MasterModals/PartyMasterModel.aspx")
+            }
+            if (val == 'p') {
+                $('#<%=lblModalHeader.ClientID%>').text("Add Product");
+                $('#<%=ModalIfram.ClientID%>').attr("src", "../MasterModals/ProductMasterModel.aspx")
+            }
+            if (val == 'b') {
+                $('#<%=lblModalHeader.ClientID%>').text("Add Batch");
+                $('#<%=ModalIfram.ClientID%>').attr("src", "../MasterModals/BatchMasterModel.aspx")
+            }
+            $('#<%= AddModal.ClientID %>').modal('show');
+        }
+
+
+        $('#<%= ddlproduct.ClientID %>').chosen();
+        $("#<%= ddlproduct.ClientID %>-deselect").chosen(
+            { allow_single_deselect: true });
+
+        $('#<%= ddlVendor.ClientID %>').chosen();
+        $("#<%= ddlVendor.ClientID %>-deselect").chosen(
+        { allow_single_deselect: true });
+
+
+        $('#<%= ddlBatch.ClientID %>').chosen();
+        $("#<%= ddlBatch.ClientID %>-deselect").chosen(
+            { allow_single_deselect: true });
+
+    </script>
+
 </asp:Content>

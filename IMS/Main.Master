@@ -38,8 +38,10 @@
     <link type="text/css" href="/assets/alert/css/themes/default.rtl.css" rel="stylesheet" />
     <link type="text/css" href="/assets/src/jquery-customselect.css" rel="stylesheet" />
 
+    <link href="assets/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    
     <link href="assets/css/chosen.css" rel="stylesheet" />
-    <script src="assets/scripts/jquery.min.js"></script>
+    <%--<script src="assets/scripts/jquery.min.js"></script>--%>
 
     <script>
         function openalert(msg, val) {
