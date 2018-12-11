@@ -486,7 +486,7 @@
                         </li>
                         <li id="li1" runat="server">
                             <%--<a href="MasterReports.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>--%>
-                            <a href="CommonReport.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>
+                            <a href="../CommonReport.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>
                         </li>
 
 

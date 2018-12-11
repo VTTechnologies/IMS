@@ -46,7 +46,7 @@ namespace IMS.Reports
                 case "PurchaseReport":
                     sqlParams = new SqlParameter[] {
                          new SqlParameter("@Id", id),
-                         new SqlParameter("@FromTable","PURCHASE")
+                         new SqlParameter("@FromTable","PURCHASEREPORT")
                     };
                     reportDataSet = "PurchaseSaleReturnDataSet";
                     dataTable = "PurchaseSaleDataTable";
@@ -58,7 +58,7 @@ namespace IMS.Reports
                 case "PurchaseReturnReport":
                     sqlParams = new SqlParameter[] {
                          new SqlParameter("@Id", id),
-                         new SqlParameter("@FromTable","PURCHASERETRUN")
+                         new SqlParameter("@FromTable","PURCHASERETURNREPORT")
                     };
                     reportDataSet = "PurchaseSaleReturnDataSet";
                     dataTable = "PurchaseSaleDataTable";
@@ -69,7 +69,7 @@ namespace IMS.Reports
                 case "CombinePurchaseAndReturnReport":
                     sqlParams = new SqlParameter[] {
                          new SqlParameter("@Id", id),
-                         new SqlParameter("@FromTable","COMBINEPURCHASEANDRETURN")
+                         new SqlParameter("@FromTable","COMBINEPURCHASEANDRETURNREPORT")
                     };
 
                     reportDataSet = "CombineDataSet";

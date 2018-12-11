@@ -47,7 +47,7 @@ namespace IMS.Reports
                 case "CombinePurchaseAndReturnReport":
                     sqlParams = new SqlParameter[] {
                          new SqlParameter("@Id", id),
-                         new SqlParameter("@FromTable","COMBINEPURCHASEANDRETURN")
+                         new SqlParameter("@FromTable","COMBINEPURCHASEANDRETURNREPORT")
                     };
 
                     reportDataSet = "CombineDataSet";
@@ -108,7 +108,7 @@ namespace IMS.Reports
                     lblinvoiceno.Text = ds.Tables[tableName].Rows[i]["InvoiceNumber"].ToString();
 
                     lblGivenAmnt.Text = ds.Tables[tableName].Rows[i]["GivenAmnt"].ToString();
-                    lblGivenAmnt.Text = ds.Tables[tableName].Rows[i]["BalanceAmnt"].ToString();
+                    lblBalanceAmnt.Text = ds.Tables[tableName].Rows[i]["BalanceAmnt"].ToString();
 
                     if (ds.Tables[tableName].Rows[i]["Type"].ToString() == "Purchase")
                     {
@@ -117,7 +117,7 @@ namespace IMS.Reports
                         totalDiscount = totalDiscount + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalDiscount"]);
                         grandTotal = grandTotal + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalAmount"]);
                     }
-                    else if ( ds.Tables[tableName].Rows[i]["Type"].ToString() == "Return")
+                    else if (ds.Tables[tableName].Rows[i]["Type"].ToString() == "Return")
                     {
                         totalAmount = totalAmount - Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalAmount"]);
                         totalTax = totalTax - Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalTax"]);
@@ -125,6 +125,12 @@ namespace IMS.Reports
                         grandTotal = grandTotal - Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalAmount"]);
 
                     }
+
+                    //totalAmount =  Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalAmount"]);
+                    //totalTax =  Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalTax"]);
+                    //totalDiscount =  Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalDiscount"]);
+                    //grandTotal =  Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalAmount"]);
+
                     lblsubtotal.Text = totalAmount.ToString();
                     lblTaxAmount.Text = totalTax.ToString();
                     lblDiscountAmt.Text = totalDiscount.ToString();
