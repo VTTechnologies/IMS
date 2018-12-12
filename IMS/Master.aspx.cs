@@ -233,9 +233,22 @@ namespace IMS
             }
         }
 
+  
+
+        protected void btnTaxGroup_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.Redirect("~/Masters/TaxGroup.aspx");
+              
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
+            }
+        }
+
         #endregion
-
-
 
 
 

@@ -5,6 +5,9 @@
          $(document).ready(function () {
              $('#<%= GridView1.ClientID %>').DataTable();
          });
+         function openModal() {
+             $('#<%=myModal.ClientID%>').modal('show');
+         }
 
 
          function CheckDouble() {
