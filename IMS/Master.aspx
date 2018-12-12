@@ -61,7 +61,7 @@
                     </div>
                     <div class="col-md-4" id="div5" runat="server">
                         <div class="Blue text-center padd20">
-                            <b class="font30 ">Tax</b>
+                            <b class="font30 ">Tax Type</b>
                             <br />
                             <i class="fa fa fa-percent fa-3x padd20"></i>
                             <br />
@@ -135,17 +135,17 @@
                             <br />
                         </div>
                     </div>
-                    <%-- <div class="col-md-4" id="div11" runat="server">
+                     <div class="col-md-4" id="div11" runat="server">
                     <div class="Blue text-center padd20">
-                        <b class="font30 ">Payment Mode</b>
+                        <b class="font30 ">Tax Group</b>
                         <br />
 
                         <i class="fa fa fa-cc-visa fa-3x padd20"></i>
                         <br />
-                          <asp:Button ID="btnpaymentmode" runat="server" CssClass="btn btn-info marg20" Text="Open" OnClick="btnpaymentmode_Click"/>
+                          <asp:Button ID="btnTaxGroup" runat="server" CssClass="btn btn-info marg20" Text="Open" OnClick="btnTaxGroup_Click"/>
                         <br />
                     </div>
-                </div>--%>
+                </div>
                     <div class="col-md-4">
                         <div class="Blue text-center padd20">
                             <b class="font30 ">Company Branches</b>

@@ -57,6 +57,7 @@
     <Compile Include="DAL\Common.cs" />
     <Compile Include="DAL\SP.cs" />
     <Compile Include="DAL\SqlHelper.cs" />
+    <Compile Include="DAL\TaxGroupDetaileViewModel.cs" />
     <Compile Include="DAL\Validationss.cs" />
     <Compile Include="EntityModel\Add_User.cs" />
     <Compile Include="EntityModel\Batch.cs" />
