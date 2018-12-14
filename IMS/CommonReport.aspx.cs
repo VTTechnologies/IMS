@@ -17,19 +17,20 @@ namespace IMS.Reports
     public partial class CommonReport : System.Web.UI.Page
     {
         IMS_TESTEntities context = new IMS_TESTEntities();
-        string connectionstring = ConfigurationManager.ConnectionStrings["TestDBConnection"].ConnectionString;         
+        string connectionstring = ConfigurationManager.ConnectionStrings["TestDBConnection"].ConnectionString;
         int companyId, branchId;
         string User_id;
-       
+        Boolean isReportTypeBalance=false;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionValue();
             if (!IsPostBack)
-            {               
+            {
                 BindProducts();
                 BindVendors();
                 BindCustomers();
-            }                               
+            }
             logo();
         }
 
@@ -64,7 +65,7 @@ namespace IMS.Reports
             ddlFilerBy.SelectedIndex = 0;
             lstProduct.Items.Clear();
             txtStartDate.Text = string.Empty;
-            txtenddate.Text = string.Empty;           
+            txtenddate.Text = string.Empty;
             ddlFilerBy.Enabled = true;
             txtStartDate.Enabled = true;
             txtenddate.Enabled = true;
@@ -72,136 +73,210 @@ namespace IMS.Reports
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            displayReportSection.Visible = true;
-            var filterIds = string.Empty;
-            foreach (ListItem item in lstProduct.Items)
+            try
             {
-                if (item.Selected)
+                displayReportSection.Visible = true;
+                var filterIds = string.Empty;
+                foreach (ListItem item in lstProduct.Items)
                 {
-                    filterIds += item.Value + ",";
+                    if (item.Selected)
+                    {
+                        filterIds += item.Value + ",";
+                    }
                 }
-            }
 
-            foreach (ListItem item in lstVendor.Items)
-            {
-                if (item.Selected)
+                foreach (ListItem item in lstVendor.Items)
                 {
-                    filterIds += "," + item.Value;
+                    if (item.Selected)
+                    {
+                        filterIds += "," + item.Value;
+                    }
                 }
-            }
-            if (ddlReportType.SelectedItem.Text != "Stock Report")
-            {
-                btnSearch.ValidationGroup = "search";
-            }
+                foreach (ListItem item in lstCustomers.Items)
+                {
+                    if (item.Selected)
+                    {
+                        filterIds += "," + item.Value;
+                    }
+                }
+                if (ddlReportType.SelectedItem.Text != "Stock Report")
+                {
+                    btnSearch.ValidationGroup = "search";
+                }
 
-            SqlParameter[] sqlParams;
-            int companyId = Convert.ToInt32(Session["company_id"]);
+                SqlParameter[] sqlParams;
+                int companyId = Convert.ToInt32(Session["company_id"]);
 
-            string reportDataSet = string.Empty;
-            string dataTable = string.Empty;
-            CommonDataSet ds = new CommonDataSet();
-            switch (ddlReportType.SelectedItem.Text)
-            {
+                string reportDataSet = string.Empty;
+                string dataTable = string.Empty;
+                CommonDataSet ds = new CommonDataSet();
+                switch (ddlReportType.SelectedItem.Text)
+                {
 
-                case "Stock Report":
-                    sqlParams = new SqlParameter[] {
+                    case "Stock Report":
+                        sqlParams = new SqlParameter[] {
                          new SqlParameter("@ReportType","STOCKREPORT"),
                          new SqlParameter("@CompanyId", companyId),
                           new SqlParameter("@start_date",txtStartDate.Text),
                            new SqlParameter("@end_date",txtenddate.Text),
                           new SqlParameter("@FilterIds",filterIds)
-                    };                   
-                    CreateReport(connectionstring, "CommonReport", sqlParams);
-                    break;
+                    };
+                        CreateReport(connectionstring, "CommonReport", sqlParams);
+                        break;
 
 
-                case "Inventory Report":
-                    sqlParams = new SqlParameter[] {
-                         new SqlParameter("@ReportType","PRODUCTINVENTORYREPORT"),
+                    case "Inventory Report":
+
+                        string reportType = string.Empty;
+                        if (ddlFilerBy.SelectedItem.Text == "Product Wise")
+                        {
+                            reportType = "PRODUCTINVENTORYREPORT";
+                        }
+                        else if (ddlFilerBy.SelectedItem.Text == "Vendor Wise")
+                        {
+                            reportType = "VENDORINVENTORYREPORT";
+                        }
+                        else if (ddlFilerBy.SelectedItem.Text == "Cutomer Wise")
+                        {
+                            reportType = "CUSTOMERINVENTORYREPORT";
+                        }
+                        sqlParams = new SqlParameter[] {
+                         new SqlParameter("@ReportType",reportType),
                          new SqlParameter("@CompanyId", companyId),
                           new SqlParameter("@start_date",txtStartDate.Text),
                            new SqlParameter("@end_date",txtenddate.Text),
                           new SqlParameter("@FilterIds",filterIds)
                     };
-                    reportDataSet = "CombineDataSet";
-                    dataTable = "CombineDataTable";
-                    CreateReport(connectionstring, "CommonReport", sqlParams);
-                    break;
 
-                default:
-                    break;
+                        CreateReport(connectionstring, "CommonReport", sqlParams);
+                        break;
+                    case "Balance Report":
+                        isReportTypeBalance = true;
+                      
+                        sqlParams = new SqlParameter[] {
+                         new SqlParameter("@ReportType","BALANCEREPORT"),
+                         new SqlParameter("@CompanyId", companyId),
+                          new SqlParameter("@start_date",txtStartDate.Text),
+                           new SqlParameter("@end_date",txtenddate.Text),
+                          new SqlParameter("@FilterIds",filterIds)
+                    };
+                        CreateReport(connectionstring, "CommonReport", sqlParams);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
             }
 
         }
 
         protected void ddlReportType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlReportType.SelectedItem.Text == "Stock Report")
+            try
             {
-                ddlFilerBy.Enabled = false;
-                txtenddate.Enabled = false;
-                txtStartDate.Enabled = false;
+                if (ddlReportType.SelectedItem.Text == "Stock Report")
+                {
+                    ddlFilerBy.Enabled = false;
+                    txtenddate.Enabled = false;
+                    txtStartDate.Enabled = false;
+                }
+                else
+                {
+                    ddlFilerBy.Enabled = true;
+                    txtenddate.Enabled = true;
+                    txtStartDate.Enabled = true;
+                }
+                if (ddlReportType.SelectedItem.Text == "Balance Report")
+                {
+                    ddlFilerBy.Items[1].Enabled = false;
+                }
+                else
+                {
+                    ddlFilerBy.Items[1].Enabled = true;
+                }
             }
-            else {
-                ddlFilerBy.Enabled = true;
-                txtenddate.Enabled = true;
-                txtStartDate.Enabled = true;
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
             }
         }
 
-    
+
         public void CreateReport(String connectionstring, string storeProcedureName, SqlParameter[] parameter)
-        {         
+        {
             var ds = Common.FillDataSet(connectionstring, storeProcedureName, parameter);
+            try
+            {
+                if (ds != null)
+                {
+                    if (ds.Tables["Table"].Rows.Count > 0)
+                    {
+                        lblCompanyName.Text = ds.Tables["Table"].Rows[0]["Company"].ToString();
+                        lblAddress.Text = ds.Tables["Table"].Rows[0]["CompanyAddress"].ToString();
+                        lblStartDate.Text = ds.Tables["Table"].Rows[0]["StartDate"].ToString();
+                        lblEndDate.Text = ds.Tables["Table"].Rows[0]["EndDate"].ToString();
+                        lblpartyname.Text = ds.Tables["Table"].Rows[0]["Party"].ToString();
+                        lblpartyaddress.Text = ds.Tables["Table"].Rows[0]["PartyAddress"].ToString();
+                    }
 
-            if(ds!=null)
-            { 
-                if (ds.Tables["Table"].Rows.Count > 0)
-                { 
-                    lblCompanyName.Text = ds.Tables["Table"].Rows[0]["Company"].ToString();
-                    lblAddress.Text = ds.Tables["Table"].Rows[0]["CompanyAddress"].ToString();
-                    lblStartDate.Text = ds.Tables["Table"].Rows[0]["StartDate"].ToString();
-                    lblEndDate.Text = ds.Tables["Table"].Rows[0]["EndDate"].ToString();
-                    lblpartyname.Text = ds.Tables["Table"].Rows[0]["Party"].ToString();
-                lblpartyaddress.Text = ds.Tables["Table"].Rows[0]["PartyAddress"].ToString();
-                 } 
-                
+                    if (!isReportTypeBalance)
+                    {
+                        ds.Tables["Table"].Columns.Remove("Party");
+                        ds.Tables["Table"].Columns.Remove("Date");
+                    }
+                    ds.Tables["Table"].Columns.Remove("Company");
+                    ds.Tables["Table"].Columns.Remove("CompanyAddress");
 
-                ds.Tables["Table"].Columns.Remove("Company");
-                ds.Tables["Table"].Columns.Remove("CompanyAddress");
-                ds.Tables["Table"].Columns.Remove("StartDate");
-                ds.Tables["Table"].Columns.Remove("EndDate");
-                ds.Tables["Table"].Columns.Remove("Party");
-                ds.Tables["Table"].Columns.Remove("PartyAddress");
-                grdreport.DataSource = ds.Tables["Table"];
-                grdreport.DataBind();
+                    ds.Tables["Table"].Columns.Remove("StartDate");
+                    ds.Tables["Table"].Columns.Remove("EndDate");
+                    ds.Tables["Table"].Columns.Remove("PartyAddress");
+                    grdreport.DataSource = ds.Tables["Table"];
+                    grdreport.DataBind();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
             }
         }
 
         protected void ddlFilerBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlFilerBy.SelectedItem.Text == "Product Wise")
+            try
             {
-                BindProducts();
-                Products.Visible = true;
-                Vendors.Visible = false;
-                Customers.Visible = false;
+                if (ddlFilerBy.SelectedItem.Text == "Product Wise")
+                {
+                    BindProducts();
+                    Products.Visible = true;
+                    Vendors.Visible = false;
+                    Customers.Visible = false;
+                }
+                else if (ddlFilerBy.SelectedItem.Text == "Vendor Wise")
+                {
+                    BindVendors();
+                    Vendors.Visible = true;
+                    Customers.Visible = false;
+                    Products.Visible = false;
+                }
+                else if (ddlFilerBy.SelectedItem.Text == "Cutomer Wise")
+                {
+                    BindCustomers();
+                    Vendors.Visible = false;
+                    Products.Visible = false;
+                    Customers.Visible = true;
+                }
+
             }
-            else if (ddlFilerBy.SelectedItem.Text == "Vendor Wise")
+            catch (Exception ex)
             {
-                BindVendors();
-                Vendors.Visible = true;
-                Customers.Visible = false;
-                Products.Visible = false;
+                ErrorLog.saveerror(ex);
             }
-            else if (ddlFilerBy.SelectedItem.Text == "Cutomer Wise")
-            {
-                BindCustomers();
-                Vendors.Visible = false;
-                Products.Visible = false;
-                Customers.Visible = true;
-            }
-        }            
+        }
         private void SessionValue()
         {
             if (Session["UserID"] == null || Session["company_id"] == null || Session["branch_id"] == null)
@@ -215,27 +290,34 @@ namespace IMS.Reports
 
         protected void grdreport_DataBound(object sender, EventArgs e)
         {
-            int firstRowSpan = 2;
-            int secondRowSpan = 2;
-            for (int i = grdreport.Rows.Count - 2; i >= 0; i--)
+            try
             {
-                GridViewRow currRow = grdreport.Rows[i];
-                GridViewRow prevRow = grdreport.Rows[i + 1];
-                if (currRow.Cells[1].Text == prevRow.Cells[1].Text)
+                int firstRowSpan = 2;
+                int secondRowSpan = 2;
+                for (int i = grdreport.Rows.Count - 2; i >= 0; i--)
                 {
-                    currRow.Cells[1].RowSpan = firstRowSpan;
-                    prevRow.Cells[1].Visible = false;
-                    firstRowSpan += 1;
+                    GridViewRow currRow = grdreport.Rows[i];
+                    GridViewRow prevRow = grdreport.Rows[i + 1];
+                    if (currRow.Cells[1].Text == prevRow.Cells[1].Text)
+                    {
+                        currRow.Cells[1].RowSpan = firstRowSpan;
+                        prevRow.Cells[1].Visible = false;
+                        firstRowSpan += 1;
 
-                    currRow.Cells[0].RowSpan = secondRowSpan;
-                    prevRow.Cells[0].Visible = false;
-                    secondRowSpan += 1;
+                        currRow.Cells[0].RowSpan = secondRowSpan;
+                        prevRow.Cells[0].Visible = false;
+                        secondRowSpan += 1;
+                    }
+                    else
+                    {
+                        firstRowSpan = 2;
+                        secondRowSpan = 2;
+                    }
                 }
-                else
-                {
-                    firstRowSpan = 2;
-                    secondRowSpan = 2;
-                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
             }
         }
 
@@ -244,7 +326,7 @@ namespace IMS.Reports
             var logo = context.tbl_company.Where(w => w.company_id == companyId).FirstOrDefault();
             try
             {
-               
+
                 if (logo != null)
                 {
 
@@ -262,13 +344,34 @@ namespace IMS.Reports
                 {
                     imglogo.Visible = false;
                     lblIms.Visible = true;
-                }               
+                }
             }
             catch (Exception ex)
             {
                 ErrorLog.saveerror(ex);
-            }            
+            }
         }
-       
+
+        protected void cbEnable_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cbEnable.Checked)
+                {
+                    txtStartDate.Enabled = false;
+                    txtenddate.Enabled = false;
+                }
+                else
+                {
+                    txtStartDate.Enabled = true;
+                    txtenddate.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
+            }
+        }
+
     }
 }
