@@ -437,7 +437,7 @@
                     <div class="single-price-plan active text-center">
                         <!-- Package Text  -->
                         <div class="package-plan">
-                            <h5>Advenced Plan</h5>
+                            <h5>Advanced Plan</h5>
                             <div class="ca-price d-flex justify-content-center">
                                 <span>&#8377;</span>
                                 <h4>9499</h4>

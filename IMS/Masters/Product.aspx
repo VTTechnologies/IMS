@@ -195,15 +195,7 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-7">
-                                    <%--<div class="input-group input-group-xs">
-                                        <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control">
-                                            <asp:ListItem Text="Choose Rack" Value="0" />
-                                        </asp:DropDownList>
-                                        <span class="input-group-addons">
-                                            <a href="javascript:AddSrcToIfram('t')">
-                                                <asp:Label ID="Label16" runat="server" Text="+" Font-Bold="true" Font-Size="20px" ForeColor="White"></asp:Label></a>
-                                        </span>
-                                    </div>--%>
+                                  
                                     <asp:DropDownList ID="ddlTax" runat="server" CssClass="form-control">
                                         <asp:ListItem Text="Choose Tax" />
                                     </asp:DropDownList>
@@ -310,10 +302,10 @@
                 </div>
             </div>
             <div class="panel-footer text-center">
-                <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" ValidationGroup="adf" />
+                <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save"  OnClick="btnSave_Click" ValidationGroup="adf" OnClientClick="DisableOnSave(this,'adf');"  UseSubmitBehavior="false" />
                 <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" OnClick="btnUpdate_Click" Visible="false" ValidationGroup="adf" />
                 <asp:Button ID="btnClear" runat="server" CssClass="btn btn-primary" Text="Clear" OnClick="Button1_Click" />
-                <%--<asp:Button ID="btnCancel" runat="server" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" Style="float: right" />--%>
+                <%--<asp:Button ID="btnCancel" runat="server" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" Style="float: right" />  --%>
             </div>
         </div>
         <div class="row">

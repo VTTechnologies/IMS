@@ -9,7 +9,7 @@
             $('#btnprint').hide();
             window.print();
         }
-    
+
         $(function () {
             $('[id*=lstProduct]').multiselect({
                 includeSelectAllOption: true
@@ -43,7 +43,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <%--<asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>--%>
-    <div class="panel panel-default ">
+    <div class="panel panel-default " >
         <div class="panel-heading text-center">
             <h2>Common Reports</h2>
         </div>
@@ -62,6 +62,7 @@
                                             <asp:ListItem Text="Choose Report" Value="0" />
                                             <asp:ListItem Text="Inventory Report" Value="1" />
                                             <asp:ListItem Text="Stock Report" Value="2" />
+                                             <asp:ListItem Text="Balance Report" Value="3" />
                                         </asp:DropDownList>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" InitialValue="0" ControlToValidate="ddlReportType" ErrorMessage="Please Select Report Type" ForeColor="Red" ValidationGroup="except"></asp:RequiredFieldValidator>
                                     </div>
@@ -85,39 +86,55 @@
                             </div>
 
                             <%--<asp:UpdatePanel ID="lstpanel" runat="server">--%>
-                                <%--<ContentTemplate>--%>
-                                    <div class="col-md-4 ">
-                                        <div>
-                                            <div id="Products" runat="server" visible="false">
-                                                <div class="col-sm-10  ">
-                                                    <label class="control-label">
-                                                        Products                                    
-                                                    </label>
-                                                    <asp:ListBox ID="lstProduct" runat="server" CssClass="form-control" SelectionMode="Multiple"></asp:ListBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="Vendors" runat="server" visible="false">
-                                            <div class="col-sm-10  ">
-                                                <label class="control-label">
-                                                    Vendors                                  
-                                                </label>
-                                                <asp:ListBox ID="lstVendor" runat="server" CssClass="form-control" SelectionMode="Multiple"></asp:ListBox>
-                                            </div>
-                                        </div>
-                                        <div id="Customers" runat="server" visible="false">
-                                            <div class="col-sm-10  ">
-                                                <label class="control-label">
-                                                    Customers                                  
-                                                </label>
-                                                <asp:ListBox ID="lstCustomers" runat="server" CssClass="form-control" SelectionMode="Multiple"></asp:ListBox>
-                                            </div>
+                            <%--<ContentTemplate>--%>
+                            <div class="col-md-4 ">
+                                <div>
+                                    <div id="Products" runat="server" visible="false">
+                                        <div class="col-sm-10  ">
+                                            <label class="control-label">
+                                                Products                                    
+                                            </label>
+                                            <asp:ListBox ID="lstProduct" runat="server" CssClass="form-control" SelectionMode="Multiple"></asp:ListBox>
                                         </div>
                                     </div>
-                             <%--   </ContentTemplate>
+                                </div>
+                                <div id="Vendors" runat="server" visible="false">
+                                    <div class="col-sm-10  ">
+                                        <label class="control-label">
+                                            Vendors                                  
+                                        </label>
+                                        <asp:ListBox ID="lstVendor" runat="server" CssClass="form-control" SelectionMode="Multiple"></asp:ListBox>
+                                    </div>
+                                </div>
+                                <div id="Customers" runat="server" visible="false">
+                                    <div class="col-sm-10  ">
+                                        <label class="control-label">
+                                            Customers                                  
+                                        </label>
+                                        <asp:ListBox ID="lstCustomers" runat="server" CssClass="form-control" SelectionMode="Multiple"></asp:ListBox>
+                                    </div>
+                                </div>
+                            </div>
+                            <%--   </ContentTemplate>
                             </asp:UpdatePanel>--%>
                         </div>
                         <div class="row">
+                              <div class="col-md-4 ">
+                                <div>
+                                    
+                                    <div class="col-sm-10 ">
+                                        
+                                        <label class="control-label">
+                                            From Bigning of Finincial Year                                   
+                                        </label>
+                                       <asp:CheckBox ID="cbEnable" runat="server" CssClass="checkbox" OnCheckedChanged="cbEnable_CheckedChanged" AutoPostBack="true" />
+                                    </div>
+                                   
+                                        
+
+                                    
+                                </div>
+                            </div>
                             <div class="col-md-4 ">
                                 <div>
                                     <div class="col-sm-10  ">
@@ -153,41 +170,50 @@
         </div>
 
         <div id="displayReportSection" runat="server" visible="false">
-            <asp:Panel id="reportSection" runat="server" >
-            <div class="row">
-                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                    <div id="invoice" class="pagestyle">                        
+            <asp:Panel ID="reportSection" runat="server">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                        <div id="invoice" class="pagestyle">
                             <div id="invoice-header">
-                                <asp:Image ID="imglogo" runat="server" Height="150" Width="300" />
-                                <asp:Label ID="lblIms" runat="server" Font-Bold="true" Style="padding: 0; font-size: 55px;" Text="!MSB!ZZ" Visible="false"></asp:Label>
-                                <div class="vcard" id="company-address">
-                                    <div class="fn org">
-                                        <h2>
-                                            <strong>
-                                                <asp:Label ID="lblCompanyName" runat="server"></asp:Label>
-                                            </strong>
-                                        </h2>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <asp:Image ID="imglogo" runat="server" Height="150" Width="300" />
+                                        <asp:Label ID="lblIms" runat="server" Font-Bold="true" Style="padding: 0; font-size: 55px;" Text="!MSB!ZZ" Visible="false"></asp:Label>
                                     </div>
-                                    <div class="adr">
-                                        <div class="street-address">
-                                            <asp:Label ID="lblAddress" runat="server"></asp:Label>
-                                        </div>
-                                        <div class="locality">Locality</div>
-                                        <div id="company-postcode">
-                                            <asp:Label ID="lblzipcode" runat="server"></asp:Label>
-                                        </div>
-                                    </div>
-                                    <div class="email">
-                                        <asp:Label ID="lblemail" runat="server"></asp:Label>
-                                    </div>
+                                    <div class="col-md-6">
 
+                                        <div class="vcard" id="company-address">
+                                            <div class="fn org">
+                                                <h2>
+                                                    <strong>
+                                                        <asp:Label ID="lblCompanyName" runat="server"></asp:Label>
+                                                    </strong>
+                                                </h2>
+                                            </div>
+                                            <div class="adr">
+                                                <div class="street-address">
+                                                    <asp:Label ID="lblAddress" runat="server"></asp:Label>
+                                                </div>
+                                                <div class="locality">Locality</div>
+                                                <div id="company-postcode">
+                                                    <asp:Label ID="lblzipcode" runat="server"></asp:Label>
+                                                </div>
+                                            </div>
+                                            <div class="email">
+                                                <asp:Label ID="lblemail" runat="server"></asp:Label>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <div id="invoice-info">
-                                 <strong>
-                                   Start Date: <asp:Label ID="lblStartDate" runat="server"></asp:Label> End Date: <asp:Label ID="lblEndDate" runat="server"></asp:Label>
-                               </strong>
+                                <strong>Start Date:
+                                    <asp:Label ID="lblStartDate" runat="server"></asp:Label>
+                                    End Date:
+                                    <asp:Label ID="lblEndDate" runat="server"></asp:Label>
+                                </strong>
                             </div>
 
                             <div class="vcard" id="client-details">
@@ -205,26 +231,26 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px; margin-top: 10px">
-                                    
-                                    <asp:GridView ID="grdreport" runat="server" OnDataBound ="grdreport_DataBound" headerstyle-backcolor="#0033CC" Font-Size="X-Small" AutoGenerateColumns="true" CssClass="table table-bordered" BorderStyle="Solid" GridLines="Horizontal">
 
-                                     
+                                    <asp:GridView ID="grdreport" runat="server" OnDataBound="grdreport_DataBound" HeaderStyle-BackColor="#0033CC" Font-Size="X-Small" AutoGenerateColumns="true" CssClass="table table-bordered" BorderStyle="Solid" GridLines="Horizontal">
+
+
                                         <HeaderStyle BackColor="#0033CC" ForeColor="White" />
                                     </asp:GridView>
-                                       
+
                                 </div>
                             </div>
-                         
+
                             <br />
-                            <br />                       
-                        <div class="row">
-                            <input type="button" class="btn btn-danger" id="btnprint" value="print" onclick="return PrintPanel();" />
+                            <br />
+                            <div class="row">
+                                <input type="button" class="btn btn-danger" id="btnprint" value="print" onclick="return PrintPanel();" />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-         </asp:Panel>
-                </div>
-       
+            </asp:Panel>
+        </div>
+
     </div>
 </asp:Content>
