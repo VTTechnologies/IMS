@@ -80,7 +80,7 @@
                                 <div class="col-sm-7">
                                     <asp:TextBox ID="txtGodownName" runat="server" onchange="CheckDouble()" CssClass="form-control"></asp:TextBox>
                                     <asp:Label ID="lblcheckDoubleError" runat="server"></asp:Label>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ValidationGroup="godwn" ErrorMessage="Name is required" ControlToValidate="txtGodownName" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" OnClientClick="DisableOnSave(this,'godwn');"  UseSubmitBehavior="false" ValidationGroup="godwn" ErrorMessage="Name is required" ControlToValidate="txtGodownName" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                                     <asp:HiddenField ID="hd" runat="server" />
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="col-sm-7">
                                     <asp:TextBox ID="txtGodownAddress" runat="server" CssClass="form-control"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ValidationGroup="godwn" ErrorMessage="Address is required" ControlToValidate="txtGodownAddress" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" OnClientClick="DisableOnSave(this,'godwn');"  UseSubmitBehavior="false" ValidationGroup="godwn" ErrorMessage="Address is required" ControlToValidate="txtGodownAddress" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
