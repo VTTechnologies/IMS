@@ -198,9 +198,9 @@ namespace IMS
         }
         public void ddltaxbind()
         {
-            List<tbl_taxgroup> cd = context.tbl_taxgroup.Where(x => x.status == true && x.company_id == companyId && x.branch_id == branchId).ToList();
-            ddlTax.DataTextField = "group_name";
-            ddlTax.DataValueField = "group_id";
+            List<tbl_tax> cd = context.tbl_tax.Where(x => x.status == true && x.company_id == companyId && x.branch_id == branchId).ToList();
+            ddlTax.DataTextField = "tax_name";
+            ddlTax.DataValueField = "tax_id";
             ddlTax.DataSource = cd;
             ddlTax.DataBind();
             ddlTax.Items.Insert(0, new ListItem("--Select Tax Group--", "0"));

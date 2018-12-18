@@ -54,15 +54,6 @@ namespace IMS
         {
             try
             {
-                //int c_id = Convert.ToInt32(Session["company_id"]);
-                //tbl_purchase p = new tbl_purchase();
-                //p.company_id = c_id;
-                ////Shakeeb
-                ////p.All(p);
-                ////hd1.Value = p.startdate;
-                ////hd2.Value = p.enddate;
-                ////hd3.Value = p.startdate;
-                ////hd4.Value = p.enddate;
                 var finicialyear = context.tbl_financialyear.Where(f => f.company_id == companyId && f.status == true).SingleOrDefault();
                 hd1.Value = finicialyear.start_date;
                 hd2.Value = finicialyear.end_date;

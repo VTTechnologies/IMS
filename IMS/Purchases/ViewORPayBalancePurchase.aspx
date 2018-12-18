@@ -11,6 +11,12 @@
             return true;
 
         }
+        function openalert(msg) {
+            debugger;
+            alertify.alert('Success', msg).setting({
+                'onok': function () { window.location.href = "ViewORPayBalancePurchase.aspx"; }
+            });
+        }
         function keypress() {
             var balance = $('#<%=lblGrandTotal.ClientID%>').value() - ($('#<%=lblGivenAmnt.ClientID%>').value() + $('#<%=txtPaidAmnt.ClientID%>').value())
             $('#<%=txtBalanceAmnt.ClientID%>').value(balance);
@@ -215,5 +221,6 @@
         <div class="panel-footer ">
             <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " ValidationGroup="savesale" Text="Save" Enabled="false" OnClick="btnSave_Click" OnClientClick="DisableOnSave(this,'savesale');" UseSubmitBehavior="false" />
         </div>
+       
     </div>
 </asp:Content>

@@ -21,7 +21,7 @@ namespace IMS.Registration
     public partial class WebForm2 : System.Web.UI.Page
     {
 
-        /// <summary>
+        /// <summary>  
         /// All The objects That are used in coding
         /// </summary>
         IMS_TESTEntities context = new IMS_TESTEntities();
@@ -108,7 +108,7 @@ namespace IMS.Registration
                 //SmtpClient SmtpServer = new SmtpClient("relay-hosting.secureserver.net");
                 SmtpClient SmtpServer = new SmtpClient("webmail.imsbizz.com", 25);
                 StringBuilder sb = new StringBuilder();
-                mail.From = new MailAddress("no-replay@imsbizz.com", "IMS Bizz");
+                mail.From = new MailAddress("no-reply@imsbizz.com", "IMS Bizz");
                 mail.To.Add(email.Value);
                 mail.Subject = "Test Mail";
                 string body = string.Empty;
@@ -121,7 +121,7 @@ namespace IMS.Registration
                 body = body.Replace("{uid}", dt.Rows[0]["uniqueidentifier"].ToString());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
-                NetworkCredential NetCrd = new NetworkCredential("no-replay@imsbizz.com", "Temp@1234");
+                NetworkCredential NetCrd = new NetworkCredential("no-reply@imsbizz.com", "Vtt@!123");
                 SmtpServer.EnableSsl = false;
                 SmtpServer.UseDefaultCredentials = false;
                 SmtpServer.Credentials = NetCrd;
