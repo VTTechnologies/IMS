@@ -119,7 +119,7 @@ namespace IMS
                 DataSet ds = new DataSet();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(ds);
-                GridView1.DataSource = ds.Tables[0];
+                GridView1.DataSource = ds;
                 GridView1.DataBind();
             }
             //           GridView1.DataSource = context.sp_SelectPurchase(c_id);
