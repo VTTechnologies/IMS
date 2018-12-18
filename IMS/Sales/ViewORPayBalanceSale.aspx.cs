@@ -123,12 +123,12 @@ namespace IMS
                 lblError.Text = string.Empty;
                 if (ValidCalculation())
                 {
-                    tbl_SalePaymentDetails salePaymentDetails = context.tbl_SalePaymentDetails.Where(w => w.SaleId == sale_Id).FirstOrDefault();
-
-                    salePaymentDetails.GivenAmnt = Convert.ToDecimal(txtPaidAmnt.Text);
+                    var salePaymentDetails = context.tbl_SalePaymentDetails.Where(w => w.SaleId == sale_Id).FirstOrDefault();
+                    salePaymentDetails.PaidAmnt = Convert.ToDecimal(txtPaidAmnt.Text);
+                    salePaymentDetails.GivenAmnt = Convert.ToDecimal(txtPaidAmnt.Text) + salePaymentDetails.GivenAmnt;
                     salePaymentDetails.BalanceAmnt = Convert.ToDecimal(txtBalanceAmnt.Text);                   
 
-                    context.tbl_SalePaymentDetails.Add(salePaymentDetails);
+                    
                     context.SaveChanges();
                     int? order = salePaymentDetails.SaleId;
                     ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Saved successfully, Your order number is " + order + "');", true);

@@ -56,7 +56,7 @@ namespace IMS.Registration.form_1
                 body = body.Replace("{pid}", dt.Rows[0]["Passverify_ID"].ToString());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
-                NetworkCredential NetCrd = new NetworkCredential("no-reply@imsbizz.com", "Temp@1234");
+                NetworkCredential NetCrd = new NetworkCredential("no-reply@imsbizz.com", "Vtt@!123");
                 SmtpServer.EnableSsl = false;
                 //SmtpServer.UseDefaultCredentials = true;
                 SmtpServer.UseDefaultCredentials = false;

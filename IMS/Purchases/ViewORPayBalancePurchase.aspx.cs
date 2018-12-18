@@ -126,12 +126,16 @@ namespace IMS
                 lblError.Text = string.Empty;
                 if (ValidCalculation())
                 {
-                    tbl_PurchasePaymentDetials purchasePaymentDetails = context.tbl_PurchasePaymentDetials.Where(w => w.PurchaseId == purchase_Id).FirstOrDefault();
+                    var purchasePaymentDetails = context.tbl_PurchasePaymentDetials.FirstOrDefault(w => w.PurchaseId == purchase_Id);
 
-                    purchasePaymentDetails.GivenAmnt = Convert.ToDecimal(txtPaidAmnt.Text);
-                    purchasePaymentDetails.BalanceAmnt = Convert.ToDecimal(txtBalanceAmnt.Text);
+                    if (purchasePaymentDetails != null)
+                    {
+                        purchasePaymentDetails.PaidAmnt = Convert.ToDecimal(txtPaidAmnt.Text);
+                        purchasePaymentDetails.GivenAmnt = Convert.ToDecimal(txtPaidAmnt.Text) +purchasePaymentDetails.GivenAmnt;
+                        purchasePaymentDetails.BalanceAmnt = Convert.ToDecimal(txtBalanceAmnt.Text);
+                    }
 
-                    context.tbl_PurchasePaymentDetials.Add(purchasePaymentDetails);
+                
                     context.SaveChanges();
                     int? order = purchasePaymentDetails.PurchaseId;
                     ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Saved successfully, Your order number is " + order + "');", true);

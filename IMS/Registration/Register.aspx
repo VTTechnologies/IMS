@@ -390,8 +390,8 @@
                                                 <label for="password" class="control-label">Password :</label>
                                                 <i class="fa fa-key"></i>
                                                 
-                                                    <input type="password" class="form-control" id="myInput" runat="server" required="required" autocomplete="off" onkeypress="handleSpace(event)" placeholder="Password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-                                                        title="Please enter your password e.g:Password@123" />
+                                                    <input type="password" class="form-control" id="myInput" runat="server" required="required" autocomplete="off" onkeypress="handleSpace(event)" placeholder="Password"
+                                                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Please enter your password e.g:Password@123" />
                                                 
                                              
                                                 (Password must contain atleast 8 characters,One upper case,One number,One special symbol)

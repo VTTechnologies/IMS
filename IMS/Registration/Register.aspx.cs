@@ -21,7 +21,7 @@ namespace IMS.Registration
     public partial class WebForm2 : System.Web.UI.Page
     {
 
-        /// <summary>
+        /// <summary>  
         /// All The objects That are used in coding
         /// </summary>
         IMS_TESTEntities context = new IMS_TESTEntities();
