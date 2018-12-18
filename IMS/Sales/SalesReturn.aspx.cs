@@ -197,7 +197,7 @@ namespace IMS.Sales
         //        cmd.Parameters.AddWithValue("@company_id", c_id);
         //        cmd.Parameters.AddWithValue("@branch_id", b_id);
         //        cmd.Parameters.AddWithValue("@party_id", party_id);
-        //        cmd.Parameters.AddWithValue("@given_amt", txtGivenAmt.Text);
+        //        cmd.Parameters.AddWithValue("@given_amt", txtPaidAmt.Text);
         //        cmd.Parameters.AddWithValue("@grand_total", lblGrandTotal.Text);
         //        cmd.Parameters.AddWithValue("@balance_amt", txtBalanceAmt.Text);
         //        cmd.Parameters.AddWithValue("@in_out", "out");
@@ -271,7 +271,7 @@ namespace IMS.Sales
             ddlproduct.SelectedIndex = 0;
             txtquantity.Text = "";
             txtBalanceAmt.Text = string.Empty;
-            txtGivenAmt.Text = string.Empty;
+            txtPaidAmt.Text = string.Empty;
         }
         public void calculation(decimal sub_Total, decimal total_tax, decimal total_discount)
         {
@@ -387,12 +387,12 @@ namespace IMS.Sales
 
                 //Update into Sale Payment Details 
                 tbl_SalePaymentDetails salePaymentDetails = context.tbl_SalePaymentDetails.Where(w => w.SaleId == saleId).FirstOrDefault();
-                salePaymentDetails.PaidAmnt = Convert.ToDecimal(txtGivenAmt.Text);
+                salePaymentDetails.PaidAmnt = Convert.ToDecimal(txtPaidAmt.Text);
                 salePaymentDetails.TaxAmount = Convert.ToDecimal(lblTaxAmount.Text);
                 salePaymentDetails.DiscountAmount = Convert.ToDecimal(lblDiscountAmt.Text);
                 salePaymentDetails.SubTotal = Convert.ToDecimal(lblsubtotal.Text);
                 salePaymentDetails.GrandTotal = Convert.ToDecimal(lblGrandTotal.Text);
-                salePaymentDetails.GivenAmnt = Convert.ToDecimal(lblGivenAmnt.Text) - Convert.ToDecimal(txtGivenAmt.Text);
+                salePaymentDetails.GivenAmnt = Convert.ToDecimal(lblGivenAmnt.Text) - Convert.ToDecimal(txtPaidAmt.Text);
                 salePaymentDetails.BalanceAmnt = Convert.ToDecimal(txtBalanceAmt.Text);
                 salePaymentDetails.FromTable = "Return";
                 sale.tbl_SalePaymentDetails.Add(salePaymentDetails);
@@ -500,7 +500,7 @@ namespace IMS.Sales
                 ///////////////////////////
 
 
-                //txtGivenAmt.Text = lblGivenAmnt.Text;
+                //txtPaidAmt.Text = lblGivenAmnt.Text;
                 GrdOriginalSale.DataSource = ds.Tables["Table"];
                 GrdOriginalSale.DataBind();
             }
@@ -530,7 +530,7 @@ namespace IMS.Sales
 
                         clr();
                         calculation(subTotal, tax_amount, discountamt);                        
-                        txtGivenAmt.Enabled = true;
+                        txtPaidAmt.Enabled = true;
 
                         DataTable tbl = (DataTable)ViewState["Details"];
 
@@ -672,7 +672,7 @@ namespace IMS.Sales
 
             //txtBalanceAmt.Text = (Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(lblGivenAmnt.Text)).ToString("0.##");
 
-            //txtGivenAmt.Text = "0.00";
+            //txtPaidAmt.Text = "0.00";
             //if (Convert.ToDecimal(txtBalanceAmt.Text) < 0)
             //    btnPayBack.Visible = true;
 
@@ -730,7 +730,7 @@ namespace IMS.Sales
 
                         clr();
                         calculation(subTotal, tax_amount, discountamt);                        
-                        txtGivenAmt.Enabled = true;
+                        txtPaidAmt.Enabled = true;
                         ViewState["Details"] = dt;
                         ddlproduct.Enabled = true;
                         this.BindGrid();
@@ -843,13 +843,13 @@ namespace IMS.Sales
         protected void btnPayBack_Click(object sender, EventArgs e)
         {
             string balanceAmnt = txtBalanceAmt.Text.Replace('-', ' ');
-            decimal paidAmnt = txtGivenAmt.Text == "" ? 0 : Convert.ToDecimal(txtGivenAmt.Text);
-            txtGivenAmt.Text = (Convert.ToDecimal(balanceAmnt) + paidAmnt).ToString();
+            decimal paidAmnt = txtPaidAmt.Text == "" ? 0 : Convert.ToDecimal(txtPaidAmt.Text);
+            txtPaidAmt.Text = (Convert.ToDecimal(balanceAmnt) + paidAmnt).ToString();
             txtBalanceAmt.Text = "0";
             btnPayBack.Visible = false;
 
             //string balanceAmnt = txtBalanceAmt.Text.Replace('-', ' ');
-            //txtGivenAmt.Text = balanceAmnt;
+            //txtPaidAmt.Text = balanceAmnt;
             //txtBalanceAmt.Text = "0";
             //btnPayBack.Visible = false;
         }
@@ -868,13 +868,13 @@ namespace IMS.Sales
             }
         }
 
-        protected void txtGivenAmt_TextChanged(object sender, EventArgs e)
+        protected void txtPaidAmt_TextChanged(object sender, EventArgs e)
         {
             try
             {
                 //decimal remainingBalance = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(lblGivenAmnt.Text);
 
-                //if (txtGivenAmt.Text == "0" || string.IsNullOrEmpty(txtGivenAmt.Text))
+                //if (txtPaidAmt.Text == "0" || string.IsNullOrEmpty(txtPaidAmt.Text))
                 //{
                 //    txtBalanceAmt.Text = remainingBalance.ToString();
                 //    return;
@@ -882,20 +882,20 @@ namespace IMS.Sales
 
                 //if(remainingBalance<0)
                 //{
-                //    txtBalanceAmt.Text = (remainingBalance + Convert.ToDecimal(txtGivenAmt.Text)).ToString();
+                //    txtBalanceAmt.Text = (remainingBalance + Convert.ToDecimal(txtPaidAmt.Text)).ToString();
                 //}
                 //else
                 //{
-                //    txtBalanceAmt.Text = (remainingBalance - Convert.ToDecimal(txtGivenAmt.Text)).ToString();
+                //    txtBalanceAmt.Text = (remainingBalance - Convert.ToDecimal(txtPaidAmt.Text)).ToString();
                 //}
                 decimal remainingBalance = Convert.ToDecimal(lblResultGrndTotal.Text) - Convert.ToDecimal(lblGivenAmnt.Text);
 
                 if (remainingBalance < 0)
                 {
                     btnPayBack.Visible = true;
-                    txtBalanceAmt.Text = (remainingBalance + Convert.ToDecimal(txtGivenAmt.Text)).ToString();
+                    txtBalanceAmt.Text = (remainingBalance + Convert.ToDecimal(txtPaidAmt.Text)).ToString();
                 }
-                else if (txtGivenAmt.Text == "0" || string.IsNullOrEmpty(txtGivenAmt.Text))
+                else if (txtPaidAmt.Text == "0" || string.IsNullOrEmpty(txtPaidAmt.Text))
                 {
                     btnPayBack.Visible = false;
                     txtBalanceAmt.Text = remainingBalance.ToString();
@@ -903,7 +903,7 @@ namespace IMS.Sales
                 }
                 else
                 {
-                    txtBalanceAmt.Text = (remainingBalance - Convert.ToDecimal(txtGivenAmt.Text)).ToString();
+                    txtBalanceAmt.Text = (remainingBalance - Convert.ToDecimal(txtPaidAmt.Text)).ToString();
                 }
                 UpdatePanel1.Update();
             }

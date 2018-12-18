@@ -230,7 +230,6 @@ namespace IMS.Reports
                     }
                     ds.Tables["Table"].Columns.Remove("Company");
                     ds.Tables["Table"].Columns.Remove("CompanyAddress");
-
                     ds.Tables["Table"].Columns.Remove("StartDate");
                     ds.Tables["Table"].Columns.Remove("EndDate");
                     ds.Tables["Table"].Columns.Remove("PartyAddress");
