@@ -80,12 +80,12 @@
                                 <div class="form-group">
                                     <div class="col-sm-5 leftpadd0">
                                         <label class="control-label">
-                                            Address :<asp:Label ID="Label1" runat="server" Text="*" ForeColor="Red"></asp:Label>
+                                            Address :
                                         </label>
                                     </div>
                                     <div class="col-sm-7">
                                         <asp:TextBox ID="txtGodownAddress" runat="server" CssClass="form-control"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ValidationGroup="godwn" ErrorMessage="Address is required" ControlToValidate="txtGodownAddress" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                                       <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ValidationGroup="godwn" ErrorMessage="Address is required" ControlToValidate="txtGodownAddress" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>--%>
                                     </div>
                                 </div>
                             </div>
@@ -97,16 +97,16 @@
                                 <div class="form-group">
                                     <div class="col-sm-5 leftpadd0">
                                         <label class="control-label">
-                                            Contact No :<asp:Label ID="Label2" runat="server" Text="*" ForeColor="Red"></asp:Label>
+                                            Contact No :
                                         </label>
                                     </div>
                                     <div class="col-sm-7">
                                         <asp:TextBox ID="txtContactNo" runat="server" CssClass="form-control" onkeypress="return OnlyNumericEntry(event);"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" Display="Dynamic" ValidationGroup="godwn" runat="server" ErrorMessage="Contact is required" ControlToValidate="txtContactNo" ForeColor="Red"></asp:RequiredFieldValidator>
+                                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator4" Display="Dynamic" ValidationGroup="godwn" runat="server" ErrorMessage="Contact is required" ControlToValidate="txtContactNo" ForeColor="Red"></asp:RequiredFieldValidator>--%>
                                         <asp:RegularExpressionValidator ID="rgx" runat="server" ErrorMessage="Enter valid Phone number in between 10-14 digits"
                                             ControlToValidate="txtContactNo" Display="Dynamic" ValidationExpression="^[0-9]{10}$" ForeColor="Red" ValidationGroup="godwn">
                                         </asp:RegularExpressionValidator>
-
+                                        <%--  --%>
                                     </div>
                                 </div>
                             </div>
@@ -116,12 +116,12 @@
                                 <div class="form-group">
                                     <div class="col-sm-5 leftpadd0">
                                         <label class="leftpadd0  ">
-                                            Contact Person :<asp:Label ID="Label3" runat="server" Text="*" ForeColor="Red"></asp:Label>
+                                            Contact Person :
                                         </label>
                                     </div>
                                     <div class="col-sm-7">
                                         <asp:TextBox ID="txtContactPerson" runat="server" CssClass="form-control"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ValidationGroup="godwn" Display="Dynamic" runat="server" ErrorMessage="Contact Person is required" ControlToValidate="txtContactPerson" ForeColor="Red"></asp:RequiredFieldValidator>
+                                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator3" ValidationGroup="godwn" Display="Dynamic" runat="server" ErrorMessage="Contact Person is required" ControlToValidate="txtContactPerson" ForeColor="Red"></asp:RequiredFieldValidator>--%>
                                     </div>
                                 </div>
                             </div>
