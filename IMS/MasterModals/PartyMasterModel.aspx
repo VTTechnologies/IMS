@@ -114,7 +114,6 @@
                                     </div>
                                     <div class="col-sm-8">
                                         <asp:TextBox ID="txtContactNo" runat="server" CssClass="form-control"></asp:TextBox>
-                                       
                                         <asp:RegularExpressionValidator ID="rgx" runat="server" ValidationGroup="abc" ErrorMessage="Invalid Mobile No" Display="Dynamic"
                                             ControlToValidate="txtContactNo" ValidationExpression="^[0-9]{10}$" ForeColor="Red">
                                         </asp:RegularExpressionValidator>
