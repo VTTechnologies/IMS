@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="col-sm-8">
                                         <asp:TextBox ID="txtPartyAddress" runat="server" CssClass="form-control"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" Display="Dynamic" ValidationGroup="abc" runat="server" ErrorMessage="Address is required" ControlToValidate="txtPartyAddress" ForeColor="Red"></asp:RequiredFieldValidator>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +114,6 @@
                                     </div>
                                     <div class="col-sm-8">
                                         <asp:TextBox ID="txtContactNo" runat="server" CssClass="form-control"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ValidationGroup="abc" Display="Dynamic" ErrorMessage="Contact is required" ControlToValidate="txtContactNo" ForeColor="Red"></asp:RequiredFieldValidator>
                                         <asp:RegularExpressionValidator ID="rgx" runat="server" ValidationGroup="abc" ErrorMessage="Invalid Mobile No" Display="Dynamic"
                                             ControlToValidate="txtContactNo" ValidationExpression="^[0-9]{10}$" ForeColor="Red">
                                         </asp:RegularExpressionValidator>
@@ -133,7 +132,7 @@
                                     </div>
                                     <div class="col-sm-8">
                                         <asp:TextBox ID="txtGSTIN" runat="server" CssClass="form-control"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ValidationGroup="abc" Display="Dynamic" ErrorMessage="GSTIN is required" ControlToValidate="txtGSTIN" ForeColor="Red"></asp:RequiredFieldValidator>
+                                       
                                         <asp:Label ID="lblgstinerror" ForeColor="Red" runat="server"></asp:Label>
                                         <asp:HiddenField ID="hd2" runat="server" />
                                         <asp:RegularExpressionValidator ID="rxgst" runat="server" ErrorMessage="Invalid GSTIN" ForeColor="Red" Display="Dynamic" ValidationExpression="\d{2}[A-Z]{5}\d{4}[A-Z]{1}\d[Z]{1}[A-Z\d]{1}" ControlToValidate="txtGSTIN" ValidationGroup="abc"></asp:RegularExpressionValidator>
@@ -157,7 +156,7 @@
                                             <asp:ListItem Text="Customer" Value="Customer" />
                                             <asp:ListItem Text="Vendor" Value="Vendor" />
                                         </asp:DropDownList>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ValidationGroup="abc" InitialValue="0" Display="Dynamic" ErrorMessage="Select Type" ControlToValidate="ddlPartyType" ForeColor="Red"></asp:RequiredFieldValidator>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -173,7 +172,7 @@
                                     <div class="col-sm-8">
                                         <asp:DropDownList ID="ddlState" runat="server" CssClass="form-control">
                                         </asp:DropDownList>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ValidationGroup="abc" InitialValue="0" Display="Dynamic" ErrorMessage="State is required" ControlToValidate="ddlState" ForeColor="Red"></asp:RequiredFieldValidator>
+                                       
                                     </div>
                                 </div>
                             </div>

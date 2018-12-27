@@ -113,10 +113,10 @@
                                             <asp:DropDownList runat="server" ID="ddlVendor" CssClass="form-control">
                                                 <asp:ListItem Text="--Select Vendor--" Value="0" />
                                             </asp:DropDownList>
-                                            <span class="input-group-addons">
-                                                <%--<asp:Button ID="btn" runat="server" Text="Show" OnClick="btn_Click" />--%>
+                                        
+                                                  <span class="input-group-addons">
                                                 <a href="javascript:AddSrcToIfram('v')">
-                                                    <asp:Label ID="Label1" runat="server" Text="+" Font-Bold="true" Font-Size="20px" ForeColor="White"></asp:Label>
+                                                    <asp:Label ID="Label1" runat="server" Text="+" Font-Bold="true"  ForeColor="White"></asp:Label>
                                                 </a>
                                             </span>
                                         </div>
@@ -453,8 +453,12 @@
                        <%-- <button type="button"class="close" data-dismiss="modal" >
                              
                             <span aria-hidden="true">&times;</span>
+
                         </button>--%>
-                        <center><h3><asp:Label ID="lblModalHeader" runat="server"></asp:Label></h3></center>
+
+                       
+                    <h3><asp:Label ID="lblModalHeader" CssClass="text-center" runat="server"></asp:Label></h3>
+
                     </div>
                     <div class="modal-body" >
                         <iframe id="ModalIfram" runat="server" width="100%" height="100%" scrolling="yes" frameborder="0" allowfullscreen="true"></iframe>

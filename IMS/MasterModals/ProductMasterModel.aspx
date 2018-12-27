@@ -234,13 +234,13 @@
                             <div class="form-group ">
                                 <div class="col-sm-5 leftpadd0">
                                     <label class="control-label   ">
-                                        Product Code:<asp:Label ID="Label7" runat="server" Text="*" ForeColor="Red"></asp:Label>
+                                        Product Code:
                                     </label>
                                 </div>
                                 <div class="col-sm-7">
                                     <asp:TextBox ID="txtProductCode" runat="server" onchange="CheckDouble()" CssClass="form-control"></asp:TextBox>
                                     <asp:Label ID="lblcheckDoubleError" runat="server"></asp:Label>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" Display="Dynamic" ValidationGroup="adf" ErrorMessage="Product code is required" ControlToValidate="txtProductName" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" Display="Dynamic" ValidationGroup="adf" ErrorMessage="Product code is required" ControlToValidate="txtProductName" ForeColor="Red"></asp:RequiredFieldValidator>--%>
                                     <asp:HiddenField ID="hde" runat="server" />
                                 </div>
                             </div>
@@ -249,12 +249,12 @@
                             <div class="form-group">
                                 <div class="col-sm-5 leftpadd0">
                                     <label class="control-label   ">
-                                        HSN Code:<asp:Label ID="Label8" runat="server" Text="*" ForeColor="Red"></asp:Label>
+                                        HSN Code:
                                     </label>
                                 </div>
                                 <div class="col-sm-7">
                                     <asp:TextBox ID="txtHSNCode" runat="server" CssClass="form-control"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" Display="Dynamic" ValidationGroup="adf" ErrorMessage="HSN Code is required" ControlToValidate="txtHSNCode" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" Display="Dynamic" ValidationGroup="adf" ErrorMessage="HSN Code is required" ControlToValidate="txtHSNCode" ForeColor="Red"></asp:RequiredFieldValidator>--%>
                                 </div>
                             </div>
                         </div>
