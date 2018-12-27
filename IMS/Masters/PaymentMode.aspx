@@ -90,7 +90,7 @@
             <div class="panel-footer">
                 <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" />
                 <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" OnClick="btnUpdate_Click" Visible="false" />
-                <input class="btn btn-primary " type="button" value="Clear" onclick="cleartextboxes();" />
+                <input class="btn btn-primary " type="button" value="Clear"  onclick="javascript: window.location = 'PaymentMode.aspx'" />
                 <%--<asp:Button ID="btnCancel" runat="server" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" Style="float: right" />--%>
             </div>
         </div>

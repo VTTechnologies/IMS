@@ -162,16 +162,16 @@
                                     </label>
                                     <div class="container">
                                         <div class="side-by-side clearfix">
-                                            <div class="input-group input-group-xs">
+                                            <div >
                                                 <asp:DropDownList ID="ddlproduct" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlproduct_SelectedIndexChanged">
                                                     <asp:ListItem Text="Choose Product" />
                                                 </asp:DropDownList>
-                                                <span class="input-group-addons">
+                                               <%-- <span class="input-group-addons">
                                                     <%--<asp:Button ID="btn" runat="server" Text="Show"/>--%>
-                                                    <a href="javascript:AddSrcToIfram('p')">
+                                                   <%-- <a href="javascript:AddSrcToIfram('p')">
                                                         <asp:Label ID="Label2" runat="server" Text="+" Font-Bold="true" Font-Size="20px" ForeColor="White"></asp:Label>
                                                     </a>
-                                                </span>
+                                                </span>--%>
                                             </div>
                                         </div>
                                     </div>
@@ -190,12 +190,12 @@
                                                 <asp:DropDownList ID="ddlBatch" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlBatch_SelectedIndexChanged" AutoPostBack="true">
                                                     <asp:ListItem Text="Choose Batch" />
                                                 </asp:DropDownList>
-                                                <span class="input-group-addons">
+                                               <%-- <span class="input-group-addons">--%>
                                                     <%--<asp:Button ID="btn" runat="server" Text="Show" OnClick="btn_Click" />--%>
-                                                    <a href="javascript:AddSrcToIfram('b')">
+                                                    <%--<a href="javascript:AddSrcToIfram('b')">
                                                         <asp:Label ID="Label3" runat="server" Text="+" Font-Bold="true" Font-Size="20px" ForeColor="White"></asp:Label>
                                                     </a>
-                                                </span>
+                                                </span>--%>
                                             </div>
                                         </div>
                                     </div>
@@ -443,17 +443,17 @@
         <div class="modal-dialog" style="height: 650px">
             <div class="modal-content" style="height: 90%">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
+                    <%--<button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
-                    </button>
-                    <center><h3><asp:Label ID="lblModalHeader" runat="server"></asp:Label></h3></center>
+                    </button>--%>
+                    <h3><asp:Label ID="lblModalHeader" runat="server" CssClass="text-center"></asp:Label></h3>
                 </div>
                 <div class="modal-body" style="height: 90%">
                     <iframe id="ModalIfram" runat="server" width="100%" height="90%" scrolling="yes" frameborder="0" allowfullscreen="true"></iframe>
                 </div>
-                <%--<div class="modal-footer">
-                        modal footer
-                    </div>--%>
+              <div class="modal-footer" >
+                        <asp:Button ID="btnCloseMode" runat="server" Text="Close" CssClass="btn btn-primary" OnClick="btnCloseMode_Click"  />
+                    </div>
             </div>
         </div>
     </div>
@@ -505,18 +505,18 @@
         }
 
 
-        $('#<%= ddlproduct.ClientID %>').chosen();
+<%--        $('#<%= ddlproduct.ClientID %>').chosen();
         $("#<%= ddlproduct.ClientID %>-deselect").chosen(
-            { allow_single_deselect: true });
+            { allow_single_deselect: true });--%>
 
         $('#<%= ddlVendor.ClientID %>').chosen();
         $("#<%= ddlVendor.ClientID %>-deselect").chosen(
         { allow_single_deselect: true });
 
 
-        $('#<%= ddlBatch.ClientID %>').chosen();
+<%--        $('#<%= ddlBatch.ClientID %>').chosen();
         $("#<%= ddlBatch.ClientID %>-deselect").chosen(
-            { allow_single_deselect: true });
+            { allow_single_deselect: true });--%>
 
     </script>
 

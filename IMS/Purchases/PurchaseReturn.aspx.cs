@@ -237,7 +237,7 @@ namespace IMS
                        
                     }
                     else if (ds.Tables["Table"].Rows[i]["Type"].ToString() == "Return")
-                    {
+                    {   
                         totalTax = totalTax - Convert.ToDecimal(ds.Tables["Table"].Rows[i]["TaxAmnt"]);
                         totalDiscount = totalDiscount - Convert.ToDecimal(ds.Tables["Table"].Rows[i]["DiscountAmnt"]);
                         subTotal = subTotal - Convert.ToDecimal(ds.Tables["Table"].Rows[i]["ProductAmount"]);

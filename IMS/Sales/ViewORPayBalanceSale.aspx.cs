@@ -86,24 +86,29 @@ namespace IMS
                 }
                 grandTotal = subTotal + totalTax - totalDiscount;
 
+                DataView dv = ds.Tables["Table"].DefaultView;
+                dv.Sort = "Date desc";
+                DataTable sortedDT = dv.ToTable();
 
-                DataRow dr = ds.Tables["Table"].Select("Id=" + purchaseId + "").FirstOrDefault();
+                DataRow dr = sortedDT.Select("Id=" + purchaseId + "").FirstOrDefault();
                 txtPaymentMode.Text = dr["PaymentMode"].ToString();
                 txtInvoiceNo.Text = dr["InvoiceNumber"].ToString();
                 txtVendor.Text = dr["Party"].ToString();               
                 txtdate.Text = dr["Date"].ToString();
 
-                //Get only Given and Balance Amnt and Calcualte Remainig as per Transaction
-                DataRow drpurchase = ds.Tables["Table"].Select("Type='Sale'").FirstOrDefault();
-                DataRow drreturn = ds.Tables["Table"].Select("Type='Return'").FirstOrDefault();
+                ////Get only Given and Balance Amnt and Calcualte Remainig as per Transaction
+                //DataRow Declare But Not Used
+                //DataRow drpurchase = ds.Tables["Table"].Select("Type='Sale'").FirstOrDefault();
+                //DataRow drreturn = ds.Tables["Table"].Select("Type='Return'").FirstOrDefault();
+                var v = context.tbl_SalePaymentDetails.Where(s => s.SaleId == purchaseId).FirstOrDefault();
 
                 lblsubtotal.Text = subTotal.ToString();
                 lblTaxAmount.Text = totalTax.ToString();
                 lblDiscountAmt.Text = totalDiscount.ToString();
                 lblGrandTotal.Text = grandTotal.ToString();
-                lblGivenAmnt.Text = dr["GivenAmnt"].ToString();
+                lblGivenAmnt.Text = v.GivenAmnt.ToString();
 
-                balanceAmnt = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(lblGivenAmnt.Text);
+                balanceAmnt = Convert.ToDecimal(v.BalanceAmnt);
 
                 if (balanceAmnt < 0)
                     btnGetRefund.Visible = true;
@@ -124,11 +129,13 @@ namespace IMS
                 if (ValidCalculation())
                 {
                     var salePaymentDetails = context.tbl_SalePaymentDetails.Where(w => w.SaleId == sale_Id).FirstOrDefault();
-                    salePaymentDetails.PaidAmnt = Convert.ToDecimal(txtPaidAmnt.Text);
-                    salePaymentDetails.GivenAmnt = Convert.ToDecimal(txtPaidAmnt.Text) + salePaymentDetails.GivenAmnt;
-                    salePaymentDetails.BalanceAmnt = Convert.ToDecimal(txtBalanceAmnt.Text);                   
-
-                    
+                    if (salePaymentDetails != null)
+                    {
+                        salePaymentDetails.PaidAmnt = Convert.ToDecimal(txtPaidAmnt.Text);
+                        salePaymentDetails.GivenAmnt = Convert.ToDecimal(txtPaidAmnt.Text) + salePaymentDetails.GivenAmnt;
+                        salePaymentDetails.BalanceAmnt = Convert.ToDecimal(txtBalanceAmnt.Text);
+                        salePaymentDetails.FromTable = "Sale Pay Balance";
+                    }
                     context.SaveChanges();
                     int? order = salePaymentDetails.SaleId;
                     ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Saved successfully, Your order number is " + order + "');", true);

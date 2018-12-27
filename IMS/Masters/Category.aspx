@@ -109,7 +109,7 @@
 
                 <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " ValidationGroup="abc" Text="Save" OnClick="btnSave_Click"/>
                 <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" ValidationGroup="abc" Text="Update" OnClick="btnUpdate_Click" Visible="false" />
-                <input class="btn btn-primary " type="button" value="Clear" onclick="clearcategory()" />
+                <input class="btn btn-primary " type="button" value="Clear" onclick="javascript: window.location = 'Category.aspx'" />
             </div>
         </div>
         <div class="row">
@@ -122,7 +122,7 @@
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div>
                     <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" OnRowCommand="GridView1_RowCommand" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" DataKeyNames="category_id"
-                        CssClass="table table table-striped table-bordered table-responsive table-hover" AutoGenerateColumns="False" SelectedIndex="0">
+                        CssClass="table table table-striped table-bordered table-responsive table-hover" OnPreRender="GridView1_PreRender" AutoGenerateColumns="False" SelectedIndex="0">
                         <Columns>
                             <asp:BoundField DataField="category_name" HeaderText="Category Name"></asp:BoundField>
                             <asp:TemplateField HeaderText="Update">

@@ -23,6 +23,8 @@ namespace IMS.Reports
         int companyId, branchId;
         string User_id;
         bool displayInventoryColumns = false;
+        bool isReportType = false;
+        bool isInvoiceType=false;
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionValue();
@@ -45,6 +47,8 @@ namespace IMS.Reports
 
                 //Combine Purchase Return Order Report 
                 case "CombinePurchaseAndReturnReport":
+                    isReportType = true;
+                    isInvoiceType = true;
                     sqlParams = new SqlParameter[] {
                          new SqlParameter("@Id", id),
                          new SqlParameter("@FromTable","COMBINEPURCHASEANDRETURNREPORT")
@@ -107,25 +111,68 @@ namespace IMS.Reports
                     lblpartyaddress.Text = ds.Tables[tableName].Rows[i]["PartyAddress"].ToString();
                     lblinvoiceno.Text = ds.Tables[tableName].Rows[i]["InvoiceNumber"].ToString();
 
-                    lblGivenAmnt.Text = ds.Tables[tableName].Rows[i]["GivenAmnt"].ToString();
-                    lblBalanceAmnt.Text = ds.Tables[tableName].Rows[i]["BalanceAmnt"].ToString();
+                    //lblGivenAmnt.Text = ds.Tables[tableName].Rows[i]["GivenAmnt"].ToString();
+                    //lblBalanceAmnt.Text = ds.Tables[tableName].Rows[i]["BalanceAmnt"].ToString();
 
-                    if (ds.Tables[tableName].Rows[i]["Type"].ToString() == "Purchase")
+                    //for resolve calculation Error Occur 
+
+                    if (isInvoiceType)
                     {
-                        totalAmount = totalAmount + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalAmount"]);
-                        totalTax = totalTax + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalTax"]);
-                        totalDiscount = totalDiscount + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalDiscount"]);
-                        grandTotal = grandTotal + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalAmount"]);
-                    }
-                    else if (ds.Tables[tableName].Rows[i]["Type"].ToString() == "Return")
-                    {
-                        totalAmount = totalAmount - Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalAmount"]);
-                        totalTax = totalTax - Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalTax"]);
-                        totalDiscount = totalDiscount - Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalDiscount"]);
-                        grandTotal = grandTotal - Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalAmount"]);
+                        var purchase = context.tbl_PurchasePaymentDetials.Where(p => p.PurchaseId == id).FirstOrDefault();
+                        totalAmount = Convert.ToDecimal(purchase.SubTotal);
+                        totalTax = Convert.ToDecimal(purchase.TaxAmount);
+                        totalDiscount = Convert.ToDecimal(purchase.DiscountAmount);
+                        grandTotal = Convert.ToDecimal(purchase.GrandTotal);
+                        lblGivenAmnt.Text = purchase.GivenAmnt.ToString();
+                        lblBalanceAmnt.Text = purchase.BalanceAmnt.ToString();
 
                     }
+                    else
+                    {
 
+                        var sale = context.tbl_SalePaymentDetails.Where(s => s.SaleId == id).FirstOrDefault();
+                        totalAmount = Convert.ToDecimal(sale.SubTotal);
+                        totalTax = Convert.ToDecimal(sale.TaxAmount);
+                        totalDiscount = Convert.ToDecimal(sale.DiscountAmount);
+                        grandTotal = Convert.ToDecimal(sale.GrandTotal);
+                        lblGivenAmnt.Text = sale.GivenAmnt.ToString();
+                        lblBalanceAmnt.Text = sale.BalanceAmnt.ToString();
+                    }
+
+
+
+
+
+
+                    //if (ds.Tables[tableName].Rows[i]["Type"].ToString() == "Purchase")
+                    //{
+                    //    totalAmount = totalAmount + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalAmount"]);
+                    //    totalTax = totalTax + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalTax"]);
+                    //    totalDiscount = totalDiscount + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalDiscount"]);
+                    //    grandTotal = grandTotal + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["GrandTotal"]);
+                    //}
+                    //else if (ds.Tables[tableName].Rows[i]["Type"].ToString() == "Sale")
+                    //{
+                    //    totalAmount = totalAmount + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalAmount"]);
+                    //    totalTax = totalTax + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalTax"]);
+                    //    totalDiscount = totalDiscount + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalDiscount"]);
+                    //    grandTotal = grandTotal + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["GrandTotal"]);
+                    //}
+                    //else if (ds.Tables[tableName].Rows[i]["Type"].ToString() == "Return")
+                    //{
+                    //    totalAmount = totalAmount - Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalAmount"]);
+                    //    totalTax = totalTax - Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalTax"]);
+                    //    totalDiscount = totalDiscount - Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalDiscount"]);
+                    //    grandTotal = grandTotal - Convert.ToDecimal(ds.Tables[tableName].Rows[i]["GrandTotal"]);
+
+                    //}
+                    //if (isReportType)
+                    //{
+                        //totalAmount = Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalAmount"]);
+                        //totalTax =  Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalTax"]);
+                        //totalDiscount = Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalDiscount"]);
+                        //grandTotal = Convert.ToDecimal(ds.Tables[tableName].Rows[i]["GrandTotal"]);
+                   // }
                     //totalAmount =  Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalAmount"]);
                     //totalTax =  Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalTax"]);
                     //totalDiscount =  Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalDiscount"]);

@@ -105,7 +105,6 @@
                                     <asp:BoundField DataField="Date" HeaderText="Date"></asp:BoundField>
                                     <asp:BoundField DataField="Quantity" HeaderText="Quantity"></asp:BoundField>
                                     <asp:BoundField DataField="Batch" HeaderText="Batch"></asp:BoundField>
-                                    <asp:BoundField DataField="Batch" HeaderText="Batch"></asp:BoundField>
                                     <asp:BoundField DataField="PaymentMode" HeaderText="Payment Mode" Visible="false"></asp:BoundField>
                                     <asp:BoundField DataField="TaxAmnt" HeaderText="Tax"></asp:BoundField>
                                     <asp:BoundField DataField="DiscountAmnt" HeaderText="Discount"></asp:BoundField>

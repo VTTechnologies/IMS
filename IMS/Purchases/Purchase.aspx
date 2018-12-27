@@ -161,7 +161,7 @@
                                     <div class="container">
                                         <div class="side-by-side clearfix">
                                             <div class="input-group input-group-xs">
-                                                <asp:DropDownList runat="server" ID="ddlproduct" CssClass="form-control">
+                                                <asp:DropDownList runat="server" ID="ddlproduct" CssClass="form-control" OnSelectedIndexChanged="ddlproduct_SelectedIndexChanged1" AutoPostBack="true">
                                                     <asp:ListItem Text="--Select Product--" Value="0" />
                                                 </asp:DropDownList>
                                                 <span class="input-group-addons">
@@ -447,20 +447,21 @@
 
 
         <div class="modal fade" role="dialog" id="AddModal" runat="server">
-            <div class="modal-dialog" style="height: 650px">
-                <div class="modal-content" style="height: 90%">
+            <div class="modal-dialog" >
+                <div class="modal-content" >
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">
+                       <%-- <button type="button"class="close" data-dismiss="modal" >
+                             
                             <span aria-hidden="true">&times;</span>
-                        </button>
+                        </button>--%>
                         <center><h3><asp:Label ID="lblModalHeader" runat="server"></asp:Label></h3></center>
                     </div>
-                    <div class="modal-body" style="height: 90%">
-                        <iframe id="ModalIfram" runat="server" width="100%" height="90%" scrolling="yes" frameborder="0" allowfullscreen="true"></iframe>
+                    <div class="modal-body" >
+                        <iframe id="ModalIfram" runat="server" width="100%" height="100%" scrolling="yes" frameborder="0" allowfullscreen="true"></iframe>
                     </div>
-                    <%--<div class="modal-footer">
-                        modal footer
-                    </div>--%>
+                    <div class="modal-footer" >
+                        <asp:Button ID="btnCloseMode" runat="server" Text="Close" CssClass="btn btn-primary" OnClick="btnCloseMode_Click"  />
+                    </div>
                 </div>
             </div>
         </div>
@@ -535,6 +536,12 @@
         $('#<%= ddlBatch.ClientID %>').chosen();
         $("#<%= ddlBatch.ClientID %>-deselect").chosen(
             { allow_single_deselect: true });
+
+
+        function Closepopup() {
+            $('#AddModal').modal('close');
+
+        }
 
     </script>
 

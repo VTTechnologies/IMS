@@ -85,7 +85,7 @@
 
 
                 <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" OnClick="btnUpdate_Click" Visible="false" ValidationGroup="abc" />
-                <input class="btn btn-primary" type="button" value="Clear" onclick="cleartextboxes();" />
+                <input class="btn btn-primary" type="button" value="Clear"  onclick="javascript: window.location = 'Expense.aspx'"/>
                 <%--<asp:Button ID="btnCancel" runat="server" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" Style="float: right" />--%>
             </div>
         </div>
@@ -99,7 +99,7 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="table-responsive" style="overflow-x: hidden">
-                    <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" overflow="hidden" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowCommand="GridView1_RowCommand" DataKeyNames="expense_id" AutoGenerateColumns="False" CssClass="table table table-striped table-bordered table-hover" SelectedIndex="1">
+                    <asp:GridView ID="GridView1" runat="server" OnPreRender="GridView1_PreRender" OnRowDataBound="GridView1_RowDataBound" overflow="hidden" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowCommand="GridView1_RowCommand" DataKeyNames="expense_id" AutoGenerateColumns="False" CssClass="table table table-striped table-bordered table-hover" SelectedIndex="1">
                         <Columns>
                             <asp:BoundField DataField="expense_name" HeaderText="Expense Name"></asp:BoundField>
 

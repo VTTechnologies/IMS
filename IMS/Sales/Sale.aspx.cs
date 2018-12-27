@@ -52,7 +52,7 @@ namespace IMS
                     }
                     txtdate.Text = DateTime.Now.ToString();
                     this.BindGrid();
-                    ddlVendorbind();
+                    ddlCustomerbind();
                     ddlproductbind();
                     ddlpaymentmodebind();
                     getdate();
@@ -164,7 +164,7 @@ namespace IMS
             gvSalesdetails.DataBind();
         }
 
-        public void ddlVendorbind()
+        public void ddlCustomerbind()
         {
             List<tbl_party> cd = context.tbl_party.Where(x => x.status == true && x.company_id == companyId && x.party_type == "Customer").ToList();
             ddlVendor.DataTextField = "party_name";
@@ -796,6 +796,23 @@ namespace IMS
             if (a != 0 || Convert.ToString(a) == null)
             {              
                 Response.Write(String.Format("<script>window.open('{0}','_blank')</script>", ResolveUrl(string.Format("~/Sales/printsale.aspx?id={0}", a))));
+            }
+        }
+
+
+        protected void btnCloseMode_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ddlCustomerbind();
+                ScriptManager.RegisterStartupScript(this, GetType(), "Close Modal Popup", "Closepopup();", true);
+                UpdatePanel1.Update();
+            }
+            catch (Exception ex)
+            {
+
+                ErrorLog.saveerror(ex);
+                //Do Logging
             }
         }
 

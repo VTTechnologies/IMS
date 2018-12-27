@@ -173,7 +173,7 @@
                          <asp:BoundField DataField="given_amnt" HeaderText="Given Amnt"></asp:BoundField>
                         <asp:BoundField DataField="balance_amnt" HeaderText="Balance Amnt"></asp:BoundField>            
                         <asp:BoundField DataField="grand_total" HeaderText="Grand Total "></asp:BoundField>                                           
-                        <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField  ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <%--<asp:ImageButton ID="btnimg_update" runat="server" CommandName="Select" CommandArgument='<%# Eval("purchase_id") %>' />--%>
                                 <asp:LinkButton ID="LinkButton4" runat="server" CommandName="Order" Font-Size="Small" CommandArgument='<%# Eval("purchase_id") %>' CssClass="btn btn-success"><i class="fa fa-edit"  aria-hidden="true"> Original Order</i></asp:LinkButton>

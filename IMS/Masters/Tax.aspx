@@ -116,7 +116,7 @@
             <div class="panel-footer text-center">
                 <asp:Button ID="btnSave" runat="server" ValidationGroup="tx" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" />
                 <asp:Button ID="btnUpdate" runat="server" ValidationGroup="tx" CssClass="btn btn-primary" Text="Update" OnClick="btnUpdate_Click" Visible="false" />
-                <asp:Button ID="btnClear" runat="server" CssClass="btn btn-primary " Text="Clear" OnClick="btnClear_Click" />
+                <input class="btn btn-primary " type="button" value="Clear"  onclick="javascript: window.location = 'Tax.aspx'" />
                 <%--<asp:Button ID="btnCancel" runat="server" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" Style="float: right" />--%>
             </div>
         </div>
@@ -130,7 +130,7 @@
             <div class="row">
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <div>
-                        <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" OnRowCommand="GridView1_RowCommand" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" DataKeyNames="tax_id" CssClass="table table table-striped table-bordered table-hover" AutoGenerateColumns="false" SelectedIndex="0">
+                        <asp:GridView ID="GridView1" runat="server" OnPreRender="GridView1_PreRender" OnRowDataBound="GridView1_RowDataBound" OnRowCommand="GridView1_RowCommand" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" DataKeyNames="tax_id" CssClass="table table table-striped table-bordered table-hover" AutoGenerateColumns="false" SelectedIndex="0">
                             <Columns>
                                 <asp:BoundField DataField="tax_name" HeaderText="Tax Name"></asp:BoundField>
                                 <asp:BoundField DataField="tax_percentage" HeaderText="Tax Percent"></asp:BoundField>

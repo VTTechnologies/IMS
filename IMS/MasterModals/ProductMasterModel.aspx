@@ -105,7 +105,7 @@
                                 </div>
                                 <div class="col-sm-7">
                                     <div class="input-group input-group-xs">
-                                        <asp:DropDownList ID="ddlCategory" runat="server" CssClass="form-control">
+                                        <asp:DropDownList ID="ddlCategory" runat="server" CssClass="form-control" style="width:100%">
                                             <asp:ListItem Text="Choose Category" />
                                         </asp:DropDownList>
                                         <span class="input-group-addons">
@@ -347,17 +347,17 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
+                   <%-- <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
-                    </button>
+                    </button>--%>
                     <center><h2><asp:Label ID="lblModalHeader" runat="server"></asp:Label></h2></center>
                 </div>
                 <div class="modal-body">
                     <iframe id="ModalIfram" runat="server" width="100%" height="350px" scrolling="yes" frameborder="0" allowfullscreen="true"></iframe>
                 </div>
-                <%--<div class="modal-footer">
-                        modal footer
-                    </div>--%>
+                <div class="modal-footer">
+                      <asp:Button ID="btnCloseMode" runat="server" Text="Close" CssClass="btn btn-primary" OnClick="btnCloseMode_Click" />
+                    </div>
             </div>
         </div>
     </div>

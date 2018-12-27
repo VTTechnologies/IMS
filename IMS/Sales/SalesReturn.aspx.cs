@@ -388,10 +388,10 @@ namespace IMS.Sales
                 //Update into Sale Payment Details 
                 tbl_SalePaymentDetails salePaymentDetails = context.tbl_SalePaymentDetails.Where(w => w.SaleId == saleId).FirstOrDefault();
                 salePaymentDetails.PaidAmnt = Convert.ToDecimal(txtPaidAmt.Text);
-                salePaymentDetails.TaxAmount = Convert.ToDecimal(lblTaxAmount.Text);
-                salePaymentDetails.DiscountAmount = Convert.ToDecimal(lblDiscountAmt.Text);
-                salePaymentDetails.SubTotal = Convert.ToDecimal(lblsubtotal.Text);
-                salePaymentDetails.GrandTotal = Convert.ToDecimal(lblGrandTotal.Text);
+                salePaymentDetails.TaxAmount = Convert.ToDecimal(lblResultTotalTaxAmnt.Text);
+                salePaymentDetails.DiscountAmount = Convert.ToDecimal(lblResultTotalDiscount.Text);
+                salePaymentDetails.SubTotal = Convert.ToDecimal(lblResultSubTotal.Text);
+                salePaymentDetails.GrandTotal = Convert.ToDecimal(lblResultGrndTotal.Text);
                 salePaymentDetails.GivenAmnt = Convert.ToDecimal(lblGivenAmnt.Text) - Convert.ToDecimal(txtPaidAmt.Text);
                 salePaymentDetails.BalanceAmnt = Convert.ToDecimal(txtBalanceAmt.Text);
                 salePaymentDetails.FromTable = "Return";

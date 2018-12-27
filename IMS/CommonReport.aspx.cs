@@ -21,6 +21,8 @@ namespace IMS.Reports
         int companyId, branchId;
         string User_id;
         Boolean isReportTypeBalance=false;
+        Boolean isReportTypeStockReport = false;
+        Boolean isReportTypeproductInventory = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -58,7 +60,17 @@ namespace IMS.Reports
             lstCustomers.DataSource = party;
             lstCustomers.DataBind();
         }
-        protected void btnClear_Click(object sender, EventArgs e)
+
+        private void BindGodowns()
+        {
+            var godown = context.tbl_godown.Where(w => w.company_id == companyId ).ToList();
+            lstGodowns.DataTextField = "godown_name";
+            lstGodowns.DataValueField = "godown_id";
+            lstGodowns.DataSource = godown;
+            lstGodowns.DataBind();
+        }
+
+        public void clear()
         {
             displayReportSection.Visible = false;
             ddlReportType.SelectedIndex = 0;
@@ -69,78 +81,120 @@ namespace IMS.Reports
             ddlFilerBy.Enabled = true;
             txtStartDate.Enabled = true;
             txtenddate.Enabled = true;
+            lstCustomers.Items.Clear();
+            lstGodowns.Items.Clear();
+            lstVendor.Items.Clear();
+        }
+        protected void btnClear_Click(object sender, EventArgs e)
+        {
+            clear();
         }
 
+        private bool ValidDate()
+        {
+            bool valid=false;
+            if (txtStartDate.Text != "" && txtenddate.Text != "")
+            {
+                valid = true;
+                
+            }
+            else if (cbEnable.Checked)
+            {
+                valid = true;
+            }
+            return valid;
+        }
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             try
             {
-                displayReportSection.Visible = true;
-                var filterIds = string.Empty;
-                foreach (ListItem item in lstProduct.Items)
+                if (ValidDate())
                 {
-                    if (item.Selected)
+                    displayReportSection.Visible = true;
+                    var filterIds = string.Empty;
+                    foreach (ListItem item in lstProduct.Items)
                     {
-                        filterIds += item.Value + ",";
+                        if (item.Selected)
+                        {
+                            filterIds += item.Value + ",";
+                        }
                     }
-                }
 
-                foreach (ListItem item in lstVendor.Items)
-                {
-                    if (item.Selected)
+                    foreach (ListItem item in lstVendor.Items)
                     {
-                        filterIds += "," + item.Value;
+                        if (item.Selected)
+                        {
+                            filterIds += "," + item.Value;
+                        }
                     }
-                }
-                foreach (ListItem item in lstCustomers.Items)
-                {
-                    if (item.Selected)
+                    foreach (ListItem item in lstCustomers.Items)
                     {
-                        filterIds += "," + item.Value;
+                        if (item.Selected)
+                        {
+                            filterIds += "," + item.Value;
+                        }
                     }
-                }
-                if (ddlReportType.SelectedItem.Text != "Stock Report")
-                {
-                    btnSearch.ValidationGroup = "search";
-                }
+                    foreach (ListItem item in lstGodowns.Items)
+                    {
+                        if (item.Selected)
+                        {
+                            filterIds += "," + item.Value;
+                        }
+                    }
+                    //if (ddlReportType.SelectedItem.Text != "Stock Report")
+                    //{
+                    //    btnSearch.ValidationGroup = "search";
+                    //}
 
-                SqlParameter[] sqlParams;
-                int companyId = Convert.ToInt32(Session["company_id"]);
+                    SqlParameter[] sqlParams;
+                    int companyId = Convert.ToInt32(Session["company_id"]);
 
-                string reportDataSet = string.Empty;
-                string dataTable = string.Empty;
-                CommonDataSet ds = new CommonDataSet();
-                switch (ddlReportType.SelectedItem.Text)
-                {
+                    string reportDataSet = string.Empty;
+                    string dataTable = string.Empty;
+                    CommonDataSet ds = new CommonDataSet();
+                    string reportType = string.Empty;
+                    switch (ddlReportType.SelectedItem.Text)
+                    {
 
-                    case "Stock Report":
-                        sqlParams = new SqlParameter[] {
-                         new SqlParameter("@ReportType","STOCKREPORT"),
+                        case "Stock Report":
+                            isReportTypeStockReport = true;
+                            if (ddlFilerBy.SelectedItem.Text == "Product Wise")
+                            {
+                                reportType = "PRODUCTSTOCKREPORT";
+                                isReportTypeproductInventory = true;
+                            }
+                            else if (ddlFilerBy.SelectedItem.Text == "Godown Wise")
+                            {
+                                reportType = "GODOWNSTOCKREPORT";
+                            }
+                            sqlParams = new SqlParameter[] {
+                         new SqlParameter("@ReportType",reportType),
                          new SqlParameter("@CompanyId", companyId),
                           new SqlParameter("@start_date",txtStartDate.Text),
                            new SqlParameter("@end_date",txtenddate.Text),
                           new SqlParameter("@FilterIds",filterIds)
                     };
-                        CreateReport(connectionstring, "CommonReport", sqlParams);
-                        break;
+                            CreateReport(connectionstring, "CommonReport", sqlParams);
+                            break;
 
 
-                    case "Inventory Report":
+                        case "Inventory Report":
 
-                        string reportType = string.Empty;
-                        if (ddlFilerBy.SelectedItem.Text == "Product Wise")
-                        {
-                            reportType = "PRODUCTINVENTORYREPORT";
-                        }
-                        else if (ddlFilerBy.SelectedItem.Text == "Vendor Wise")
-                        {
-                            reportType = "VENDORINVENTORYREPORT";
-                        }
-                        else if (ddlFilerBy.SelectedItem.Text == "Cutomer Wise")
-                        {
-                            reportType = "CUSTOMERINVENTORYREPORT";
-                        }
-                        sqlParams = new SqlParameter[] {
+                            //string reportType = string.Empty;
+                            if (ddlFilerBy.SelectedItem.Text == "Product Wise")
+                            {
+                                reportType = "PRODUCTINVENTORYREPORT";
+                                isReportTypeproductInventory = true;
+                            }
+                            else if (ddlFilerBy.SelectedItem.Text == "Vendor Wise")
+                            {
+                                reportType = "VENDORINVENTORYREPORT";
+                            }
+                            else if (ddlFilerBy.SelectedItem.Text == "Cutomer Wise")
+                            {
+                                reportType = "CUSTOMERINVENTORYREPORT";
+                            }
+                            sqlParams = new SqlParameter[] {
                          new SqlParameter("@ReportType",reportType),
                          new SqlParameter("@CompanyId", companyId),
                           new SqlParameter("@start_date",txtStartDate.Text),
@@ -148,23 +202,38 @@ namespace IMS.Reports
                           new SqlParameter("@FilterIds",filterIds)
                     };
 
-                        CreateReport(connectionstring, "CommonReport", sqlParams);
-                        break;
-                    case "Balance Report":
-                        isReportTypeBalance = true;
-                      
-                        sqlParams = new SqlParameter[] {
-                         new SqlParameter("@ReportType","BALANCEREPORT"),
+                            CreateReport(connectionstring, "CommonReport", sqlParams);
+                            break;
+                        case "Balance Report":
+                            isReportTypeBalance = true;
+                            if (ddlFilerBy.SelectedItem.Text == "Cutomer Wise")
+                            {
+                                reportType = "CUSTOMERBALANCEREPORT";
+                                
+                            }
+                            else if (ddlFilerBy.SelectedItem.Text == "Vendor Wise")
+                            {
+                                reportType = "VENDORBALANCEREPORT";
+                            }
+                            sqlParams = new SqlParameter[] {
+                         new SqlParameter("@ReportType",reportType),
                          new SqlParameter("@CompanyId", companyId),
                           new SqlParameter("@start_date",txtStartDate.Text),
                            new SqlParameter("@end_date",txtenddate.Text),
                           new SqlParameter("@FilterIds",filterIds)
                     };
-                        CreateReport(connectionstring, "CommonReport", sqlParams);
-                        break;
+                            CreateReport(connectionstring, "CommonReport", sqlParams);
+                            break;
 
-                    default:
-                        break;
+                        default:
+                            break;
+                    }
+
+                }
+
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Please Enter The Dates Or Check The Financial Year CheckeBox ');", true);
                 }
             }
             catch (Exception ex)
@@ -178,15 +247,21 @@ namespace IMS.Reports
         {
             try
             {
+                cbEnable.Checked = false;
                 if (ddlReportType.SelectedItem.Text == "Stock Report")
                 {
-                    ddlFilerBy.Enabled = false;
-                    txtenddate.Enabled = false;
-                    txtStartDate.Enabled = false;
+                    ddlFilerBy.Items[2].Enabled = false;
+                    ddlFilerBy.Items[3].Enabled = false;
+                    //ddlFilerBy.Enabled = false;
+                    //txtenddate.Enabled = false;
+                    //txtStartDate.Enabled = false;
+                    
                 }
                 else
                 {
-                    ddlFilerBy.Enabled = true;
+                    ddlFilerBy.Items[2].Enabled = true;
+                    ddlFilerBy.Items[3].Enabled = true;
+                    ddlFilerBy.Items[4].Enabled = false;
                     txtenddate.Enabled = true;
                     txtStartDate.Enabled = true;
                 }
@@ -213,20 +288,35 @@ namespace IMS.Reports
             {
                 if (ds != null)
                 {
-                    if (ds.Tables["Table"].Rows.Count > 0)
+                    if (ds.Tables["Table"].Rows.Count > 0  )
                     {
                         lblCompanyName.Text = ds.Tables["Table"].Rows[0]["Company"].ToString();
                         lblAddress.Text = ds.Tables["Table"].Rows[0]["CompanyAddress"].ToString();
                         lblStartDate.Text = ds.Tables["Table"].Rows[0]["StartDate"].ToString();
                         lblEndDate.Text = ds.Tables["Table"].Rows[0]["EndDate"].ToString();
-                        lblpartyname.Text = ds.Tables["Table"].Rows[0]["Party"].ToString();
-                        lblpartyaddress.Text = ds.Tables["Table"].Rows[0]["PartyAddress"].ToString();
+                        //lblpartyname.Text = ds.Tables["Table"].Rows[0]["Party"].ToString();
+                        //lblpartyaddress.Text = ds.Tables["Table"].Rows[0]["PartyAddress"].ToString();
                     }
 
                     if (!isReportTypeBalance)
                     {
-                        ds.Tables["Table"].Columns.Remove("Party");
                         ds.Tables["Table"].Columns.Remove("Date");
+                    }
+                    if (!isReportTypeproductInventory && !isReportTypeBalance && !isReportTypeStockReport)
+                    {
+                        ds.Tables["Table"].Columns.Remove("PartyId");
+                        ds.Tables["Table"].Columns.Remove("CompanyId");
+                        ds.Tables["Table"].Columns.Remove("Id");
+
+                    }
+                    if (isReportTypeStockReport)
+                    {
+                        ds.Tables["Table"].Columns.Remove("batch_id");
+                        ds.Tables["Table"].Columns.Remove("modified_date");
+                        ds.Tables["Table"].Columns.Remove("company_id");
+                        ds.Tables["Table"].Columns.Remove("InvoiceNumber");
+                        ds.Tables["Table"].Columns.Remove("PartyId");
+                        ds.Tables["Table"].Columns.Remove("Party");
                     }
                     ds.Tables["Table"].Columns.Remove("Company");
                     ds.Tables["Table"].Columns.Remove("CompanyAddress");
@@ -254,6 +344,7 @@ namespace IMS.Reports
                     Products.Visible = true;
                     Vendors.Visible = false;
                     Customers.Visible = false;
+                    Godowns.Visible = false;
                 }
                 else if (ddlFilerBy.SelectedItem.Text == "Vendor Wise")
                 {
@@ -261,6 +352,7 @@ namespace IMS.Reports
                     Vendors.Visible = true;
                     Customers.Visible = false;
                     Products.Visible = false;
+                    Godowns.Visible = false;
                 }
                 else if (ddlFilerBy.SelectedItem.Text == "Cutomer Wise")
                 {
@@ -268,6 +360,15 @@ namespace IMS.Reports
                     Vendors.Visible = false;
                     Products.Visible = false;
                     Customers.Visible = true;
+                    Godowns.Visible = false;
+                }
+                else if (ddlFilerBy.SelectedItem.Text == "Godown Wise")
+                {
+                    BindGodowns();
+                    Vendors.Visible = false;
+                    Products.Visible = false;
+                    Customers.Visible = false;
+                    Godowns.Visible = true;
                 }
 
             }
@@ -371,6 +472,12 @@ namespace IMS.Reports
                 ErrorLog.saveerror(ex);
             }
         }
+
+
+
+
+
+
 
     }
 }

@@ -102,7 +102,7 @@
                 <%--<asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" ValidationGroup="v1" OnClick="btnSave_Click" OnClientClick="this.disabled='true'; this.value='Processing...';" UseSubmitBehavior="false" />--%>
                 <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" ValidationGroup="v1" OnClick="btnSave_Click" />
                 <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" ValidationGroup="v1" OnClick="btnUpdate_Click" Visible="false" />
-                <input class="btn btn-primary " type="button" value="Clear" onclick="cleartextboxes();" />
+                <input class="btn btn-primary " type="button" value="Clear" onclick="javascript: window.location = 'Batch.aspx'" />
                 <%--<asp:Button ID="btnCancel" runat="server" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" Style="float: right" />--%>
             </div>
         </div>
@@ -115,7 +115,7 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div>
-                    <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" DataKeyNames="batch_id" OnRowCommand="GridView1_RowCommand" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" SelectedIndex="0" AutoGenerateColumns="False" CssClass="table table-bordered ">
+                    <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" OnPreRender="GridView1_PreRender" DataKeyNames="batch_id" OnRowCommand="GridView1_RowCommand" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" SelectedIndex="0" AutoGenerateColumns="False" CssClass="table table-bordered ">
                         <Columns>
                             <asp:BoundField DataField="batch_name" HeaderText="Batch Name"></asp:BoundField>
 
