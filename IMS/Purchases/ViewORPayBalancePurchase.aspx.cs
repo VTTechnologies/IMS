@@ -68,43 +68,50 @@ namespace IMS
 
                 for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
                 {
-                    if (ds.Tables["Table"].Rows[i]["Type"].ToString() == "Purchase")
-                    {
-                        totalTax = totalTax + Convert.ToDecimal(ds.Tables["Table"].Rows[i]["TaxAmnt"]);
-                        totalDiscount = totalDiscount + Convert.ToDecimal(ds.Tables["Table"].Rows[i]["DiscountAmnt"]);
-                        subTotal = subTotal + Convert.ToDecimal(ds.Tables["Table"].Rows[i]["ProductAmount"]);
+                    //if (ds.Tables["Table"].Rows[i]["Type"].ToString() == "Purchase")
+                    //{
+                    //    totalTax = totalTax + Convert.ToDecimal(ds.Tables["Table"].Rows[i]["TaxAmnt"]);
+                    //    totalDiscount = totalDiscount + Convert.ToDecimal(ds.Tables["Table"].Rows[i]["DiscountAmnt"]);
+                    //    subTotal = subTotal + Convert.ToDecimal(ds.Tables["Table"].Rows[i]["ProductAmount"]);
                        
-                    }
-                    else if (ds.Tables["Table"].Rows[i]["Type"].ToString() == "Return")
-                    {
-                        totalTax = totalTax - Convert.ToDecimal(ds.Tables["Table"].Rows[i]["TaxAmnt"]);
-                        totalDiscount = totalDiscount - Convert.ToDecimal(ds.Tables["Table"].Rows[i]["DiscountAmnt"]);
-                        subTotal = subTotal - Convert.ToDecimal(ds.Tables["Table"].Rows[i]["ProductAmount"]);
+                    //}
+                    //else if (ds.Tables["Table"].Rows[i]["Type"].ToString() == "Return")
+                    //{
+                    //    totalTax = totalTax - Convert.ToDecimal(ds.Tables["Table"].Rows[i]["TaxAmnt"]);
+                    //    totalDiscount = totalDiscount - Convert.ToDecimal(ds.Tables["Table"].Rows[i]["DiscountAmnt"]);
+                    //    subTotal = subTotal - Convert.ToDecimal(ds.Tables["Table"].Rows[i]["ProductAmount"]);
                         
-                    }
+                    //}
+
+
+                    totalTax = Convert.ToDecimal(ds.Tables["Table"].Rows[i]["TaxAmnt"]);
+                    totalDiscount =  Convert.ToDecimal(ds.Tables["Table"].Rows[i]["DiscountAmnt"]);
+                    subTotal = Convert.ToDecimal(ds.Tables["Table"].Rows[i]["ProductAmount"]);
 
                 }
                 grandTotal = subTotal + totalTax - totalDiscount;
 
-
-                DataRow dr = ds.Tables["Table"].Select("Id=" + purchaseId + "").FirstOrDefault();
+                DataView dv = ds.Tables["Table"].DefaultView;
+                dv.Sort = "Date desc";
+                DataTable sortedDT = dv.ToTable();
+                DataRow dr = sortedDT.Select("Id=" + purchaseId + "").FirstOrDefault();
                 txtPaymentMode.Text = dr["PaymentMode"].ToString();
                 lblInvoice.Text = dr["InvoiceNumber"].ToString();
                 txtVendor.Text = dr["Party"].ToString();
                 txtPONo.Text = dr["PoNo"].ToString();
                 txtdate.Text = dr["Date"].ToString();
 
-                //Get only Given and Balance Amnt and Calcualte Remainig as per Transaction
-                DataRow drpurchase = ds.Tables["Table"].Select("Type='Purchase'").FirstOrDefault();
-                DataRow drreturn = ds.Tables["Table"].Select("Type='Return'").FirstOrDefault();
-
+                ////Get only Given and Balance Amnt and Calcualte Remainig as per Transaction
+                //DataRow drpurchase = ds.Tables["Table"].Select("Type='Purchase'").FirstOrDefault();
+                //DataRow drreturn = ds.Tables["Table"].Select("Type='Return'").FirstOrDefault();
+                var v = context.tbl_PurchasePaymentDetials.Where(s => s.PurchaseId == purchaseId).FirstOrDefault();
                 lblsubtotal.Text = subTotal.ToString();
                 lblTaxAmount.Text = totalTax.ToString();
                 lblDiscountAmt.Text = totalDiscount.ToString();
                 lblGrandTotal.Text = grandTotal.ToString();
-                lblGivenAmnt.Text = dr["GivenAmnt"].ToString();
+                lblGivenAmnt.Text = v.GivenAmnt.ToString();
 
-                balanceAmnt = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(lblGivenAmnt.Text);
+                balanceAmnt = Convert.ToDecimal(v.BalanceAmnt);
 
                 if (balanceAmnt < 0)
                     btnGetRefund.Visible = true;
@@ -131,8 +138,9 @@ namespace IMS
                     if (purchasePaymentDetails != null)
                     {
                         purchasePaymentDetails.PaidAmnt = Convert.ToDecimal(txtPaidAmnt.Text);
-                        purchasePaymentDetails.GivenAmnt = Convert.ToDecimal(txtPaidAmnt.Text) +purchasePaymentDetails.GivenAmnt;
+                        purchasePaymentDetails.GivenAmnt = Convert.ToDecimal(txtPaidAmnt.Text) + purchasePaymentDetails.GivenAmnt;
                         purchasePaymentDetails.BalanceAmnt = Convert.ToDecimal(txtBalanceAmnt.Text);
+                        purchasePaymentDetails.FromTable = "Purchase Pay Balance";
                     }
 
                 
@@ -142,7 +150,8 @@ namespace IMS
                 }
                 else
                 {
-                    lblError.Text = "Calculation doesn't match, please check calculation.";
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Calculation doesn't match, please check calculation.');");
+                    
                 }
             }
             catch (Exception ex)
@@ -153,7 +162,7 @@ namespace IMS
         private bool ValidCalculation()
         {
             bool valid = false;
-            if (Convert.ToDecimal(lblGrandTotal.Text) == (Convert.ToDecimal(lblGivenAmnt.Text) + Convert.ToDecimal(txtPaidAmnt.Text)))
+            if (Convert.ToDecimal(lblGrandTotal.Text) >= (Convert.ToDecimal(lblGivenAmnt.Text) + Convert.ToDecimal(txtPaidAmnt.Text)))
             {
                 valid = true;
             }
@@ -246,22 +255,34 @@ namespace IMS
                
                 decimal remainingBalance = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(lblGivenAmnt.Text);
                 
-                if (remainingBalance < 0)
+                //if (remainingBalance < 0)
+                //{
+                //    btnGetRefund.Visible = true;
+                //    txtBalanceAmnt.Text = (remainingBalance + Convert.ToDecimal(txtPaidAmnt.Text)).ToString();
+                //}
+                //else if (txtPaidAmnt.Text == "0" || string.IsNullOrEmpty(txtPaidAmnt.Text))
+                //{
+                //    btnGetRefund.Visible = false;
+                //    txtBalanceAmnt.Text = remainingBalance.ToString();
+                //    return;
+                //}
+                //else
+                //{
+                //    txtBalanceAmnt.Text = (remainingBalance - Convert.ToDecimal(txtPaidAmnt.Text)).ToString();
+                //}
+                decimal a = Convert.ToDecimal(lblGrandTotal.Text);
+                decimal b = Convert.ToDecimal(txtPaidAmnt.Text);
+                if (remainingBalance < b)
                 {
-                    btnGetRefund.Visible = true;
-                    txtBalanceAmnt.Text = (remainingBalance + Convert.ToDecimal(txtPaidAmnt.Text)).ToString();
-                }
-                else if (txtPaidAmnt.Text == "0" || string.IsNullOrEmpty(txtPaidAmnt.Text))
-                {
-                    btnGetRefund.Visible = false;
-                    txtBalanceAmnt.Text = remainingBalance.ToString();
-                    return;
-                }
-                else
-                {
-                    txtBalanceAmnt.Text = (remainingBalance - Convert.ToDecimal(txtPaidAmnt.Text)).ToString();
+                    txtPaidAmnt.Text = remainingBalance.ToString();
+                    txtBalanceAmnt.Text = "0";
                 }
 
+                else
+                {
+                    decimal c = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(txtPaidAmnt.Text);
+                    txtBalanceAmnt.Text = c.ToString();
+                }
                 UpdatePanel2.Update();
             }
             catch (Exception ex)

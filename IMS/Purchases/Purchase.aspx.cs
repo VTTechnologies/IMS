@@ -467,13 +467,6 @@ namespace IMS
         {
             try
             {
-                ////Shakeeb
-                ////int c_id = Convert.ToInt32(Session["company_id"]);
-                ////tbl_purchase p = new tbl_purchase();
-                ////p.company_id = c_id;
-                ////p.All(p);
-                ////hd1.Value = p.startdate;
-                ////hd2.Value = p.enddate;
                 //ef code awais
                var finicialyear= context.tbl_financialyear.Where(f => f.company_id == companyId && f.status == true).SingleOrDefault();
                hd1.Value = finicialyear.start_date;
@@ -881,28 +874,7 @@ namespace IMS
         //    Response.Redirect("PurchaseHome.aspx");
         //}
 
-        protected void ddlproduct_SelectedIndexChanged(object sender, System.EventArgs e)
-        {
-            try
-            {
-                lblcheckDoubleError.Text = string.Empty;
-                txtprice.Text = string.Empty;
-                txtsalesprice.Text = string.Empty;
-                int p_id = Convert.ToInt32(ddlproduct.SelectedValue);               
-                var product = context.tbl_product.Join(context.tbl_tax, p=>p.tax_id,t=>t.tax_id,(p,t) => new
-                {p.purchas_price,p.sales_price,t.tax_percentage,p.company_id,p.branch_id,p.product_id}).Where(p => p.company_id == companyId && p.branch_id == branchId && p.product_id == p_id).SingleOrDefault();
-                txtprice.Text = Convert.ToString(product.purchas_price);
-                txtsalesprice.Text = Convert.ToString(product.sales_price);
-                txtTaxpercentage.Text = Convert.ToString(product.tax_percentage);
-                UpdatePanel1.Update();
-            }
-            catch (Exception ex)
-            {
-
-                ErrorLog.saveerror(ex);
-                //Do Logging
-            }
-        }
+     
 
         protected void txtGivenAmt_TextChanged(object sender, System.EventArgs e)
         {
@@ -969,6 +941,62 @@ namespace IMS
             catch (Exception ex)
             {
                 throw;
+            }
+        }
+
+        protected void ddlproduct_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+            try
+            {
+                lblcheckDoubleError.Text = string.Empty;
+                txtprice.Text = string.Empty;
+                txtsalesprice.Text = string.Empty;
+                int p_id = Convert.ToInt32(ddlproduct.SelectedValue);
+                var product = context.tbl_product.Join(context.tbl_tax, p => p.tax_id, t => t.tax_id, (p, t) => new { p.purchas_price, p.sales_price, t.tax_percentage, p.company_id, p.branch_id, p.product_id }).Where(p => p.company_id == companyId && p.branch_id == branchId && p.product_id == p_id).SingleOrDefault();
+                txtprice.Text = Convert.ToString(product.purchas_price);
+                txtsalesprice.Text = Convert.ToString(product.sales_price);
+                txtTaxpercentage.Text = Convert.ToString(product.tax_percentage);
+                UpdatePanel1.Update();
+            }
+            catch (Exception ex)
+            {
+
+                ErrorLog.saveerror(ex);
+                //Do Logging
+            }
+        }
+
+        //protected void btnCloseModel_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        ddlproductbind();
+        //        ddlVendorbind();
+        //        ddlbatchbind();
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        ErrorLog.saveerror(ex);
+        //        //Do Logging
+        //    }
+        //}
+
+        protected void btnCloseMode_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ddlproductbind();
+                ddlVendorbind();
+                ddlbatchbind();
+                ScriptManager.RegisterStartupScript(this, GetType(), "Close Modal Popup", "Closepopup();", true);
+                UpdatePanel1.Update();
+            }
+            catch (Exception ex)
+            {
+
+                ErrorLog.saveerror(ex);
+                //Do Logging
             }
         }
 

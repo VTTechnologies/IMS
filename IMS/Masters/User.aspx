@@ -236,7 +236,8 @@
 
                         <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" ValidationGroup="usr" />
                         <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" Visible="false" OnClick="btnUpdate_Click" ValidationGroup="usr" />
-                        <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary " Text="Clear" OnClick="Button1_Click" />
+                        
+                        <input class="btn btn-primary " type="button" value="Clear"  onclick="javascript: window.location = 'User.aspx'" />
                         <%--<asp:Button ID="btnCancel" runat="server" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" Style="float: right" />--%>
                     </div>
                 </div>
@@ -252,7 +253,7 @@
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
 
 
-                    <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" DataKeyNames="userbranch_id" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" CssClass="table table table-striped table-bordered table-hover">
+                    <asp:GridView ID="GridView1" runat="server" OnPreRender="GridView1_PreRender" OnRowDataBound="GridView1_RowDataBound" DataKeyNames="userbranch_id" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" CssClass="table table table-striped table-bordered table-hover">
 
                         <Columns>
                             <asp:BoundField DataField="first_name" HeaderText="First Name"></asp:BoundField>

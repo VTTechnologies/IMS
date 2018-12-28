@@ -133,7 +133,12 @@ namespace IMS.Reports
                 da.Fill(ds, tableName);
                 grdreport.DataSource = (DataTable)ds.Tables[tableName];
                 grdreport.DataBind();
-
+                decimal totalAmount = 0;
+                decimal totalTax = 0;
+                decimal totalDiscount = 0;
+                decimal grandTotal = 0;
+                decimal givenAmt = 0;
+                decimal balanceAmt = 0;
               for (int i = 0; i < ds.Tables[tableName].Rows.Count; i++)
                 {                  
                     lblCompanyName.Text = ds.Tables[tableName].Rows[i]["company_name"].ToString();
@@ -146,11 +151,20 @@ namespace IMS.Reports
                     lblpartyaddress.Text = ds.Tables[tableName].Rows[i]["party_address"].ToString();
 
                     lblinvoiceno.Text = ds.Tables[tableName].Rows[i]["InvoiceNumber"].ToString();
-                    lblsubtotal.Text = ds.Tables[tableName].Rows[i]["total_amount"].ToString();
-                    lblTaxAmount.Text = ds.Tables[tableName].Rows[i]["total_tax"].ToString();
-                    lblDiscountAmt.Text = ds.Tables[tableName].Rows[i]["total_discount"].ToString();
-                    lblGrandTotal.Text = ds.Tables[tableName].Rows[i]["grand_total"].ToString();
+
+                    totalAmount = totalAmount + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["amount"]);
+                    totalTax = totalTax + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["tax_amt"]);
+                    totalDiscount = totalDiscount + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["discount_amnt"]);
+                    grandTotal = grandTotal + totalAmount+totalTax -totalDiscount;
+
+                   
+                  
+                    
                 }
+              lblsubtotal.Text = totalAmount.ToString(); //ds.Tables[tableName].Rows[i]["total_amount"].ToString();given_amnt
+              lblTaxAmount.Text = totalTax.ToString();//ds.Tables[tableName].Rows[i]["total_tax"].ToString();
+              lblDiscountAmt.Text = totalDiscount.ToString(); //ds.Tables[tableName].Rows[i]["total_discount"].ToString();
+              lblGrandTotal.Text = grandTotal.ToString();//ds.Tables[tableName].Rows[i]["grand_total"].ToString();
             }
         }
         private void SessionValue()

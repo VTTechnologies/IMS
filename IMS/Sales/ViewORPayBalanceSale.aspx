@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Sales/SalesManger.Master" AutoEventWireup="true" CodeBehind="ViewORPayBalanceSale.aspx.cs" Inherits="IMS.ViewORPayBalanceSale" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="ViewORPayBalanceSale.aspx.cs" Inherits="IMS.ViewORPayBalanceSale" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type='text/javascript'>

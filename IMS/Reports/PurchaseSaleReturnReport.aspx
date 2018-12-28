@@ -118,8 +118,6 @@
                                 <asp:BoundField DataField="quantity" HeaderText="Quantity"></asp:BoundField>
                                 <asp:BoundField DataField="batch_name" HeaderText="Batch"></asp:BoundField>
                                 <asp:BoundField DataField="tax_amt" HeaderText="Tax"></asp:BoundField>
-                                <asp:BoundField DataField="given_amnt" HeaderText="Given Amnt"></asp:BoundField>
-                                <asp:BoundField DataField="balance_amnt" HeaderText="Balance Amnt"></asp:BoundField>
                                 <asp:BoundField DataField="amount" HeaderText="Total"></asp:BoundField>
 
                             </Columns>

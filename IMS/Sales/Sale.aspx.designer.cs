@@ -121,15 +121,6 @@ namespace IMS {
         protected global::System.Web.UI.WebControls.DropDownList ddlproduct;
         
         /// <summary>
-        /// Label2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
-        
-        /// <summary>
         /// RequiredFieldValidator8 control.
         /// </summary>
         /// <remarks>
@@ -155,15 +146,6 @@ namespace IMS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlBatch;
-        
-        /// <summary>
-        /// Label3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
         /// RequiredFieldValidator9 control.
@@ -506,5 +488,14 @@ namespace IMS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlIframe ModalIfram;
+        
+        /// <summary>
+        /// btnCloseMode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCloseMode;
     }
 }

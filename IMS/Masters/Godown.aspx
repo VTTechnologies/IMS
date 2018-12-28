@@ -143,7 +143,7 @@
 
                 <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" OnClientClick="DisableOnSave(this,'godwn');"  UseSubmitBehavior="false" ValidationGroup="godwn" />
                 <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" OnClick="btnUpdate_Click" Visible="false" ValidationGroup="godwn" />
-                <input class="btn btn-primary " type="button" value="Clear" onclick="cleartextboxes();" />
+                <input class="btn btn-primary " type="button" value="Clear"  onclick="javascript: window.location = 'Godown.aspx'" />
                 <%--<asp:Button ID="btnCancel" runat="server" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" Style="float: right" />--%>
             </div>
         </div>
@@ -156,7 +156,7 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div>
-                    <asp:GridView ID="GridView1" OnRowDataBound="GridView1_RowDataBound" runat="server" DataKeyNames="godown_id" OnRowCommand="GridView1_RowCommand" AutoGenerateColumns="false" CssClass="table table-responsive table-striped table-bordered table-hover" SelectedIndex="0">
+                    <asp:GridView ID="GridView1" OnPreRender="GridView1_PreRender" OnRowDataBound="GridView1_RowDataBound" runat="server" DataKeyNames="godown_id" OnRowCommand="GridView1_RowCommand" AutoGenerateColumns="false" CssClass="table table-responsive table-striped table-bordered table-hover" SelectedIndex="0">
                         <Columns>
                             <asp:BoundField DataField="godown_name" HeaderText="Godown Name"></asp:BoundField>
                             <asp:BoundField DataField="godown_address" HeaderText="Address" ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs"></asp:BoundField>

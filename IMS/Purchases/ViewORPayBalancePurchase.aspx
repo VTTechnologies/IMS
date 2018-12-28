@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="PurchaseManger.Master" AutoEventWireup="true" CodeBehind="ViewORPayBalancePurchase.aspx.cs" Inherits="IMS.ViewORPayBalancePurchase" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="ViewORPayBalancePurchase.aspx.cs" Inherits="IMS.ViewORPayBalancePurchase" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type='text/javascript'>
@@ -11,15 +11,21 @@
             return true;
 
         }
-        function openalert(msg) {
-            debugger;
-            alertify.alert('Success', msg).setting({
-                'onok': function () { window.location.href = "ViewORPayBalancePurchase.aspx"; }
-            });
-        }
+       
         function keypress() {
             var balance = $('#<%=lblGrandTotal.ClientID%>').value() - ($('#<%=lblGivenAmnt.ClientID%>').value() + $('#<%=txtPaidAmnt.ClientID%>').value())
             $('#<%=txtBalanceAmnt.ClientID%>').value(balance);
+
+
+            if ($('#<%=txtPaidAmnt.ClientID%>').value() > $('#<%=txtBalanceAmnt.ClientID%>').value()) {
+                var paidAmnt = $('#<%=txtBalanceAmnt.ClientID%>').value();
+                $('#<%=txtPaidAmnt.ClientID%>').value(paidAmnt);
+                $('#<%=txtBalanceAmnt.ClientID%>').value(0);
+            }
+        }
+
+        function keypres() {
+           
         }
     </script>
 </asp:Content>

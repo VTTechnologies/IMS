@@ -20,7 +20,16 @@
             $('[id*=lstCustomers]').multiselect({
                 includeSelectAllOption: true
             });
+            $('[id*=lstGodowns]').multiselect({
+                includeSelectAllOption: true
+            });
         });
+        function openalert(msg) {
+            debugger;
+            alertify.alert('Success', msg).setting({
+                'onok': function () { window.location.href = "CommonReport.aspx"; }
+            });
+        }
 
         function PrintPanel() {
             var panel = document.getElementById("<%=reportSection.ClientID %>");
@@ -79,6 +88,7 @@
                                             <asp:ListItem Text="Product Wise" Value="1" />
                                             <asp:ListItem Text="Vendor Wise" Value="2" />
                                             <asp:ListItem Text="Cutomer Wise" Value="3" />
+                                            <asp:ListItem Text="Godown Wise" Value="4"  />
                                         </asp:DropDownList>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" InitialValue="0" ControlToValidate="ddlFilerBy" ErrorMessage="Please Select Filter By" ForeColor="Red" ValidationGroup="search"></asp:RequiredFieldValidator>
                                     </div>
@@ -114,6 +124,14 @@
                                         <asp:ListBox ID="lstCustomers" runat="server" CssClass="form-control" SelectionMode="Multiple"></asp:ListBox>
                                     </div>
                                 </div>
+                                 <div id="Godowns" runat="server" visible="false">
+                                    <div class="col-sm-10  ">
+                                        <label class="control-label">
+                                            Godowns                                  
+                                        </label>
+                                        <asp:ListBox ID="lstGodowns" runat="server" CssClass="form-control" SelectionMode="Multiple"></asp:ListBox>
+                                    </div>
+                                </div>
                             </div>
                             <%--   </ContentTemplate>
                             </asp:UpdatePanel>--%>
@@ -125,7 +143,7 @@
                                     <div class="col-sm-10 ">
                                         
                                         <label class="control-label">
-                                            From Bigning of Finincial Year                                   
+                                            From Bigning of Financial Year                                   
                                         </label>
                                        <asp:CheckBox ID="cbEnable" runat="server" CssClass="checkbox" OnCheckedChanged="cbEnable_CheckedChanged" AutoPostBack="true" />
                                     </div>
@@ -165,7 +183,7 @@
             </div>
         </div>
         <div class="panel-footer text-center">
-            <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-primary" OnClick="btnSearch_Click" Text="Search" />
+            <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-primary" OnClick="btnSearch_Click" Text="Search" ValidationGroup="search" />
             <asp:Button ID="Button2" runat="server" CssClass="btn btn-primary" OnClick="btnClear_Click" Text="Clear" />
         </div>
 

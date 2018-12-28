@@ -331,5 +331,26 @@ namespace IMS
         }
 
         #endregion
+
+        protected void btnCloseMode_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ddlcategorybind();
+                ddlgodownbind();
+                ddlrackbind(Convert.ToInt32(ddlGodown.SelectedValue));
+                ddltaxbind();
+                ddlunitbind();
+                ScriptManager.RegisterStartupScript(this, GetType(), "Close Modal Popup", "Closepopup();", true);
+                UpdatePanel1.Update();
+
+            }
+            catch (Exception ex)
+            {
+
+                ErrorLog.saveerror(ex);
+                //Do Logging
+            }
+        }
     }
 }

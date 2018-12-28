@@ -429,8 +429,8 @@
                                                 Paid Amount
                                           <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtBalanceAmt" ErrorMessage="*" ValidationGroup="savesale" ForeColor="Red"></asp:RequiredFieldValidator>
                                             </label>
-                                            <asp:TextBox ID="txtPaidAmt" runat="server" CssClass="form-control" AutoPostBack="true" Enabled="false" OnTextChanged="txtGivenAmt_TextChanged" onkeypress="return OnlyNumericEntry(event);"></asp:TextBox>
-                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ForeColor="Red" ControlToValidate="txtGivenAmt" ErrorMessage="Given Amount Should be digits only" ValidationGroup="savesale" ValidationExpression="^\s*(?=.*[0-9])\d*(?:\.\d{1,5})?\s*$" Display="Dynamic">
+                                            <asp:TextBox ID="txtPaidAmt" runat="server" CssClass="form-control" AutoPostBack="true" Enabled="false" OnTextChanged="txtPaidAmt_TextChanged" onkeypress="return OnlyNumericEntry(event);"></asp:TextBox>
+                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ForeColor="Red" ControlToValidate="txtPaidAmt" ErrorMessage="Paid Amount Should be digits only" ValidationGroup="savesale" ValidationExpression="^\s*(?=.*[0-9])\d*(?:\.\d{1,5})?\s*$" Display="Dynamic">
                                             </asp:RegularExpressionValidator>
                                         </div>
                                     </div>
