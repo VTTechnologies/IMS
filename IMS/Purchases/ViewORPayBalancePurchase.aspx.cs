@@ -131,8 +131,8 @@ namespace IMS
             try
             {
                 lblError.Text = string.Empty;
-                //if (ValidCalculation())
-                //{
+                if (ValidCalculation())
+                {
                     var purchasePaymentDetails = context.tbl_PurchasePaymentDetials.FirstOrDefault(w => w.PurchaseId == purchase_Id);
 
                     if (purchasePaymentDetails != null)
@@ -147,11 +147,12 @@ namespace IMS
                     context.SaveChanges();
                     int? order = purchasePaymentDetails.PurchaseId;
                     ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Saved successfully, Your order number is " + order + "');", true);
-                //}
-                //else
-                //{
-                //    lblError.Text = "Calculation doesn't match, please check calculation.";
-                //}
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Calculation doesn't match, please check calculation.');");
+                    
+                }
             }
             catch (Exception ex)
             {
@@ -161,7 +162,7 @@ namespace IMS
         private bool ValidCalculation()
         {
             bool valid = false;
-            if (Convert.ToDecimal(lblGrandTotal.Text) == (Convert.ToDecimal(lblGivenAmnt.Text) + Convert.ToDecimal(txtPaidAmnt.Text)))
+            if (Convert.ToDecimal(lblGrandTotal.Text) >= (Convert.ToDecimal(lblGivenAmnt.Text) + Convert.ToDecimal(txtPaidAmnt.Text)))
             {
                 valid = true;
             }
@@ -254,22 +255,34 @@ namespace IMS
                
                 decimal remainingBalance = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(lblGivenAmnt.Text);
                 
-                if (remainingBalance < 0)
+                //if (remainingBalance < 0)
+                //{
+                //    btnGetRefund.Visible = true;
+                //    txtBalanceAmnt.Text = (remainingBalance + Convert.ToDecimal(txtPaidAmnt.Text)).ToString();
+                //}
+                //else if (txtPaidAmnt.Text == "0" || string.IsNullOrEmpty(txtPaidAmnt.Text))
+                //{
+                //    btnGetRefund.Visible = false;
+                //    txtBalanceAmnt.Text = remainingBalance.ToString();
+                //    return;
+                //}
+                //else
+                //{
+                //    txtBalanceAmnt.Text = (remainingBalance - Convert.ToDecimal(txtPaidAmnt.Text)).ToString();
+                //}
+                decimal a = Convert.ToDecimal(lblGrandTotal.Text);
+                decimal b = Convert.ToDecimal(txtPaidAmnt.Text);
+                if (remainingBalance < b)
                 {
-                    btnGetRefund.Visible = true;
-                    txtBalanceAmnt.Text = (remainingBalance + Convert.ToDecimal(txtPaidAmnt.Text)).ToString();
-                }
-                else if (txtPaidAmnt.Text == "0" || string.IsNullOrEmpty(txtPaidAmnt.Text))
-                {
-                    btnGetRefund.Visible = false;
-                    txtBalanceAmnt.Text = remainingBalance.ToString();
-                    return;
-                }
-                else
-                {
-                    txtBalanceAmnt.Text = (remainingBalance - Convert.ToDecimal(txtPaidAmnt.Text)).ToString();
+                    txtPaidAmnt.Text = remainingBalance.ToString();
+                    txtBalanceAmnt.Text = "0";
                 }
 
+                else
+                {
+                    decimal c = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(txtPaidAmnt.Text);
+                    txtBalanceAmnt.Text = c.ToString();
+                }
                 UpdatePanel2.Update();
             }
             catch (Exception ex)

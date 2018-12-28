@@ -890,21 +890,35 @@ namespace IMS.Sales
                 //}
                 decimal remainingBalance = Convert.ToDecimal(lblResultGrndTotal.Text) - Convert.ToDecimal(lblGivenAmnt.Text);
 
-                if (remainingBalance < 0)
+                //if (remainingBalance < 0)
+                //{
+                //    btnPayBack.Visible = true;
+                //    txtBalanceAmt.Text = (remainingBalance + Convert.ToDecimal(txtPaidAmt.Text)).ToString();
+                //}
+                //else if (txtPaidAmt.Text == "0" || string.IsNullOrEmpty(txtPaidAmt.Text))
+                //{
+                //    btnPayBack.Visible = false;
+                //    txtBalanceAmt.Text = remainingBalance.ToString();
+                //    return;
+                //}
+                //else
+                //{
+                //    txtBalanceAmt.Text = (remainingBalance - Convert.ToDecimal(txtPaidAmt.Text)).ToString();
+                //}
+
+                decimal a = Convert.ToDecimal(lblGrandTotal.Text);
+                decimal b = Convert.ToDecimal(txtPaidAmt.Text);
+                if (remainingBalance < b)
                 {
-                    btnPayBack.Visible = true;
-                    txtBalanceAmt.Text = (remainingBalance + Convert.ToDecimal(txtPaidAmt.Text)).ToString();
+                    txtPaidAmt.Text = remainingBalance.ToString();
+                    txtBalanceAmt.Text = "0";
                 }
-                else if (txtPaidAmt.Text == "0" || string.IsNullOrEmpty(txtPaidAmt.Text))
-                {
-                    btnPayBack.Visible = false;
-                    txtBalanceAmt.Text = remainingBalance.ToString();
-                    return;
-                }
+
                 else
                 {
-                    txtBalanceAmt.Text = (remainingBalance - Convert.ToDecimal(txtPaidAmt.Text)).ToString();
-                }
+                    decimal c = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(txtPaidAmt.Text);
+                    txtBalanceAmt.Text = c.ToString();
+                } 
                 UpdatePanel1.Update();
             }
             catch (Exception ex)

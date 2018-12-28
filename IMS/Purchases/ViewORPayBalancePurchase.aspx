@@ -15,6 +15,17 @@
         function keypress() {
             var balance = $('#<%=lblGrandTotal.ClientID%>').value() - ($('#<%=lblGivenAmnt.ClientID%>').value() + $('#<%=txtPaidAmnt.ClientID%>').value())
             $('#<%=txtBalanceAmnt.ClientID%>').value(balance);
+
+
+            if ($('#<%=txtPaidAmnt.ClientID%>').value() > $('#<%=txtBalanceAmnt.ClientID%>').value()) {
+                var paidAmnt = $('#<%=txtBalanceAmnt.ClientID%>').value();
+                $('#<%=txtPaidAmnt.ClientID%>').value(paidAmnt);
+                $('#<%=txtBalanceAmnt.ClientID%>').value(0);
+            }
+        }
+
+        function keypres() {
+           
         }
     </script>
 </asp:Content>

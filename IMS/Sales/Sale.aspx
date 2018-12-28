@@ -440,15 +440,15 @@
     </div>
 
     <div class="modal fade" role="dialog" id="AddModal" runat="server">
-        <div class="modal-dialog" style="height: 650px">
-            <div class="modal-content" style="height: 90%">
+        <div class="modal-dialog" >
+            <div class="modal-content">
                 <div class="modal-header">
                     <%--<button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
                     </button>--%>
                     <h3><asp:Label ID="lblModalHeader" runat="server" CssClass="text-center"></asp:Label></h3>
                 </div>
-                <div class="modal-body" style="height: 90%">
+                <div class="modal-body" >
                     <iframe id="ModalIfram" runat="server" width="100%" height="90%" scrolling="yes" frameborder="0" allowfullscreen="true"></iframe>
                 </div>
               <div class="modal-footer" >

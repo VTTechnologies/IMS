@@ -32,6 +32,8 @@ namespace IMS.Reports
                 BindProducts();
                 BindVendors();
                 BindCustomers();
+
+                ddlFilerBy.Items[4].Enabled = false;
             }
             logo();
         }
@@ -252,6 +254,7 @@ namespace IMS.Reports
                 {
                     ddlFilerBy.Items[2].Enabled = false;
                     ddlFilerBy.Items[3].Enabled = false;
+                    ddlFilerBy.Items[4].Enabled = true;
                     //ddlFilerBy.Enabled = false;
                     //txtenddate.Enabled = false;
                     //txtStartDate.Enabled = false;

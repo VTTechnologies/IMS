@@ -142,7 +142,7 @@ namespace IMS
                 }
                 else
                 {
-                    lblError.Text = "Calculation doesn't match, please check calculation.";
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Calculation doesn't match, please check calculation.');", true);
                 }
             }
             catch (Exception ex)
@@ -153,7 +153,7 @@ namespace IMS
         private bool ValidCalculation()
         {
             bool valid = false;
-            if (Convert.ToDecimal(lblGrandTotal.Text) == (Convert.ToDecimal(lblGivenAmnt.Text) + Convert.ToDecimal(txtPaidAmnt.Text)))
+            if (Convert.ToDecimal(lblGrandTotal.Text) >= (Convert.ToDecimal(lblGivenAmnt.Text) + Convert.ToDecimal(txtPaidAmnt.Text)))
             {
                 valid = true;
             }
@@ -243,20 +243,34 @@ namespace IMS
             {             
                 decimal remainingBalance = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(lblGivenAmnt.Text);
 
-                if (txtPaidAmnt.Text == "0" || string.IsNullOrEmpty(txtPaidAmnt.Text))
-                {
-                    txtBalanceAmnt.Text = remainingBalance.ToString();
-                    return;
-                }
+                //if (txtPaidAmnt.Text == "0" || string.IsNullOrEmpty(txtPaidAmnt.Text))
+                //{
+                //    txtBalanceAmnt.Text = remainingBalance.ToString();
+                //    return;
+                //}
 
-                if (Convert.ToDecimal(txtPaidAmnt.Text) > remainingBalance)
+                //if (Convert.ToDecimal(txtPaidAmnt.Text) > remainingBalance)
+                //{
+                //    txtPaidAmnt.Text = remainingBalance.ToString();
+                //    txtBalanceAmnt.Text = "0";
+                //}
+                //else
+                //{
+                //    txtBalanceAmnt.Text = (remainingBalance - Convert.ToDecimal(txtPaidAmnt.Text)).ToString();
+                //}
+
+                decimal a = Convert.ToDecimal(lblGrandTotal.Text);
+                decimal b = Convert.ToDecimal(txtPaidAmnt.Text);
+                if (remainingBalance < b)
                 {
                     txtPaidAmnt.Text = remainingBalance.ToString();
                     txtBalanceAmnt.Text = "0";
                 }
+
                 else
                 {
-                    txtBalanceAmnt.Text = (remainingBalance - Convert.ToDecimal(txtPaidAmnt.Text)).ToString();
+                    decimal c = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(txtPaidAmnt.Text);
+                    txtBalanceAmnt.Text = c.ToString();
                 }
 
                 UpdatePanel2.Update();
