@@ -4,7 +4,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-        $(function () {
+        <%--$(function () {
 
             var hv = $("#" + '<%= hd1.ClientID %>').val();
             var hvq = $("#" + '<%= hd2.ClientID %>').val();
@@ -32,11 +32,11 @@
                     maxDate: new Date(hvq)
                 }
                 );
-        });
+        });--%>
     </script>
 
     <style>
-        tr.GridPager td {
+        /*tr.GridPager td {
             height: 26px;
             margin: 0;
             padding: 0;
@@ -67,7 +67,7 @@
             color: #000;
             border: 1px solid #969696;
             height: 20px;
-        }
+        }*/
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -114,10 +114,15 @@
                                             From  Date
                                     
                                         </label>
-                                        <asp:HiddenField ID="hd1" runat="server" />
-                                        <asp:HiddenField ID="hd2" runat="server" />
+                                        <ajaxToolkit:CalendarExtender ID="CalendarExtender1" OnPreRender="CalendarExtender1_PreRender" TargetControlID="txtStartDate" runat="server" />
                                         <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control"></asp:TextBox>
-
+                                      <%--  <asp:RangeValidator ID="RangeValidator1" runat="server"
+                                            ControlToValidate="txtStartDate" ErrorMessage="RangeValidator"
+                                            Type="Date">
+                                        </asp:RangeValidator>--%>
+                                        <%--<ajaxTolkit:validatorcalloutextender id="RangeValidator1_ValidatorCalloutExtender"
+                                            runat="server" enabled="True" targetcontrolid="RangeValidator1">
+</ajaxTolkit:validatorcalloutextender>--%>
                                     </div>
                                 </div>
                             </div>
@@ -128,8 +133,7 @@
                                             To Date
                                     
                                         </label>
-                                        <asp:HiddenField ID="hd3" runat="server" />
-                                        <asp:HiddenField ID="hd4" runat="server" />
+                                        <ajaxToolkit:CalendarExtender ID="CalendarExtender2" TargetControlID="txtStartDate" runat="server" />
                                         <asp:TextBox ID="txtenddate" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                 </div>
@@ -143,14 +147,14 @@
         </div>
         <div class="panel-footer text-center">
             <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-primary" OnClick="btnSearch_Click" Text="Search" />
-             <asp:Button ID="btnClear" runat="server" CssClass="btn btn-primary" OnClick="btnClear_Click" Text="Clear" />
+            <asp:Button ID="btnClear" runat="server" CssClass="btn btn-primary" OnClick="btnClear_Click" Text="Clear" />
         </div>
     </div>
-     <div class="row">
-                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="padding-bottom: 8px">
-                     <asp:Button ID="btnExporttoexcel" runat="server" CssClass="btn btn-primary " Text="Export To Excel" OnClick="btnExporttoexcel_Click" />
-                     </div>
-            </div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="padding-bottom: 8px">
+            <asp:Button ID="btnExporttoexcel" runat="server" CssClass="btn btn-primary " Text="Export To Excel" OnClick="btnExporttoexcel_Click" />
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
             <div style="overflow-x: auto">
@@ -167,16 +171,16 @@
                             <ItemStyle CssClass="hidden"></ItemStyle>
                         </asp:BoundField>
                         <asp:BoundField DataField="InvoiceNumber" HeaderText="Invoice Number"></asp:BoundField>
-                       <asp:BoundField DataField="customerName" HeaderText="Customer"></asp:BoundField>
+                        <asp:BoundField DataField="customerName" HeaderText="Customer"></asp:BoundField>
                         <asp:BoundField DataField="date" HeaderText="Date"></asp:BoundField>
                         <asp:BoundField DataField="PaidAmnt" HeaderText="Paid Amnt"></asp:BoundField>
                         <asp:BoundField DataField="given_amnt" HeaderText="Given Amnt"></asp:BoundField>
                         <asp:BoundField DataField="balance_amnt" HeaderText="Balance Amnt"></asp:BoundField>
-                        <asp:BoundField DataField="grand_total" HeaderText="Grand Total "></asp:BoundField>                       
+                        <asp:BoundField DataField="grand_total" HeaderText="Grand Total "></asp:BoundField>
                         <asp:TemplateField ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
-                                  <asp:LinkButton ID="LinkButton4" runat="server" CommandName="Order" Font-Size="Small" CommandArgument='<%# Eval("sale_id") %>' CssClass="btn btn-success"><i class="fa fa-edit"  aria-hidden="true"> Original Order</i></asp:LinkButton>
-                                 <asp:LinkButton ID="LinkButton5" runat="server" CommandName="Invoice"  Font-Size="Small" CommandArgument='<%# Eval("sale_id") %>' CssClass="btn btn-danger"><i class="fa fa-edit" aria-hidden="true"> Combine Invoice</i></asp:LinkButton>
+                                <asp:LinkButton ID="LinkButton4" runat="server" CommandName="Order" Font-Size="Small" CommandArgument='<%# Eval("sale_id") %>' CssClass="btn btn-success"><i class="fa fa-edit"  aria-hidden="true"> Original Order</i></asp:LinkButton>
+                                <asp:LinkButton ID="LinkButton5" runat="server" CommandName="Invoice" Font-Size="Small" CommandArgument='<%# Eval("sale_id") %>' CssClass="btn btn-danger"><i class="fa fa-edit" aria-hidden="true"> Combine Invoice</i></asp:LinkButton>
                                 <asp:LinkButton ID="LinkButton6" runat="server" CommandName="Return" Font-Size="Small" CommandArgument='<%# Eval("sale_id") %>' CssClass="btn btn-warning"><i class="fa fa-edit" aria-hidden="true"> Return</i></asp:LinkButton>
                                 <asp:LinkButton ID="LinkPayBalance" runat="server" CommandName="ViewORPayBalance" Font-Size="Small" CommandArgument='<%# Eval("sale_id") %>' CssClass="btn btn-primary"><i class="fa fa-edit" aria-hidden="true"> View/Pay Balance</i></asp:LinkButton>
                             </ItemTemplate>
@@ -187,7 +191,7 @@
                     <PagerStyle CssClass="pagination-ys" />
                     <%--<PagerStyle Wrap="False" CssClass="GridPager" HorizontalAlign="Center" VerticalAlign="Middle" />--%>
                 </asp:GridView>
-            </div>           
+            </div>
         </div>
     </div>
 </asp:Content>

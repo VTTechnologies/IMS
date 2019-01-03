@@ -290,9 +290,9 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-7">
-                                    <asp:TextBox ID="txtSalesPrice" runat="server" CssClass="form-control" onkeypress="return OnlyNumericEntry(event);"></asp:TextBox>
+                                    <asp:TextBox ID="txtSalesPrice" runat="server" CssClass="form-control" onkeypress="return OnlyNumericEntry(event);"></asp:TextBox><%--^[1-9][0-9]*$--%>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" Display="Dynamic" ValidationGroup="adf" ErrorMessage="Sale price is required" ControlToValidate="txtSalesPrice" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" ValidationExpression="^[1-9][0-9]*$" runat="server" ValidationGroup="adf" Display="Dynamic" ForeColor="Red" ControlToValidate="txtSalesPrice" ErrorMessage="Sales Price should b greater then 0"></asp:RegularExpressionValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" ValidationExpression="^(0*[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*)$" runat="server" ValidationGroup="adf" Display="Dynamic" ForeColor="Red" ControlToValidate="txtSalesPrice" ErrorMessage="Sales Price should b greater then 0"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
                         </div>
@@ -372,7 +372,7 @@
     </div>
 
     <div class="modal fade" role="dialog" id="AddModal" runat="server">
-        <div class="modal-dialog modal-lg" style="height:auto">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
@@ -383,9 +383,9 @@
                 <div class="modal-body">
                     <iframe id="ModalIfram" runat="server" width="100%" height="350px" scrolling="yes" frameborder="0" allowfullscreen="true"></iframe>
                 </div>
-                <%--<div class="modal-footer">
-                        modal footer
-                    </div>--%>
+              <div class="modal-footer" >
+                        <asp:Button ID="btnCloseMode" runat="server" Text="Close" CssClass="btn btn-primary" OnClick="btnCloseMode_Click"  />
+                    </div>
             </div>
         </div>
     </div>
@@ -398,7 +398,10 @@
         function openModal() {
             $('#<%=myModal.ClientID%>').modal('show');
         }
+        function Closepopup() {
+            $('#AddModal').modal('close');
 
+        }
         function CheckDouble() {
             $.ajax({
                 type: "POST",

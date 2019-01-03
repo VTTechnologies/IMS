@@ -153,10 +153,22 @@ namespace IMS
         private bool ValidCalculation()
         {
             bool valid = false;
-            if (Convert.ToDecimal(lblGrandTotal.Text) >= (Convert.ToDecimal(lblGivenAmnt.Text) + Convert.ToDecimal(txtPaidAmnt.Text)))
+            if (Convert.ToInt32(txtBalanceAmnt.Text) >= 0)
+            {
+                if (Convert.ToDecimal(lblGrandTotal.Text) >= (Convert.ToDecimal(lblGivenAmnt.Text) + Convert.ToDecimal(txtPaidAmnt.Text)))
+                {
+                    valid = true;
+                }
+                else
+                {
+                    valid = false;
+                }
+            }
+            else
             {
                 valid = true;
             }
+
             return valid;
         }
 
@@ -259,20 +271,23 @@ namespace IMS
                 //    txtBalanceAmnt.Text = (remainingBalance - Convert.ToDecimal(txtPaidAmnt.Text)).ToString();
                 //}
 
-                decimal a = Convert.ToDecimal(lblGrandTotal.Text);
-                decimal b = Convert.ToDecimal(txtPaidAmnt.Text);
-                if (remainingBalance < b)
+                decimal paidAmnt = Convert.ToDecimal(txtPaidAmnt.Text);
+                if (remainingBalance < paidAmnt)
                 {
                     txtPaidAmnt.Text = remainingBalance.ToString();
                     txtBalanceAmnt.Text = "0";
                 }
 
+                else if(paidAmnt!=0)
+                {
+                    txtBalanceAmnt.Text = (remainingBalance - Convert.ToDecimal(txtPaidAmnt.Text)).ToString();
+                    //decimal c = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(txtPaidAmnt.Text);
+                    //txtBalanceAmnt.Text = c.ToString();
+                }
                 else
                 {
-                    decimal c = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(txtPaidAmnt.Text);
-                    txtBalanceAmnt.Text = c.ToString();
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Paid amount should be greator then zero');", true);
                 }
-
                 UpdatePanel2.Update();
             }
             catch (Exception ex)
