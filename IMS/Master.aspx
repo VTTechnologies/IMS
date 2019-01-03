@@ -61,7 +61,7 @@
                     </div>
                     <div class="col-md-4" id="div5" runat="server">
                         <div class="Blue text-center padd20">
-                            <b class="font30 ">Tax Type</b>
+                            <b class="font30 ">Tax </b>
                             <br />
                             <i class="fa fa fa-percent fa-3x padd20"></i>
                             <br />
@@ -135,7 +135,7 @@
                             <br />
                         </div>
                     </div>
-                     <div class="col-md-4" id="div11" runat="server">
+                     <div class="col-md-4" id="div11" runat="server" visible="false">
                     <div class="Blue text-center padd20">
                         <b class="font30 ">Tax Group</b>
                         <br />

@@ -266,7 +266,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Delete" ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs">
                                             <ItemTemplate>
-                                                <asp:ImageButton CommandName="Delete row" CommandArgument='<%#Eval("purchasedetails_id")%>' ID="btnimg_Remove" runat="server" ImageUrl="~/assets/img/remove.png" data-toggle="modal" href="#myModal" />
+                                                <asp:ImageButton CommandName="Delete row" CommandArgument='<%#Eval("purchasedetails_id")%>' ID="btnimg_Remove"  runat="server" ImageUrl="~/assets/img/remove.png" data-toggle="modal" href="#myModal" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>

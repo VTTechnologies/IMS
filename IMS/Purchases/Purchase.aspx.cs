@@ -21,6 +21,7 @@ namespace IMS
         string user_id = string.Empty;
         bool viewOrPayBalance = false;
         int purchase_Id = 0;
+        int counter = 0;
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["TestDBConnection"].ConnectionString);
         
         protected void Page_Load(object sender, EventArgs e)
@@ -640,13 +641,13 @@ namespace IMS
                     {
                         decimal subTotal = Convert.ToDecimal(txtquantity.Text) * Convert.ToDecimal(dr["Price"]);
                         decimal a = subTotal / 100;
-                        decimal discount_percent = (Convert.ToDecimal(dr["Discount Amount"]) * 100) / Convert.ToDecimal(dr["Sub Total"]);
-                        decimal discountamt = a * Convert.ToDecimal(discount_percent.ToString("0.##"));
+                        //decimal discount_percent = (Convert.ToDecimal(discount) * 100) / Convert.ToDecimal(dr["Sub Total"]);
+                        decimal discountamt = a * Convert.ToDecimal(discount);
                         decimal tax_amount = a * Convert.ToDecimal(dr["Tax"]);
 
                         dr["Quantity"] = txtquantity.Text;
                         dr["Tax"] = txtTaxpercentage.Text;
-                        dr["Discount"] = discount_percent;
+                        dr["Discount"] = Convert.ToDecimal(discount);
                         dr["Discount Amount"] = discountamt;
                         dr["Sub Total"] = subTotal;
                         dr["Tax Amount"] = tax_amount;
@@ -661,6 +662,7 @@ namespace IMS
                         ViewState["Details"] = dt;
                         btnAdd.Visible = true;
                         btnUpdate.Visible = false;
+                        counter = 0;
                         this.BindGrid();
                     }
                 }
@@ -765,7 +767,7 @@ namespace IMS
                 decimal discount_percent = decimal.Parse(grv.Cells[9].Text) * 100 / decimal.Parse(grv.Cells[12].Text);
                 decimal discountamt = a * Convert.ToDecimal(discount_percent.ToString("0.##"));
                 decimal tax_amount = a * decimal.Parse(grv.Cells[10].Text);              
-                DeleteCalculation(subTotal, tax_amount, discountamt);
+                
 
                 if (e.CommandName == "Delete row")
                 {
@@ -775,6 +777,7 @@ namespace IMS
                     dt.Rows[rowIndex].Delete();
                     ViewState["Details"] = dt;
                     this.BindGrid();
+                    DeleteCalculation(subTotal, tax_amount, discountamt);
                     clr();
 
                 }
@@ -788,13 +791,18 @@ namespace IMS
                         txtquantity.Text = grv.Cells[5].Text.ToString();
                         txtprice.Text = grv.Cells[6].Text.ToString();
                         txtsalesprice.Text = grv.Cells[7].Text.ToString();
-                        txtDiscount.Text = grv.Cells[9].Text.ToString();
-                        txtTaxpercentage.Text= grv.Cells[10].Text.ToString();
+                        txtDiscount.Text = grv.Cells[8].Text.ToString();
+                        txtTaxpercentage.Text = grv.Cells[10].Text.ToString();
                         btnUpdate.Visible = true;
                         btnAdd.Visible = false;
                         ddlproduct.Enabled = false;
+
+                        DeleteCalculation(subTotal, tax_amount, discountamt);
+                        //counter++;
                     }
-                                   }
+                }
+
+                
             }
 
             catch (Exception ex)

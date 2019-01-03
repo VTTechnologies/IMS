@@ -27,6 +27,10 @@ namespace IMS
             SessionValue();
             if (!IsPostBack)
             {
+
+                //btnimg_update.Attributes.Add("onclick", "this.disabled = 'true';"
+                //                + ClientScript.GetPostBackEventReference(btnimg_update, null)
+                //                + ";this.src = 'Images/wait.png';");
                 if (ViewState["Details"] == null)
                 {
                     DataTable dataTable = new DataTable();
@@ -685,7 +689,7 @@ namespace IMS
                 decimal discount_percent = decimal.Parse(grv.Cells[7].Text) * 100 / decimal.Parse(grv.Cells[10].Text);
                 decimal discountamt = a * Convert.ToDecimal(discount_percent.ToString("0.##"));
                 decimal tax_amount = a * decimal.Parse(grv.Cells[8].Text);
-                DeleteCalculation(subTotal, tax_amount, discountamt);
+                
 
                 if (e.CommandName == "Delete row")
                 {
@@ -695,6 +699,7 @@ namespace IMS
                     DataTable dt = ViewState["Details"] as DataTable;
                     dt.Rows[rowIndex].Delete();
                     ViewState["Details"] = dt;
+                    DeleteCalculation(subTotal, tax_amount, discountamt);
                     this.BindGrid();
 
                 }
@@ -705,12 +710,15 @@ namespace IMS
 
                         ViewState["id"] = grv.RowIndex;
                         ddlproduct.SelectedValue = grv.Cells[2].Text.ToString();
-
+                        
                         ddlproduct.Items.FindByValue(grv.Cells[2].Text).Enabled = true;
                         txtquantity.Text = grv.Cells[5].Text.ToString();
                         btnUpdate.Visible = true;
                         btnAdd.Visible = false;
                         ddlproduct.Enabled = false;
+                        DeleteCalculation(subTotal, tax_amount, discountamt);
+                        //grv.Cells[12].Enabled = false;
+                        
                     }
                 }
             }
@@ -948,7 +956,12 @@ namespace IMS
                     txtPaidAmt.Text = remainingBalance.ToString();
                     txtBalanceAmt.Text = "0";
                 }
-
+                else if (txtPaidAmt.Text == "0" || string.IsNullOrEmpty(txtPaidAmt.Text))
+                {
+                    btnGetRefund.Visible = false;
+                    txtBalanceAmt.Text = remainingBalance.ToString();
+                    //return;
+                }
                 else
                 {
                     decimal c = Convert.ToDecimal(lblGrandTotal.Text) - Convert.ToDecimal(txtPaidAmt.Text);
