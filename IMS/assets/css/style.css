@@ -779,6 +779,7 @@ table.dataTable thead .sorting:after {
 
 .bgblue{
     color:white;
+    /*background-image:url("../assets/img/IMS.png");*/
     background-color:#003366;
 }
 
