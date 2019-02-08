@@ -20,7 +20,6 @@ namespace IMS.Registration
 {
     public partial class WebForm2 : System.Web.UI.Page
     {
-
         /// <summary>  
         /// All The objects That are used in coding
         /// </summary>
@@ -54,21 +53,21 @@ namespace IMS.Registration
         /// </summary>
 
         #region Methods
-          [System.Web.Services.WebMethod]
+        [System.Web.Services.WebMethod]
         public static string CheckDouble(string useroremail)
         {
             try
             {
-                    SqlHelper helper = new SqlHelper();
-                    DataTable data = helper.checkregisteremail(useroremail);
-                    if (data.Rows.Count > 0)
-                    {
-                        return "true";
-                    }
-                    else
-                    {
-                        return "false";
-                    }
+                SqlHelper helper = new SqlHelper();
+                DataTable data = helper.checkregisteremail(useroremail);
+                if (data.Rows.Count > 0)
+                {
+                    return "true";
+                }
+                else
+                {
+                    return "false";
+                }
             }
             catch (Exception ex)
             {
@@ -76,28 +75,28 @@ namespace IMS.Registration
             }
             return "true";
         }
-          [System.Web.Services.WebMethod]
-          public static string CheckMobileDouble(string mobileno)
-          {
-              try
-              {
-                  SqlHelper helper = new SqlHelper();
-                  DataTable data = helper.checkregistermobileno(mobileno);
-                  if (data.Rows.Count > 0)
-                  {
-                      return "true";
-                  }
-                  else
-                  {
-                      return "false";
-                  }
-              }
-              catch (Exception ex)
-              {
-                  ErrorLog.saveerror(ex);
-              }
-              return "true";
-          }
+        [System.Web.Services.WebMethod]
+        public static string CheckMobileDouble(string mobileno)
+        {
+            try
+            {
+                SqlHelper helper = new SqlHelper();
+                DataTable data = helper.checkregistermobileno(mobileno);
+                if (data.Rows.Count > 0)
+                {
+                    return "true";
+                }
+                else
+                {
+                    return "false";
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
+            }
+            return "true";
+        }
         protected void SendMail()
         {
             try
@@ -110,7 +109,7 @@ namespace IMS.Registration
                 StringBuilder sb = new StringBuilder();
                 mail.From = new MailAddress("no-reply@imsbizz.com", "IMS Bizz");
                 mail.To.Add(email.Value);
-                mail.Subject = "Test Mail";
+                mail.Subject = "Verify Your Account";
                 string body = string.Empty;
                 using (StreamReader reader = new StreamReader(Server.MapPath("~/Registration/EmailVerification.html")))
                 {
@@ -206,7 +205,7 @@ namespace IMS.Registration
                     r.created_by = txtfirstname.Value;
                     r.created_date = DateTime.Now;
                     r.start_date = startdate.Value;
-                    r.end_date = enddate.Value; 
+                    r.end_date = enddate.Value;
                     r.uniqueid = uniqueid.ToString();
                     DataTable dt = new DataTable();
                     dt = r.Insert(r);
@@ -221,8 +220,6 @@ namespace IMS.Registration
             }
         }
 
-      
-
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             try
@@ -234,10 +231,7 @@ namespace IMS.Registration
                 ErrorLog.saveerror(ex);
             }
         }
-
         #endregion
-
-
 
         //public void validation()
         //{
@@ -267,8 +261,5 @@ namespace IMS.Registration
         //        ErrorLog.saveerror(ex);
         //    }
         //}
-
-       
-
     }
 }

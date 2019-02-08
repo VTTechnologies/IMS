@@ -14,13 +14,15 @@ namespace IMSBLL.EntityModel
     public partial class CommonReport_Result
     {
         public int company_id { get; set; }
+        public string Godown { get; set; }
         public string Company { get; set; }
+        public string PartyId { get; set; }
+        public string Product { get; set; }
         public string CompanyAddress { get; set; }
-        public string batch_name { get; set; }
+        public string Batch { get; set; }
         public int batch_id { get; set; }
-        public string product_name { get; set; }
         public string product_code { get; set; }
-        public Nullable<int> qty { get; set; }
+        public Nullable<int> Quantity { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<System.DateTime> modified_date { get; set; }
         public Nullable<System.DateTime> startDate { get; set; }

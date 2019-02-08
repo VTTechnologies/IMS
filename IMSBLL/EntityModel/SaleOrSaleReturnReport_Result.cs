@@ -19,7 +19,7 @@ namespace IMSBLL.EntityModel
         public string contact_no { get; set; }
         public string company_address { get; set; }
         public Nullable<decimal> total_tax { get; set; }
-        public Nullable<decimal> total_discount { get; set; }
+        public Nullable<decimal> discount_amnt { get; set; }
         public Nullable<decimal> total_amount { get; set; }
         public Nullable<decimal> grand_total { get; set; }
         public string InvoiceNumber { get; set; }

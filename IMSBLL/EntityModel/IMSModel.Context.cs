@@ -85,20 +85,6 @@ namespace IMSBLL.EntityModel
         public virtual DbSet<View_PurchaseDetails> View_PurchaseDetails { get; set; }
         public virtual DbSet<View_SaleDetails> View_SaleDetails { get; set; }
     
-        [DbFunction("IMS_TESTEntities", "Split")]
-        public virtual IQueryable<Split_Result> Split(string list, string splitOn)
-        {
-            var listParameter = list != null ?
-                new ObjectParameter("List", list) :
-                new ObjectParameter("List", typeof(string));
-    
-            var splitOnParameter = splitOn != null ?
-                new ObjectParameter("SplitOn", splitOn) :
-                new ObjectParameter("SplitOn", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Split_Result>("[IMS_TESTEntities].[Split](@List, @SplitOn)", listParameter, splitOnParameter);
-        }
-    
         public virtual ObjectResult<CommonReport_Result> CommonReport(string reportType, Nullable<int> companyId, string filterIds, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date)
         {
             var reportTypeParameter = reportType != null ?
@@ -229,6 +215,19 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("SaleId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SaleOrderReport_Result>("SaleOrderReport", saleIdParameter);
+        }
+    
+        public virtual ObjectResult<SaleOrPurchaseOrReturnReport_Result> SaleOrPurchaseOrReturnReport(Nullable<int> id, string fromTable)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var fromTableParameter = fromTable != null ?
+                new ObjectParameter("FromTable", fromTable) :
+                new ObjectParameter("FromTable", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SaleOrPurchaseOrReturnReport_Result>("SaleOrPurchaseOrReturnReport", idParameter, fromTableParameter);
         }
     
         public virtual ObjectResult<SaleOrSaleReturnReport_Result> SaleOrSaleReturnReport(Nullable<int> id, string fromTable)
@@ -3346,6 +3345,20 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("mobileno", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SpGetExistsMobile", mobilenoParameter);
+        }
+    
+        [DbFunction("IMS_TESTEntities", "Split")]
+        public virtual IQueryable<Split_Result> Split(string list, string splitOn)
+        {
+            var listParameter = list != null ?
+                new ObjectParameter("List", list) :
+                new ObjectParameter("List", typeof(string));
+    
+            var splitOnParameter = splitOn != null ?
+                new ObjectParameter("SplitOn", splitOn) :
+                new ObjectParameter("SplitOn", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Split_Result>("[IMS_TESTEntities].[Split](@List, @SplitOn)", listParameter, splitOnParameter);
         }
     }
 }

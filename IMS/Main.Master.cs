@@ -74,24 +74,24 @@ namespace IMS
                     cmd.Parameters.AddWithValue("@s_date", "2018-05-15 18:47:00");
                     cmd.Parameters.Add("@days_left", SqlDbType.Int);
                     cmd.Parameters["@days_left"].Direction = ParameterDirection.Output;
-                    cmd.ExecuteNonQuery();                    
+                    cmd.ExecuteNonQuery();
                     if (!(cmd.Parameters["@days_left"].Value is DBNull))
-                        mcid = Convert.ToInt32(cmd.Parameters["@days_left"].Value);                   
+                        mcid = Convert.ToInt32(cmd.Parameters["@days_left"].Value);
                     if (!(cmd.Parameters["@enddays_flag"].Value is DBNull))
-                        end_days = Convert.ToInt32(cmd.Parameters["@enddays_flag"].Value);                   
+                        end_days = Convert.ToInt32(cmd.Parameters["@enddays_flag"].Value);
                     if (!(cmd.Parameters["@days_flag"].Value is DBNull))
                         days_flag = Convert.ToInt32(cmd.Parameters["@days_flag"].Value);
                     if (days_flag == 1)
-                    {                    
+                    {
                         Session["mcid"] = 1;
                         Session["days"] = mcid;
                         //msg.Visible = true;
                         //notify.Visible = true;
                         //lblnotification.Text = "1";
-                       // lblF_year.Text = "Your Current Financial Year Is Ending In "  + mcid+ " Day's";
+                        // lblF_year.Text = "Your Current Financial Year Is Ending In "  + mcid+ " Day's";
                         //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Your Current Financial Year Is Ending In  Days','False');", true);
                     }
-                   
+
                 }
 
 
@@ -111,7 +111,7 @@ namespace IMS
         public void companyname()
         {
             tbl_company r = new tbl_company();
-            var company_id=Convert.ToInt32(Session["company_id"]);
+            var company_id = Convert.ToInt32(Session["company_id"]);
             r = context.tbl_company.Where(w => w.company_id == company_id).SingleOrDefault();
             try
             {
@@ -146,51 +146,52 @@ namespace IMS
                 con.Close();
                 con.Dispose();
             }
-           
-                        
+
+
             //lblHeading.Text=
         }
         public void selected()
-       {
-           String activepage = Request.RawUrl;
-           if (activepage.Contains("Index.aspx"))
-           {
-               liindex.Attributes["class"] = "selected";
-           }
-           //else if (activepage.Contains("Company.aspx"))
-           //{
-           //    licompany.Attributes["class"] = "selected";
-           //}
-           //else if (activepage.Contains("Branch.aspx"))
-           //{
-           //    libranch.Attributes["class"] = "selected";
-           //}
-           else if (activepage.Contains("Master.aspx"))
-           {
-               limaster.Attributes["class"] = "selected";
-           }
-           else if (activepage.Contains("Sale.aspx"))
-           {
-               lisale.Attributes["class"] = "selected";
-           }
-           else if (activepage.Contains("Purchase.aspx"))
-           {
-               lipurchase.Attributes["class"] = "selected";
-           }
-           else if (activepage.Contains("PurchaseReturn.aspx"))
-           {
-               lipurchasereturn.Attributes["class"] = "selected";
-           }
-           else if (activepage.Contains("salesReturn.aspx"))
-           {
-               lisalereturn.Attributes["class"] = "selected";
-           }
+        {
+            String activepage = Request.RawUrl;
+            if (activepage.Contains("Index.aspx"))
+            {
+                liindex.Attributes["class"] = "selected";
+            }
+            //else if (activepage.Contains("Company.aspx"))
+            //{
+            //    licompany.Attributes["class"] = "selected";
+            //}
+            //else if (activepage.Contains("Branch.aspx"))
+            //{
+            //    libranch.Attributes["class"] = "selected";
+            //}
+            else if (activepage.Contains("Master.aspx"))
+            {
+                limaster.Attributes["class"] = "selected";
+            }
+            else if (activepage.Contains("Sale.aspx"))
+            {
+                lisale.Attributes["class"] = "selected";
+            }
+            else if (activepage.Contains("Purchase.aspx"))
+            {
+                lipurchase.Attributes["class"] = "selected";
+            }
+            else if (activepage.Contains("PurchaseReturn.aspx"))
+            {
+                lipurchasereturn.Attributes["class"] = "selected";
+            }
+            else if (activepage.Contains("salesReturn.aspx"))
+            {
+                lisalereturn.Attributes["class"] = "selected";
+            }
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             try
             {
+                Session.Clear();
                 FormsAuthentication.SignOut();
                 FormsAuthentication.RedirectToLoginPage();
             }
@@ -201,6 +202,6 @@ namespace IMS
                 //Do Logging
             }
         }
-        
+
     }
 }
