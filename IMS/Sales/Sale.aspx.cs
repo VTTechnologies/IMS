@@ -133,6 +133,10 @@ namespace IMS
                 hd1.Value = finicialyear.start_date;
                 hd2.Value = finicialyear.end_date;
 
+
+                CalendarExtender1.StartDate = Convert.ToDateTime(finicialyear.start_date);
+                CalendarExtender1.EndDate = Convert.ToDateTime(finicialyear.end_date);
+
             }
             catch (Exception ex)
             {
@@ -342,6 +346,7 @@ namespace IMS
 
                 context.tbl_sale.Add(sale);
                 context.SaveChanges();
+                Session["sale_id"] = sale.sale_id;
                 string order = sale.InvoiceNumber;
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Saved successfully, Your order number is " + order + "');", true);
             }

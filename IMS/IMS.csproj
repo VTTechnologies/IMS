@@ -823,7 +823,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\BalanceReport.rdlc" />
     <EmbeddedResource Include="Reports\CombineReport.rdlc" />
+    <EmbeddedResource Include="Reports\GodownWiseStockReport.rdlc" />
     <EmbeddedResource Include="Reports\InventoryReport.rdlc" />
     <EmbeddedResource Include="Reports\ProductWiseStockReport.rdlc" />
     <EmbeddedResource Include="Reports\PurchaseSaleReturnReport.rdlc" />

@@ -250,7 +250,7 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px; margin-top: 10px">
 
-                                    <asp:GridView ID="grdreport" runat="server" OnDataBound="grdreport_DataBound" HeaderStyle-BackColor="#0033CC" Font-Size="X-Small" AutoGenerateColumns="true" CssClass="table table-bordered" BorderStyle="Solid" GridLines="Horizontal">
+                                    <asp:GridView ID="grdreport" EmptyDataText="No Record Found" runat="server" OnDataBound="grdreport_DataBound" HeaderStyle-BackColor="#0033CC" Font-Size="X-Small" AutoGenerateColumns="true" CssClass="table table-bordered" BorderStyle="Solid" GridLines="Horizontal">
 
 
                                         <HeaderStyle BackColor="#0033CC" ForeColor="White" />

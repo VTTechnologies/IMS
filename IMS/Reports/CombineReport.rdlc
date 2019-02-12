@@ -649,7 +649,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Company.Value</Value>
+                <Value>=First(Fields!Company.Value, "CombineDataSet")</Value>
                 <Style>
                   <FontSize>12pt</FontSize>
                   <FontWeight>Bold</FontWeight>
@@ -682,7 +682,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!CompanyAddress.Value</Value>
+                <Value>=First(Fields!CompanyAddress.Value, "CombineDataSet")</Value>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <FontFamily>Calibri</FontFamily>
@@ -717,7 +717,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Party.Value</Value>
+                <Value>=First(Fields!Party.Value, "CombineDataSet")</Value>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <FontFamily>Calibri</FontFamily>
@@ -752,7 +752,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!PartyAddress.Value</Value>
+                <Value>=First(Fields!PartyAddress.Value, "CombineDataSet")</Value>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <FontFamily>Calibri</FontFamily>
@@ -796,7 +796,7 @@
                 </Style>
               </TextRun>
               <TextRun>
-                <Value>=Fields!InvoiceNumber.Value</Value>
+                <Value>=First(Fields!InvoiceNumber.Value, "CombineDataSet")</Value>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <FontFamily>Calibri</FontFamily>
@@ -837,7 +837,7 @@
                 </Style>
               </TextRun>
               <TextRun>
-                <Value>=Fields!StartDate.Value</Value>
+                <Value>=First(Fields!StartDate.Value, "CombineDataSet")</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -849,7 +849,7 @@
                 </Style>
               </TextRun>
               <TextRun>
-                <Value>=Fields!EndDate.Value</Value>
+                <Value>=First(Fields!EndDate.Value, "CombineDataSet")</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -942,7 +942,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Sum(CInt(IIf(Left(Fields!Type.Value, 1) = "P",Fields!ProductAmount.Value, 0))) - Sum(CInt(IIf(Left(Fields!Type.Value, 1) = "R", Fields!ProductAmount.Value, 0)))</Value>
+                <Value>=First(Fields!SubTotal.Value, "PaymentDetailsDataSet")</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -1056,7 +1056,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Sum(CInt(IIf(Left(Fields!Type.Value, 1) = "P", Fields!TotalTax.Value, 0))) - Sum(CInt(IIf(Left(Fields!Type.Value, 1) = "R", Fields!TotalTax.Value, 0)))</Value>
+                <Value>=Sum(Fields!TaxAmnt.Value, "CombineDataSet")</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -1090,7 +1090,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Sum(CInt(IIf(Left(Fields!Type.Value, 1) = "P", Fields!DiscountAmnt.Value, 0))) - Sum(CInt(IIf(Left(Fields!Type.Value, 1) = "R", Fields!TotalDiscount.Value, 0)))</Value>
+                <Value>=First(Fields!DiscountAmount.Value, "PaymentDetailsDataSet")</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -1159,7 +1159,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Sum(CInt(IIf(Left(Fields!Type.Value, 1) = "P", Fields!TotalAmount.Value, 0))) - Sum(CInt(IIf(Left(Fields!Type.Value, 1) = "R", Fields!TotalAmount.Value, 0)))</Value>
+                <Value>=First(Fields!GrandTotal.Value, "PaymentDetailsDataSet")</Value>
                 <Style>
                   <FontSize>11pt</FontSize>
                   <FontWeight>Bold</FontWeight>
@@ -1177,6 +1177,66 @@
         <Height>0.25in</Height>
         <Width>1.825in</Width>
         <ZIndex>17</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox10">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Given Amount</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox10</rd:DefaultName>
+        <Top>3.66542in</Top>
+        <Left>0.23333in</Left>
+        <Height>0.25in</Height>
+        <Width>1in</Width>
+        <ZIndex>18</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox11">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!GivenAmnt.Value, "PaymentDetailsDataSet")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox11</rd:DefaultName>
+        <Top>3.66542in</Top>
+        <Left>1.8425in</Left>
+        <Height>0.25in</Height>
+        <Width>1in</Width>
+        <ZIndex>19</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1307,8 +1367,48 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>CommonDataSet</rd:DataSetName>
-        <rd:SchemaPath>D:\VT Technologies\IMS\IMS\Reports\CommonDataSet.xsd</rd:SchemaPath>
+        <rd:SchemaPath>F:\IMS\IMS 1.0\IMS\IMS\Reports\CommonDataSet.xsd</rd:SchemaPath>
         <rd:TableName>CombineDataTable</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="PaymentDetailsDataSet">
+      <Query>
+        <DataSourceName>CommonDataSet</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="SubTotal">
+          <DataField>SubTotal</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TaxAmount">
+          <DataField>TaxAmount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DiscountAmount">
+          <DataField>DiscountAmount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GrandTotal">
+          <DataField>GrandTotal</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GivenAmnt">
+          <DataField>GivenAmnt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BalanceAmnt">
+          <DataField>BalanceAmnt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>CommonDataSet</rd:DataSetName>
+        <rd:SchemaPath>F:\IMS\IMS 1.0\IMS\IMS\Reports\CommonDataSet.xsd</rd:SchemaPath>
+        <rd:TableName>PaymentDetailsDataTable</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />

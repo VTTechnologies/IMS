@@ -119,7 +119,7 @@
                                  <asp:BoundField DataField="Product_id" HeaderText="Product id" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
                                 <asp:BoundField DataField="product_name" HeaderText="Product"></asp:BoundField>
                                 <asp:BoundField DataField="quantity" HeaderText="Quantity"></asp:BoundField>
-                                <asp:BoundField DataField="price" HeaderText="Price"></asp:BoundField>
+                                <asp:BoundField DataField="sale_rate" HeaderText="Price"></asp:BoundField>
                                 <asp:BoundField DataField="dicount_amt" HeaderText="Discount Amount"></asp:BoundField>
                                 <asp:BoundField DataField="tax_percentage" HeaderText="Tax"></asp:BoundField>
                                 <asp:BoundField DataField="tax_amt" HeaderText="Tax Amount"></asp:BoundField>

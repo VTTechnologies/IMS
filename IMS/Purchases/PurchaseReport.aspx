@@ -154,7 +154,7 @@
            
              
             <div style="overflow-x: auto">
-                <asp:GridView ID="GridView1" runat="server" OnRowCommand="GridView1_RowCommand" EmptyDataText="No Recorde Found" EmptyDataRowStyle-ForeColor="Red" AutoGenerateColumns="false" CssClass="table table-bordered " Font-Size="Small"  AllowPaging="true" PageSize="10" OnPageIndexChanging="GridView1_PageIndexChanging">
+                <asp:GridView ID="GridView1" runat="server" OnRowCommand="GridView1_RowCommand" EmptyDataText="No Record Found" EmptyDataRowStyle-ForeColor="Red" AutoGenerateColumns="false" CssClass="table table-bordered " Font-Size="Small"  AllowPaging="true" PageSize="10" OnPageIndexChanging="GridView1_PageIndexChanging">
                     <Columns>
                         <asp:TemplateField HeaderText="SR.No">
                             <ItemTemplate>

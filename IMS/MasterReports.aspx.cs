@@ -1,4 +1,5 @@
 ﻿using IMS.Reports;
+using IMSBLL.DAL;
 using IMSBLL.EntityModel;
 using Microsoft.Reporting.WebForms;
 using System;
@@ -18,7 +19,11 @@ namespace IMS
     {
         string Connectionstring = ConfigurationManager.ConnectionStrings["TestDBConnection"].ToString();
         IMS_TESTEntities context = new IMS_TESTEntities();
-        int companyId = 0;
+        int companyId, branchId;
+        string User_id;
+        Boolean isReportTypeBalance = false;
+        Boolean isReportTypeStockReport = false;
+        Boolean isReportTypeproductInventory = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionValue();
@@ -27,6 +32,7 @@ namespace IMS
                 BindProducts();
                 BindVendors();
                 BindCustomers();
+                ddlFilerBy.Items[4].Enabled = false;
             }
         }
         private void SessionValue()
@@ -63,111 +69,252 @@ namespace IMS
             lstCustomers.DataBind();
         }
         
+        private void BindGodowns()
+        {
+            var godown = context.tbl_godown.Where(w => w.company_id == companyId).ToList();
+            lstGodowns.DataTextField = "godown_name";
+            lstGodowns.DataValueField = "godown_id";
+            lstGodowns.DataSource = godown;
+            lstGodowns.DataBind();
+        }
         #region Events
         protected void btnClear_Click(object sender, EventArgs e)
         {
+           // ddlReportType.SelectedIndex = 0;
+           //// ddlVendor.SelectedIndex = 0;
+           // //txtInvoiceNo.Text = string.Empty;
+           // txtStartDate.Text = string.Empty;
+           // txtenddate.Text = string.Empty;
+           // ReportViewer1.Visible = false;
+           // ddlFilerBy.Enabled = true;
+           // txtStartDate.Enabled = true;
+           // txtenddate.Enabled = true;
+
+
+           // displayReportSection.Visible = false;
             ddlReportType.SelectedIndex = 0;
-           // ddlVendor.SelectedIndex = 0;
-            //txtInvoiceNo.Text = string.Empty;
+            ddlFilerBy.SelectedIndex = 0;
+            lstProduct.Items.Clear();
             txtStartDate.Text = string.Empty;
             txtenddate.Text = string.Empty;
-            ReportViewer1.Visible = false;
             ddlFilerBy.Enabled = true;
             txtStartDate.Enabled = true;
             txtenddate.Enabled = true;
+            lstCustomers.Items.Clear();
+            lstGodowns.Items.Clear();
+            lstVendor.Items.Clear();
         }
-      
+        private bool ValidDate()
+        {
+            bool valid = false;
+            if (txtStartDate.Text != "" && txtenddate.Text != "")
+            {
+                valid = true;
+
+            }
+            else if (cbEnable.Checked)
+            {
+                valid = true;
+            }
+            return valid;
+        }
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            var filterIds = string.Empty;
-            foreach (ListItem item in lstProduct.Items)
+            try
             {
-                if (item.Selected)
+                if (ValidDate())
                 {
-                    filterIds += item.Value + ",";
-                }
-            }
+                   
+                    var filterIds = string.Empty;
+                    foreach (ListItem item in lstProduct.Items)
+                    {
+                        if (item.Selected)
+                        {
+                            filterIds += item.Value + ",";
+                        }
+                    }
 
-            foreach (ListItem item in lstVendor.Items)
-            {
-                if (item.Selected)
-                {
-                    filterIds += "," + item.Value;
-                }
-            }
-            if (ddlReportType.SelectedItem.Text != "Stock Report")
-            {
-                btnSearch.ValidationGroup = "search";              
-            }
+                    foreach (ListItem item in lstVendor.Items)
+                    {
+                        if (item.Selected)
+                        {
+                            filterIds += "," + item.Value;
+                        }
+                    }
+                    foreach (ListItem item in lstCustomers.Items)
+                    {
+                        if (item.Selected)
+                        {
+                            filterIds += "," + item.Value;
+                        }
+                    }
+                    foreach (ListItem item in lstGodowns.Items)
+                    {
+                        if (item.Selected)
+                        {
+                            filterIds += "," + item.Value;
+                        }
+                    }
 
-            SqlParameter[] sqlParams;
-            ReportParameter reportParam;
-            ReportViewer1.Visible = true;
-            int companyId = Convert.ToInt32(Session["company_id"]);
-            var logo = context.tbl_company.Where(w => w.company_id == companyId).Select(s => s.logo).SingleOrDefault();
-            string logoPath = new Uri(Server.MapPath(logo)).AbsoluteUri;
+                    SqlParameter[] sqlParams;
+                    ReportParameter reportParam;
+                    ReportViewer1.Visible = true;
+                    int companyId = Convert.ToInt32(Session["company_id"]);
+                    var logo = context.tbl_company.Where(w => w.company_id == companyId).Select(s => s.logo).SingleOrDefault();
+                    string logoPath = new Uri(Server.MapPath(logo)).AbsoluteUri;
 
-            string reportDataSet = string.Empty;
-            string dataTable = string.Empty;
+                    string reportDataSet = string.Empty;
+                    string dataTable = string.Empty;
+                    string reportType = string.Empty;
+                    switch (ddlReportType.SelectedItem.Text)
+                    {
 
-            switch (ddlReportType.SelectedItem.Text)
-            {
-
-                case "Stock Report":
-                    sqlParams = new SqlParameter[] {
-                         new SqlParameter("@ReportType","STOCKREPORT"),
+                        case "Stock Report": isReportTypeStockReport = true;
+                            string Path = string.Empty;
+                            if (ddlFilerBy.SelectedItem.Text == "Product Wise")
+                            {
+                                reportType = "PRODUCTSTOCKREPORT";
+                                isReportTypeproductInventory = true;
+                                Path = "~/Reports/ProductWiseStockReport.rdlc";
+                                reportDataSet = "ProductWiseStockDataSet";
+                                dataTable = "ProductWiseStockReport";
+                            }
+                            else if (ddlFilerBy.SelectedItem.Text == "Godown Wise")
+                            {
+                                reportType = "GODOWNSTOCKREPORT";
+                                Path = "~/Reports/GodownWiseStockReport.rdlc";
+                                reportDataSet = "GodownWiseStockReportDataSet";
+                                dataTable = "ProductWiseStockReport";
+                            }
+                            sqlParams = new SqlParameter[] {
+                         new SqlParameter("@ReportType",reportType),
                          new SqlParameter("@CompanyId", companyId),
                           new SqlParameter("@start_date",txtStartDate.Text),
                            new SqlParameter("@end_date",txtenddate.Text),
                           new SqlParameter("@FilterIds",filterIds)
                     };
-                    ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Reports/ProductWiseStockReport.rdlc");
-                    ReportViewer1.LocalReport.EnableExternalImages = true;
-                    reportDataSet = "ProductWiseStockDataSet";
-                    dataTable = "ProductWiseStockReport";
-                    reportParam = new ReportParameter("LogoPath", logoPath);
-                    ReportViewer1.LocalReport.SetParameters(reportParam);
-                    CreateReport(Connectionstring, "CommonReport", sqlParams, ref ReportViewer1, reportDataSet, dataTable);
+                            ReportViewer1.LocalReport.ReportPath = Server.MapPath(Path);
+                            ReportViewer1.LocalReport.EnableExternalImages = true;
+                           
+                            reportParam = new ReportParameter("LogoPath", logoPath);
+                            ReportViewer1.LocalReport.SetParameters(reportParam);
+                            CreateReport(Connectionstring, "CommonReport", sqlParams, ref ReportViewer1, reportDataSet, dataTable);
 
-                    ReportViewer1.LocalReport.Refresh();
-                    break;
+                            ReportViewer1.LocalReport.Refresh();
+                            break;
 
-                case "Inventory Report":
-                    sqlParams = new SqlParameter[] {
-                         new SqlParameter("@ReportType","PRODUCTINVENTORYREPORT"),
+                        case "Inventory Report": 
+                            if (ddlFilerBy.SelectedItem.Text == "Product Wise")
+                            {
+                                reportType = "PRODUCTINVENTORYREPORT";
+                                isReportTypeproductInventory = true;
+                            }
+                            else if (ddlFilerBy.SelectedItem.Text == "Vendor Wise")
+                            {
+                                reportType = "VENDORINVENTORYREPORT";
+                            }
+                            else if (ddlFilerBy.SelectedItem.Text == "Cutomer Wise")
+                            {
+                                reportType = "CUSTOMERINVENTORYREPORT";
+                            }
+                            sqlParams = new SqlParameter[] {
+                         new SqlParameter("@ReportType",reportType),
                          new SqlParameter("@CompanyId", companyId),
                           new SqlParameter("@start_date",txtStartDate.Text),
                            new SqlParameter("@end_date",txtenddate.Text),
                           new SqlParameter("@FilterIds",filterIds) 
                     };
-                    ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Reports/ProductWiseStockReport.rdlc");
-                    ReportViewer1.LocalReport.EnableExternalImages = true;
-                    reportDataSet = "ProductWiseStockDataSet";
-                    dataTable = "ProductWiseStockReport";
-                    reportParam = new ReportParameter("LogoPath", logoPath);
-                    ReportViewer1.LocalReport.SetParameters(reportParam);
-                    CreateReport(Connectionstring, "CommonReport", sqlParams, ref ReportViewer1, reportDataSet, dataTable);
+                            ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Reports/InventoryReport.rdlc");
+                            ReportViewer1.LocalReport.EnableExternalImages = true;
+                            reportDataSet = "CombineDataSet";
+                            dataTable = "CombineDataTable";
+                            reportParam = new ReportParameter("LogoPath", logoPath);
+                            ReportViewer1.LocalReport.SetParameters(reportParam);
+                            CreateReport(Connectionstring, "CommonReport", sqlParams, ref ReportViewer1, reportDataSet, dataTable);
 
-                    ReportViewer1.LocalReport.Refresh();
-                    break;
-                default:
-                    break;
+                            ReportViewer1.LocalReport.Refresh();
+                            break;
+
+
+                        case "Balance Report":
+                            isReportTypeBalance = true;
+                            if (ddlFilerBy.SelectedItem.Text == "Cutomer Wise")
+                            {
+                                reportType = "CUSTOMERBALANCEREPORT";
+
+                            }
+                            else if (ddlFilerBy.SelectedItem.Text == "Vendor Wise")
+                            {
+                                reportType = "VENDORBALANCEREPORT";
+                            }
+                            sqlParams = new SqlParameter[] {
+                         new SqlParameter("@ReportType",reportType),
+                         new SqlParameter("@CompanyId", companyId),
+                          new SqlParameter("@start_date",txtStartDate.Text),
+                           new SqlParameter("@end_date",txtenddate.Text),
+                          new SqlParameter("@FilterIds",filterIds)
+                    };
+                            ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Reports/BalanceReport.rdlc");
+                            ReportViewer1.LocalReport.EnableExternalImages = true;
+                            reportDataSet = "BalanceDataSet";
+                            dataTable = "CombineDataTable";
+                            reportParam = new ReportParameter("Logopath", logoPath);
+                            ReportViewer1.LocalReport.SetParameters(reportParam);
+                            CreateReport(Connectionstring, "CommonReport", sqlParams, ref ReportViewer1, reportDataSet, dataTable);
+
+                            ReportViewer1.LocalReport.Refresh();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Please Enter The Dates Or Check The Financial Year CheckeBox ');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
             }
                        
         }
 
         protected void ddlReportType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlReportType.SelectedItem.Text == "Stock Report")
+            try
             {
-                ddlFilerBy.Enabled = false;
-                txtenddate.Enabled = false;
-                txtStartDate.Enabled = false;
+                cbEnable.Checked = false;
+                if (ddlReportType.SelectedItem.Text == "Stock Report")
+                {
+                    ddlFilerBy.Items[2].Enabled = false;
+                    ddlFilerBy.Items[3].Enabled = false;
+                    ddlFilerBy.Items[4].Enabled = true;
+                    //ddlFilerBy.Enabled = false;
+                    //txtenddate.Enabled = false;
+                    //txtStartDate.Enabled = false;
+
+                }
+                else
+                {
+                    ddlFilerBy.Items[2].Enabled = true;
+                    ddlFilerBy.Items[3].Enabled = true;
+                    ddlFilerBy.Items[4].Enabled = false;
+                    txtenddate.Enabled = true;
+                    txtStartDate.Enabled = true;
+                }
+                if (ddlReportType.SelectedItem.Text == "Balance Report")
+                {
+                    ddlFilerBy.Items[1].Enabled = false;
+                }
+                else
+                {
+                    ddlFilerBy.Items[1].Enabled = true;
+                }
             }
-            else {
-                ddlFilerBy.Enabled = true;
-                txtenddate.Enabled = true;
-                txtStartDate.Enabled = true;
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
             }
         }
 
@@ -211,26 +358,68 @@ namespace IMS
 
         protected void ddlFilerBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlFilerBy.SelectedItem.Text == "Product Wise")
+
+            try
             {
-                BindProducts();
-                Products.Visible = true;
-                Vendors.Visible = false;
-                Customers.Visible = false;
+                if (ddlFilerBy.SelectedItem.Text == "Product Wise")
+                {
+                    BindProducts();
+                    Products.Visible = true;
+                    Vendors.Visible = false;
+                    Customers.Visible = false;
+                    Godowns.Visible = false;
+                }
+                else if (ddlFilerBy.SelectedItem.Text == "Vendor Wise")
+                {
+                    BindVendors();
+                    Vendors.Visible = true;
+                    Customers.Visible = false;
+                    Products.Visible = false;
+                    Godowns.Visible = false;
+                }
+                else if (ddlFilerBy.SelectedItem.Text == "Cutomer Wise")
+                {
+                    BindCustomers();
+                    Vendors.Visible = false;
+                    Products.Visible = false;
+                    Customers.Visible = true;
+                    Godowns.Visible = false;
+                }
+                else if (ddlFilerBy.SelectedItem.Text == "Godown Wise")
+                {
+                    BindGodowns();
+                    Vendors.Visible = false;
+                    Products.Visible = false;
+                    Customers.Visible = false;
+                    Godowns.Visible = true;
+                }
+
             }
-            else if (ddlFilerBy.SelectedItem.Text == "Vendor Wise")
+            catch (Exception ex)
             {
-                BindVendors();
-                Vendors.Visible = true;
-                Customers.Visible = false;
-                Products.Visible = false;
+                ErrorLog.saveerror(ex);
             }
-            else if (ddlFilerBy.SelectedItem.Text == "Cutomer Wise")
+        }
+
+
+        protected void cbEnable_CheckedChanged(object sender, EventArgs e)
+        {
+            try
             {
-                BindCustomers();
-                Vendors.Visible = false;
-                Products.Visible = false;
-                Customers.Visible = true;
+                if (cbEnable.Checked)
+                {
+                    txtStartDate.Enabled = false;
+                    txtenddate.Enabled = false;
+                }
+                else
+                {
+                    txtStartDate.Enabled = true;
+                    txtenddate.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.saveerror(ex);
             }
         }
         #endregion

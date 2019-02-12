@@ -78,18 +78,9 @@ namespace IMS
         public void logo()
         {
             var logo=context.tbl_company.Where(w=> w.company_id==companyId).SingleOrDefault();
-            //SqlConnection con1 = new SqlConnection(ConfigurationManager.ConnectionStrings["TestDBConnection"].ConnectionString);
-            //SqlCommand cmd = new SqlCommand();
-            //cmd.CommandText = "sp_selectcompanylogo";
-            //cmd.CommandType = CommandType.StoredProcedure;
-            //cmd.Parameters.AddWithValue("@company_id", Convert.ToInt32(Session["company_id"]));
-            //cmd.Connection = con1;
+          
             try
             {
-                //cmd.CommandTimeout = 600000;
-                //con1.Open();
-                //byte[] bytes = (byte[])cmd.ExecuteScalar();
-                //string strBase64 = Convert.ToBase64String(bytes);
                 if (logo.logo != null)
                 {
                     if (File.Exists(Server.MapPath(logo.logo)))
@@ -107,7 +98,6 @@ namespace IMS
                     imglogo.Visible = false;
                     lblIms.Visible = true;
                 }
-                //imglogo.ImageUrl = logo.logo.ToString();
             }
             catch (Exception ex)
             {
@@ -160,7 +150,7 @@ namespace IMS
                 lblinvoiceno.Text = purchase.invoiceNumber.ToString();
                 lblsubtotal.Text = purchase.actualamount.ToString();
                 lblTaxAmount.Text = purchase.totalTax.ToString();
-                lblDiscountAmt.Text = purchase.balanceamt.ToString();
+                lblDiscountAmt.Text = purchase.discount.ToString();
                 lblGrandTotal.Text = purchase.total.ToString();
             }
                                                                                                                    

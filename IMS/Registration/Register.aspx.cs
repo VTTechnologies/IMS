@@ -208,6 +208,8 @@ namespace IMS.Registration
                     r.start_date = startdate.Value;
                     r.end_date = enddate.Value; 
                     r.uniqueid = uniqueid.ToString();
+
+                    //context.sp_Register(company_name,)
                     DataTable dt = new DataTable();
                     dt = r.Insert(r);
                     Session["userdetails"] = dt;

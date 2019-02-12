@@ -28,6 +28,7 @@ namespace IMS
                 selected();
                 companyname();
                 F_yearcheck();
+                Role();
             }
         }
         //public void Test(string PageName)
@@ -185,6 +186,34 @@ namespace IMS
            {
                lisalereturn.Attributes["class"] = "selected";
            }
+        }
+
+        public void Role()
+        {
+            if (Session["Rolename"] != null)
+            {
+                string role = string.Empty;
+                role = Convert.ToString(Session["Rolename"]);
+
+                if (role =="Sales Manager")
+                {
+                    limaster.Visible = false;
+                    lipurchase.Visible = false;
+                    lipurchaseReport.Visible = false;
+                    lipurchasereturn.Visible = false;
+                    liindex.Visible = false;
+                    li1.Visible = false;
+                }
+                else if (role == "Purchase Manager")
+                {
+                    limaster.Visible = false;
+                    lisale.Visible = false;
+                    lisaleReport.Visible = false;
+                    lisalereturn.Visible = false;
+                    liindex.Visible = false;
+                    li1.Visible = false;
+                }
+            }
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)

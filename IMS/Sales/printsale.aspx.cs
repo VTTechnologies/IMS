@@ -129,9 +129,8 @@ namespace IMS.Sales
             var sale = (from p in context.tbl_sale
                         join sd in context.tbl_SalePaymentDetails on p.sale_id equals sd.SaleId
                         join c in context.tbl_party on p.party_id equals c.party_id
-                            join m in context.tbl_monytransaction on p.sale_id equals m.transactio_type_id
                             join company in context.tbl_company on p.company_id equals company.company_id
-                            where p.sale_id == a && p.company_id == companyId && p.status == true && c.party_type == "Customer"
+                        where p.sale_id == a && p.company_id == companyId && p.status == true && c.party_type == "Customer"
                             select new
                             {
                                 PartyId = p.party_id,
@@ -142,8 +141,8 @@ namespace IMS.Sales
                                 total = sd.GrandTotal,
                                 totalTax = sd.TaxAmount,
                                 name = c.party_name,
-                                balanceamt = m.balance_amt,
-                                givenamt = m.given_amt,
+                                balanceamt = sd.BalanceAmnt,
+                                givenamt = sd.GivenAmnt,
                                 companyName = company.company_name,
                                 address = company.company_address,
                                 partyaddress = c.party_address,
@@ -159,7 +158,6 @@ namespace IMS.Sales
             //Scompany c = new Scompany();
             //c.company_id = Convert.ToInt32(Session["company_id"]);
             //c.All(c);
-            lblCompanyName.Text = sale.companyName;
             lblAddress.Text = sale.address;
             lblemail.Text = sale.owneremail;
             lblzipcode.Text = sale.pincode;
@@ -179,6 +177,7 @@ namespace IMS.Sales
             lblsubtotal.Text = sale.actualamount.ToString();
             lblTaxAmount.Text = sale.totalTax.ToString();
             lblDiscountAmt.Text = sale.discount.ToString();
+            lblCompanyName.Text = sale.companyName;
             lblGrandTotal.Text = sale.total.ToString();
 
         }
