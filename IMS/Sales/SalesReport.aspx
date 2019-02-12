@@ -114,7 +114,7 @@
                                             From  Date
                                     
                                         </label>
-                                        <ajaxToolkit:CalendarExtender ID="CalendarExtender1" OnPreRender="CalendarExtender1_PreRender" TargetControlID="txtStartDate" runat="server" />
+                                        <ajaxToolkit:CalendarExtender ID="CalendarExtender1"  TargetControlID="txtStartDate" runat="server" />
                                         <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control"></asp:TextBox>
                                       <%--  <asp:RangeValidator ID="RangeValidator1" runat="server"
                                             ControlToValidate="txtStartDate" ErrorMessage="RangeValidator"
@@ -133,7 +133,7 @@
                                             To Date
                                     
                                         </label>
-                                        <ajaxToolkit:CalendarExtender ID="CalendarExtender2" TargetControlID="txtStartDate" runat="server" />
+                                        <ajaxToolkit:CalendarExtender ID="CalendarExtender2" TargetControlID="txtenddate" runat="server" />
                                         <asp:TextBox ID="txtenddate" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                 </div>
@@ -158,7 +158,7 @@
     <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
             <div style="overflow-x: auto">
-                <asp:GridView ID="GridView1" runat="server" EmptyDataText="No Recorde Found" OnRowCommand="GridView1_RowCommand" EmptyDataRowStyle-ForeColor="Red" AutoGenerateColumns="false" CssClass="table table-bordered" AllowPaging="true" PageSize="10" OnPageIndexChanging="GridView1_PageIndexChanging">
+                <asp:GridView ID="GridView1" runat="server" EmptyDataText="No Record Found" OnRowCommand="GridView1_RowCommand" EmptyDataRowStyle-ForeColor="Red" AutoGenerateColumns="false" CssClass="table table-bordered" AllowPaging="true" PageSize="10" OnPageIndexChanging="GridView1_PageIndexChanging">
                     <Columns>
                         <asp:TemplateField HeaderText="SR.No">
                             <ItemTemplate>

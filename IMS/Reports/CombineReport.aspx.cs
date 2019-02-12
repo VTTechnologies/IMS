@@ -138,12 +138,7 @@ namespace IMS.Reports
                         lblGivenAmnt.Text = sale.GivenAmnt.ToString();
                         lblBalanceAmnt.Text = sale.BalanceAmnt.ToString();
                     }
-
-
-
-
-
-
+                    
                     //if (ds.Tables[tableName].Rows[i]["Type"].ToString() == "Purchase")
                     //{
                     //    totalAmount = totalAmount + Convert.ToDecimal(ds.Tables[tableName].Rows[i]["TotalAmount"]);

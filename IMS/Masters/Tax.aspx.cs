@@ -262,22 +262,25 @@ namespace IMS
 
         protected void GridView1_PreRender(object sender, EventArgs e)
         {
-            GridView1.UseAccessibleHeader = false;
-            GridView1.HeaderRow.TableSection = TableRowSection.TableHeader;
-            GridView1.FooterRow.TableSection = TableRowSection.TableFooter;
-            int CellCount = GridView1.FooterRow.Cells.Count;
-            GridView1.FooterRow.Cells.Clear();
-            GridView1.FooterRow.Cells.Add(new TableCell());
-            GridView1.FooterRow.Cells[0].ColumnSpan = CellCount - 1;
-            GridView1.FooterRow.Cells[0].HorizontalAlign = HorizontalAlign.Right;
-            GridView1.FooterRow.Cells.Add(new TableCell());
-
-            TableFooterRow tfr = new TableFooterRow();
-            for (int i = 0; i < CellCount; i++)
+            if (GridView1.Rows.Count > 0)
             {
-                tfr.Cells.Add(new TableCell());
+                GridView1.UseAccessibleHeader = false;
+                GridView1.HeaderRow.TableSection = TableRowSection.TableHeader;
+                GridView1.FooterRow.TableSection = TableRowSection.TableFooter;
+                int CellCount = GridView1.FooterRow.Cells.Count;
+                GridView1.FooterRow.Cells.Clear();
+                GridView1.FooterRow.Cells.Add(new TableCell());
+                GridView1.FooterRow.Cells[0].ColumnSpan = CellCount - 1;
+                GridView1.FooterRow.Cells[0].HorizontalAlign = HorizontalAlign.Right;
+                GridView1.FooterRow.Cells.Add(new TableCell());
+
+                TableFooterRow tfr = new TableFooterRow();
+                for (int i = 0; i < CellCount; i++)
+                {
+                    tfr.Cells.Add(new TableCell());
+                }
+                GridView1.FooterRow.Controls[1].Controls.Add(tfr);
             }
-            GridView1.FooterRow.Controls[1].Controls.Add(tfr);
         }
 
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)

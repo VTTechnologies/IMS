@@ -38,7 +38,7 @@
     <link type="text/css" href="/assets/alert/css/themes/default.min.css" rel="stylesheet" />
     <link type="text/css" href="/assets/alert/css/themes/default.rtl.css" rel="stylesheet" />
     <link type="text/css" href="/assets/src/jquery-customselect.css" rel="stylesheet" />
-     <link href="assets/css/chosen.css" rel="stylesheet" />
+     <link href="/assets/css/chosen.css" rel="stylesheet" />
 <%--    <link href="assets/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     
    
@@ -486,7 +486,7 @@
                             <a href="../Sales/SalesReport.aspx"><i class="fa fa-cart-arrow-down fa-fw"></i>Sale Report</a>
                         </li>
                         <li id="li1" runat="server">
-                            <%--<a href="MasterReports.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>--%>
+                           <%-- <a href="../MasterReports.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>--%>
                             <a href="../CommonReport.aspx"><i class="fa fa-file fa-fw"></i>Reports</a>
                         </li>
 

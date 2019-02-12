@@ -32,7 +32,7 @@ namespace IMS
             {               
                 bindgrid(0, "", "", "");
                 ddlVendorbind();
-                //getdate();
+               getdate();
             }
         }
         /// <summary>
@@ -50,27 +50,33 @@ namespace IMS
             companyId = Convert.ToInt32(Session["company_id"]);
             branchId = Convert.ToInt32(Session["branch_id"]);
         }
-        //public void getdate()
-        //{
-        //    try
-        //    {
-        //        var finicialyear = context.tbl_financialyear.Where(f => f.company_id == companyId && f.status == true).SingleOrDefault();
-        //        //CalendarExtender1.StartDate = Convert.ToDateTime(finicialyear.start_date);
-        //        //CalendarExtender1.EndDate = Convert.ToDateTime(finicialyear.end_date)
+        public void getdate()
+        {
+            try
+            {
+                var finicialyear = context.tbl_financialyear.Where(f => f.company_id == companyId && f.status == true).SingleOrDefault();
+                //CalendarExtender1.StartDate = Convert.ToDateTime(finicialyear.start_date);
+                //CalendarExtender1.EndDate = Convert.ToDateTime(finicialyear.end_date)
 
-        //             //RangeValidator1.MinimumValue =  (finicialyear.start_date);
-        //             //RangeValidator1.MaximumValue = (finicialyear.end_date);
-        //        //hd1.Value = finicialyear.start_date;
-        //        //hd2.Value = finicialyear.end_date;
-        //        //hd3.Value = finicialyear.start_date;
-        //        //hd4.Value = finicialyear.end_date;
-        //    }
-        //    catch (Exception ex)
-        //    {
+                CalendarExtender1.StartDate = Convert.ToDateTime(finicialyear.start_date);
+                CalendarExtender1.EndDate = Convert.ToDateTime(finicialyear.end_date);
 
-        //        ErrorLog.saveerror(ex);
-        //    }
-        //}
+
+                CalendarExtender2.StartDate = Convert.ToDateTime(finicialyear.start_date);
+                CalendarExtender2.EndDate = Convert.ToDateTime(finicialyear.end_date);
+                //RangeValidator1.MinimumValue =  (finicialyear.start_date);
+                //RangeValidator1.MaximumValue = (finicialyear.end_date);
+                //hd1.Value = finicialyear.start_date;
+                //hd2.Value = finicialyear.end_date;
+                //hd3.Value = finicialyear.start_date;
+                //hd4.Value = finicialyear.end_date;
+            }
+            catch (Exception ex)
+            {
+
+                ErrorLog.saveerror(ex);
+            }
+        }
         public void ddlVendorbind()
         {
             
@@ -251,20 +257,20 @@ namespace IMS
         }
         #endregion
 
-        protected void CalendarExtender1_PreRender(object sender, EventArgs e)
-        {
-            try
-            {
-                var finicialyear = context.tbl_financialyear.Where(f => f.company_id == companyId && f.status == true).SingleOrDefault();
-                CalendarExtender1.StartDate = Convert.ToDateTime(finicialyear.start_date);
-                CalendarExtender1.EndDate = Convert.ToDateTime(finicialyear.end_date);
+        //protected void CalendarExtender1_PreRender(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        var finicialyear = context.tbl_financialyear.Where(f => f.company_id == companyId && f.status == true).SingleOrDefault();
+        //        CalendarExtender1.StartDate = Convert.ToDateTime(finicialyear.start_date);
+        //        CalendarExtender1.EndDate = Convert.ToDateTime(finicialyear.end_date);
 
-            }
-            catch (Exception ex)
-            {
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                ErrorLog.saveerror(ex);
-            }
-        }
+        //        ErrorLog.saveerror(ex);
+        //    }
+        //}
     }
 }

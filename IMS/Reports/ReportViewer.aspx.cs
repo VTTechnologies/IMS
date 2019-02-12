@@ -94,7 +94,7 @@ namespace IMS.Reports
                 case "CombinePurchaseAndReturnReport":
                     sqlParams = new SqlParameter[] {
                          new SqlParameter("@Id", id),
-                         new SqlParameter("@FromTable","COMBINEPURCHASEANDRETURN")
+                         new SqlParameter("@FromTable","COMBINEPURCHASEANDRETURNREPORT")
                     };                   
                     ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Reports/CombineReport.rdlc");
                     ReportViewer1.LocalReport.EnableExternalImages = true;
@@ -102,7 +102,15 @@ namespace IMS.Reports
                     dataTable = "CombineDataTable";
                     reportParam = new ReportParameter("LogoPath", logoPath);
                     ReportViewer1.LocalReport.SetParameters(reportParam);
-                    CreateReport(Connectionstring, "PurchaseOrPurchaseReturnReport", sqlParams, ref ReportViewer1, reportDataSet, dataTable);                    
+                    CreateReport(Connectionstring, "PurchaseOrPurchaseReturnReport", sqlParams, ref ReportViewer1, reportDataSet, dataTable);
+
+                   SqlParameter[] sqlParams1 = new SqlParameter[] {
+                         new SqlParameter("@Id", id),
+                         new SqlParameter("@FromTable","COMBINEPURCHASEANDRETURNREPORT")
+                    }; 
+                   string reportDataSet1 = "PaymentDetailsDataSet";
+                   string dataTable1 = "PaymentDetailsDataTable";
+                   CreateReport(Connectionstring, "SaleOrPurchaseOrReturnReport", sqlParams1, ref ReportViewer1, reportDataSet1, dataTable1);    
                     ReportViewer1.LocalReport.Refresh();
                     break;
 
@@ -152,6 +160,16 @@ namespace IMS.Reports
                     reportParam = new ReportParameter("LogoPath", logoPath);
                     ReportViewer1.LocalReport.SetParameters(reportParam);
                     CreateReport(Connectionstring, "SaleOrSaleReturnReport", sqlParams, ref ReportViewer1, reportDataSet, dataTable);
+
+                    
+                    sqlParams1 = new SqlParameter[] {
+                         new SqlParameter("@Id", id),
+                         new SqlParameter("@FromTable","COMBINESALEANDRETURN")
+                    }; 
+                    reportDataSet1 = "PaymentDetailsDataSet";
+                    dataTable1 = "PaymentDetailsDataTable";
+                   CreateReport(Connectionstring, "SaleOrPurchaseOrReturnReport", sqlParams1, ref ReportViewer1, reportDataSet1, dataTable1);  
+
                     ReportViewer1.LocalReport.Refresh();
                     break;
 
@@ -236,7 +254,7 @@ namespace IMS.Reports
                 ReportDataSource datasource = new ReportDataSource(reportDataSource, ds.Tables[tableName]);
                 //if (ds.Tables[tableName].Rows.Count > 0)
                 //{
-                    reportViewer.LocalReport.DataSources.Clear();
+                    //reportViewer.LocalReport.DataSources.Clear();
                     reportViewer.LocalReport.DataSources.Add(datasource);
                 //}
             }

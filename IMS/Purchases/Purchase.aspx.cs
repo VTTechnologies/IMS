@@ -42,7 +42,7 @@ namespace IMS
                 SessionValue();
                 if (!IsPostBack)
                 {
-                    
+                    CalendarExtender1.StartDate = DateTime.Now;
                     if (ViewState["Details"] == null)
                     {
                         DataTable dataTable = new DataTable();
@@ -472,6 +472,9 @@ namespace IMS
                var finicialyear= context.tbl_financialyear.Where(f => f.company_id == companyId && f.status == true).SingleOrDefault();
                hd1.Value = finicialyear.start_date;
                hd2.Value = finicialyear.end_date;
+
+               CalendarExtender1.StartDate = Convert.ToDateTime(finicialyear.start_date);
+               CalendarExtender1.EndDate = Convert.ToDateTime(finicialyear.end_date);
             }
             catch (Exception ex)
             {

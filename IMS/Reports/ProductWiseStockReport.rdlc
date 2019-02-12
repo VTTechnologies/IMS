@@ -65,7 +65,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Product Code</Value>
+                              <Value>HSN Code</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <Color>White</Color>
@@ -171,21 +171,21 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="product_name">
+                    <Textbox Name="Product">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!product_name.Value</Value>
+                              <Value>=Fields!Product.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>product_name</rd:DefaultName>
+                      <rd:DefaultName>Product</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -201,14 +201,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="product_code">
+                    <Textbox Name="HSNCode">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!product_code.Value</Value>
+                              <Value>=Fields!HSNCode.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -217,7 +217,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>product_code</rd:DefaultName>
+                      <rd:DefaultName>HSNCode</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -233,14 +233,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="batch_name">
+                    <Textbox Name="Batch">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!batch_name.Value</Value>
+                              <Value>=Fields!Batch.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -249,7 +249,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>batch_name</rd:DefaultName>
+                      <rd:DefaultName>Batch</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -265,14 +265,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="qty">
+                    <Textbox Name="Quantity">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!qty.Value</Value>
+                              <Value>=Fields!Quantity.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -281,7 +281,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>qty</rd:DefaultName>
+                      <rd:DefaultName>Quantity</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -387,7 +387,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!company_name.Value</Value>
+                <Value>=First(Fields!Company.Value, "ProductWiseStockDataSet")</Value>
                 <Style>
                   <FontSize>12pt</FontSize>
                   <FontWeight>Bold</FontWeight>
@@ -532,28 +532,28 @@
           <DataField>company_id</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="company_name">
-          <DataField>company_name</DataField>
+        <Field Name="Company">
+          <DataField>Company</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="company_address">
           <DataField>company_address</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="batch_name">
-          <DataField>batch_name</DataField>
+        <Field Name="Batch">
+          <DataField>Batch</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="batch_id">
           <DataField>batch_id</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="product_name">
-          <DataField>product_name</DataField>
+        <Field Name="Product">
+          <DataField>Product</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="product_code">
-          <DataField>product_code</DataField>
+        <Field Name="HSNCode">
+          <DataField>HSNCode</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="created_date">
@@ -564,8 +564,8 @@
           <DataField>modified_date</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
-        <Field Name="qty">
-          <DataField>qty</DataField>
+        <Field Name="Quantity">
+          <DataField>Quantity</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="startDate">
@@ -579,7 +579,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>CommonDataSet</rd:DataSetName>
-        <rd:SchemaPath>D:\VT Technologies\IMS\IMS\Reports\CommonDataSet.xsd</rd:SchemaPath>
+        <rd:SchemaPath>F:\IMS\IMS 1.0\IMS\IMS\Reports\CommonDataSet.xsd</rd:SchemaPath>
         <rd:TableName>ProductWiseStockReport</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />

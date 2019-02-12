@@ -65,18 +65,6 @@ namespace IMS.Reports
                     CreateReport(connectionstring, "PurchaseOrPurchaseReturnReport", sqlParams, reportDataSet, dataTable);
                     break;
 
-                //Combine Purchase Return Order Report 
-                case "CombinePurchaseAndReturnReport":
-                    sqlParams = new SqlParameter[] {
-                         new SqlParameter("@Id", id),
-                         new SqlParameter("@FromTable","COMBINEPURCHASEANDRETURNREPORT")
-                    };
-
-                    reportDataSet = "CombineDataSet";
-                    dataTable = "CombineDataTable";
-                    CreateReport(connectionstring, "PurchaseOrPurchaseReturnReport", sqlParams, reportDataSet, dataTable);
-                    break;
-
                 //Original Sale Order Report 
                 case "SaleReport":
                     sqlParams = new SqlParameter[] {
@@ -99,16 +87,7 @@ namespace IMS.Reports
                     CreateReport(connectionstring, "SaleOrSaleReturnReport", sqlParams, reportDataSet, dataTable);
                     break;
 
-                //Combine Sale Return Order Report 
-                case "CombineSaleAndReturnReport":
-                    sqlParams = new SqlParameter[] {
-                         new SqlParameter("@Id", id),
-                         new SqlParameter("@FromTable","COMBINESALEANDRETURN")
-                    };
-                    reportDataSet = "CombineDataSet";
-                    dataTable = "CombineDataTable";
-                    CreateReport(connectionstring, "SaleOrSaleReturnReport", sqlParams, reportDataSet, dataTable);
-                    break;
+             
 
                 default:
                     break;
