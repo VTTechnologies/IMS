@@ -170,7 +170,7 @@ namespace IMS
 
         public void ddlgodownbind()
         {
-            List<tbl_godown> gd = context.tbl_godown.Where(x => x.status == true && x.company_id == companyId && x.branch_id == branchId).ToList();
+            List<tbl_godown> gd = context.tbl_godown.Where(x => x.status == true && x.company_id == companyId).ToList();
 
             ddlGodown.DataTextField = "godown_name";
             ddlGodown.DataValueField = "godown_id";
