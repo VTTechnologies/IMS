@@ -57,8 +57,8 @@ namespace IMSBLL.EntityModel
 
             try
             {
-                context.tbl_User.Add(_userRole);
-                context.SaveChanges();
+                //context.tbl_User.Add(_userRole);
+                //context.SaveChanges();
                 //result = helper.GetDataTablebyProc(SP.AddUser, parameters);
             }
             catch (Exception ex)

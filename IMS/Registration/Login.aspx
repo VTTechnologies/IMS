@@ -2,15 +2,15 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- Core CSS - Include with every page -->
-     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link href="../assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
     <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="../assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
     <link href="../assets/css/style.css" rel="stylesheet" />
     <link href="../assets/css/main-style.css" rel="stylesheet" />
-   
+
     <script src="../assets/alert/alertify.js"></script>
     <script src="../assets/alert/alertify.min.js"></script>
     <link href="../assets/alert/css/alertify.css" rel="stylesheet" />
@@ -95,8 +95,8 @@
                     <p>Some text in the modal.</p>
                 </div>
                 <div class="modal-footer">
-                    <asp:Button ID="btnOk" runat="server" Text="Ok" CssClass="btn btn-primary"  OnClick="btnOk_Click" />
-                    
+                    <asp:Button ID="btnOk" runat="server" Text="Ok" CssClass="btn btn-primary" OnClick="btnOk_Click" />
+
                 </div>
             </div>
         </div>

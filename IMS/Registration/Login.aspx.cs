@@ -230,9 +230,11 @@ namespace IMS.Registration
             //r.RoleName(r);           
             Session["Rolename"] = r.role_name;
             Session["company_id"] = r.company_id;
-            Session["financialyear_id"] = context.tbl_financialyear.Where(w => w.company_id == r.company_id && w.branch_id == r.branch_id && w.status == true).Select(s => s.financialyear_id).FirstOrDefault();
+            Session["financialyear_id"] = context.tbl_financialyear.Where(w => w.company_id == r.company_id  && w.status == true).Select(s => s.financialyear_id).FirstOrDefault();
             Session["branch_id"] = r.branch_id;
             Session["LoginuserName"] = r.Name;
+
+            string fid = Session["financialyear_id"].ToString();
         }
 
         public static string GetSwcSHA1(string value)

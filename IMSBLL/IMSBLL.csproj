@@ -98,6 +98,9 @@
     <Compile Include="EntityModel\SaleOrderReport_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModel\SaleOrPurchaseOrReturnReport_Result.cs">
+      <DependentUpon>IMSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModel\SaleOrSaleReturnReport_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>

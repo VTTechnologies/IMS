@@ -10,25 +10,16 @@
 namespace IMSBLL.EntityModel
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class tbl_PurchasePaymentDetials
+    public partial class SaleOrPurchaseOrReturnReport_Result
     {
-        public int Id { get; set; }
-        public Nullable<int> PurchaseId { get; set; }
+        public Nullable<int> Id { get; set; }
         public Nullable<decimal> SubTotal { get; set; }
         public Nullable<decimal> TaxAmount { get; set; }
         public Nullable<decimal> DiscountAmount { get; set; }
         public Nullable<decimal> GrandTotal { get; set; }
-        public Nullable<decimal> PaidAmnt { get; set; }
         public Nullable<decimal> GivenAmnt { get; set; }
         public Nullable<decimal> BalanceAmnt { get; set; }
-        public string FromTable { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public string ModifiedBy { get; set; }
-    
-        public virtual tbl_purchase tbl_purchase { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
     }
 }

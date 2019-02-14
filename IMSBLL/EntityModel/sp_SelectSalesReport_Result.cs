@@ -14,6 +14,9 @@ namespace IMSBLL.EntityModel
     public partial class sp_SelectSalesReport_Result
     {
         public int sale_id { get; set; }
+        public Nullable<decimal> PaidAmnt { get; set; }
+        public Nullable<decimal> BalanceAmnt { get; set; }
+        public Nullable<decimal> GivenAmnt { get; set; }
         public string InvoiceNumber { get; set; }
         public int party_id { get; set; }
         public string customerName { get; set; }

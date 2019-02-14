@@ -42,6 +42,15 @@
 
 
             <div class="bgblue jumbotron" >
+                <%--<div class="row">
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-10">
+
+                    </div>
+                </div>--%>
+            <a class="navbar-brand" href="https://imsbizz.com/" style=" font: 400 32px Lato, sans-serif; margin-top:-50px; margin-left:-15px">!MS B!ZZ</a>
                 <div class="container text-center">
                     <h1>Inventory Management System </h1>
                 </div>
@@ -61,7 +70,7 @@
             <div>
                 <footer class=" fo w3-padding-16 bgblue ">
                      <div class="text-center ">
-                        Copyrights © 2017 All Rights Reserved by <a href="http://www.vttechnologies.co/">VT Technology</a>
+                        Copyrights © 2017 All Rights Reserved by <a href="http://www.vttechnologies.co/" target="_blank"> VT Technologies</a>
                         
                     </div>
                 </footer>
