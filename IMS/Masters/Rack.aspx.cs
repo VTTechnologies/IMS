@@ -109,20 +109,10 @@ namespace IMS
         private void loadDataTable()
         {
 
-            //SqlCommand cmd = new SqlCommand();
-            //cmd.CommandType = CommandType.StoredProcedure;
-            //cmd.CommandText = "sp_SelectRack";
-            //cmd.Parameters.AddWithValue("@company_id", c_id);
-            //cmd.Parameters.AddWithValue("@branch_id", b_id);
-            //cmd.Connection = con;
             try
             {
 
-                //con.Open();
-                //DataSet ds = new DataSet();
-                //SqlDataAdapter da = new SqlDataAdapter(cmd);
-                //da.Fill(ds);
-                GridView1.DataSource = context.sp_SelectRack(companyId, branchId); //ds.Tables[0];
+                GridView1.DataSource = context.sp_SelectRack(companyId, branchId); 
                 GridView1.DataBind();
             }
             catch (Exception ex)

@@ -60,14 +60,9 @@
     <Compile Include="DAL\TaxGroupDetaileViewModel.cs" />
     <Compile Include="DAL\Validationss.cs" />
     <Compile Include="EntityModel\Add_User.cs" />
-    <Compile Include="EntityModel\Batch.cs" />
     <Compile Include="EntityModel\CommonReport_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\Company.cs" />
-    <Compile Include="EntityModel\Expense.cs" />
-    <Compile Include="EntityModel\FinancialYear.cs" />
-    <Compile Include="EntityModel\Godown.cs" />
     <Compile Include="EntityModel\IMSModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,16 +78,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IMSModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\Party.cs" />
-    <Compile Include="EntityModel\PaymentMode.cs" />
-    <Compile Include="EntityModel\Product.cs" />
     <Compile Include="EntityModel\ProductReport_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\PurchaseOrPurchaseReturnReport_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\Rack.cs" />
     <Compile Include="EntityModel\registeruser.cs" />
     <Compile Include="EntityModel\salelogic.cs" />
     <Compile Include="EntityModel\SaleOrderReport_Result.cs">
@@ -235,7 +226,6 @@
     <Compile Include="EntityModel\sp_SelectUserRole_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\Tax.cs" />
     <Compile Include="EntityModel\Tax_percent.cs" />
     <Compile Include="EntityModel\tbl_ActualPurchaseTaxAndPrice.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
@@ -403,7 +393,6 @@
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\testclass.cs" />
-    <Compile Include="EntityModel\Unit.cs" />
     <Compile Include="DAL\UserRol.cs" />
     <Compile Include="EntityModel\View_PurchaseDetails.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
