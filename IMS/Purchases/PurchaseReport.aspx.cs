@@ -220,8 +220,8 @@ namespace IMS
                 }
                 else if(e.CommandName == "Invoice")
                 {
-                    Response.Write(String.Format("<script>window.open('{0}','_blank')</script>", ResolveUrl(string.Format("~/Reports/ReportViewer.aspx?Id={0}&ReportName={1}", id, "CombinePurchaseAndReturnReport"))));
-                    //.Write(String.Format("<script>window.open('{0}','_blank')</script>", ResolveUrl(string.Format("~/Reports/CombineReport.aspx?Id={0}&ReportName={1}", id, "CombinePurchaseAndReturnReport"))));
+                   // Response.Write(String.Format("<script>window.open('{0}','_blank')</script>", ResolveUrl(string.Format("~/Reports/ReportViewer.aspx?Id={0}&ReportName={1}", id, "CombinePurchaseAndReturnReport"))));
+                    Response.Write(String.Format("<script>window.open('{0}','_blank')</script>", ResolveUrl(string.Format("~/Reports/CombineReport.aspx?Id={0}&ReportName={1}", id, "CombinePurchaseAndReturnReport"))));
                 }
                 else if(e.CommandName == "Return")
                 {

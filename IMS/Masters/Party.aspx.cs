@@ -65,24 +65,12 @@ namespace IMS
         }
         private void loadDataTable()
         {
-            //List<tbl_party> dt = context.tbl_party.Where(x => x.status == true).ToList();
-            //SqlCommand cmd = new SqlCommand();
-            //cmd.CommandType = CommandType.StoredProcedure;
-            //cmd.CommandText = "sp_SelectParty";
-            //cmd.Parameters.AddWithValue("@company_id", companyId);
-            //cmd.Parameters.AddWithValue("@branch_id", branchId);
-            //cmd.Connection = con;
             try
             {
-
-                //con.Open();
-                //DataSet ds = new DataSet();
-                //SqlDataAdapter da = new SqlDataAdapter(cmd);
-                //da.Fill(ds);
-                GridView1.DataSource = context.sp_SelectParty(companyId, branchId); //ds.Tables[0];
+                GridView1.DataSource = context.sp_SelectParty(companyId, branchId); 
                 GridView1.DataBind();
             }
-            //           GridView1.DataSource = context.sp_SelectPurchase(c_id);
+           
             catch (Exception ex)
             {
 
