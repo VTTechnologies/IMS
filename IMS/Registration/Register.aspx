@@ -96,7 +96,7 @@
     <script type="text/javascript">
         $(function () {
             $("#<%=chkpassword.ClientID%>").bind("click", function () {
-                var txtPassword = $("#<%=myInput.ClientID%>");
+                var txtPassword = $("#<%=password.ClientID%>");
                 if ($(this).is(":checked")) {
                     txtPassword.after('<input onchange = "PasswordChanged(this);" id = "txt_' + txtPassword.attr("id") + '" type = "text" class="form-control" value = "' + txtPassword.val() + '" />');
                     txtPassword.hide();
@@ -239,18 +239,18 @@
 
 
         function validatePassword() {
-            var password = document.getElementById("password"),
-                confirm_password = document.getElementById("Cpassword");
+            var password = $("#<%= password.ClientID %>"),
+                confirm_password = $("#<%= Cpassword.ClientID %>");
             if (password.value != confirm_password.value) {
                 alert("Passwords Don't Match");
-                confirm_password.setCustomValidity("Passwords Don't Match");
+                //confirm_password.setCustomValidity("Passwords Don't Match");
             } else {
-                confirm_password.setCustomValidity("");
+                //confirm_password.setCustomValidity("");
             }
         }
 
-        password.onchange = validatePassword;
-        confirm_password.onkeyup = validatePassword;
+        //password.onchange = validatePassword;
+        //confirm_password.onkeyup = validatePassword;
 
     </script>
 
@@ -387,10 +387,10 @@
                                                 <label for="password" class="control-label">Password :</label>
                                                 <i class="fa fa-key"></i>
 
-                                                <%--                                                    <input type="password" class="form-control" id="myInput" runat="server" required="required" autocomplete="off" onkeypress="handleSpace(event)" placeholder="Password"
+                                                <%--                                                    <input type="password" class="form-control" id="password" runat="server" required="required" autocomplete="off" onkeypress="handleSpace(event)" placeholder="Password"
                                                         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Please enter your password e.g:Password@123" />--%>
-                                                <input type="password" class="form-control" id="myInput" runat="server" required="required" autocomplete="off" onkeypress="handleSpace(event)" placeholder="Password"
-                                                    title="Please enter your password" pattern="[A-Za-z]{6}" />
+                                                <input type="password" class="form-control" id="password" runat="server" required="required" autocomplete="off" onkeypress="handleSpace(event)" placeholder="Password"
+                                                minlength="6"  title="Please enter your password" />
 
                                                 <%--(Password must contain atleast 8 characters,One upper case,One number,One special symbol)--%>
                                                 (Password must contain atleast 6 characters)
@@ -408,7 +408,7 @@
                                                 <label for="Cpassword" class="control-label">Confirm Password :</label>
                                                 <i class="fa fa-key"></i>
                                                 <input type="password" name="txtCpassword" class="form-control" required="required" runat="server" id="Cpassword" autocomplete="off" placeholder="Confirm Password"
-                                                     pattern="[A-Za-z]{6}"
+                                                    
                                                     title="Confirm Password" onchange="validatePassword()" />
                                             </div>
                                         </div>
