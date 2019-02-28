@@ -186,6 +186,10 @@ namespace IMS.Registration
                 Session["UserID"] = r.user_id;
             }
             Session["username"] = txtEmail.Text;
+            if(!r.IsVerified.Value)
+            {
+                Response.Redirect("USerVerification.aspx");
+            }
             return us_ID;
         }
 
