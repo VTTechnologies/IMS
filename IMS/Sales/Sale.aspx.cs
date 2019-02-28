@@ -357,153 +357,153 @@ namespace IMS
         }
 
 
-        protected void savelogic()
-        {
-            SqlTransaction transaction;
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "sp_Salesinsert";
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Connection = con;
-            cmd.CommandTimeout = 600000;
-            con.Open();
-            transaction = con.BeginTransaction("Transaction");
-            cmd.Transaction = transaction;
-            try
-            {
-                int mcid = 0;
-                if (validationss())
-                {
-                    cmd.Parameters.AddWithValue("@company_id", companyId);
-                    cmd.Parameters.AddWithValue("@branch_id", branchId);
-                    cmd.Parameters.AddWithValue("@party_id", ddlVendor.SelectedValue);
-                    cmd.Parameters.AddWithValue("@invoice_no", txtSONo.Text);
-                    cmd.Parameters.AddWithValue("@total_tax", lblTaxAmount.Text);
-                    cmd.Parameters.AddWithValue("@total_discount", lblDiscountAmt.Text);
-                    cmd.Parameters.AddWithValue("@actual_amount", lblsubtotal.Text);
-                    cmd.Parameters.AddWithValue("@grand_total", lblGrandTotal.Text);
-                    cmd.Parameters.AddWithValue("@created_by", User_id.ToString());
-                    cmd.Parameters.AddWithValue("@created_date", txtdate.Text);
-                    cmd.Parameters.Add("@sale_id", SqlDbType.Int);
-                    cmd.Parameters["@sale_id"].Direction = ParameterDirection.Output;
-                    cmd.ExecuteNonQuery();
-                    mcid = Convert.ToInt32(cmd.Parameters["@sale_id"].Value);
-                    cmd.Parameters.Clear();
+        //protected void savelogic()
+        //{
+        //    SqlTransaction transaction;
+        //    SqlCommand cmd = new SqlCommand();
+        //    cmd.CommandText = "sp_Salesinsert";
+        //    cmd.CommandType = CommandType.StoredProcedure;
+        //    cmd.Connection = con;
+        //    cmd.CommandTimeout = 600000;
+        //    con.Open();
+        //    transaction = con.BeginTransaction("Transaction");
+        //    cmd.Transaction = transaction;
+        //    try
+        //    {
+        //        int mcid = 0;
+        //        if (validationss())
+        //        {
+        //            cmd.Parameters.AddWithValue("@company_id", companyId);
+        //            cmd.Parameters.AddWithValue("@branch_id", branchId);
+        //            cmd.Parameters.AddWithValue("@party_id", ddlVendor.SelectedValue);
+        //            cmd.Parameters.AddWithValue("@invoice_no", txtSONo.Text);
+        //            cmd.Parameters.AddWithValue("@total_tax", lblTaxAmount.Text);
+        //            cmd.Parameters.AddWithValue("@total_discount", lblDiscountAmt.Text);
+        //            cmd.Parameters.AddWithValue("@actual_amount", lblsubtotal.Text);
+        //            cmd.Parameters.AddWithValue("@grand_total", lblGrandTotal.Text);
+        //            cmd.Parameters.AddWithValue("@created_by", User_id.ToString());
+        //            cmd.Parameters.AddWithValue("@created_date", txtdate.Text);
+        //            cmd.Parameters.Add("@sale_id", SqlDbType.Int);
+        //            cmd.Parameters["@sale_id"].Direction = ParameterDirection.Output;
+        //            cmd.ExecuteNonQuery();
+        //            mcid = Convert.ToInt32(cmd.Parameters["@sale_id"].Value);
+        //            cmd.Parameters.Clear();
 
 
 
-                    //GridViewRow row = gvsaledetails.Rows[rowIndex];
-                    for (int i = 0; i <= gvSalesdetails.Rows.Count - 1; i++)
-                    {
-                        //sale Details Saving Code Start Here
+        //            //GridViewRow row = gvsaledetails.Rows[rowIndex];
+        //            for (int i = 0; i <= gvSalesdetails.Rows.Count - 1; i++)
+        //            {
+        //                //sale Details Saving Code Start Here
 
-                        cmd.CommandText = "sp_SalesDetailinsert";
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@product_id", gvSalesdetails.Rows[i].Cells[2].Text);
-                        cmd.Parameters.AddWithValue("@sale_id", mcid);
-                        cmd.Parameters.AddWithValue("@batch_id", gvSalesdetails.Rows[i].Cells[10].Text);
-                        cmd.Parameters.AddWithValue("@tax_amt", gvSalesdetails.Rows[i].Cells[8].Text);
-                        cmd.Parameters.AddWithValue("@dicount_amt", gvSalesdetails.Rows[i].Cells[6].Text);
-                        cmd.Parameters.AddWithValue("@quantity", Convert.ToDecimal(gvSalesdetails.Rows[i].Cells[3].Text));
-                        cmd.Parameters.AddWithValue("@amount", gvSalesdetails.Rows[i].Cells[9].Text);
-                        cmd.Parameters.AddWithValue("@price", gvSalesdetails.Rows[i].Cells[4].Text);
-                        cmd.Parameters.AddWithValue("@user_id", User_id.ToString());
-                        cmd.Parameters.AddWithValue("@created_date", DateTime.Today);
-                        cmd.Parameters.Add("@saledetails_id", SqlDbType.Int);
-                        cmd.Parameters["@saledetails_id"].Direction = ParameterDirection.Output;
-                        cmd.Connection = con;
-                        cmd.CommandTimeout = 600000;
-                        cmd.ExecuteNonQuery();
-                        int saledetails_id = Convert.ToInt32(cmd.Parameters["@saledetails_id"].Value);
-                        cmd.Parameters.Clear();
-                        // sale Details Code End
+        //                cmd.CommandText = "sp_SalesDetailinsert";
+        //                cmd.CommandType = CommandType.StoredProcedure;
+        //                cmd.Parameters.AddWithValue("@product_id", gvSalesdetails.Rows[i].Cells[2].Text);
+        //                cmd.Parameters.AddWithValue("@sale_id", mcid);
+        //                cmd.Parameters.AddWithValue("@batch_id", gvSalesdetails.Rows[i].Cells[10].Text);
+        //                cmd.Parameters.AddWithValue("@tax_amt", gvSalesdetails.Rows[i].Cells[8].Text);
+        //                cmd.Parameters.AddWithValue("@dicount_amt", gvSalesdetails.Rows[i].Cells[6].Text);
+        //                cmd.Parameters.AddWithValue("@quantity", Convert.ToDecimal(gvSalesdetails.Rows[i].Cells[3].Text));
+        //                cmd.Parameters.AddWithValue("@amount", gvSalesdetails.Rows[i].Cells[9].Text);
+        //                cmd.Parameters.AddWithValue("@price", gvSalesdetails.Rows[i].Cells[4].Text);
+        //                cmd.Parameters.AddWithValue("@user_id", User_id.ToString());
+        //                cmd.Parameters.AddWithValue("@created_date", DateTime.Today);
+        //                cmd.Parameters.Add("@saledetails_id", SqlDbType.Int);
+        //                cmd.Parameters["@saledetails_id"].Direction = ParameterDirection.Output;
+        //                cmd.Connection = con;
+        //                cmd.CommandTimeout = 600000;
+        //                cmd.ExecuteNonQuery();
+        //                int saledetails_id = Convert.ToInt32(cmd.Parameters["@saledetails_id"].Value);
+        //                cmd.Parameters.Clear();
+        //                // sale Details Code End
 
-                        // Stock & Stock Transaction Data Saving Code Starts Here
-                        cmd.CommandText = "sp_InsertSaleTransaction";
-                        cmd.CommandType = CommandType.StoredProcedure;
+        //                // Stock & Stock Transaction Data Saving Code Starts Here
+        //                cmd.CommandText = "sp_InsertSaleTransaction";
+        //                cmd.CommandType = CommandType.StoredProcedure;
 
-                        // code are here
+        //                // code are here
 
-                        cmd.Parameters.AddWithValue("@company_id", companyId);
-                        cmd.Parameters.AddWithValue("@branch_id", branchId);
-                        cmd.Parameters.AddWithValue("@product_id", gvSalesdetails.Rows[i].Cells[2].Text);
-                        cmd.Parameters.AddWithValue("@bacth_id", gvSalesdetails.Rows[i].Cells[10].Text);
-                        cmd.Parameters.AddWithValue("@in_out", "Out");
-                        cmd.Parameters.AddWithValue("@qty", Convert.ToDecimal(gvSalesdetails.Rows[i].Cells[3].Text));
-                        cmd.Parameters.AddWithValue("@transactio_type_id", saledetails_id);
-                        cmd.Parameters.AddWithValue("@stocktransaction_typ", "Sales");
-                        cmd.Parameters.AddWithValue("@created_by", User_id.ToString());
-                        cmd.Parameters.AddWithValue("@created_date", DateTime.Today);
-                        cmd.Connection = con;
-                        cmd.CommandTimeout = 600000;
-                        // end
+        //                cmd.Parameters.AddWithValue("@company_id", companyId);
+        //                cmd.Parameters.AddWithValue("@branch_id", branchId);
+        //                cmd.Parameters.AddWithValue("@product_id", gvSalesdetails.Rows[i].Cells[2].Text);
+        //                cmd.Parameters.AddWithValue("@bacth_id", gvSalesdetails.Rows[i].Cells[10].Text);
+        //                cmd.Parameters.AddWithValue("@in_out", "Out");
+        //                cmd.Parameters.AddWithValue("@qty", Convert.ToDecimal(gvSalesdetails.Rows[i].Cells[3].Text));
+        //                cmd.Parameters.AddWithValue("@transactio_type_id", saledetails_id);
+        //                cmd.Parameters.AddWithValue("@stocktransaction_typ", "Sales");
+        //                cmd.Parameters.AddWithValue("@created_by", User_id.ToString());
+        //                cmd.Parameters.AddWithValue("@created_date", DateTime.Today);
+        //                cmd.Connection = con;
+        //                cmd.CommandTimeout = 600000;
+        //                // end
 
-                        cmd.ExecuteNonQuery();
-                        cmd.Parameters.Clear();
+        //                cmd.ExecuteNonQuery();
+        //                cmd.Parameters.Clear();
 
-                        // Stock & Stock Transaction Data Saving Code end
+        //                // Stock & Stock Transaction Data Saving Code end
 
-                    }
+        //            }
 
 
-                    cmd.Parameters.Clear();
-                    cmd.CommandText = "sp_InsertMonyTransaction";
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@company_id", companyId);
-                    cmd.Parameters.AddWithValue("@branch_id", branchId);
-                    cmd.Parameters.AddWithValue("@party_id", ddlVendor.SelectedValue);
-                    cmd.Parameters.AddWithValue("@given_amt", txtGivenAmt.Text);
-                    cmd.Parameters.AddWithValue("@grand_total", lblGrandTotal.Text);
-                    cmd.Parameters.AddWithValue("@balance_amt", txtBalanceAmt.Text);
-                    cmd.Parameters.AddWithValue("@in_out", "In");
-                    cmd.Parameters.AddWithValue("@paymentmode_id", ddlPaymentMode.SelectedValue);
-                    cmd.Parameters.AddWithValue("@transaction_typ", "Sales");
-                    cmd.Parameters.AddWithValue("@transactio_type_id", mcid);
-                    cmd.Parameters.AddWithValue("@created_by", User_id.ToString());
-                    cmd.Parameters.AddWithValue("@created_date", DateTime.Today);
-                    cmd.Connection = con;
-                    cmd.CommandTimeout = 600000;
-                    cmd.ExecuteNonQuery();
-                    transaction.Commit();
-                    con.Close();
-                    clr();
-                    Session["sale_id"] = mcid;
-                    string order = mcid.ToString();
-                    ClientScript.RegisterStartupScript(this.GetType(), "pop", "openalert('Saved successfully, your order number is " + order + "');", true);
-                }
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-                ErrorLog.saveerror(ex);
-            }
-            finally
-            {
-                if (con != null && con.State != ConnectionState.Closed)
-                {
-                    con.Close();
-                }
-            }
-        }
-        public void orerid()
-        {
-            try
-            {
-                int a = 1;
+        //            cmd.Parameters.Clear();
+        //            cmd.CommandText = "sp_InsertMonyTransaction";
+        //            cmd.CommandType = CommandType.StoredProcedure;
+        //            cmd.Parameters.AddWithValue("@company_id", companyId);
+        //            cmd.Parameters.AddWithValue("@branch_id", branchId);
+        //            cmd.Parameters.AddWithValue("@party_id", ddlVendor.SelectedValue);
+        //            cmd.Parameters.AddWithValue("@given_amt", txtGivenAmt.Text);
+        //            cmd.Parameters.AddWithValue("@grand_total", lblGrandTotal.Text);
+        //            cmd.Parameters.AddWithValue("@balance_amt", txtBalanceAmt.Text);
+        //            cmd.Parameters.AddWithValue("@in_out", "In");
+        //            cmd.Parameters.AddWithValue("@paymentmode_id", ddlPaymentMode.SelectedValue);
+        //            cmd.Parameters.AddWithValue("@transaction_typ", "Sales");
+        //            cmd.Parameters.AddWithValue("@transactio_type_id", mcid);
+        //            cmd.Parameters.AddWithValue("@created_by", User_id.ToString());
+        //            cmd.Parameters.AddWithValue("@created_date", DateTime.Today);
+        //            cmd.Connection = con;
+        //            cmd.CommandTimeout = 600000;
+        //            cmd.ExecuteNonQuery();
+        //            transaction.Commit();
+        //            con.Close();
+        //            clr();
+        //            Session["sale_id"] = mcid;
+        //            string order = mcid.ToString();
+        //            ClientScript.RegisterStartupScript(this.GetType(), "pop", "openalert('Saved successfully, your order number is " + order + "');", true);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction.Rollback();
+        //        ErrorLog.saveerror(ex);
+        //    }
+        //    finally
+        //    {
+        //        if (con != null && con.State != ConnectionState.Closed)
+        //        {
+        //            con.Close();
+        //        }
+        //    }
+        //}
+        //public void orerid()
+        //{
+        //    try
+        //    {
+        //        int a = 1;
 
-                tbl_sale s = new tbl_sale();
-                ////Shakeeb
-                ////s.All(s);
-                int b = s.sale_id;
-                int c = a + b;
-                txtSONo.Text = c.ToString();
-            }
-            catch (Exception ex)
-            {
+        //        tbl_sale s = new tbl_sale();
+        //        ////Shakeeb
+        //        ////s.All(s);
+        //        int b = s.sale_id;
+        //        int c = a + b;
+        //        txtSONo.Text = c.ToString();
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                ErrorLog.saveerror(ex);
-                //Do Logging
-            }
-        }
+        //        ErrorLog.saveerror(ex);
+        //        //Do Logging
+        //    }
+        //}
 
 
         // Events-------------------------------------------------------------{}

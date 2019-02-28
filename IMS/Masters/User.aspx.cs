@@ -178,23 +178,6 @@ namespace IMS.Masters
                     {
                         if (hde.Value == "false")
                         {
-                            //UserRol r = new UserRol();
-                            //r.user_name = txtUserEmail.Text;
-                            //r.first_name = txtFirstName.Text;
-                            //r.last_name = txtLastname.Text;
-                            //r.user_mobieno = txtContactNo.Text;
-                            //r.user_Emai = txtUserEmail.Text;
-                            //string enPswd = GetSwcSHA1(txtPassword.Text);
-                            //r.password = enPswd;
-                            //r.role_id = Convert.ToInt32(ddlRole.SelectedValue);
-                            //r.branch_id = Convert.ToInt32(ddlBranch.SelectedValue);
-                            //r.status = true;
-                            ////r.created_by = "admin";
-                            //r.created_by = User_id;
-                            //r.created_date = DateTime.Now;
-                            //r.company_id = companyId;
-                            ////Shakeeb
-                            ////r.Insert(r);
                             context.sp_AddUser2(txtUserEmail.Text, txtUserEmail.Text, txtContactNo.Text, 
                                 GetSwcSHA1(txtPassword.Text), Convert.ToInt32(ddlRole.SelectedValue)
                                 , branchId, companyId, true, User_id, DateTime.Now, txtFirstName.Text, txtLastname.Text);
@@ -229,25 +212,6 @@ namespace IMS.Masters
             {
                 if (hd.Value == "false" && hde.Value == "false")
                 {
-                    //UserRol r = new UserRol();
-                   // GridViewRow row = GridView1.SelectedRow;
-                    //r.userbranch_id = Convert.ToInt32(ViewState["bachid"]);
-                    //r.role_id = Convert.ToInt32(ddlRole.SelectedValue);
-                    //r.branch_id = Convert.ToInt32(ddlBranch.SelectedValue);
-                    //r.user_name = txtUserEmail.Text;
-                    //r.first_name = txtFirstName.Text;
-                    //r.last_name = txtLastname.Text;
-                    //r.user_Emai = txtUserEmail.Text;
-                    //r.user_mobieno = txtContactNo.Text;
-                    //r.company_id = companyId;
-                    //r.userbranch_id = Convert.ToInt32(ViewState["Userbranch"]);
-                    //r.user_id = Convert.ToInt32(ViewState["user"].ToString());
-                    //r.status = true;
-                    //r.modified_by = User_id;
-                    //r.modified_date = DateTime.Now;
-                    ////Shakeeb
-                    ////r.Update(r);
-
                     context.sp_UpdateUser(Convert.ToInt32(ViewState["bachid"])
                         , Convert.ToInt32(ViewState["user"].ToString())
                         , txtUserEmail.Text

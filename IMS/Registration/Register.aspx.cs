@@ -105,9 +105,9 @@ namespace IMS.Registration
                 dt = (DataTable)Session["userdetails"];
                 MailMessage mail = new MailMessage();
                 //SmtpClient SmtpServer = new SmtpClient("relay-hosting.secureserver.net");
-                SmtpClient SmtpServer = new SmtpClient("webmail.imsbizz.com", 25);
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 587);
                 StringBuilder sb = new StringBuilder();
-                mail.From = new MailAddress("no-reply@imsbizz.com", "IMS Bizz");
+                mail.From = new MailAddress("awais.vtt@gmail.com", "IMS Bizz");
                 mail.To.Add(email.Value);
                 mail.Subject = "Verify Your Account";
                 string body = string.Empty;
@@ -120,8 +120,8 @@ namespace IMS.Registration
                 body = body.Replace("{uid}", dt.Rows[0]["uniqueidentifier"].ToString());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
-                NetworkCredential NetCrd = new NetworkCredential("no-reply@imsbizz.com", "Vtt@!123");
-                SmtpServer.EnableSsl = false;
+                NetworkCredential NetCrd = new NetworkCredential("awais.vtt@gmail.com", "Khan@123");
+                SmtpServer.EnableSsl = true;
                 SmtpServer.UseDefaultCredentials = false;
                 SmtpServer.Credentials = NetCrd;
                 SmtpServer.Timeout = 20000;
@@ -167,16 +167,39 @@ namespace IMS.Registration
             }
             return true;
         }
-        public static string GetSwcSHA1(string value)
+        //public static string GetSwcSHA1(string value)
+        //{
+        //    SHA1 algorithm = SHA1.Create();
+        //    byte[] data = algorithm.ComputeHash(Encoding.UTF8.GetBytes(value));
+        //    string sh1 = "";
+        //    for (int i = 0; i < data.Length; i++)
+        //    {
+        //        sh1 += data[i].ToString("x2").ToUpperInvariant();
+        //    }
+        //    return sh1;
+        //}
+
+
+        private string Encrypt(string clearText)
         {
-            SHA1 algorithm = SHA1.Create();
-            byte[] data = algorithm.ComputeHash(Encoding.UTF8.GetBytes(value));
-            string sh1 = "";
-            for (int i = 0; i < data.Length; i++)
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            using (Aes encryptor = Aes.Create())
             {
-                sh1 += data[i].ToString("x2").ToUpperInvariant();
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        cs.Close();
+                    }
+                    clearText = Convert.ToBase64String(ms.ToArray());
+                }
             }
-            return sh1;
+            return clearText;
         }
         #endregion
 
@@ -199,7 +222,7 @@ namespace IMS.Registration
                     r.company_name = txtcompanyname.Value;
                     r.owner_emailid = email.Value;
                     r.owner_mobileno = txtmobile.Value;
-                    string enPswd = GetSwcSHA1(myInput.Value);
+                    string enPswd = Encrypt(myInput.Value);
                     r.password = enPswd;
                     r.pincode = txtzip.Value;
                     r.created_by = txtfirstname.Value;
@@ -235,33 +258,6 @@ namespace IMS.Registration
         }
         #endregion
 
-        //public void validation()
-        //{
-        //    try
-        //    {
-        //        String password = txtPassword.Text; // Substitute with the user input string
-        //        Utilities.PasswordScore passwordStrengthScore = Utilities.CheckStrength(password);
-
-        //        switch (passwordStrengthScore)
-        //        {
-        //            case Utilities.PasswordScore.Blank:
-        //            case Utilities.PasswordScore.VeryWeak:
-        //            case Utilities.PasswordScore.Weak:
-        //                lblPswdCheck.Text = "Password should have atleast 8 characters, preferably atleast one upper case and one special character";
-        //                lblPswdCheck.Visible = true;
-        //                break;
-        //            case Utilities.PasswordScore.Medium:
-        //            case Utilities.PasswordScore.Strong:
-        //            case Utilities.PasswordScore.VeryStrong:
-        //                // Password deemed strong enough, allow user to be added to database etc
-        //                lblPswdCheck.Visible = false;
-        //                break;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ErrorLog.saveerror(ex);
-        //    }
-        //}
+        
     }
 }

@@ -13,6 +13,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Configuration;
 using System.Data.Entity.Core.Objects;
+using System.IO;
 
 namespace IMS.Registration
 {
@@ -62,31 +63,12 @@ namespace IMS.Registration
                                     if (us_ID > 0)
                                     {
                                         selectUserRole();
-                                        SqlCommand cmd = new SqlCommand();
-                                        cmd.CommandText = "sp_checklicense";
                                         int c_id = Convert.ToInt32(Session["company_id"]);
-
                                         ObjectParameter freeCount = new ObjectParameter("free_count", typeof(int));
                                         ObjectParameter subscriptionCount = new ObjectParameter("Subscription_count", typeof(int));
 
                                         var r = context.sp_checklicense(c_id, us_ID, freeCount, subscriptionCount);
-                                        //cmd.CommandType = CommandType.StoredProcedure;
-                                        // cmd.Connection = con;
-                                        //cmd.CommandTimeout = 600000;
-                                        // con.Open();
-
-                                        //cmd.Parameters.AddWithValue("@company_id", c_id);
-                                        //cmd.Parameters.AddWithValue("@user_id", us_ID);
-                                        //cmd.Parameters.Add("@Subscription_count", SqlDbType.Int);
-                                        //cmd.Parameters["@Subscription_count"].Direction = ParameterDirection.Output;
-
-                                        //cmd.Parameters.Add("@free_count", SqlDbType.Int);
-                                        //cmd.Parameters["@free_count"].Direction = ParameterDirection.Output;
-
-                                        //cmd.ExecuteNonQuery();
-                                        //int mcid = Convert.ToInt32(cmd.Parameters["@Subscription_count"].Value);
-                                        //int freedays_count = Convert.ToInt32(cmd.Parameters["@free_count"].Value);
-
+                                        
                                         if (Convert.ToInt32(subscriptionCount.Value) > 0)
                                         {
                                                     if (Convert.ToInt32(freeCount.Value) > 0)
@@ -190,25 +172,11 @@ namespace IMS.Registration
             }
         }
 
-        //private bool CheckActiveUser()
-        //{
-        //    string userId = Session["UserID"].ToString();
-        //    var t = context.Tbl_EmailVerify.Where(g => g.user_id == userId).FirstOrDefault();
-        //    if (t != null)
-        //    {
-        //        bool isActive = Convert.ToBoolean(t.status);
-        //        if (t.status == true)
-        //        {
-        //            return true;
-        //        }
-        //    }
-        //    return false;
-        //}
         private int AuthenticateUser()
         {
             //UserRol r = new UserRol();
             //r.user_name = txtEmail.Text;
-            string enPswd = GetSwcSHA1(txtPassword.Text);
+            string enPswd = Encrypt(txtPassword.Text);
             //r.password = enPswd;
             ////Shakeeb
             var r = context.tbl_User.Where(g => g.user_name == txtEmail.Text && g.password == enPswd && g.status==true).FirstOrDefault();
@@ -236,7 +204,27 @@ namespace IMS.Registration
 
             string fid = Session["financialyear_id"].ToString();
         }
-
+        private string Encrypt(string clearText)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        cs.Close();
+                    }
+                    clearText = Convert.ToBase64String(ms.ToArray());
+                }
+            }
+            return clearText;
+        }
         public static string GetSwcSHA1(string value)
         {
             SHA1 algorithm = SHA1.Create();
