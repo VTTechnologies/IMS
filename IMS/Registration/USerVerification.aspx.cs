@@ -25,7 +25,7 @@ namespace IMS.Registration
 
         protected void btnOTP_Click(object sender, EventArgs e)
         {
-            //SendOtp();
+            SendOtp();
             otpDiv.Style.Add("display", "normal");
             btnOTP.Text = "Re-Generate OTP";
         }
