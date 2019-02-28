@@ -32,7 +32,7 @@ namespace IMS.Registration
                 System.Net.Mail.SmtpClient SmtpServer = new SmtpClient("webmail.imsbizz.com", 25);
                 StringBuilder sb = new StringBuilder();
                 mail.From = new MailAddress("no-replay@imsbizz.com", "IMS Bizz");
-                mail.To.Add("contact@vttechnologies.co");
+                mail.To.Add("contact@zunmansolutions.com");
                 mail.Subject = "Message from Main Contact form";
                 //string body = string.Empty;
                 //using (StreamReader reader = new StreamReader(Server.MapPath("~/Registration/EmailVerification.html")))

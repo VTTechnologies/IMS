@@ -48,7 +48,6 @@ namespace IMS
             companyId = Convert.ToInt32(Session["company_id"]);
             branchId = Convert.ToInt32(Session["branch_id"]);
         }
-
         public void BindGrid(List<DashboardOrderTableViewModel> list)
         {
 

@@ -30,6 +30,8 @@ namespace IMSBLL.EntityModel
         public string status { get; set; }
         public DateTime modifydate { get; set; }
         public int passverifyID { get; set; }
+        public string OTP { get; set; }
+        public Nullable<bool> IsVerified { get; set; }
         SqlHelper helper = new SqlHelper();
 
         public DataTable activeuser(Register1 p)
@@ -114,6 +116,7 @@ namespace IMSBLL.EntityModel
             parameters.Add("@start_date", start_date);
             parameters.Add("@end_date", end_date);
             parameters.Add("@uniqueidentity", uniqueid);
+            parameters.Add("@IsVerified", IsVerified);
 
             try
             {

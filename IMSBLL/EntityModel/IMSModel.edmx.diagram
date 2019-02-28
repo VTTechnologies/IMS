@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7220dfe9eaeb4edbb1ee3485242d81d7" Name="Diagram1">
+      <Diagram DiagramId="7220dfe9eaeb4edbb1ee3485242d81d7" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="IMS_TESTModel.tbl_ActualPurchaseTaxAndPrice" Width="1.5" PointX="12" PointY="71.5" />
         <EntityTypeShape EntityType="IMS_TESTModel.tbl_ActualSalesTaxAndPrice" Width="1.5" PointX="31.5" PointY="79" />
         <EntityTypeShape EntityType="IMS_TESTModel.tbl_batch" Width="1.5" PointX="9.75" PointY="76.5" />
@@ -188,6 +188,7 @@
         <AssociationConnector Association="IMS_TESTModel.FK__tbl_taxde__type___4301EA8F" />
         <AssociationConnector Association="IMS_TESTModel.FK__tbl_userb__user___267ABA7A" />
         <AssociationConnector Association="IMS_TESTModel.FK__tbl_userr__user___1A14E395" />
+        <EntityTypeShape EntityType="IMS_TESTModel.ELMAH_Error" Width="1.5" PointX="7.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
