@@ -5,6 +5,22 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="IMS_TESTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ELMAH_Error">
+          <Key>
+            <PropertyRef Name="ErrorId" />
+          </Key>
+          <Property Name="ErrorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Application" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Host" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="User" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StatusCode" Type="int" Nullable="false" />
+          <Property Name="TimeUtc" Type="datetime" Nullable="false" />
+          <Property Name="Sequence" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AllXml" Type="ntext" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbl_ActualPurchaseTaxAndPrice">
           <Key>
             <PropertyRef Name="ID" />
@@ -927,6 +943,9 @@
           <Property Name="modified_date" Type="smalldatetime" />
           <Property Name="first_name" Type="nvarchar" MaxLength="100" />
           <Property Name="last_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsLogin" Type="bit" />
+          <Property Name="OTP" Type="nvarchar(max)" />
+          <Property Name="IsVerified" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_userbranch">
           <Key>
@@ -2552,6 +2571,28 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           <Parameter Name="start_date" Type="datetime" Mode="In" />
           <Parameter Name="end_date" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="ELMAH_GetErrorsXml" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Application" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageIndex" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="TotalCount" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="ELMAH_GetErrorXml" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Application" Type="nvarchar" Mode="In" />
+          <Parameter Name="ErrorId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="ELMAH_LogError" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ErrorId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Application" Type="nvarchar" Mode="In" />
+          <Parameter Name="Host" Type="nvarchar" Mode="In" />
+          <Parameter Name="Type" Type="nvarchar" Mode="In" />
+          <Parameter Name="Source" Type="nvarchar" Mode="In" />
+          <Parameter Name="Message" Type="nvarchar" Mode="In" />
+          <Parameter Name="User" Type="nvarchar" Mode="In" />
+          <Parameter Name="AllXml" Type="ntext" Mode="In" />
+          <Parameter Name="StatusCode" Type="int" Mode="In" />
+          <Parameter Name="TimeUtc" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="GetBatchwiseQuantity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="batch_id" Type="int" Mode="In" />
@@ -3485,6 +3526,7 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           </ReturnType>
         </Function>
         <EntityContainer Name="IMS_TESTModelStoreContainer">
+          <EntitySet Name="ELMAH_Error" EntityType="Self.ELMAH_Error" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_ActualPurchaseTaxAndPrice" EntityType="Self.tbl_ActualPurchaseTaxAndPrice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_ActualSalesTaxAndPrice" EntityType="Self.tbl_ActualSalesTaxAndPrice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_batch" EntityType="Self.tbl_batch" Schema="dbo" store:Type="Tables" />
@@ -4700,14 +4742,14 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="ProductReport" ReturnType="Collection(IMS_TESTModel.ProductReport_Result)">
-            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+          <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PurchaseOrPurchaseReturnReport" ReturnType="Collection(IMS_TESTModel.PurchaseOrPurchaseReturnReport_Result)">
             <Parameter Name="Id" Mode="In" Type="Int32" />
             <Parameter Name="FromTable" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SaleOrderReport" ReturnType="Collection(IMS_TESTModel.SaleOrderReport_Result)">
-            <Parameter Name="SaleId" Mode="In" Type="Int32" />
+          <Parameter Name="SaleId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SaleOrPurchaseOrReturnReport" ReturnType="Collection(IMS_TESTModel.SaleOrPurchaseOrReturnReport_Result)">
             <Parameter Name="Id" Mode="In" Type="Int32" />
@@ -4718,7 +4760,7 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="FromTable" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SaleReport" ReturnType="Collection(IMS_TESTModel.SaleReport_Result)">
-            <Parameter Name="saledetails_id" Mode="In" Type="Int32" />
+          <Parameter Name="saledetails_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ActiveUser" ReturnType="Collection(IMS_TESTModel.sp_ActiveUser_Result)">
             <Parameter Name="userid" Mode="In" Type="Int32" />
@@ -4781,10 +4823,10 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="pid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_checkuser" ReturnType="Collection(String)">
-            <Parameter Name="user_Emai" Mode="In" Type="String" />
+          <Parameter Name="user_Emai" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_checkusermobil" ReturnType="Collection(String)">
-            <Parameter Name="user_mobieno" Mode="In" Type="String" />
+          <Parameter Name="user_mobieno" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_CompanyInsert">
             <Parameter Name="company_name" Mode="In" Type="String" />
@@ -4804,7 +4846,7 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="definition" Mode="In" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="sp_dashboarddata" ReturnType="Collection(IMS_TESTModel.sp_dashboarddata_Result)">
-            <Parameter Name="conpanyid" Mode="In" Type="Int32" />
+          <Parameter Name="conpanyid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Deletebatch">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -4901,13 +4943,13 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="created_date" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="Sp_GetExistsMobile" ReturnType="Collection(String)">
-            <Parameter Name="user_mobieno" Mode="In" Type="String" />
+          <Parameter Name="user_mobieno" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetPurchaseDetailsById" ReturnType="Collection(IMS_TESTModel.sp_GetPurchaseDetailsById_Result)">
-            <Parameter Name="purchsae_id" Mode="In" Type="Int32" />
+          <Parameter Name="purchsae_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetSaleDetailsById" ReturnType="Collection(IMS_TESTModel.sp_GetSaleDetailsById_Result)">
-            <Parameter Name="saleId" Mode="In" Type="Int32" />
+          <Parameter Name="saleId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_godowninsert">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -5063,7 +5105,7 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="branch_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_product_relorderlevel_report_forcompany_only" ReturnType="Collection(IMS_TESTModel.sp_product_relorderlevel_report_forcompany_only_Result)">
-            <Parameter Name="company_id" Mode="In" Type="Int32" />
+          <Parameter Name="company_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ProductInsert">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -5193,7 +5235,7 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="sale_id" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SalesreturnProduct">
-            <Parameter Name="salereturnmain_id" Mode="In" Type="Int32" />
+          <Parameter Name="salereturnmain_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_saveerror">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -5217,7 +5259,7 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="product_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectBranch" ReturnType="Collection(IMS_TESTModel.sp_SelectBranch_Result)">
-            <Parameter Name="company_id" Mode="In" Type="Int32" />
+          <Parameter Name="company_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectBranchName" ReturnType="Collection(String)">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -5228,13 +5270,13 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="branch_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectCompany" ReturnType="Collection(IMS_TESTModel.sp_SelectCompany_Result)">
-            <Parameter Name="company_id" Mode="In" Type="Int32" />
+          <Parameter Name="company_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectCompany_name" ReturnType="Collection(String)">
-            <Parameter Name="user_id" Mode="In" Type="Int32" />
+          <Parameter Name="user_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_selectcompanylogo" ReturnType="Collection(String)">
-            <Parameter Name="company_id" Mode="In" Type="Int32" />
+          <Parameter Name="company_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectCountry" ReturnType="Collection(IMS_TESTModel.sp_SelectCountry_Result)" />
           <FunctionImport Name="sp_SelectExpense" ReturnType="Collection(IMS_TESTModel.sp_SelectExpense_Result)">
@@ -5242,7 +5284,7 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="branch_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectFinicialyeardate" ReturnType="Collection(IMS_TESTModel.sp_SelectFinicialyeardate_Result)">
-            <Parameter Name="company_id" Mode="In" Type="Int32" />
+          <Parameter Name="company_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectFY" ReturnType="Collection(IMS_TESTModel.sp_SelectFY_Result)">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -5269,10 +5311,10 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="branch_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectProductbyid" ReturnType="Collection(IMS_TESTModel.sp_SelectProductbyid_Result)">
-            <Parameter Name="purchsae_id" Mode="In" Type="Int32" />
+          <Parameter Name="purchsae_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectPurchase">
-            <Parameter Name="company_id" Mode="In" Type="Int32" />
+          <Parameter Name="company_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_selectpurchasebatch" ReturnType="Collection(IMS_TESTModel.sp_selectpurchasebatch_Result)">
             <Parameter Name="purchase_id" Mode="In" Type="Int32" />
@@ -5303,7 +5345,7 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="company_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Selectsaleproduct" ReturnType="Collection(IMS_TESTModel.sp_Selectsaleproduct_Result)">
-            <Parameter Name="sale_id" Mode="In" Type="Int32" />
+          <Parameter Name="sale_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectSalesReport" ReturnType="Collection(IMS_TESTModel.sp_SelectSalesReport_Result)">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -5313,7 +5355,7 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="enddate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_selectspurchaseproduct" ReturnType="Collection(IMS_TESTModel.sp_selectspurchaseproduct_Result)">
-            <Parameter Name="purchase_id" Mode="In" Type="Int32" />
+          <Parameter Name="purchase_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectTax" ReturnType="Collection(IMS_TESTModel.sp_SelectTax_Result)">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -5328,7 +5370,7 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="branch_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectUserRole" ReturnType="Collection(IMS_TESTModel.sp_SelectUserRole_Result)">
-            <Parameter Name="company_id" Mode="In" Type="Int32" />
+          <Parameter Name="company_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_taxInsert">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -5581,7 +5623,7 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spAuthenticateUserRole" ReturnType="Collection(IMS_TESTModel.spAuthenticateUserRole_Result)">
-            <Parameter Name="user_id" Mode="In" Type="Int32" />
+          <Parameter Name="user_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spCheckDoubleInMasters">
             <Parameter Name="companyid" Mode="In" Type="Int32" />
@@ -5591,14 +5633,37 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
             <Parameter Name="branch_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SpGetExistsEmail" ReturnType="Collection(String)">
-            <Parameter Name="email" Mode="In" Type="String" />
+          <Parameter Name="email" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SpGetExistsMobile" ReturnType="Collection(String)">
-            <Parameter Name="mobileno" Mode="In" Type="String" />
+          <Parameter Name="mobileno" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Split" IsComposable="true" ReturnType="Collection(IMS_TESTModel.Split_Result)">
             <Parameter Name="List" Mode="In" Type="String" />
             <Parameter Name="SplitOn" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="ELMAH_Error" EntityType="IMS_TESTModel.ELMAH_Error" />
+          <FunctionImport Name="ELMAH_GetErrorsXml" ReturnType="Collection(String)">
+            <Parameter Name="Application" Mode="In" Type="String" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="TotalCount" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ELMAH_GetErrorXml" ReturnType="Collection(String)">
+            <Parameter Name="Application" Mode="In" Type="String" />
+            <Parameter Name="ErrorId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="ELMAH_LogError">
+            <Parameter Name="ErrorId" Mode="In" Type="Guid" />
+            <Parameter Name="Application" Mode="In" Type="String" />
+            <Parameter Name="Host" Mode="In" Type="String" />
+            <Parameter Name="Type" Mode="In" Type="String" />
+            <Parameter Name="Source" Mode="In" Type="String" />
+            <Parameter Name="Message" Mode="In" Type="String" />
+            <Parameter Name="User" Mode="In" Type="String" />
+            <Parameter Name="AllXml" Mode="In" Type="String" />
+            <Parameter Name="StatusCode" Mode="In" Type="Int32" />
+            <Parameter Name="TimeUtc" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="tbl_ActualPurchaseTaxAndPrice">
@@ -6769,6 +6834,9 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           <NavigationProperty Name="tbl_subscription" Relationship="IMS_TESTModel.FK__tbl_subsc__user___3493CFA7" FromRole="tbl_User" ToRole="tbl_subscription" />
           <NavigationProperty Name="tbl_userbranch" Relationship="IMS_TESTModel.FK__tbl_userb__user___267ABA7A" FromRole="tbl_User" ToRole="tbl_userbranch" />
           <NavigationProperty Name="tbl_userrole" Relationship="IMS_TESTModel.FK__tbl_userr__user___1A14E395" FromRole="tbl_User" ToRole="tbl_userrole" />
+          <Property Name="IsLogin" Type="Boolean" />
+          <Property Name="OTP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsVerified" Type="Boolean" />
         </EntityType>
         <EntityType Name="tbl_userbranch">
           <Key>
@@ -8881,6 +8949,22 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <EntityType Name="ELMAH_Error">
+          <Key>
+            <PropertyRef Name="ErrorId" />
+          </Key>
+          <Property Name="ErrorId" Type="Guid" Nullable="false" />
+          <Property Name="Application" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Host" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="User" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusCode" Type="Int32" Nullable="false" />
+          <Property Name="TimeUtc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AllXml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9843,6 +9927,9 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
           <EntitySetMapping Name="tbl_User">
             <EntityTypeMapping TypeName="IMS_TESTModel.tbl_User">
               <MappingFragment StoreEntitySet="tbl_User">
+                <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+                <ScalarProperty Name="OTP" ColumnName="OTP" />
+                <ScalarProperty Name="IsLogin" ColumnName="IsLogin" />
                 <ScalarProperty Name="last_name" ColumnName="last_name" />
                 <ScalarProperty Name="first_name" ColumnName="first_name" />
                 <ScalarProperty Name="modified_date" ColumnName="modified_date" />
@@ -10744,6 +10831,26 @@ warning 6002: The table/view 'IMS_DEV.dbo.View_SaleDetails' does not have a prim
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ELMAH_Error">
+            <EntityTypeMapping TypeName="IMS_TESTModel.ELMAH_Error">
+              <MappingFragment StoreEntitySet="ELMAH_Error">
+                <ScalarProperty Name="AllXml" ColumnName="AllXml" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="TimeUtc" ColumnName="TimeUtc" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="Application" ColumnName="Application" />
+                <ScalarProperty Name="ErrorId" ColumnName="ErrorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ELMAH_GetErrorsXml" FunctionName="IMS_TESTModel.Store.ELMAH_GetErrorsXml" />
+          <FunctionImportMapping FunctionImportName="ELMAH_GetErrorXml" FunctionName="IMS_TESTModel.Store.ELMAH_GetErrorXml" />
+          <FunctionImportMapping FunctionImportName="ELMAH_LogError" FunctionName="IMS_TESTModel.Store.ELMAH_LogError" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
