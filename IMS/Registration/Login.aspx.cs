@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +13,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Configuration;
 using System.Data.Entity.Core.Objects;
+using System.IO;
 
 namespace IMS.Registration
 {
@@ -56,142 +57,135 @@ namespace IMS.Registration
                 if (txtEmail.Text != "  " && txtPassword.Text != "")
                 {
                     AuthenticateUser();
-                    us_ID = Convert.ToInt32(Session["UserID"]);
-                    if (us_ID > 0)
-                    {
-                        selectUserRole();
-                        SqlCommand cmd = new SqlCommand();
-                        cmd.CommandText = "sp_checklicense";
-                        int c_id = Convert.ToInt32(Session["company_id"]);
+                    
+                                    us_ID = Convert.ToInt32(Session["UserID"]);
 
-                        ObjectParameter freeCount = new ObjectParameter("free_count", typeof(int));
-                        ObjectParameter subscriptionCount = new ObjectParameter("Subscription_count", typeof(int));
-
-                        var r = context.sp_checklicense(c_id, us_ID, freeCount, subscriptionCount);
-                        //cmd.CommandType = CommandType.StoredProcedure;
-                        // cmd.Connection = con;
-                        //cmd.CommandTimeout = 600000;
-                        // con.Open();
-
-                        //cmd.Parameters.AddWithValue("@company_id", c_id);
-                        //cmd.Parameters.AddWithValue("@user_id", us_ID);
-                        //cmd.Parameters.Add("@Subscription_count", SqlDbType.Int);
-                        //cmd.Parameters["@Subscription_count"].Direction = ParameterDirection.Output;
-
-                        //cmd.Parameters.Add("@free_count", SqlDbType.Int);
-                        //cmd.Parameters["@free_count"].Direction = ParameterDirection.Output;
-
-                        //cmd.ExecuteNonQuery();
-                        //int mcid = Convert.ToInt32(cmd.Parameters["@Subscription_count"].Value);
-                        //int freedays_count = Convert.ToInt32(cmd.Parameters["@free_count"].Value);
-
-                        if (Convert.ToInt32(subscriptionCount.Value) > 0)
-                        {
-                            if (Convert.ToInt32(freeCount.Value) > 0)
-                            {
-                                string userData = string.Empty;
-                                string role = Convert.ToString(Session["Rolename"]);
-                                if (role == "Sales Manager")
-                                {
-                                    userData = "Sales";
-                                }
-                                else if (role == "Purchase Manager")
-                                {
-                                    userData = "Purchase";
-                                }
-                                else if (role == "Manager" || role == "")
-                                {
-                                    userData = "Manager";
-                                }
-                                Session["UserRoleSession"] = userData;
-                                if (!string.IsNullOrEmpty(userData))
-                                {
-                                    // create a new ticket used for authentication
-                                    if (cbRemember.Checked == true)
+                                    if (us_ID > 0)
                                     {
-                                        Response.Cookies["us_ID"].Value = txtEmail.Text;
-                                        Response.Cookies["enPswd"].Value = txtPassword.Text;
-                                        Response.Cookies["us_ID"].Expires = DateTime.Now.AddDays(15);
-                                        Response.Cookies["enPswd"].Expires = DateTime.Now.AddDays(15);
-                                    }
-                                    else
-                                    {
-                                        Response.Cookies["us_ID"].Expires = DateTime.Now.AddDays(-1);
-                                        Response.Cookies["enPswd"].Expires = DateTime.Now.AddDays(-1);
-                                    }
-                                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, txtEmail.Text, DateTime.Now, DateTime.Now.AddMinutes(15), false, userData, FormsAuthentication.FormsCookiePath);
-                                    var encryptedTicket = FormsAuthentication.Encrypt(ticket);
-                                    if (cbRemember.Checked)
-                                    {
-                                        HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-                                        cookie.Expires = ticket.Expiration;
-                                        HttpContext.Current.Response.Cookies.Set(cookie);
-                                    }
-                                    else
-                                    {
-                                        FormsAuthentication.SetAuthCookie(txtEmail.Text, false);
-                                    }
-                                }
-                                string returnUrl = Request.QueryString["ReturnUrl"];
-                                if (role.Equals("Purchase Manager"))
-                                {
-                                    returnUrl = "Purchases/Purchase.aspx";
-                                }
-                                else if (role == "Sales Manager")
-                                {
-                                    returnUrl = "Sales/Sale.aspx";
-                                }
-                                else if (role == "Manager" || role == "")
-                                {
-                                    returnUrl = "Home.aspx";
-                                }
-                                Response.Redirect(@"~/" + returnUrl, false);
+                                        selectUserRole();
+                                        int c_id = Convert.ToInt32(Session["company_id"]);
+                                        ObjectParameter freeCount = new ObjectParameter("free_count", typeof(int));
+                                        ObjectParameter subscriptionCount = new ObjectParameter("Subscription_count", typeof(int));
+
+                                        var r = context.sp_checklicense(c_id, us_ID, freeCount, subscriptionCount);
+                                        
+                                        if (Convert.ToInt32(subscriptionCount.Value) > 0)
+                                        {
+                                                    if (Convert.ToInt32(freeCount.Value) > 0)
+                                                    {
+
+                                                        string userData = string.Empty;
+                                                        string role = Convert.ToString(Session["Rolename"]);
+                                                                if (role == "Sales Manager")
+                                                                {
+                                                                    userData = "Sales";
+                                                                }
+                                                                else if (role == "Purchase Manager")
+                                                                {
+                                                                    userData = "Purchase";
+                                                                }
+                                                                else if (role == "Manager" || role == "")
+                                                                {
+                                                                    userData = "Manager";
+                                                                }
+                                                        Session["UserRoleSession"] = userData;
+
+                                                        if (!string.IsNullOrEmpty(userData))
+                                                        {
+                                                            // create a new ticket used for authentication
+
+                                                                    if (cbRemember.Checked == true)
+                                                                    {
+                                                                        Response.Cookies["us_ID"].Value = txtEmail.Text;
+                                                                        Response.Cookies["enPswd"].Value = txtPassword.Text;
+                                                                        Response.Cookies["us_ID"].Expires = DateTime.Now.AddDays(15);
+                                                                        Response.Cookies["enPswd"].Expires = DateTime.Now.AddDays(15);
+                                                                    }
+
+                                                                    else
+                                                                    {
+
+                                                                        Response.Cookies["us_ID"].Expires = DateTime.Now.AddDays(-1);
+
+                                                                        Response.Cookies["enPswd"].Expires = DateTime.Now.AddDays(-1);
+
+                                                                    }
+                                                                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, txtEmail.Text, DateTime.Now, DateTime.Now.AddMinutes(15), false, userData, FormsAuthentication.FormsCookiePath);
+                                                                    var encryptedTicket = FormsAuthentication.Encrypt(ticket);
+                                                                    if (cbRemember.Checked)
+                                                                    {
+                                                                        HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                                                                        cookie.Expires = ticket.Expiration;
+                                                                        HttpContext.Current.Response.Cookies.Set(cookie);
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        FormsAuthentication.SetAuthCookie(txtEmail.Text, false);
+                                                                    }
+                                                        }
+                                                        string returnUrl = Request.QueryString["ReturnUrl"];
+                                                        if (role.Equals("Purchase Manager"))
+                                                        {
+                                                            returnUrl = "Purchases/Purchase.aspx";
+                                                        }
+                                                        else if (role == "Sales Manager")
+                                                        {
+                                                            returnUrl = "Sales/Sale.aspx";
+                                                        }
+                                                        else if (role == "Manager" || role == "")
+                                                        {
+                                                            returnUrl = "Home.aspx";
+                                                        }
+                                                        Response.Redirect(@"~/" + returnUrl, false);
+                                            }
+                                            else
+                                            {
+                                                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Your free count has over.');", true);
+                                            }
                             }
                             else
                             {
-                                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Your free count has over.');", true);
+                                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Your subscription has been ended, Please Choose any Of Our Plan To Continue.');", true);
                             }
+
                         }
+                          
                         else
-                        {
-                            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Your subscription has been ended, Please Choose any Of Our Plan To Continue.');", true);
+                                    {
+                                        ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('User Name Or Password Is Invalid');", true);
+
                         }
                     }
-                    else
-                    {
-                        ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('User Name Or Password Is Invalid');", true);
-                    }
-                }
+
+              
                 else
                 {
                     lblError.Visible = true;
                     lblError.Text = "Please Enter Your Email ID and Password";
+
                 }
+
             }
             catch (Exception ex)
             {
                 ErrorLog.saveerror(ex);
             }
         }
+
         private int AuthenticateUser()
         {
             //UserRol r = new UserRol();
             //r.user_name = txtEmail.Text;
-            string enPswd = GetSwcSHA1(txtPassword.Text);
+            string enPswd = Encrypt(txtPassword.Text);
             //r.password = enPswd;
             ////Shakeeb
-            var r = context.tbl_User.Where(g => g.user_name == txtEmail.Text && g.password == enPswd && g.status == true).FirstOrDefault();
-            
+            var r = context.tbl_User.Where(g => g.user_name == txtEmail.Text && g.password == enPswd && g.status==true).FirstOrDefault();
             // r.userID(r);
             if (r != null)
             {
                 Session["UserID"] = r.user_id;
             }
             Session["username"] = txtEmail.Text;
-            if (!r.IsVerified.Value)
-            {
-                Response.Redirect("USerVerification.aspx");
-            }
             return us_ID;
         }
 
@@ -204,13 +198,33 @@ namespace IMS.Registration
             //r.RoleName(r);           
             Session["Rolename"] = r.role_name;
             Session["company_id"] = r.company_id;
-            Session["financialyear_id"] = context.tbl_financialyear.Where(w => w.company_id == r.company_id && w.status == true).Select(s => s.financialyear_id).FirstOrDefault();
+            Session["financialyear_id"] = context.tbl_financialyear.Where(w => w.company_id == r.company_id  && w.status == true).Select(s => s.financialyear_id).FirstOrDefault();
             Session["branch_id"] = r.branch_id;
             Session["LoginuserName"] = r.Name;
 
             string fid = Session["financialyear_id"].ToString();
         }
-
+        private string Encrypt(string clearText)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        cs.Close();
+                    }
+                    clearText = Convert.ToBase64String(ms.ToArray());
+                }
+            }
+            return clearText;
+        }
         public static string GetSwcSHA1(string value)
         {
             SHA1 algorithm = SHA1.Create();
