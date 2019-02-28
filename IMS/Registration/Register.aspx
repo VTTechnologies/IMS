@@ -14,7 +14,7 @@
     <script src="../assets/alert/alertify.js"></script>
     <script src="../assets/alert/alertify.min.js"></script>
     <link href="../assets/alert/css/alertify.css" rel="stylesheet" />
-  
+
     <link href="../assets/alert/css/alertify.min.css" rel="stylesheet" />
     <link href="../assets/alert/css/themes/default.css" rel="stylesheet" />
     <link href="../assets/alert/css/themes/default.min.css" rel="stylesheet" />
@@ -32,16 +32,13 @@
     <script type='text/javascript'>
 
 
-        function openalert(msg, val)
-        {
+        function openalert(msg, val) {
             alertify.alert('Success', msg).setting({
-                'onok': function ()
-                {
-                    if (val == 'True')
-                    {
+                'onok': function () {
+                    if (val == 'True') {
                         window.location.href = "Login.aspx";
                     }
-                    
+
                 }
             });
 
@@ -243,7 +240,7 @@
 
         function validatePassword() {
             var password = document.getElementById("password"),
-               confirm_password = document.getElementById("Cpassword");
+                confirm_password = document.getElementById("Cpassword");
             if (password.value != confirm_password.value) {
                 alert("Passwords Don't Match");
                 confirm_password.setCustomValidity("Passwords Don't Match");
@@ -389,12 +386,14 @@
                                             <div class="form -group">
                                                 <label for="password" class="control-label">Password :</label>
                                                 <i class="fa fa-key"></i>
-                                                
-                                                    <input type="password" class="form-control" id="myInput" runat="server" required="required" autocomplete="off" onkeypress="handleSpace(event)" placeholder="Password"
-                                                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Please enter your password e.g:Password@123" />
-                                                
-                                             
-                                                (Password must contain atleast 8 characters,One upper case,One number,One special symbol)
+
+                                                <%--                                                    <input type="password" class="form-control" id="myInput" runat="server" required="required" autocomplete="off" onkeypress="handleSpace(event)" placeholder="Password"
+                                                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Please enter your password e.g:Password@123" />--%>
+                                                <input type="password" class="form-control" id="myInput" runat="server" required="required" autocomplete="off" onkeypress="handleSpace(event)" placeholder="Password"
+                                                    title="Please enter your password" pattern="[A-Za-z]{6}" />
+
+                                                <%--(Password must contain atleast 8 characters,One upper case,One number,One special symbol)--%>
+                                                (Password must contain atleast 6 characters)
                                                 <br />
                                                 <input type="checkbox" id="chkpassword" runat="server" />Show Password
                                            
@@ -409,7 +408,7 @@
                                                 <label for="Cpassword" class="control-label">Confirm Password :</label>
                                                 <i class="fa fa-key"></i>
                                                 <input type="password" name="txtCpassword" class="form-control" required="required" runat="server" id="Cpassword" autocomplete="off" placeholder="Confirm Password"
-                                                    pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                                                     pattern="[A-Za-z]{6}"
                                                     title="Confirm Password" onchange="validatePassword()" />
                                             </div>
                                         </div>
