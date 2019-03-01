@@ -46,13 +46,13 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input id="txtOtp" runat="server" type="number" class="form-control" />
+                                                    <label id="lblWrongOTP" runat="server" style="color:red"></label>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <asp:Button runat="server" CssClass="btn btn-primary" ID="btnOTP" OnClick="btnOTP_Click"></asp:Button>
                                                 </div>
                                             </div>
 
-                                            <br />
                                             <div class="row" runat="server" style="display: none;" id="otpDiv">
                                                 <div class="col-md-4 col-md-offset-3">
                                                     <asp:Button runat="server" Text="Submit" CssClass="btn btn-primary"

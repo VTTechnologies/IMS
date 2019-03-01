@@ -181,15 +181,16 @@ namespace IMS.Registration
             ////Shakeeb
             var r = context.tbl_User.Where(g => g.user_name == txtEmail.Text && g.password == enPswd && g.status==true).FirstOrDefault();
             // r.userID(r);
+
+            Session["username"] = txtEmail.Text;
             if (r != null)
             {
                 Session["UserID"] = r.user_id;
-            }
-            Session["username"] = txtEmail.Text;
-            if(!r.IsVerified.Value)
-            {
-                Response.Redirect("USerVerification.aspx");
-            }
+                if (!r.IsVerified.Value)
+                {
+                    Response.Redirect("USerVerification.aspx");
+                }
+            }            
             return us_ID;
         }
 

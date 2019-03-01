@@ -38,7 +38,6 @@
                     if (val == 'True') {
                         window.location.href = "Login.aspx";
                     }
-
                 }
             });
 
@@ -81,11 +80,7 @@
         }, function () {
             $('.password').attr('type', 'password');
         });
-
-
     </script>
-
-
 
     <script type='text/javascript'>
         function openModal() {
@@ -96,22 +91,44 @@
     <script type="text/javascript">
         $(function () {
             $("#<%=chkpassword.ClientID%>").bind("click", function () {
+                debugger;
                 var txtPassword = $("#<%=password.ClientID%>");
                 if ($(this).is(":checked")) {
-                    txtPassword.after('<input onchange = "PasswordChanged(this);" id = "txt_' + txtPassword.attr("id") + '" type = "text" class="form-control" value = "' + txtPassword.val() + '" />');
-                    txtPassword.hide();
+                    $(txtPassword).attr('type', 'text');
+                    //txtPassword.after('<input onchange = "PasswordChanged(this);" id = "txt_' + txtPassword.attr("id") + '" type = "text" class="form-control" value = "' + txtPassword.val() + '" />');
+                    //txtPassword.hide();
                 } else {
-                    txtPassword.val(txtPassword.next().val());
-                    txtPassword.next().remove();
-                    txtPassword.show();
+                    $(txtPassword).attr('type', 'password');
+                    //txtPassword.val(txtPassword.next().val());
+                    //txtPassword.next().remove();
+                    //txtPassword.show();
                 }
             });
         });
-        function PasswordChanged(txt) {
-            $(txt).prev().val($(txt).val());
-        }
+        //function PasswordChanged(txt) {
+        //    debugger;
+        //    $(txt).prev().val($(txt).val());
+        //}
     </script>
     <script>
+        $(document).ready(function () {
+            /*$("#btnSubmit").on('click', */
+            
+        });
+        function validation() {
+                debugger;
+                var password = $("#<%= password.ClientID %>").val(),
+                    confirmPassword = $("#<%= Cpassword.ClientID %>").val();
+                if (password != confirmPassword) {
+                    alert("Password does not match.");
+                    return false;
+                }
+                if (password.length < 6) {
+                    alert("Password does not match with the given format.");
+                    return false;
+                }
+                return true;
+            }
         function handleSpace(event) {
             //handling ie and other browser keycode 
             var keyPressed = event.which || event.keyCode;
@@ -236,18 +253,30 @@
             }
         }--%>
 
-
-
-        function validatePassword() {
-            var password = $("#<%= password.ClientID %>"),
-                confirm_password = $("#<%= Cpassword.ClientID %>");
-            if (password.value != confirm_password.value) {
-                alert("Passwords Don't Match");
-                //confirm_password.setCustomValidity("Passwords Don't Match");
-            } else {
-                //confirm_password.setCustomValidity("");
+        function validatePassword(val) {
+            debugger
+            var password = $("#<%= password.ClientID %>").val(),
+                confirm_password = $("#<%= Cpassword.ClientID %>").val();
+            if (val == 'first') {
+                confirm_password = "";
+                if (password.length < 6) {
+                    $("#passLengthError").html("Password does not match with the given format");
+                }
+                else {
+                    $("#passLengthError").html("");
+                }
+            }
+            else {
+                if (password != confirm_password) {
+                    $("#passError").html("Password does not match");
+                    //confirm_password.setCustomValidity("Passwords Don't Match");
+                } else {
+                    $("#passError").html("");
+                }
             }
         }
+
+
 
         //password.onchange = validatePassword;
         //confirm_password.onkeyup = validatePassword;
@@ -390,8 +419,9 @@
                                                 <%--                                                    <input type="password" class="form-control" id="password" runat="server" required="required" autocomplete="off" onkeypress="handleSpace(event)" placeholder="Password"
                                                         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Please enter your password e.g:Password@123" />--%>
                                                 <input type="password" class="form-control" id="password" runat="server" required="required" autocomplete="off" onkeypress="handleSpace(event)" placeholder="Password"
-                                                minlength="6"  title="Please enter your password" />
-
+                                                    title="Please enter your password" onchange="validatePassword('first')" onkeyup="validatePassword('first')" />
+                                                <span style="color: red" id="passLengthError"></span>
+                                                <br />
                                                 <%--(Password must contain atleast 8 characters,One upper case,One number,One special symbol)--%>
                                                 (Password must contain atleast 6 characters)
                                                 <br />
@@ -408,8 +438,8 @@
                                                 <label for="Cpassword" class="control-label">Confirm Password :</label>
                                                 <i class="fa fa-key"></i>
                                                 <input type="password" name="txtCpassword" class="form-control" required="required" runat="server" id="Cpassword" autocomplete="off" placeholder="Confirm Password"
-                                                    
-                                                    title="Confirm Password" onchange="validatePassword()" />
+                                                    title="Confirm Password" onchange="validatePassword('second')" onkeyup="validatePassword('second')" />
+                                                <span style="color: red" id="passError"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -707,7 +737,7 @@
                                     <div class="input-group div2">
                                         <div class="col-lg-12 text-center">
                                            
-                                            <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Submit" OnClick="btnSubmit_Click" ValidationGroup="Update" />
+                                            <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" OnClientClick="return validation();" Text="Submit" OnClick="btnSubmit_Click" ValidationGroup="Update" />
                                              <button type="reset" class="btn btn-primary">
                                                 Clear</button>
                                         </div>
