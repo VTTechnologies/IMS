@@ -210,3 +210,9 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/IMS/Scripts
+/IMSAPI/Content
+/IMSAPI/Scripts/esm
+/IMSAPI/Scripts/umd
+/IMSAPI/Scripts
+/.nuget

@@ -113,22 +113,22 @@
     <script>
         $(document).ready(function () {
             /*$("#btnSubmit").on('click', */
-            
+
         });
         function validation() {
-                debugger;
-                var password = $("#<%= password.ClientID %>").val(),
-                    confirmPassword = $("#<%= Cpassword.ClientID %>").val();
-                if (password != confirmPassword) {
-                    alert("Password does not match.");
-                    return false;
-                }
-                if (password.length < 6) {
-                    alert("Password does not match with the given format.");
-                    return false;
-                }
-                return true;
+            debugger;
+            var password = $("#<%= password.ClientID %>").val(),
+                confirmPassword = $("#<%= Cpassword.ClientID %>").val();
+            if (password != confirmPassword) {
+                alert("Password does not match.");
+                return false;
             }
+            if (password.length < 6) {
+                alert("Password does not match with the given format.");
+                return false;
+            }
+            return true;
+        }
         function handleSpace(event) {
             //handling ie and other browser keycode 
             var keyPressed = event.which || event.keyCode;
@@ -512,6 +512,20 @@
                                             ControlToValidate="txtEndDate" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                     </div>
                                     <br />
+
+                                    
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <br />
+                                                <label for="MobileNo" class="control-label">Reference Mobile No : +91</label>
+                                                <input type="text" name="txtRefMobileNo" runat="server"  id="txtRefMobNum" maxlength="10" onkeypress="return /\d/.test(String.fromCharCode(((event||window.event).which||(event||window.event).which)));" class="form-control" required="required" autocomplete="off" placeholder=" Reference Mobile No" pattern="^[0-9 ]{10}$"
+                                                    title="Please enter ten digit mobile number" />
+                                                <asp:Label ID="Label1" runat="server"></asp:Label>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
 

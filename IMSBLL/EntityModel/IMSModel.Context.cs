@@ -27,6 +27,7 @@ namespace IMSBLL.EntityModel
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<ELMAH_Error> ELMAH_Error { get; set; }
         public virtual DbSet<tbl_ActualPurchaseTaxAndPrice> tbl_ActualPurchaseTaxAndPrice { get; set; }
         public virtual DbSet<tbl_ActualSalesTaxAndPrice> tbl_ActualSalesTaxAndPrice { get; set; }
         public virtual DbSet<tbl_batch> tbl_batch { get; set; }
@@ -84,9 +85,8 @@ namespace IMSBLL.EntityModel
         public virtual DbSet<Tbl_VerifyResetPass> Tbl_VerifyResetPass { get; set; }
         public virtual DbSet<View_PurchaseDetails> View_PurchaseDetails { get; set; }
         public virtual DbSet<View_SaleDetails> View_SaleDetails { get; set; }
-        public virtual DbSet<ELMAH_Error> ELMAH_Error { get; set; }
     
-        public virtual ObjectResult<CommonReport_Result> CommonReport(string reportType, Nullable<int> companyId, string filterIds, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date)
+        public virtual int CommonReport(string reportType, Nullable<int> companyId, string filterIds, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date)
         {
             var reportTypeParameter = reportType != null ?
                 new ObjectParameter("ReportType", reportType) :
@@ -108,7 +108,82 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("end_date", end_date) :
                 new ObjectParameter("end_date", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommonReport_Result>("CommonReport", reportTypeParameter, companyIdParameter, filterIdsParameter, start_dateParameter, end_dateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CommonReport", reportTypeParameter, companyIdParameter, filterIdsParameter, start_dateParameter, end_dateParameter);
+        }
+    
+        public virtual ObjectResult<string> ELMAH_GetErrorsXml(string application, Nullable<int> pageIndex, Nullable<int> pageSize, ObjectParameter totalCount)
+        {
+            var applicationParameter = application != null ?
+                new ObjectParameter("Application", application) :
+                new ObjectParameter("Application", typeof(string));
+    
+            var pageIndexParameter = pageIndex.HasValue ?
+                new ObjectParameter("PageIndex", pageIndex) :
+                new ObjectParameter("PageIndex", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("PageSize", pageSize) :
+                new ObjectParameter("PageSize", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ELMAH_GetErrorsXml", applicationParameter, pageIndexParameter, pageSizeParameter, totalCount);
+        }
+    
+        public virtual ObjectResult<string> ELMAH_GetErrorXml(string application, Nullable<System.Guid> errorId)
+        {
+            var applicationParameter = application != null ?
+                new ObjectParameter("Application", application) :
+                new ObjectParameter("Application", typeof(string));
+    
+            var errorIdParameter = errorId.HasValue ?
+                new ObjectParameter("ErrorId", errorId) :
+                new ObjectParameter("ErrorId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ELMAH_GetErrorXml", applicationParameter, errorIdParameter);
+        }
+    
+        public virtual int ELMAH_LogError(Nullable<System.Guid> errorId, string application, string host, string type, string source, string message, string user, string allXml, Nullable<int> statusCode, Nullable<System.DateTime> timeUtc)
+        {
+            var errorIdParameter = errorId.HasValue ?
+                new ObjectParameter("ErrorId", errorId) :
+                new ObjectParameter("ErrorId", typeof(System.Guid));
+    
+            var applicationParameter = application != null ?
+                new ObjectParameter("Application", application) :
+                new ObjectParameter("Application", typeof(string));
+    
+            var hostParameter = host != null ?
+                new ObjectParameter("Host", host) :
+                new ObjectParameter("Host", typeof(string));
+    
+            var typeParameter = type != null ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(string));
+    
+            var sourceParameter = source != null ?
+                new ObjectParameter("Source", source) :
+                new ObjectParameter("Source", typeof(string));
+    
+            var messageParameter = message != null ?
+                new ObjectParameter("Message", message) :
+                new ObjectParameter("Message", typeof(string));
+    
+            var userParameter = user != null ?
+                new ObjectParameter("User", user) :
+                new ObjectParameter("User", typeof(string));
+    
+            var allXmlParameter = allXml != null ?
+                new ObjectParameter("AllXml", allXml) :
+                new ObjectParameter("AllXml", typeof(string));
+    
+            var statusCodeParameter = statusCode.HasValue ?
+                new ObjectParameter("StatusCode", statusCode) :
+                new ObjectParameter("StatusCode", typeof(int));
+    
+            var timeUtcParameter = timeUtc.HasValue ?
+                new ObjectParameter("TimeUtc", timeUtc) :
+                new ObjectParameter("TimeUtc", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ELMAH_LogError", errorIdParameter, applicationParameter, hostParameter, typeParameter, sourceParameter, messageParameter, userParameter, allXmlParameter, statusCodeParameter, timeUtcParameter);
         }
     
         public virtual ObjectResult<Nullable<decimal>> GetBatchwiseQuantity(Nullable<int> batch_id, Nullable<int> product_id)
@@ -143,48 +218,6 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("CompanyId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("GetReturnQuantity", idParameter, forParameter, productIdParameter, companyIdParameter);
-        }
-    
-        public virtual int InventoryReport(Nullable<int> companyId, Nullable<int> partyId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
-        {
-            var companyIdParameter = companyId.HasValue ?
-                new ObjectParameter("CompanyId", companyId) :
-                new ObjectParameter("CompanyId", typeof(int));
-    
-            var partyIdParameter = partyId.HasValue ?
-                new ObjectParameter("PartyId", partyId) :
-                new ObjectParameter("PartyId", typeof(int));
-    
-            var startDateParameter = startDate.HasValue ?
-                new ObjectParameter("StartDate", startDate) :
-                new ObjectParameter("StartDate", typeof(System.DateTime));
-    
-            var endDateParameter = endDate.HasValue ?
-                new ObjectParameter("EndDate", endDate) :
-                new ObjectParameter("EndDate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InventoryReport", companyIdParameter, partyIdParameter, startDateParameter, endDateParameter);
-        }
-    
-        public virtual int PaymentBalanceReport(Nullable<int> companyId, Nullable<int> partyId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
-        {
-            var companyIdParameter = companyId.HasValue ?
-                new ObjectParameter("CompanyId", companyId) :
-                new ObjectParameter("CompanyId", typeof(int));
-    
-            var partyIdParameter = partyId.HasValue ?
-                new ObjectParameter("PartyId", partyId) :
-                new ObjectParameter("PartyId", typeof(int));
-    
-            var startDateParameter = startDate.HasValue ?
-                new ObjectParameter("StartDate", startDate) :
-                new ObjectParameter("StartDate", typeof(System.DateTime));
-    
-            var endDateParameter = endDate.HasValue ?
-                new ObjectParameter("EndDate", endDate) :
-                new ObjectParameter("EndDate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PaymentBalanceReport", companyIdParameter, partyIdParameter, startDateParameter, endDateParameter);
         }
     
         public virtual ObjectResult<ProductReport_Result> ProductReport(Nullable<int> companyId)
@@ -319,27 +352,6 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AddUser2", user_nameParameter, user_emailidParameter, user_mobilenoParameter, passwordParameter, role_idParameter, branch_idParameter, company_idParameter, statusParameter, created_byParameter, created_dateParameter, first_nameParameter, last_nameParameter);
         }
     
-        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
         public virtual int sp_BatchInsert(Nullable<int> company_id, Nullable<int> branch_id, string batch_name, Nullable<bool> status, string created_by, Nullable<System.DateTime> created_date, string modified_by, Nullable<System.DateTime> modified_date)
         {
             var company_idParameter = company_id.HasValue ?
@@ -414,7 +426,7 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CategoryInsert", company_idParameter, branch_idParameter, category_nameParameter, statusParameter, created_byParameter, created_dateParameter, modified_byParameter, modified_dateParameter);
         }
     
-        public virtual int sp_checklicense(Nullable<int> company_id, Nullable<int> user_id, ObjectParameter free_count, ObjectParameter subscription_count)
+        public virtual ObjectResult<sp_checklicense_Result> sp_checklicense(Nullable<int> company_id, Nullable<int> user_id, ObjectParameter free_count, ObjectParameter subscription_count)
         {
             var company_idParameter = company_id.HasValue ?
                 new ObjectParameter("company_id", company_id) :
@@ -424,7 +436,7 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("user_id", user_id) :
                 new ObjectParameter("user_id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_checklicense", company_idParameter, user_idParameter, free_count, subscription_count);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_checklicense_Result>("sp_checklicense", company_idParameter, user_idParameter, free_count, subscription_count);
         }
     
         public virtual ObjectResult<string> sp_checkrackingodown(Nullable<int> company_id, Nullable<int> godown_id, string value)
@@ -518,27 +530,6 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("last_name", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CompanyInsert", company_nameParameter, owner_emailidParameter, owner_mobilenoParameter, country_idParameter, pincodeParameter, created_byParameter, created_dateParameter, first_nameParameter, last_nameParameter);
-        }
-    
-        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
         }
     
         public virtual ObjectResult<sp_dashboarddata_Result> sp_dashboarddata(Nullable<int> conpanyid)
@@ -793,19 +784,6 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteUser", company_idParameter, userbranch_idParameter, user_idParameter, branch_idParameter);
         }
     
-        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
-        }
-    
         public virtual int sp_ExpenseInsert(Nullable<int> company_id, Nullable<int> branch_id, string expense_name, Nullable<bool> status, string created_by, Nullable<System.DateTime> created_date, string modified_by, Nullable<System.DateTime> modified_date)
         {
             var company_idParameter = company_id.HasValue ?
@@ -946,32 +924,6 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("modified_date", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_godowninsert", company_idParameter, branch_idParameter, godown_nameParameter, godown_addressParameter, contact_noParameter, contact_personParameter, statusParameter, created_byParameter, created_dateParameter, modified_byParameter, modified_dateParameter);
-        }
-    
-        public virtual int sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual int sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
         }
     
         public virtual int sp_insert_purchase_return(Nullable<int> purchasedetails_id, Nullable<int> purchasereturn_id, Nullable<int> batch_id, Nullable<int> product_id, Nullable<decimal> tax_amt, Nullable<decimal> quantity, Nullable<decimal> amount, string created_by, string created_date)
@@ -1543,120 +1495,6 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_productwithquantity_Result>("sp_productwithquantity", company_idParameter, branch_idParameter);
         }
     
-        public virtual int sp_PurchaseDetailinsert(Nullable<int> product_id, Nullable<int> purchase_id, Nullable<int> batch_id, Nullable<int> user_id, string created_date, Nullable<decimal> tax_amt, Nullable<decimal> dicount_amt, Nullable<decimal> quantity, Nullable<decimal> amount, Nullable<decimal> purchase_rate, Nullable<decimal> sale_rate, ObjectParameter purchasedetails_id)
-        {
-            var product_idParameter = product_id.HasValue ?
-                new ObjectParameter("product_id", product_id) :
-                new ObjectParameter("product_id", typeof(int));
-    
-            var purchase_idParameter = purchase_id.HasValue ?
-                new ObjectParameter("purchase_id", purchase_id) :
-                new ObjectParameter("purchase_id", typeof(int));
-    
-            var batch_idParameter = batch_id.HasValue ?
-                new ObjectParameter("batch_id", batch_id) :
-                new ObjectParameter("batch_id", typeof(int));
-    
-            var user_idParameter = user_id.HasValue ?
-                new ObjectParameter("user_id", user_id) :
-                new ObjectParameter("user_id", typeof(int));
-    
-            var created_dateParameter = created_date != null ?
-                new ObjectParameter("created_date", created_date) :
-                new ObjectParameter("created_date", typeof(string));
-    
-            var tax_amtParameter = tax_amt.HasValue ?
-                new ObjectParameter("tax_amt", tax_amt) :
-                new ObjectParameter("tax_amt", typeof(decimal));
-    
-            var dicount_amtParameter = dicount_amt.HasValue ?
-                new ObjectParameter("dicount_amt", dicount_amt) :
-                new ObjectParameter("dicount_amt", typeof(decimal));
-    
-            var quantityParameter = quantity.HasValue ?
-                new ObjectParameter("quantity", quantity) :
-                new ObjectParameter("quantity", typeof(decimal));
-    
-            var amountParameter = amount.HasValue ?
-                new ObjectParameter("amount", amount) :
-                new ObjectParameter("amount", typeof(decimal));
-    
-            var purchase_rateParameter = purchase_rate.HasValue ?
-                new ObjectParameter("purchase_rate", purchase_rate) :
-                new ObjectParameter("purchase_rate", typeof(decimal));
-    
-            var sale_rateParameter = sale_rate.HasValue ?
-                new ObjectParameter("sale_rate", sale_rate) :
-                new ObjectParameter("sale_rate", typeof(decimal));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_PurchaseDetailinsert", product_idParameter, purchase_idParameter, batch_idParameter, user_idParameter, created_dateParameter, tax_amtParameter, dicount_amtParameter, quantityParameter, amountParameter, purchase_rateParameter, sale_rateParameter, purchasedetails_id);
-        }
-    
-        public virtual int sp_Purchaseinsert(Nullable<int> company_id, Nullable<int> branch_id, Nullable<int> party_id, string po_no, string po_Date, Nullable<decimal> total_tax, Nullable<decimal> total_amnt, Nullable<decimal> grand_total, Nullable<decimal> total_discount, string created_by, Nullable<System.DateTime> created_date, string invoiceNumber, Nullable<int> paymentMode_id, Nullable<decimal> given_amnt, Nullable<decimal> balance_amnt, ObjectParameter purchase_id)
-        {
-            var company_idParameter = company_id.HasValue ?
-                new ObjectParameter("company_id", company_id) :
-                new ObjectParameter("company_id", typeof(int));
-    
-            var branch_idParameter = branch_id.HasValue ?
-                new ObjectParameter("branch_id", branch_id) :
-                new ObjectParameter("branch_id", typeof(int));
-    
-            var party_idParameter = party_id.HasValue ?
-                new ObjectParameter("party_id", party_id) :
-                new ObjectParameter("party_id", typeof(int));
-    
-            var po_noParameter = po_no != null ?
-                new ObjectParameter("po_no", po_no) :
-                new ObjectParameter("po_no", typeof(string));
-    
-            var po_DateParameter = po_Date != null ?
-                new ObjectParameter("Po_Date", po_Date) :
-                new ObjectParameter("Po_Date", typeof(string));
-    
-            var total_taxParameter = total_tax.HasValue ?
-                new ObjectParameter("total_tax", total_tax) :
-                new ObjectParameter("total_tax", typeof(decimal));
-    
-            var total_amntParameter = total_amnt.HasValue ?
-                new ObjectParameter("total_amnt", total_amnt) :
-                new ObjectParameter("total_amnt", typeof(decimal));
-    
-            var grand_totalParameter = grand_total.HasValue ?
-                new ObjectParameter("grand_total", grand_total) :
-                new ObjectParameter("grand_total", typeof(decimal));
-    
-            var total_discountParameter = total_discount.HasValue ?
-                new ObjectParameter("total_discount", total_discount) :
-                new ObjectParameter("total_discount", typeof(decimal));
-    
-            var created_byParameter = created_by != null ?
-                new ObjectParameter("created_by", created_by) :
-                new ObjectParameter("created_by", typeof(string));
-    
-            var created_dateParameter = created_date.HasValue ?
-                new ObjectParameter("created_date", created_date) :
-                new ObjectParameter("created_date", typeof(System.DateTime));
-    
-            var invoiceNumberParameter = invoiceNumber != null ?
-                new ObjectParameter("InvoiceNumber", invoiceNumber) :
-                new ObjectParameter("InvoiceNumber", typeof(string));
-    
-            var paymentMode_idParameter = paymentMode_id.HasValue ?
-                new ObjectParameter("PaymentMode_id", paymentMode_id) :
-                new ObjectParameter("PaymentMode_id", typeof(int));
-    
-            var given_amntParameter = given_amnt.HasValue ?
-                new ObjectParameter("given_amnt", given_amnt) :
-                new ObjectParameter("given_amnt", typeof(decimal));
-    
-            var balance_amntParameter = balance_amnt.HasValue ?
-                new ObjectParameter("balance_amnt", balance_amnt) :
-                new ObjectParameter("balance_amnt", typeof(decimal));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Purchaseinsert", company_idParameter, branch_idParameter, party_idParameter, po_noParameter, po_DateParameter, total_taxParameter, total_amntParameter, grand_totalParameter, total_discountParameter, created_byParameter, created_dateParameter, invoiceNumberParameter, paymentMode_idParameter, given_amntParameter, balance_amntParameter, purchase_id);
-        }
-    
         public virtual int sp_rackInsert(Nullable<int> company_id, Nullable<int> branch_id, Nullable<int> godown_id, string rack_name, Nullable<bool> status, string created_by, Nullable<System.DateTime> created_date, string modified_by, Nullable<System.DateTime> modified_date)
         {
             var company_idParameter = company_id.HasValue ?
@@ -1698,7 +1536,7 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_rackInsert", company_idParameter, branch_idParameter, godown_idParameter, rack_nameParameter, statusParameter, created_byParameter, created_dateParameter, modified_byParameter, modified_dateParameter);
         }
     
-        public virtual ObjectResult<sp_Register_Result> sp_Register(string company_name, string first_name, string last_name, string owner_emailid, string owner_mobileno, string user_password, Nullable<int> country_id, string pincode, string created_by, Nullable<System.DateTime> created_date, string start_date, string end_date, string uniqueidentity)
+        public virtual ObjectResult<sp_Register_Result> sp_Register(string company_name, string first_name, string last_name, string owner_emailid, string owner_mobileno, string user_password, Nullable<int> country_id, string pincode, string created_by, Nullable<System.DateTime> created_date, string start_date, string end_date, string uniqueidentity, Nullable<bool> isVerified, string ref_Mobile)
         {
             var company_nameParameter = company_name != null ?
                 new ObjectParameter("company_name", company_name) :
@@ -1752,24 +1590,15 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("uniqueidentity", uniqueidentity) :
                 new ObjectParameter("uniqueidentity", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Register_Result>("sp_Register", company_nameParameter, first_nameParameter, last_nameParameter, owner_emailidParameter, owner_mobilenoParameter, user_passwordParameter, country_idParameter, pincodeParameter, created_byParameter, created_dateParameter, start_dateParameter, end_dateParameter, uniqueidentityParameter);
-        }
+            var isVerifiedParameter = isVerified.HasValue ?
+                new ObjectParameter("IsVerified", isVerified) :
+                new ObjectParameter("IsVerified", typeof(bool));
     
-        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
+            var ref_MobileParameter = ref_Mobile != null ?
+                new ObjectParameter("Ref_Mobile", ref_Mobile) :
+                new ObjectParameter("Ref_Mobile", typeof(string));
     
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var new_diagramnameParameter = new_diagramname != null ?
-                new ObjectParameter("new_diagramname", new_diagramname) :
-                new ObjectParameter("new_diagramname", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Register_Result>("sp_Register", company_nameParameter, first_nameParameter, last_nameParameter, owner_emailidParameter, owner_mobilenoParameter, user_passwordParameter, country_idParameter, pincodeParameter, created_byParameter, created_dateParameter, start_dateParameter, end_dateParameter, uniqueidentityParameter, isVerifiedParameter, ref_MobileParameter);
         }
     
         public virtual int sp_salereturn(Nullable<int> sale_id, Nullable<int> saledetails_id, Nullable<int> product_id, Nullable<int> batch_id, Nullable<decimal> tax_amt, Nullable<decimal> dicount_amt, Nullable<int> quantity, Nullable<decimal> amount, Nullable<decimal> price, string created_by, string created_date)
@@ -1821,100 +1650,6 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_salereturn", sale_idParameter, saledetails_idParameter, product_idParameter, batch_idParameter, tax_amtParameter, dicount_amtParameter, quantityParameter, amountParameter, priceParameter, created_byParameter, created_dateParameter);
         }
     
-        public virtual int sp_SalesDetailinsert(Nullable<int> product_id, Nullable<int> sale_id, Nullable<int> batch_id, Nullable<int> user_id, string created_date, Nullable<decimal> tax_amt, Nullable<decimal> dicount_amt, Nullable<decimal> quantity, Nullable<decimal> amount, Nullable<decimal> price, ObjectParameter saledetails_id)
-        {
-            var product_idParameter = product_id.HasValue ?
-                new ObjectParameter("product_id", product_id) :
-                new ObjectParameter("product_id", typeof(int));
-    
-            var sale_idParameter = sale_id.HasValue ?
-                new ObjectParameter("sale_id", sale_id) :
-                new ObjectParameter("sale_id", typeof(int));
-    
-            var batch_idParameter = batch_id.HasValue ?
-                new ObjectParameter("batch_id", batch_id) :
-                new ObjectParameter("batch_id", typeof(int));
-    
-            var user_idParameter = user_id.HasValue ?
-                new ObjectParameter("user_id", user_id) :
-                new ObjectParameter("user_id", typeof(int));
-    
-            var created_dateParameter = created_date != null ?
-                new ObjectParameter("created_date", created_date) :
-                new ObjectParameter("created_date", typeof(string));
-    
-            var tax_amtParameter = tax_amt.HasValue ?
-                new ObjectParameter("tax_amt", tax_amt) :
-                new ObjectParameter("tax_amt", typeof(decimal));
-    
-            var dicount_amtParameter = dicount_amt.HasValue ?
-                new ObjectParameter("dicount_amt", dicount_amt) :
-                new ObjectParameter("dicount_amt", typeof(decimal));
-    
-            var quantityParameter = quantity.HasValue ?
-                new ObjectParameter("quantity", quantity) :
-                new ObjectParameter("quantity", typeof(decimal));
-    
-            var amountParameter = amount.HasValue ?
-                new ObjectParameter("amount", amount) :
-                new ObjectParameter("amount", typeof(decimal));
-    
-            var priceParameter = price.HasValue ?
-                new ObjectParameter("price", price) :
-                new ObjectParameter("price", typeof(decimal));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SalesDetailinsert", product_idParameter, sale_idParameter, batch_idParameter, user_idParameter, created_dateParameter, tax_amtParameter, dicount_amtParameter, quantityParameter, amountParameter, priceParameter, saledetails_id);
-        }
-    
-        public virtual int sp_Salesinsert(Nullable<int> company_id, Nullable<int> branch_id, Nullable<int> party_id, string invoice_no, Nullable<decimal> total_tax, Nullable<decimal> actual_amount, Nullable<decimal> grand_total, Nullable<decimal> total_discount, string created_by, Nullable<System.DateTime> created_date, string invoiceNumber, ObjectParameter sale_id)
-        {
-            var company_idParameter = company_id.HasValue ?
-                new ObjectParameter("company_id", company_id) :
-                new ObjectParameter("company_id", typeof(int));
-    
-            var branch_idParameter = branch_id.HasValue ?
-                new ObjectParameter("branch_id", branch_id) :
-                new ObjectParameter("branch_id", typeof(int));
-    
-            var party_idParameter = party_id.HasValue ?
-                new ObjectParameter("party_id", party_id) :
-                new ObjectParameter("party_id", typeof(int));
-    
-            var invoice_noParameter = invoice_no != null ?
-                new ObjectParameter("invoice_no", invoice_no) :
-                new ObjectParameter("invoice_no", typeof(string));
-    
-            var total_taxParameter = total_tax.HasValue ?
-                new ObjectParameter("total_tax", total_tax) :
-                new ObjectParameter("total_tax", typeof(decimal));
-    
-            var actual_amountParameter = actual_amount.HasValue ?
-                new ObjectParameter("actual_amount", actual_amount) :
-                new ObjectParameter("actual_amount", typeof(decimal));
-    
-            var grand_totalParameter = grand_total.HasValue ?
-                new ObjectParameter("grand_total", grand_total) :
-                new ObjectParameter("grand_total", typeof(decimal));
-    
-            var total_discountParameter = total_discount.HasValue ?
-                new ObjectParameter("total_discount", total_discount) :
-                new ObjectParameter("total_discount", typeof(decimal));
-    
-            var created_byParameter = created_by != null ?
-                new ObjectParameter("created_by", created_by) :
-                new ObjectParameter("created_by", typeof(string));
-    
-            var created_dateParameter = created_date.HasValue ?
-                new ObjectParameter("created_date", created_date) :
-                new ObjectParameter("created_date", typeof(System.DateTime));
-    
-            var invoiceNumberParameter = invoiceNumber != null ?
-                new ObjectParameter("InvoiceNumber", invoiceNumber) :
-                new ObjectParameter("InvoiceNumber", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Salesinsert", company_idParameter, branch_idParameter, party_idParameter, invoice_noParameter, total_taxParameter, actual_amountParameter, grand_totalParameter, total_discountParameter, created_byParameter, created_dateParameter, invoiceNumberParameter, sale_id);
-        }
-    
         public virtual int sp_SalesreturnProduct(Nullable<int> salereturnmain_id)
         {
             var salereturnmain_idParameter = salereturnmain_id.HasValue ?
@@ -1924,7 +1659,7 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SalesreturnProduct", salereturnmain_idParameter);
         }
     
-        public virtual int sp_saveerror(Nullable<int> company_id, Nullable<int> branch_id, string error_type, string error_msg, string created_by, Nullable<System.DateTime> created_date)
+        public virtual ObjectResult<Nullable<int>> sp_saveerror(Nullable<int> company_id, Nullable<int> branch_id, string error_type, string error_msg, string created_by, Nullable<System.DateTime> created_date)
         {
             var company_idParameter = company_id.HasValue ?
                 new ObjectParameter("company_id", company_id) :
@@ -1950,7 +1685,7 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("created_date", created_date) :
                 new ObjectParameter("created_date", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_saveerror", company_idParameter, branch_idParameter, error_typeParameter, error_msgParameter, created_byParameter, created_dateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_saveerror", company_idParameter, branch_idParameter, error_typeParameter, error_msgParameter, created_byParameter, created_dateParameter);
         }
     
         public virtual ObjectResult<sp_SelectBatch_Result> sp_SelectBatch(Nullable<int> company_id, Nullable<int> branch_id)
@@ -2170,15 +1905,6 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("purchsae_id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SelectProductbyid_Result>("sp_SelectProductbyid", purchsae_idParameter);
-        }
-    
-        public virtual int sp_SelectPurchase(Nullable<int> company_id)
-        {
-            var company_idParameter = company_id.HasValue ?
-                new ObjectParameter("company_id", company_id) :
-                new ObjectParameter("company_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SelectPurchase", company_idParameter);
         }
     
         public virtual ObjectResult<sp_selectpurchasebatch_Result> sp_selectpurchasebatch(Nullable<int> purchase_id, Nullable<int> product_id)
@@ -2880,108 +2606,6 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateProduct", company_idParameter, branch_idParameter, product_idParameter, category_idParameter, rack_idParameter, godown_idParameter, tax_idParameter, unit_idParameter, reorder_levelParameter, purchas_priceParameter, sales_priceParameter, product_codeParameter, hsn_codeParameter, product_nameParameter, modified_byParameter, modified_dateParameter);
         }
     
-        public virtual int sp_UpdatePurchase(Nullable<int> purchase_id, Nullable<int> count, Nullable<int> company_id, Nullable<int> party_id, string po_no, Nullable<decimal> total_tax, Nullable<decimal> actual_amount, Nullable<decimal> grand_total, Nullable<decimal> discount, string modified_by, string modifie_date)
-        {
-            var purchase_idParameter = purchase_id.HasValue ?
-                new ObjectParameter("purchase_id", purchase_id) :
-                new ObjectParameter("purchase_id", typeof(int));
-    
-            var countParameter = count.HasValue ?
-                new ObjectParameter("count", count) :
-                new ObjectParameter("count", typeof(int));
-    
-            var company_idParameter = company_id.HasValue ?
-                new ObjectParameter("company_id", company_id) :
-                new ObjectParameter("company_id", typeof(int));
-    
-            var party_idParameter = party_id.HasValue ?
-                new ObjectParameter("party_id", party_id) :
-                new ObjectParameter("party_id", typeof(int));
-    
-            var po_noParameter = po_no != null ?
-                new ObjectParameter("po_no", po_no) :
-                new ObjectParameter("po_no", typeof(string));
-    
-            var total_taxParameter = total_tax.HasValue ?
-                new ObjectParameter("total_tax", total_tax) :
-                new ObjectParameter("total_tax", typeof(decimal));
-    
-            var actual_amountParameter = actual_amount.HasValue ?
-                new ObjectParameter("actual_amount", actual_amount) :
-                new ObjectParameter("actual_amount", typeof(decimal));
-    
-            var grand_totalParameter = grand_total.HasValue ?
-                new ObjectParameter("grand_total", grand_total) :
-                new ObjectParameter("grand_total", typeof(decimal));
-    
-            var discountParameter = discount.HasValue ?
-                new ObjectParameter("discount", discount) :
-                new ObjectParameter("discount", typeof(decimal));
-    
-            var modified_byParameter = modified_by != null ?
-                new ObjectParameter("modified_by", modified_by) :
-                new ObjectParameter("modified_by", typeof(string));
-    
-            var modifie_dateParameter = modifie_date != null ?
-                new ObjectParameter("modifie_date", modifie_date) :
-                new ObjectParameter("modifie_date", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdatePurchase", purchase_idParameter, countParameter, company_idParameter, party_idParameter, po_noParameter, total_taxParameter, actual_amountParameter, grand_totalParameter, discountParameter, modified_byParameter, modifie_dateParameter);
-        }
-    
-        public virtual int sp_UpdatePurchasedetails(Nullable<int> purchasedetails_id, Nullable<int> product_id, Nullable<int> purchase_id, Nullable<int> batch_id, Nullable<decimal> tax_amt, Nullable<decimal> dicount_amt, Nullable<decimal> quantity, Nullable<decimal> amount, Nullable<decimal> purchase_rate, Nullable<decimal> sale_rate, string modified_by, string modifie_date)
-        {
-            var purchasedetails_idParameter = purchasedetails_id.HasValue ?
-                new ObjectParameter("purchasedetails_id", purchasedetails_id) :
-                new ObjectParameter("purchasedetails_id", typeof(int));
-    
-            var product_idParameter = product_id.HasValue ?
-                new ObjectParameter("product_id", product_id) :
-                new ObjectParameter("product_id", typeof(int));
-    
-            var purchase_idParameter = purchase_id.HasValue ?
-                new ObjectParameter("purchase_id", purchase_id) :
-                new ObjectParameter("purchase_id", typeof(int));
-    
-            var batch_idParameter = batch_id.HasValue ?
-                new ObjectParameter("batch_id", batch_id) :
-                new ObjectParameter("batch_id", typeof(int));
-    
-            var tax_amtParameter = tax_amt.HasValue ?
-                new ObjectParameter("tax_amt", tax_amt) :
-                new ObjectParameter("tax_amt", typeof(decimal));
-    
-            var dicount_amtParameter = dicount_amt.HasValue ?
-                new ObjectParameter("dicount_amt", dicount_amt) :
-                new ObjectParameter("dicount_amt", typeof(decimal));
-    
-            var quantityParameter = quantity.HasValue ?
-                new ObjectParameter("quantity", quantity) :
-                new ObjectParameter("quantity", typeof(decimal));
-    
-            var amountParameter = amount.HasValue ?
-                new ObjectParameter("amount", amount) :
-                new ObjectParameter("amount", typeof(decimal));
-    
-            var purchase_rateParameter = purchase_rate.HasValue ?
-                new ObjectParameter("purchase_rate", purchase_rate) :
-                new ObjectParameter("purchase_rate", typeof(decimal));
-    
-            var sale_rateParameter = sale_rate.HasValue ?
-                new ObjectParameter("sale_rate", sale_rate) :
-                new ObjectParameter("sale_rate", typeof(decimal));
-    
-            var modified_byParameter = modified_by != null ?
-                new ObjectParameter("modified_by", modified_by) :
-                new ObjectParameter("modified_by", typeof(string));
-    
-            var modifie_dateParameter = modifie_date != null ?
-                new ObjectParameter("modifie_date", modifie_date) :
-                new ObjectParameter("modifie_date", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdatePurchasedetails", purchasedetails_idParameter, product_idParameter, purchase_idParameter, batch_idParameter, tax_amtParameter, dicount_amtParameter, quantityParameter, amountParameter, purchase_rateParameter, sale_rateParameter, modified_byParameter, modifie_dateParameter);
-        }
-    
         public virtual int sp_UpdateRack(Nullable<int> company_id, Nullable<int> branch_id, Nullable<int> rack_id, Nullable<int> godown_id, string rack_name, string modified_by, Nullable<System.DateTime> modified_date)
         {
             var company_idParameter = company_id.HasValue ?
@@ -3013,104 +2637,6 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("modified_date", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateRack", company_idParameter, branch_idParameter, rack_idParameter, godown_idParameter, rack_nameParameter, modified_byParameter, modified_dateParameter);
-        }
-    
-        public virtual int sp_UpdateSale(Nullable<int> sale_id, Nullable<int> count, Nullable<int> company_id, Nullable<int> party_id, string invoice_no, Nullable<decimal> total_tax, Nullable<decimal> actual_amount, Nullable<decimal> grand_total, Nullable<decimal> discount, string modified_by, string modifie_date)
-        {
-            var sale_idParameter = sale_id.HasValue ?
-                new ObjectParameter("sale_id", sale_id) :
-                new ObjectParameter("sale_id", typeof(int));
-    
-            var countParameter = count.HasValue ?
-                new ObjectParameter("count", count) :
-                new ObjectParameter("count", typeof(int));
-    
-            var company_idParameter = company_id.HasValue ?
-                new ObjectParameter("company_id", company_id) :
-                new ObjectParameter("company_id", typeof(int));
-    
-            var party_idParameter = party_id.HasValue ?
-                new ObjectParameter("party_id", party_id) :
-                new ObjectParameter("party_id", typeof(int));
-    
-            var invoice_noParameter = invoice_no != null ?
-                new ObjectParameter("invoice_no", invoice_no) :
-                new ObjectParameter("invoice_no", typeof(string));
-    
-            var total_taxParameter = total_tax.HasValue ?
-                new ObjectParameter("total_tax", total_tax) :
-                new ObjectParameter("total_tax", typeof(decimal));
-    
-            var actual_amountParameter = actual_amount.HasValue ?
-                new ObjectParameter("actual_amount", actual_amount) :
-                new ObjectParameter("actual_amount", typeof(decimal));
-    
-            var grand_totalParameter = grand_total.HasValue ?
-                new ObjectParameter("grand_total", grand_total) :
-                new ObjectParameter("grand_total", typeof(decimal));
-    
-            var discountParameter = discount.HasValue ?
-                new ObjectParameter("discount", discount) :
-                new ObjectParameter("discount", typeof(decimal));
-    
-            var modified_byParameter = modified_by != null ?
-                new ObjectParameter("modified_by", modified_by) :
-                new ObjectParameter("modified_by", typeof(string));
-    
-            var modifie_dateParameter = modifie_date != null ?
-                new ObjectParameter("modifie_date", modifie_date) :
-                new ObjectParameter("modifie_date", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateSale", sale_idParameter, countParameter, company_idParameter, party_idParameter, invoice_noParameter, total_taxParameter, actual_amountParameter, grand_totalParameter, discountParameter, modified_byParameter, modifie_dateParameter);
-        }
-    
-        public virtual int sp_Updatesaledetail(Nullable<int> saledetails_id, Nullable<int> product_id, Nullable<int> sale_id, Nullable<int> batch_id, Nullable<decimal> tax_amt, Nullable<decimal> dicount_amt, Nullable<decimal> quantity, Nullable<decimal> amount, Nullable<decimal> price, string modified_by, string modifie_date)
-        {
-            var saledetails_idParameter = saledetails_id.HasValue ?
-                new ObjectParameter("saledetails_id", saledetails_id) :
-                new ObjectParameter("saledetails_id", typeof(int));
-    
-            var product_idParameter = product_id.HasValue ?
-                new ObjectParameter("product_id", product_id) :
-                new ObjectParameter("product_id", typeof(int));
-    
-            var sale_idParameter = sale_id.HasValue ?
-                new ObjectParameter("sale_id", sale_id) :
-                new ObjectParameter("sale_id", typeof(int));
-    
-            var batch_idParameter = batch_id.HasValue ?
-                new ObjectParameter("batch_id", batch_id) :
-                new ObjectParameter("batch_id", typeof(int));
-    
-            var tax_amtParameter = tax_amt.HasValue ?
-                new ObjectParameter("tax_amt", tax_amt) :
-                new ObjectParameter("tax_amt", typeof(decimal));
-    
-            var dicount_amtParameter = dicount_amt.HasValue ?
-                new ObjectParameter("dicount_amt", dicount_amt) :
-                new ObjectParameter("dicount_amt", typeof(decimal));
-    
-            var quantityParameter = quantity.HasValue ?
-                new ObjectParameter("quantity", quantity) :
-                new ObjectParameter("quantity", typeof(decimal));
-    
-            var amountParameter = amount.HasValue ?
-                new ObjectParameter("amount", amount) :
-                new ObjectParameter("amount", typeof(decimal));
-    
-            var priceParameter = price.HasValue ?
-                new ObjectParameter("price", price) :
-                new ObjectParameter("price", typeof(decimal));
-    
-            var modified_byParameter = modified_by != null ?
-                new ObjectParameter("modified_by", modified_by) :
-                new ObjectParameter("modified_by", typeof(string));
-    
-            var modifie_dateParameter = modifie_date != null ?
-                new ObjectParameter("modifie_date", modifie_date) :
-                new ObjectParameter("modifie_date", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Updatesaledetail", saledetails_idParameter, product_idParameter, sale_idParameter, batch_idParameter, tax_amtParameter, dicount_amtParameter, quantityParameter, amountParameter, priceParameter, modified_byParameter, modifie_dateParameter);
         }
     
         public virtual int sp_Updatestockquantity(Nullable<int> product_id, Nullable<int> quantity, Nullable<int> company_id)
@@ -3278,11 +2804,6 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateUser", userbranch_idParameter, user_idParameter, user_nameParameter, user_emailidParameter, user_mobilenoParameter, role_idParameter, branch_idParameter, company_idParameter, statusParameter, modified_byParameter, modified_dateParameter, first_nameParameter, last_nameParameter);
         }
     
-        public virtual int sp_upgraddiagrams()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
-    
         public virtual ObjectResult<Nullable<int>> spAuthenticateUser(string user_name, string password)
         {
             var user_nameParameter = user_name != null ?
@@ -3346,95 +2867,6 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("mobileno", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SpGetExistsMobile", mobilenoParameter);
-        }
-    
-        [DbFunction("IMS_TESTEntities", "Split")]
-        public virtual IQueryable<Split_Result> Split(string list, string splitOn)
-        {
-            var listParameter = list != null ?
-                new ObjectParameter("List", list) :
-                new ObjectParameter("List", typeof(string));
-    
-            var splitOnParameter = splitOn != null ?
-                new ObjectParameter("SplitOn", splitOn) :
-                new ObjectParameter("SplitOn", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Split_Result>("[IMS_TESTEntities].[Split](@List, @SplitOn)", listParameter, splitOnParameter);
-        }
-    
-        public virtual ObjectResult<string> ELMAH_GetErrorsXml(string application, Nullable<int> pageIndex, Nullable<int> pageSize, ObjectParameter totalCount)
-        {
-            var applicationParameter = application != null ?
-                new ObjectParameter("Application", application) :
-                new ObjectParameter("Application", typeof(string));
-    
-            var pageIndexParameter = pageIndex.HasValue ?
-                new ObjectParameter("PageIndex", pageIndex) :
-                new ObjectParameter("PageIndex", typeof(int));
-    
-            var pageSizeParameter = pageSize.HasValue ?
-                new ObjectParameter("PageSize", pageSize) :
-                new ObjectParameter("PageSize", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ELMAH_GetErrorsXml", applicationParameter, pageIndexParameter, pageSizeParameter, totalCount);
-        }
-    
-        public virtual ObjectResult<string> ELMAH_GetErrorXml(string application, Nullable<System.Guid> errorId)
-        {
-            var applicationParameter = application != null ?
-                new ObjectParameter("Application", application) :
-                new ObjectParameter("Application", typeof(string));
-    
-            var errorIdParameter = errorId.HasValue ?
-                new ObjectParameter("ErrorId", errorId) :
-                new ObjectParameter("ErrorId", typeof(System.Guid));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ELMAH_GetErrorXml", applicationParameter, errorIdParameter);
-        }
-    
-        public virtual int ELMAH_LogError(Nullable<System.Guid> errorId, string application, string host, string type, string source, string message, string user, string allXml, Nullable<int> statusCode, Nullable<System.DateTime> timeUtc)
-        {
-            var errorIdParameter = errorId.HasValue ?
-                new ObjectParameter("ErrorId", errorId) :
-                new ObjectParameter("ErrorId", typeof(System.Guid));
-    
-            var applicationParameter = application != null ?
-                new ObjectParameter("Application", application) :
-                new ObjectParameter("Application", typeof(string));
-    
-            var hostParameter = host != null ?
-                new ObjectParameter("Host", host) :
-                new ObjectParameter("Host", typeof(string));
-    
-            var typeParameter = type != null ?
-                new ObjectParameter("Type", type) :
-                new ObjectParameter("Type", typeof(string));
-    
-            var sourceParameter = source != null ?
-                new ObjectParameter("Source", source) :
-                new ObjectParameter("Source", typeof(string));
-    
-            var messageParameter = message != null ?
-                new ObjectParameter("Message", message) :
-                new ObjectParameter("Message", typeof(string));
-    
-            var userParameter = user != null ?
-                new ObjectParameter("User", user) :
-                new ObjectParameter("User", typeof(string));
-    
-            var allXmlParameter = allXml != null ?
-                new ObjectParameter("AllXml", allXml) :
-                new ObjectParameter("AllXml", typeof(string));
-    
-            var statusCodeParameter = statusCode.HasValue ?
-                new ObjectParameter("StatusCode", statusCode) :
-                new ObjectParameter("StatusCode", typeof(int));
-    
-            var timeUtcParameter = timeUtc.HasValue ?
-                new ObjectParameter("TimeUtc", timeUtc) :
-                new ObjectParameter("TimeUtc", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ELMAH_LogError", errorIdParameter, applicationParameter, hostParameter, typeParameter, sourceParameter, messageParameter, userParameter, allXmlParameter, statusCodeParameter, timeUtcParameter);
         }
     }
 }

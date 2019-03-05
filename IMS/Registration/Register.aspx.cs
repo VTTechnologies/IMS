@@ -30,6 +30,7 @@ namespace IMS.Registration
             {
                 if (!IsPostBack)
                 {
+                    Session["regisFlag"] = true;
                     List<tbl_country> gd = context.tbl_country.Where(x => x.status == true).ToList();
 
                     ddlcountry.DataTextField = "country_name";
@@ -244,12 +245,14 @@ namespace IMS.Registration
                     r.end_date = enddate.Value;
                     r.uniqueid = uniqueid.ToString();
                     r.IsVerified = false;
+                    r.Ref_Mobile = txtRefMobNum.Value;
 
                     //context.sp_Register(company_name,)
                     DataTable dt = new DataTable();
                     dt = r.Insert(r);
                     Session["userdetails"] = dt;
                     SendMail();
+                    Session["regisFlag"] = null;
                     ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Thank you for signing up please confirm your E-mail','True');", true);
                 }
             }
