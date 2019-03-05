@@ -19,6 +19,7 @@ namespace IMS.Registration
             }
             if (!Page.IsPostBack)
             {
+                lblWrongOTP.InnerText = "";
                 btnOTP.Text = "Generate OTP";
             }
         }
@@ -36,18 +37,24 @@ namespace IMS.Registration
             string otp = string.Empty;
             if (txtOtp.Value == null || txtOtp.Value == "")
             {
-                Response.Write("<script>alert('Please enter OTP')</script>");
+                lblWrongOTP.InnerText = "Please enter OTP";
                 return;
+            }
+            else
+            {
+                lblWrongOTP.InnerText = "";
             }
             var userdata = context.tbl_User.Where(u => u.user_id == userId).FirstOrDefault();
             if(txtOtp.Value == userdata.OTP)
             {
+                lblWrongOTP.InnerText = "";
                 userdata.IsVerified = true;
                 context.SaveChanges();
+                Response.Redirect("~/Registration/Login.aspx");
             }
             else
             {
-                Response.Write("<script>alert('Wrong OTP')</script>");
+                lblWrongOTP.InnerText = "Wrong OTP";
                 return;
             }
         }

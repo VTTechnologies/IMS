@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Configuration;
 using System.Net;
 using System.Web;
 
@@ -49,15 +50,17 @@ namespace IMS.Registration
         }
         public string SendSMSTL()
         {
+            string apikey = ConfigurationManager.AppSettings["TLapikey"];
+            string senderId = ConfigurationManager.AppSettings["senderId"];
             //String message = HttpUtility.UrlEncode("Test Message from ather TL Account");
             using (var wb = new WebClient())
             {
                 byte[] response = wb.UploadValues("https://api.textlocal.in/send/", new NameValueCollection()
                 {
-                {"apikey" , "Y6Hd1CBueb0-r3TJqtADICdON6gmatBlF2w7rIzMsp"},
+                {"apikey" , apikey},
                 {"numbers" , Dmobile},
                 {"message" , Message},
-                {"sender" , "TXTLCL"}
+                {"sender" , senderId}
                 });
                 string result = System.Text.Encoding.UTF8.GetString(response);
                 return result;

@@ -233,7 +233,9 @@ namespace IMS.Registration
                     r.company_name = txtcompanyname.Value;
                     r.owner_emailid = email.Value;
                     r.owner_mobileno = txtmobile.Value;
+
                     string enPswd = GetSwcSHA1(password.Value);
+
                     r.password = enPswd;
                     r.pincode = txtzip.Value;
                     r.created_by = txtfirstname.Value;

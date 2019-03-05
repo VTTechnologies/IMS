@@ -246,6 +246,7 @@
     <Content Include="Masters\TaxGroup.aspx" />
     <Content Include="Masters\TaxType.aspx" />
     <Content Include="Masters\User.aspx" />
+    <Content Include="PrivacyPolicy.html" />
     <Content Include="Purchases\PrintPurchase.aspx" />
     <Content Include="Purchases\ViewORPayBalancePurchase.aspx" />
     <Content Include="Purchases\PurchaseReport.aspx" />

@@ -22,6 +22,15 @@ namespace IMS.Registration {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtOtp;
         
         /// <summary>
+        /// lblWrongOTP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblWrongOTP;
+        
+        /// <summary>
         /// btnOTP control.
         /// </summary>
         /// <remarks>
