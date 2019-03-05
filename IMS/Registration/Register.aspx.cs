@@ -120,7 +120,7 @@ namespace IMS.Registration
                 body = body.Replace("{uid}", dt.Rows[0]["uniqueidentifier"].ToString());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
-                NetworkCredential NetCrd = new NetworkCredential("imsbizz@gmail.com", "Vtt@123");
+                NetworkCredential NetCrd = new NetworkCredential("imsbizz@gmail.com", "Vtt@1234");
                 SmtpServer.EnableSsl = true;
                 SmtpServer.UseDefaultCredentials = false;
                 SmtpServer.Credentials = NetCrd;
