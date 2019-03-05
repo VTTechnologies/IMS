@@ -107,7 +107,7 @@ namespace IMS.Registration
                 //SmtpClient SmtpServer = new SmtpClient("relay-hosting.secureserver.net");
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 587);
                 StringBuilder sb = new StringBuilder();
-                mail.From = new MailAddress("awais.vtt@gmail.com", "IMS Bizz");
+                mail.From = new MailAddress("imsbizz@gmail.com", "IMS Bizz");
                 mail.To.Add(email.Value);
                 mail.Subject = "Verify Your Account";
                 string body = string.Empty;
@@ -120,7 +120,7 @@ namespace IMS.Registration
                 body = body.Replace("{uid}", dt.Rows[0]["uniqueidentifier"].ToString());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
-                NetworkCredential NetCrd = new NetworkCredential("awais.vtt@gmail.com", "Khan@123");
+                NetworkCredential NetCrd = new NetworkCredential("imsbizz@gmail.com", "Vtt@123");
                 SmtpServer.EnableSsl = true;
                 SmtpServer.UseDefaultCredentials = false;
                 SmtpServer.Credentials = NetCrd;
@@ -201,6 +201,17 @@ namespace IMS.Registration
             }
             return clearText;
         }
+        public static string GetSwcSHA1(string value)
+        {
+            SHA1 algorithm = SHA1.Create();
+            byte[] data = algorithm.ComputeHash(Encoding.UTF8.GetBytes(value));
+            string sh1 = "";
+            for (int i = 0; i < data.Length; i++)
+            {
+                sh1 += data[i].ToString("x2").ToUpperInvariant();
+            }
+            return sh1;
+        }
         #endregion
 
         /// <summary>
@@ -222,7 +233,7 @@ namespace IMS.Registration
                     r.company_name = txtcompanyname.Value;
                     r.owner_emailid = email.Value;
                     r.owner_mobileno = txtmobile.Value;
-                    string enPswd = Encrypt(myInput.Value);
+                    string enPswd = GetSwcSHA1(password.Value);
                     r.password = enPswd;
                     r.pincode = txtzip.Value;
                     r.created_by = txtfirstname.Value;

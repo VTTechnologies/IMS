@@ -176,7 +176,7 @@ namespace IMS.Registration
         {
             //UserRol r = new UserRol();
             //r.user_name = txtEmail.Text;
-            string enPswd = Encrypt(txtPassword.Text);
+            string enPswd = GetSwcSHA1(txtPassword.Text);
             //r.password = enPswd;
             ////Shakeeb
             var r = context.tbl_User.Where(g => g.user_name == txtEmail.Text && g.password == enPswd && g.status==true).FirstOrDefault();
