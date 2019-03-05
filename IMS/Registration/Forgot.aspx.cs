@@ -42,7 +42,7 @@ namespace IMS.Registration.form_1
                 //SmtpClient SmtpServer = new SmtpClient("relay-hosting.secureserver.net");
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 587);
                 StringBuilder sb = new StringBuilder();
-                mail.From = new MailAddress("imsbizz@gmail.com", "IMS Bizz");
+                mail.From = new MailAddress("awais.vtt@gmail.com", "IMS Bizz");
                 mail.To.Add(email.Value);
                 mail.Subject =  dt.Rows[0]["username"].ToString()+" here's the link to reset your password";
                 string body = string.Empty;
@@ -56,8 +56,8 @@ namespace IMS.Registration.form_1
                 body = body.Replace("{pid}", dt.Rows[0]["Passverify_ID"].ToString());
                 mail.Body = body;
                 mail.IsBodyHtml = true;
-                NetworkCredential NetCrd = new NetworkCredential("imsbizz@gmail.com", "Vtt@1234");
-                SmtpServer.EnableSsl = false;
+                NetworkCredential NetCrd = new NetworkCredential("awais.vtt@gmail.com", "Khan@123");
+                SmtpServer.EnableSsl = true;
                 //SmtpServer.UseDefaultCredentials = true;
                 SmtpServer.UseDefaultCredentials = false;
                 SmtpServer.Credentials = NetCrd;
