@@ -69,12 +69,12 @@ namespace IMS.Registration
                 MobileNo = "91" + MobileNo;
             }
             VerifyUser verifyUser = new VerifyUser();
-            verifyUser.Source = "TRYBMS";
-            verifyUser.Username = "athar.sayed8055";
-            verifyUser.Password = "93354218";
+            verifyUser.Source = "";
+            verifyUser.Username = "";
+            verifyUser.Password = "";
             verifyUser.OTP = verifyUser.GenerateRandomOTP(4);
             verifyUser.Dmobile = MobileNo;
-            verifyUser.Message = "Your one time password is " + verifyUser.OTP;
+            verifyUser.Message = "Your OTP verification code for IMSBIZZ is " + verifyUser.OTP + ".";
             verifyUser.Message = HttpUtility.UrlEncode(verifyUser.Message);
 
             string res = verifyUser.SendSMSTL();
