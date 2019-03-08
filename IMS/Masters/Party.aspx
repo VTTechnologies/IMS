@@ -8,54 +8,116 @@
     </script>
     <script type="text/javascript">
 
+
+        function Checkgstin() {
+            $.ajax({
+                type: "POST",
+                url: '<%= ResolveUrl("~/Masters/Party.aspx/checkGstinNo") %>', // this for calling the web method function in cs code. 
+                data: '{useroremail: "' + $("#<%=txtGSTIN.ClientID%>")[0].value + '" }',// user name or email value 
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccessgstin,
+                failure: function (response) {
+                    alert(response);
+                }
+            });
+        }
+        function OnSuccessgstin(response) {
+            var msg = $("#<%=lblgstinerror.ClientID%>")[0];
+            var hd1 = $("#<%=hde.ClientID%>")[0];
+            switch (response.d) {
+                case "true":
+                    msg.style.display = "block";
+                    msg.style.color = "red";
+                    msg.innerHTML = "This Gstin No is already exists";
+                    hd1.value = "true";
+                    break;
+                case "false":
+                    msg.style.display = "none";
+                    hd1.value = "false";
+                    break;
+            }
+        } function CheckmobileNo() {
+            $.ajax({
+                type: "POST",
+                url: '<%= ResolveUrl("~/Masters/Party.aspx/checkContactNo") %>', // this for calling the web method function in cs code. 
+                data: '{useroremail: "' + $("#<%=txtContactNo.ClientID%>")[0].value + '" }',// user name or email value 
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccessmobile,
+                failure: function (response) {
+                    alert(response);
+                }
+            });
+        }
+        function OnSuccessmobile(response) {
+            var msg = $("#<%=lblContactNo.ClientID%>")[0];
+            var hd1 = $("#<%=hde.ClientID%>")[0];
+            switch (response.d) {
+                case "true":
+                    msg.style.display = "block";
+                    msg.style.color = "red";
+                    msg.innerHTML = "This Contact No is already exists";
+                    hd1.value = "true";
+                    break;
+                case "false":
+                    msg.style.display = "none";
+                    hd1.value = "false";
+                    break;
+            }
+        }
+        $(document).ready(function () {
+            $('#<%= GridView1.ClientID %>').DataTable();
+        });
+
         function countChar(val) {
 
             var len = val.value.length;
             var hd1 = $("#<%=hd2.ClientID%>")[0];
             if (len != 15) {
                 document.getElementById('<%=lblgstinerror.ClientID %>').innerHTML = "GSTIN No Must be 15 digit alphanumeric only";
-               hd1.value = "true";
-           }
-           else {
-               document.getElementById('<%=lblgstinerror.ClientID %>').innerHTML = "";
-               hd1.value = "false";
-           }
-       };
+                hd1.value = "true";
+            }
+            else {
+                document.getElementById('<%=lblgstinerror.ClientID %>').innerHTML = "";
+                hd1.value = "false";
+            }
+        };
 
-       function CheckDouble() {
-           $.ajax({
-               type: "POST",
-               url: '<%= ResolveUrl("~/Masters/Party.aspx/CheckDouble") %>', // this for calling the web method function in cs code.  
-               data: '{useroremail: "' + $("#<%=txtPartyName.ClientID%>")[0].value + '" }',// user name or email value  
-               contentType: "application/json; charset=utf-8",
-               dataType: "json",
-               success: OnSuccess,
-               failure: function (response) {
-                   alert(response);
-               }
-           });
-       }
-       function OnSuccess(response) {
-           var msg = $("#<%=lblcheckDoubleError.ClientID%>")[0];
-           var hd1 = $("#<%=hde.ClientID%>")[0];
-           switch (response.d) {
-               case "true":
-                   msg.style.display = "block";
-                   msg.style.color = "red";
-                   msg.innerHTML = "This Party name already exists";
-                   hd1.value = "true";
-                   break;
-               case "false":
-                   msg.style.display = "none";
-                   hd1.value = "false";
-                   break;
-           }
-       }
+        function CheckDouble() {
+            $.ajax({
+                type: "POST",
+                url: '<%= ResolveUrl("~/Masters/Party.aspx/CheckDouble") %>', // this for calling the web method function in cs code.  
+                data: '{useroremail: "' + $("#<%=txtPartyName.ClientID%>")[0].value + '" }',// user name or email value  
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccess,
+                failure: function (response) {
+                    alert(response);
+                }
+            });
+        }
+        function OnSuccess(response) {
+            var msg = $("#<%=lblcheckDoubleError.ClientID%>")[0];
+            var hd1 = $("#<%=hde.ClientID%>")[0];
+            switch (response.d) {
+                case "true":
+                    msg.style.display = "block";
+                    msg.style.color = "red";
+                    msg.innerHTML = "This Party name already exists";
+                    hd1.value = "true";
+                    break;
+                case "false":
+                    msg.style.display = "none";
+                    hd1.value = "false";
+                    break;
+            }
+        }
         $(document).ready(function () {
             $('#<%= GridView1.ClientID %>').DataTable();
         });
 
-       var txt = $("<%=txtPartyName.ClientID%>");
+        var txt = $("<%=txtPartyName.ClientID%>");
 
         txt.focus();
     </script>
@@ -118,11 +180,12 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-8">
-                                    <asp:TextBox ID="txtContactNo" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="txtContactNo" runat="server" onchange="CheckmobileNo()" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ValidationGroup="abc" Display="Dynamic" ErrorMessage="Contact is required" ControlToValidate="txtContactNo" ForeColor="Red"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="rgx" runat="server" ValidationGroup="abc" ErrorMessage="Invalid Mobile No" Display="Dynamic"
                                         ControlToValidate="txtContactNo" ValidationExpression="^[0-9]{10}$" ForeColor="Red">
                                     </asp:RegularExpressionValidator>
+                                    <asp:Label ID="lblContactNo" ForeColor="Red" runat="server"></asp:Label>
 
                                 </div>
                             </div>
@@ -137,7 +200,7 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-8">
-                                    <asp:TextBox ID="txtGSTIN" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="txtGSTIN" onchange="Checkgstin()" runat="server" CssClass="form-control"></asp:TextBox>
                                     <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ValidationGroup="abc" Display="Dynamic" ErrorMessage="GSTIN is required" ControlToValidate="txtGSTIN" ForeColor="Red"></asp:RequiredFieldValidator>--%>
                                     <asp:Label ID="lblgstinerror" ForeColor="Red" runat="server"></asp:Label>
                                     <asp:HiddenField ID="hd2" runat="server" />
@@ -186,9 +249,9 @@
                 </div>
             </div>
             <div class="panel-footer text-center">
-                <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" OnClientClick="DisableOnSave(this,'abc');"  UseSubmitBehavior="false" ValidationGroup="abc" />
+                <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary " Text="Save" OnClick="btnSave_Click" OnClientClick="DisableOnSave(this,'abc');" UseSubmitBehavior="false" ValidationGroup="abc" />
                 <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" OnClick="btnUpdate_Click" Visible="false" ValidationGroup="abc" />
-                <input class="btn btn-primary " type="button" value="Clear"  onclick="javascript: window.location = 'Party.aspx'" />
+                <input class="btn btn-primary " type="button" value="Clear" onclick="javascript: window.location = 'Party.aspx'" />
                 <%--<asp:Button ID="btnCancel" runat="server" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" Style="float: right" />--%>
             </div>
         </div>
