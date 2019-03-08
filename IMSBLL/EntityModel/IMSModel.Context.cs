@@ -426,7 +426,7 @@ namespace IMSBLL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CategoryInsert", company_idParameter, branch_idParameter, category_nameParameter, statusParameter, created_byParameter, created_dateParameter, modified_byParameter, modified_dateParameter);
         }
     
-        public virtual ObjectResult<sp_checklicense_Result> sp_checklicense(Nullable<int> company_id, Nullable<int> user_id, ObjectParameter free_count, ObjectParameter subscription_count)
+        public virtual int sp_checklicense(Nullable<int> company_id, Nullable<int> user_id, ObjectParameter free_count, ObjectParameter subscription_count)
         {
             var company_idParameter = company_id.HasValue ?
                 new ObjectParameter("company_id", company_id) :
@@ -436,7 +436,7 @@ namespace IMSBLL.EntityModel
                 new ObjectParameter("user_id", user_id) :
                 new ObjectParameter("user_id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_checklicense_Result>("sp_checklicense", company_idParameter, user_idParameter, free_count, subscription_count);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_checklicense", company_idParameter, user_idParameter, free_count, subscription_count);
         }
     
         public virtual ObjectResult<string> sp_checkrackingodown(Nullable<int> company_id, Nullable<int> godown_id, string value)

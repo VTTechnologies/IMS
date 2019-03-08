@@ -106,9 +106,6 @@
     <Compile Include="EntityModel\sp_ActiveUser_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\sp_checklicense_Result.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityModel\Sp_checkResetPwdlink_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
