@@ -4586,14 +4586,14 @@ warning 6002: The table/view 'IMS_empty.dbo.View_SaleDetails' does not have a pr
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ProductReport" ReturnType="Collection(IMS_TESTModel.ProductReport_Result)">
-            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+          <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PurchaseOrPurchaseReturnReport" ReturnType="Collection(IMS_TESTModel.PurchaseOrPurchaseReturnReport_Result)">
             <Parameter Name="Id" Mode="In" Type="Int32" />
             <Parameter Name="FromTable" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SaleOrderReport" ReturnType="Collection(IMS_TESTModel.SaleOrderReport_Result)">
-            <Parameter Name="SaleId" Mode="In" Type="Int32" />
+          <Parameter Name="SaleId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SaleOrPurchaseOrReturnReport" ReturnType="Collection(IMS_TESTModel.SaleOrPurchaseOrReturnReport_Result)">
             <Parameter Name="Id" Mode="In" Type="Int32" />
@@ -4604,7 +4604,7 @@ warning 6002: The table/view 'IMS_empty.dbo.View_SaleDetails' does not have a pr
             <Parameter Name="FromTable" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SaleReport" ReturnType="Collection(IMS_TESTModel.SaleReport_Result)">
-            <Parameter Name="saledetails_id" Mode="In" Type="Int32" />
+          <Parameter Name="saledetails_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ActiveUser" ReturnType="Collection(IMS_TESTModel.sp_ActiveUser_Result)">
             <Parameter Name="userid" Mode="In" Type="Int32" />
@@ -4661,10 +4661,10 @@ warning 6002: The table/view 'IMS_empty.dbo.View_SaleDetails' does not have a pr
             <Parameter Name="pid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_checkuser" ReturnType="Collection(String)">
-            <Parameter Name="user_Emai" Mode="In" Type="String" />
+          <Parameter Name="user_Emai" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_checkusermobil" ReturnType="Collection(String)">
-            <Parameter Name="user_mobieno" Mode="In" Type="String" />
+          <Parameter Name="user_mobieno" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_CompanyInsert">
             <Parameter Name="company_name" Mode="In" Type="String" />
@@ -4678,7 +4678,7 @@ warning 6002: The table/view 'IMS_empty.dbo.View_SaleDetails' does not have a pr
             <Parameter Name="last_name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_dashboarddata" ReturnType="Collection(IMS_TESTModel.sp_dashboarddata_Result)">
-            <Parameter Name="conpanyid" Mode="In" Type="Int32" />
+          <Parameter Name="conpanyid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Deletebatch">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -4771,13 +4771,13 @@ warning 6002: The table/view 'IMS_empty.dbo.View_SaleDetails' does not have a pr
             <Parameter Name="created_date" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="Sp_GetExistsMobile" ReturnType="Collection(String)">
-            <Parameter Name="user_mobieno" Mode="In" Type="String" />
+          <Parameter Name="user_mobieno" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetPurchaseDetailsById" ReturnType="Collection(IMS_TESTModel.sp_GetPurchaseDetailsById_Result)">
-            <Parameter Name="purchsae_id" Mode="In" Type="Int32" />
+          <Parameter Name="purchsae_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetSaleDetailsById" ReturnType="Collection(IMS_TESTModel.sp_GetSaleDetailsById_Result)">
-            <Parameter Name="saleId" Mode="In" Type="Int32" />
+          <Parameter Name="saleId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_godowninsert">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -4925,7 +4925,7 @@ warning 6002: The table/view 'IMS_empty.dbo.View_SaleDetails' does not have a pr
             <Parameter Name="branch_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_product_relorderlevel_report_forcompany_only" ReturnType="Collection(IMS_TESTModel.sp_product_relorderlevel_report_forcompany_only_Result)">
-            <Parameter Name="company_id" Mode="In" Type="Int32" />
+          <Parameter Name="company_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ProductInsert">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -4993,7 +4993,7 @@ warning 6002: The table/view 'IMS_empty.dbo.View_SaleDetails' does not have a pr
             <Parameter Name="created_date" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_SalesreturnProduct">
-            <Parameter Name="salereturnmain_id" Mode="In" Type="Int32" />
+          <Parameter Name="salereturnmain_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_saveerror" ReturnType="Collection(Int32)">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -5017,7 +5017,7 @@ warning 6002: The table/view 'IMS_empty.dbo.View_SaleDetails' does not have a pr
             <Parameter Name="product_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectBranch" ReturnType="Collection(IMS_TESTModel.sp_SelectBranch_Result)">
-            <Parameter Name="company_id" Mode="In" Type="Int32" />
+          <Parameter Name="company_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectBranchName" ReturnType="Collection(String)">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -5028,13 +5028,13 @@ warning 6002: The table/view 'IMS_empty.dbo.View_SaleDetails' does not have a pr
             <Parameter Name="branch_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectCompany" ReturnType="Collection(IMS_TESTModel.sp_SelectCompany_Result)">
-            <Parameter Name="company_id" Mode="In" Type="Int32" />
+          <Parameter Name="company_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectCompany_name" ReturnType="Collection(String)">
-            <Parameter Name="user_id" Mode="In" Type="Int32" />
+          <Parameter Name="user_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_selectcompanylogo" ReturnType="Collection(String)">
-            <Parameter Name="company_id" Mode="In" Type="Int32" />
+          <Parameter Name="company_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectCountry" ReturnType="Collection(IMS_TESTModel.sp_SelectCountry_Result)" />
           <FunctionImport Name="sp_SelectExpense" ReturnType="Collection(IMS_TESTModel.sp_SelectExpense_Result)">
@@ -5042,7 +5042,7 @@ warning 6002: The table/view 'IMS_empty.dbo.View_SaleDetails' does not have a pr
             <Parameter Name="branch_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectFinicialyeardate" ReturnType="Collection(IMS_TESTModel.sp_SelectFinicialyeardate_Result)">
-            <Parameter Name="company_id" Mode="In" Type="Int32" />
+          <Parameter Name="company_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectFY" ReturnType="Collection(IMS_TESTModel.sp_SelectFY_Result)">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -5069,7 +5069,7 @@ warning 6002: The table/view 'IMS_empty.dbo.View_SaleDetails' does not have a pr
             <Parameter Name="branch_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectProductbyid" ReturnType="Collection(IMS_TESTModel.sp_SelectProductbyid_Result)">
-            <Parameter Name="purchsae_id" Mode="In" Type="Int32" />
+          <Parameter Name="purchsae_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_selectpurchasebatch" ReturnType="Collection(IMS_TESTModel.sp_selectpurchasebatch_Result)">
             <Parameter Name="purchase_id" Mode="In" Type="Int32" />
@@ -5100,7 +5100,7 @@ warning 6002: The table/view 'IMS_empty.dbo.View_SaleDetails' does not have a pr
             <Parameter Name="company_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Selectsaleproduct" ReturnType="Collection(IMS_TESTModel.sp_Selectsaleproduct_Result)">
-            <Parameter Name="sale_id" Mode="In" Type="Int32" />
+          <Parameter Name="sale_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectSalesReport" ReturnType="Collection(IMS_TESTModel.sp_SelectSalesReport_Result)">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -5110,7 +5110,7 @@ warning 6002: The table/view 'IMS_empty.dbo.View_SaleDetails' does not have a pr
             <Parameter Name="enddate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_selectspurchaseproduct" ReturnType="Collection(IMS_TESTModel.sp_selectspurchaseproduct_Result)">
-            <Parameter Name="purchase_id" Mode="In" Type="Int32" />
+          <Parameter Name="purchase_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectTax" ReturnType="Collection(IMS_TESTModel.sp_SelectTax_Result)">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -5125,7 +5125,7 @@ warning 6002: The table/view 'IMS_empty.dbo.View_SaleDetails' does not have a pr
             <Parameter Name="branch_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SelectUserRole" ReturnType="Collection(IMS_TESTModel.sp_SelectUserRole_Result)">
-            <Parameter Name="company_id" Mode="In" Type="Int32" />
+          <Parameter Name="company_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_taxInsert">
             <Parameter Name="company_id" Mode="In" Type="Int32" />
@@ -5324,7 +5324,7 @@ warning 6002: The table/view 'IMS_empty.dbo.View_SaleDetails' does not have a pr
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spAuthenticateUserRole" ReturnType="Collection(IMS_TESTModel.spAuthenticateUserRole_Result)">
-            <Parameter Name="user_id" Mode="In" Type="Int32" />
+          <Parameter Name="user_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spCheckDoubleInMasters">
             <Parameter Name="companyid" Mode="In" Type="Int32" />
@@ -5334,10 +5334,10 @@ warning 6002: The table/view 'IMS_empty.dbo.View_SaleDetails' does not have a pr
             <Parameter Name="branch_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SpGetExistsEmail" ReturnType="Collection(String)">
-            <Parameter Name="email" Mode="In" Type="String" />
+          <Parameter Name="email" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SpGetExistsMobile" ReturnType="Collection(String)">
-            <Parameter Name="mobileno" Mode="In" Type="String" />
+          <Parameter Name="mobileno" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="ELMAH_Error">

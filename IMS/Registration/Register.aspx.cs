@@ -213,14 +213,7 @@ namespace IMS.Registration
             }
             return sh1;
         }
-        #endregion
-
-        /// <summary>
-        /// All The Events That are used in coding
-        /// </summary>
-
-        #region Events
-        protected void btnSubmit_Click(object sender, EventArgs e)
+        public void Register()
         {
             try
             {
@@ -261,7 +254,18 @@ namespace IMS.Registration
                 ErrorLog.saveerror(ex);
             }
         }
+        #endregion
 
+        /// <summary>
+        /// All The Events That are used in coding
+        /// </summary>
+
+        #region Events
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            mpeTermsConditions.Show();
+            Register();
+        }
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             try
@@ -273,8 +277,10 @@ namespace IMS.Registration
                 ErrorLog.saveerror(ex);
             }
         }
+        protected void btnAgree_Click(object sender, EventArgs e)
+        {
+            //Register();
+        }
         #endregion
-
-        
     }
 }

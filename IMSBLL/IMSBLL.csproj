@@ -60,9 +60,6 @@
     <Compile Include="DAL\TaxGroupDetaileViewModel.cs" />
     <Compile Include="DAL\Validationss.cs" />
     <Compile Include="EntityModel\Add_User.cs" />
-    <Compile Include="EntityModel\CommonReport_Result.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityModel\ELMAH_Error.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
@@ -106,10 +103,10 @@
     <Compile Include="EntityModel\spAuthenticateUserRole_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\Split_Result.cs">
+    <Compile Include="EntityModel\sp_ActiveUser_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\sp_ActiveUser_Result.cs">
+    <Compile Include="EntityModel\sp_checklicense_Result.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\Sp_checkResetPwdlink_Result.cs">
