@@ -57,107 +57,107 @@ namespace IMS.Registration
                 if (txtEmail.Text != "  " && txtPassword.Text != "")
                 {
                     AuthenticateUser();
-                    
-                                    us_ID = Convert.ToInt32(Session["UserID"]);
 
-                                    if (us_ID > 0)
+                    us_ID = Convert.ToInt32(Session["UserID"]);
+
+                    if (us_ID > 0)
+                    {
+                        selectUserRole();
+                        int c_id = Convert.ToInt32(Session["company_id"]);
+                        ObjectParameter freeCount = new ObjectParameter("free_count", typeof(int));
+                        ObjectParameter subscriptionCount = new ObjectParameter("Subscription_count", typeof(int));
+
+                        var r = context.sp_checklicense(c_id, us_ID, freeCount, subscriptionCount);
+
+                        if (Convert.ToInt32(subscriptionCount.Value) > 0)
+                        {
+                            if (Convert.ToInt32(freeCount.Value) > 0)
+                            {
+
+                                string userData = string.Empty;
+                                string role = Convert.ToString(Session["Rolename"]);
+                                if (role == "Sales Manager")
+                                {
+                                    userData = "Sales";
+                                }
+                                else if (role == "Purchase Manager")
+                                {
+                                    userData = "Purchase";
+                                }
+                                else if (role == "Manager" || role == "")
+                                {
+                                    userData = "Manager";
+                                }
+                                Session["UserRoleSession"] = userData;
+
+                                if (!string.IsNullOrEmpty(userData))
+                                {
+                                    // create a new ticket used for authentication
+
+                                    if (cbRemember.Checked == true)
                                     {
-                                        selectUserRole();
-                                        int c_id = Convert.ToInt32(Session["company_id"]);
-                                        ObjectParameter freeCount = new ObjectParameter("free_count", typeof(int));
-                                        ObjectParameter subscriptionCount = new ObjectParameter("Subscription_count", typeof(int));
+                                        Response.Cookies["us_ID"].Value = txtEmail.Text;
+                                        Response.Cookies["enPswd"].Value = txtPassword.Text;
+                                        Response.Cookies["us_ID"].Expires = DateTime.Now.AddDays(15);
+                                        Response.Cookies["enPswd"].Expires = DateTime.Now.AddDays(15);
+                                    }
 
-                                        var r = context.sp_checklicense(c_id, us_ID, freeCount, subscriptionCount);
-                                        
-                                        if (Convert.ToInt32(subscriptionCount.Value) > 0)
-                                        {
-                                                    if (Convert.ToInt32(freeCount.Value) > 0)
-                                                    {
+                                    else
+                                    {
 
-                                                        string userData = string.Empty;
-                                                        string role = Convert.ToString(Session["Rolename"]);
-                                                                if (role == "Sales Manager")
-                                                                {
-                                                                    userData = "Sales";
-                                                                }
-                                                                else if (role == "Purchase Manager")
-                                                                {
-                                                                    userData = "Purchase";
-                                                                }
-                                                                else if (role == "Manager" || role == "")
-                                                                {
-                                                                    userData = "Manager";
-                                                                }
-                                                        Session["UserRoleSession"] = userData;
+                                        Response.Cookies["us_ID"].Expires = DateTime.Now.AddDays(-1);
 
-                                                        if (!string.IsNullOrEmpty(userData))
-                                                        {
-                                                            // create a new ticket used for authentication
+                                        Response.Cookies["enPswd"].Expires = DateTime.Now.AddDays(-1);
 
-                                                                    if (cbRemember.Checked == true)
-                                                                    {
-                                                                        Response.Cookies["us_ID"].Value = txtEmail.Text;
-                                                                        Response.Cookies["enPswd"].Value = txtPassword.Text;
-                                                                        Response.Cookies["us_ID"].Expires = DateTime.Now.AddDays(15);
-                                                                        Response.Cookies["enPswd"].Expires = DateTime.Now.AddDays(15);
-                                                                    }
-
-                                                                    else
-                                                                    {
-
-                                                                        Response.Cookies["us_ID"].Expires = DateTime.Now.AddDays(-1);
-
-                                                                        Response.Cookies["enPswd"].Expires = DateTime.Now.AddDays(-1);
-
-                                                                    }
-                                                                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, txtEmail.Text, DateTime.Now, DateTime.Now.AddMinutes(15), false, userData, FormsAuthentication.FormsCookiePath);
-                                                                    var encryptedTicket = FormsAuthentication.Encrypt(ticket);
-                                                                    if (cbRemember.Checked)
-                                                                    {
-                                                                        HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-                                                                        cookie.Expires = ticket.Expiration;
-                                                                        HttpContext.Current.Response.Cookies.Set(cookie);
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        FormsAuthentication.SetAuthCookie(txtEmail.Text, false);
-                                                                    }
-                                                        }
-                                                        string returnUrl = Request.QueryString["ReturnUrl"];
-                                                        if (role.Equals("Purchase Manager"))
-                                                        {
-                                                            returnUrl = "Purchases/Purchase.aspx";
-                                                        }
-                                                        else if (role == "Sales Manager")
-                                                        {
-                                                            returnUrl = "Sales/Sale.aspx";
-                                                        }
-                                                        else if (role == "Manager" || role == "")
-                                                        {
-                                                            returnUrl = "Home.aspx";
-                                                        }
-                                                        Response.Redirect(@"~/" + returnUrl, false);
-                                            }
-                                            else
-                                            {
-                                                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Your free count has over.');", true);
-                                            }
+                                    }
+                                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, txtEmail.Text, DateTime.Now, DateTime.Now.AddMinutes(15), false, userData, FormsAuthentication.FormsCookiePath);
+                                    var encryptedTicket = FormsAuthentication.Encrypt(ticket);
+                                    if (cbRemember.Checked)
+                                    {
+                                        HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                                        cookie.Expires = ticket.Expiration;
+                                        HttpContext.Current.Response.Cookies.Set(cookie);
+                                    }
+                                    else
+                                    {
+                                        FormsAuthentication.SetAuthCookie(txtEmail.Text, false);
+                                    }
+                                }
+                                string returnUrl = Request.QueryString["ReturnUrl"];
+                                if (role.Equals("Purchase Manager"))
+                                {
+                                    returnUrl = "Purchases/Purchase.aspx";
+                                }
+                                else if (role == "Sales Manager")
+                                {
+                                    returnUrl = "Sales/Sale.aspx";
+                                }
+                                else if (role == "Manager" || role == "")
+                                {
+                                    returnUrl = "Home.aspx";
+                                }
+                                Response.Redirect(@"~/" + returnUrl, false);
                             }
                             else
                             {
-                                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Your subscription has been ended, Please Choose any Of Our Plan To Continue.');", true);
+                                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Your free count has over.');", true);
                             }
-
                         }
-                          
                         else
-                                    {
-                                        ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('User Name Or Password Is Invalid');", true);
-
+                        {
+                            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Your subscription has been ended, Please Choose any Of Our Plan To Continue.');", true);
                         }
+
                     }
 
-              
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('User Name Or Password Is Invalid');", true);
+
+                    }
+                }
+
+
                 else
                 {
                     lblError.Visible = true;
@@ -179,7 +179,7 @@ namespace IMS.Registration
             string enPswd = GetSwcSHA1(txtPassword.Text);
             //r.password = enPswd;
             ////Shakeeb
-            var r = context.tbl_User.Where(g => g.user_name == txtEmail.Text && g.password == enPswd && g.status==true).FirstOrDefault();
+            var r = context.tbl_User.Where(g => g.user_name == txtEmail.Text && g.password == enPswd && g.status == true).FirstOrDefault();
             // r.userID(r);
 
             Session["username"] = txtEmail.Text;
@@ -190,7 +190,7 @@ namespace IMS.Registration
                 {
                     Response.Redirect("USerVerification.aspx");
                 }
-            }            
+            }
             return us_ID;
         }
 
@@ -203,7 +203,7 @@ namespace IMS.Registration
             //r.RoleName(r);           
             Session["Rolename"] = r.role_name;
             Session["company_id"] = r.company_id;
-            Session["financialyear_id"] = context.tbl_financialyear.Where(w => w.company_id == r.company_id  && w.status == true).Select(s => s.financialyear_id).FirstOrDefault();
+            Session["financialyear_id"] = context.tbl_financialyear.Where(w => w.company_id == r.company_id && w.status == true).Select(s => s.financialyear_id).FirstOrDefault();
             Session["branch_id"] = r.branch_id;
             Session["LoginuserName"] = r.Name;
 

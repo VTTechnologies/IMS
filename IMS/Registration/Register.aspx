@@ -543,9 +543,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
                                     <%--<div class="form-group div2">
                                         <label class="col-lg-3 control-label">
                                             First Name
@@ -568,9 +565,6 @@
                         </asp:ValidatorCalloutExtender>
 
                                     </div>--%>
-
-
-
                                     <%--<div class="row">
                                         <label class="col-sm-12 ">
                                             Passowrd :
@@ -624,14 +618,6 @@
                                             </div>
                                         </div>
                                     </div>--%>
-
-
-
-
-
-
-
-
                                     <%-- <div class="form-group div2">
                                         <label class="col-lg-3 control-label">
                                             Last Name
@@ -689,12 +675,6 @@
 
 
                                     </div>--%>
-
-
-
-
-
-
                                     <%-- <div class="form-group div2">
                                         <label class="col-lg-3 control-label">
                                             Mobile No
@@ -729,7 +709,6 @@
 
 
                                     </div>--%>
-
 
                                     <%-- <div class="row col-sm-12">
                                         <div class="col-sm-6">
