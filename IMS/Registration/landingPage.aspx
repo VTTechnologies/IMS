@@ -792,16 +792,16 @@
                 <h2>!MS B!ZZ</h2>
             </div>
             <!-- social icon-->
-            <div class="footer-social-icon">
-                <a href="https://www.facebook.com/imsbizz/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="https://www.facebook.com/imsbizz/"><i class="active fa fa-twitter" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+            <div class="footer-social-icon">                
+                <a href="https://www.facebook.com/zunmansolutions" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="https://twitter.com/ZunmanSolutions" target="_blank"><i class="active fa fa-twitter" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/zunmansolutions/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.linkedin.com/company/zunmansolutions" target="_blank" ><i class="fa fa-linkedin" aria-hidden="true"></i></a>                    
             </div>
             <div class="footer-menu">
                 <nav>
                     <ul>
-                        <li><a href="#">About</a></li>
+                        <li><a class="nav-link" href="#about">About</a></li>
                         <li><a href="#">Terms &amp; Conditions</a></li>
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Contact</a></li>
