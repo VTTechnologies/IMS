@@ -91,7 +91,6 @@
     <script type="text/javascript">
         $(function () {
             $("#<%=chkpassword.ClientID%>").bind("click", function () {
-                debugger;
                 var txtPassword = $("#<%=password.ClientID%>");
                 if ($(this).is(":checked")) {
                     $(txtPassword).attr('type', 'text');
