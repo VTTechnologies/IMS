@@ -143,11 +143,11 @@ namespace IMS.Registration
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Please Enter Proper Mobile Number','False');", true);
                 return false;
             }
-            if (v.emialvalidation(email.Value) == false)
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Please Enter Proper Email','False');", true);
-                return false;
-            }
+            //if (v.emialvalidation(email.Value) == false)
+            //{
+            //    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Please Enter Proper Email','False');", true);
+            //    return false;
+            //}
             string[] array = new string[] { txtfirstname.Value, txtlastname.Value, txtcompanyname.Value, txtzip.Value, txtmobile.Value };
             if (v.emtystringvalidtion(array) == false)
             {
@@ -244,9 +244,9 @@ namespace IMS.Registration
                     DataTable dt = new DataTable();
                     dt = r.Insert(r);
                     Session["userdetails"] = dt;
-                    SendMail();
+                    //SendMail();
                     Session["regisFlag"] = null;
-                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Thank you for signing up please confirm your E-mail','True');", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Thank you for signing up please confirm your Mobile No.','True');", true);
                 }
             }
             catch (Exception ex)

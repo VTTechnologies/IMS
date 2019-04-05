@@ -419,7 +419,7 @@
                                                 <label for="email" class="control-label">Email :</label>
                                                 <i class="fa fa-envelope"></i>
 
-                                                <input type="email" name="txtEmail" onchange="CheckDouble()" class="form-control" runat="server" required="required" id="email" autocomplete="off" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                                <input type="email" name="txtEmail" onchange="CheckDouble()" class="form-control" runat="server" id="email" autocomplete="off" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                                                     title="Please enter your Email" />
                                                 <asp:Label ID="lblcheckDoubleError" runat="server"></asp:Label>
                                                 <asp:HiddenField ID="hd" runat="server" />
@@ -433,7 +433,7 @@
                                                 <label for="password" class="control-label">Password :</label>
                                                 <i class="fa fa-key"></i>
 
-                                                <%--                                                    <input type="password" class="form-control" id="password" runat="server" required="required" autocomplete="off" onkeypress="handleSpace(event)" placeholder="Password"
+                                                <%--<input type="password" class="form-control" id="password" runat="server" required="required" autocomplete="off" onkeypress="handleSpace(event)" placeholder="Password"
                                                         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Please enter your password e.g:Password@123" />--%>
                                                 <input type="password" class="form-control" id="password" runat="server" required="required" autocomplete="off" onkeypress="handleSpace(event)" placeholder="Password"
                                                     title="Please enter your password" onchange="validatePassword('first')" onkeyup="validatePassword('first')" />
@@ -1009,6 +1009,7 @@
                 <%--<asp:Button ID="btnCancel" CssClass="btn btn-danger" runat="server" Text="Cancel" OnClick="btnAgree_Click" />--%>
             </div>
         </asp:Panel>
+
         <div class="modal fade" id="myModalOld" role="dialog">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
