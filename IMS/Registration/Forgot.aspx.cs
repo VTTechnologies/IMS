@@ -37,7 +37,7 @@ namespace IMS.Registration.form_1
 
         //code done by ather for reset password changed from email to mobile no.
 
-        public bool ResetRequest()
+        public void SendLink()
         {
             try
             {
@@ -57,7 +57,7 @@ namespace IMS.Registration.form_1
 
                     var userData = (from u in context.tbl_User
                                     join vrp in context.Tbl_VerifyResetPass on u.user_id.ToString() equals vrp.user_id
-                                    where u.user_mobieno == MobileNo && u.status == true
+                                    where u.user_mobieno == MobileNo && u.status == true && vrp.uniqueidentifier == uniqueid.ToString()
                                     select new clsData
                                     {
                                         uniqueidentifier = vrp.uniqueidentifier,
@@ -67,13 +67,12 @@ namespace IMS.Registration.form_1
                                     }).ToList().FirstOrDefault();
 
                     ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('We have sent link on your registered mobile no. to reset your password','False');", true);
-                    Session["userData"] = userData;
-                    return true;
+                    SendLink(userData);
                 }
                 else
                 {
                     ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('This Mobile No. is not register with IMSbizz','False');", true);
-                    return false;
+                    return;
                 }
 
             }
@@ -81,31 +80,31 @@ namespace IMS.Registration.form_1
             {
                 ErrorLog.saveerror(ex);
             }
-            return true;
         }
 
-        protected void SendLink()
+        private void SendLink(clsData userData)
         {
             try
             {
-                string userid = "", uniqueid = "", passid = "", MobileNo = "", link = "";
+                string userId = string.Empty, uniqueId = string.Empty, passId = string.Empty, mobileNo = string.Empty, link = string.Empty;
 
-                var data = Session["userData"] as clsData;
-                userid = data.user_id;
-                uniqueid = data.uniqueidentifier;
-                passid = data.Passverify_ID.ToString();
-                MobileNo = data.UserMobile;
+                //var data = Session["userData"] as clsData;
+                userId = userData.user_id;
+                uniqueId = userData.uniqueidentifier;
+                passId = userData.Passverify_ID.ToString();
+                mobileNo = userData.UserMobile;
 
-                if (MobileNo.Length == 10) //condition added because 91 is required for sending message from API
+                if (mobileNo.Length == 10) //condition added because 91 is required for sending message from API
                 {
-                    MobileNo = "91" + MobileNo;
+                    mobileNo = "91" + mobileNo;
                 }
-                link = "https://imsbizz.com/Registration/ResetPassword.aspx?pid=" + passid;
+                link = "https://imsbizz.com/Registration/ResetPassword.aspx?pid=" + passId;
                 VerifyUser verifyUser = new VerifyUser();
-                verifyUser.Dmobile = MobileNo;
-                verifyUser.Message = "Please click below link to reset your password " + link + ".";
+                verifyUser.Dmobile = mobileNo;
+                verifyUser.Message = "Please click below link to reset your password " + link + "";
                 verifyUser.Message = HttpUtility.UrlEncode(verifyUser.Message);
                 string res = verifyUser.SendSMSTL();
+                Session["userData"] = null;
             }
             catch (Exception ex)
             {
@@ -193,11 +192,13 @@ namespace IMS.Registration.form_1
         {
             try
             {
-                if (ResetRequest())
-                {
-                    SendLink();
-                    txtMobile.Value = "";
-                }
+                SendLink();
+                txtMobile.Value = "";
+                //if (ResetRequest())
+                //{
+                //    SendLink();
+                //    txtMobile.Value = "";
+                //}
             }
             catch (Exception ex)
             {
@@ -208,6 +209,7 @@ namespace IMS.Registration.form_1
         #endregion
 
     }
+    [Serializable()]
     internal class clsData
     {
         public string user_id { get; set; }

@@ -38,8 +38,7 @@
                 }
             });
         });
-    </script>
-    <script type='text/javascript'>
+
         function validatePassword(val) {
             debugger
             var password = $("#<%= password.ClientID %>").val(),
