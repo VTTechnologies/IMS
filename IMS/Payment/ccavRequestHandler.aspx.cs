@@ -13,10 +13,10 @@ using System.Linq;
 public partial class SubmitData : System.Web.UI.Page
 {
     CCACrypto ccaCrypto = new CCACrypto();
-    string workingKey = "FEC62AFAAFA1D5B497550DE2B0E48AA0";//put in the 32bit alpha numeric key in the quotes provided here 	
+    string workingKey = "";//put in the 32bit alpha numeric key in the quotes provided here 	
     string ccaRequest = "";
     public string strEncRequest = "";
-    public string strAccessCode = "AVTZ02GE72CI75ZTIC";// put the access key in the quotes provided here.
+    public string strAccessCode = "";// put the access key in the quotes provided here.
 
     IMS_TESTEntities context = new IMS_TESTEntities();
     protected void Page_Load(object sender, EventArgs e)
@@ -28,6 +28,10 @@ public partial class SubmitData : System.Web.UI.Page
             string tid = string.Empty, merchant_id = string.Empty, order_id = string.Empty, amount = string.Empty, currency = string.Empty, redirect_url = string.Empty, cancel_url = string.Empty;
 
             merchant_id = ConfigurationManager.AppSettings["merchant_id"];
+            redirect_url = ConfigurationManager.AppSettings["redirect_url"];
+            workingKey = ConfigurationManager.AppSettings["workingKey"];
+            strAccessCode = ConfigurationManager.AppSettings["strAccessCode"];
+
             tid = DateTime.Now.ToString("yyMMddhhmmssMs");
             Session["tid"] = tid;
             tid = "tid=" + tid;
@@ -35,8 +39,8 @@ public partial class SubmitData : System.Web.UI.Page
             order_id = "&order_id=" + "IMSBIZZ" + DateTime.Now.ToString("yyMMddhhmmssMs");
             amount = "&amount=" + GetPriceByPlaneId().ToString();
             currency = "&currency=" + "INR";
-            redirect_url = "&redirect_url=" + "http://localhost:44301/Subscription/Message.aspx";
-            cancel_url = "&cancel_url=" + "ccavResponseHandler.php";
+            redirect_url = "&redirect_url=" + redirect_url;
+             cancel_url = "&cancel_url=" + "ccavResponseHandler.php";
 
 
             ccaRequest = tid + merchant_id + order_id + amount + currency + redirect_url + cancel_url;
