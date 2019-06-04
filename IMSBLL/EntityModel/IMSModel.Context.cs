@@ -2868,5 +2868,47 @@ namespace IMSBLL.EntityModel
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SpGetExistsMobile", mobilenoParameter);
         }
+    
+        public virtual ObjectResult<GetUserDetailsAndCompanyByUserId_Result> GetUserDetailsAndCompanyByUserId(string userMobile)
+        {
+            var userMobileParameter = userMobile != null ?
+                new ObjectParameter("userMobile", userMobile) :
+                new ObjectParameter("userMobile", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserDetailsAndCompanyByUserId_Result>("GetUserDetailsAndCompanyByUserId", userMobileParameter);
+        }
+    
+        public virtual int InsertPaymentAndSubscriptionDetails(Nullable<int> planId, Nullable<int> userId, Nullable<int> companyId, string transactionId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<decimal> paidAmount)
+        {
+            var planIdParameter = planId.HasValue ?
+                new ObjectParameter("planId", planId) :
+                new ObjectParameter("planId", typeof(int));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var transactionIdParameter = transactionId != null ?
+                new ObjectParameter("transactionId", transactionId) :
+                new ObjectParameter("transactionId", typeof(string));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("startDate", startDate) :
+                new ObjectParameter("startDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("endDate", endDate) :
+                new ObjectParameter("endDate", typeof(System.DateTime));
+    
+            var paidAmountParameter = paidAmount.HasValue ?
+                new ObjectParameter("paidAmount", paidAmount) :
+                new ObjectParameter("paidAmount", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertPaymentAndSubscriptionDetails", planIdParameter, userIdParameter, companyIdParameter, transactionIdParameter, startDateParameter, endDateParameter, paidAmountParameter);
+        }
     }
 }

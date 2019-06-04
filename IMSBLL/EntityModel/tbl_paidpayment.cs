@@ -17,7 +17,7 @@ namespace IMSBLL.EntityModel
         public int paidpayment_id { get; set; }
         public Nullable<int> subscription_id { get; set; }
         public Nullable<int> user_id { get; set; }
-        public Nullable<int> transaction_id { get; set; }
+        public string transaction_id { get; set; }
         public Nullable<int> company_id { get; set; }
         public Nullable<System.DateTime> transaction_date { get; set; }
         public Nullable<decimal> paidamount { get; set; }

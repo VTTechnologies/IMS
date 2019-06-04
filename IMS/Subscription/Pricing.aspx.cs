@@ -50,29 +50,34 @@ namespace IMS.Subscription
             var result = context.sp_planall();
             dt = helper.LINQToDataTable(result);
             DataRow row1 = dt.Rows[0];
+            string PlanId1 = row1["plan_id"].ToString();
             string rowValue = row1["plan_name"].ToString();
             string rowValue4 = row1["price"].ToString();
             string rowValue7 = row1["duration"].ToString();
 
             DataRow row2 = dt.Rows[1];
+            string PlanId2 = row2["plan_id"].ToString();
             string rowValue2 = row2["plan_name"].ToString();
             string rowValue5 = row2["price"].ToString();
             string rowValue8 = row2["duration"].ToString();
 
             DataRow row3 = dt.Rows[2];
+            string PlanId3 = row3["plan_id"].ToString();
             string rowValue3 = row3["plan_name"].ToString();
             string rowValue6 = row3["price"].ToString();
             string rowValue9 = row3["duration"].ToString();
-            
 
+            plnId1.Value = PlanId1;
             lblName1.Text = rowValue;
             lblName2.Text = rowValue2;
             lblName3.Text = rowValue3;
 
+            plnId2.Value = PlanId2;
             lblPrice1.Text = rowValue4;
             lblPrice2.Text = rowValue5;
             lblPrice3.Text = rowValue6;
 
+            plnId3.Value = PlanId3;
             lblDuration1.Text = rowValue7;
             lblDuration2.Text = rowValue8;
             lblDuration3.Text = rowValue9;

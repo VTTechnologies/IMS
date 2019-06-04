@@ -57,6 +57,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="MCPG.CCA.Util">
+      <HintPath>..\..\..\..\Programming Data\ASP.Net_Kit_Version_3.5\ASP.Net_Kit_Version_3.5\NON_SEAMLESS_KIT\MCPG.ASP.net.ENC\bin\MCPG.CCA.Util.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ReportViewer.Runtime.Common.12.0.2402.15\lib\Microsoft.ReportViewer.Common.dll</HintPath>
@@ -251,6 +254,10 @@
     <Content Include="Masters\TaxGroup.aspx" />
     <Content Include="Masters\TaxType.aspx" />
     <Content Include="Masters\User.aspx" />
+    <Content Include="Payment\ccavRequestHandler.aspx" />
+    <Content Include="Payment\ccavResponseHandler.aspx" />
+    <Content Include="Payment\dataFrom.htm" />
+    <Content Include="Payment\SuccessUrl.aspx" />
     <Content Include="PrivacyPolicy.html" />
     <Content Include="Purchases\PrintPurchase.aspx" />
     <Content Include="Purchases\ViewORPayBalancePurchase.aspx" />
@@ -303,6 +310,9 @@
     <Content Include="Sales\SalesReturn.aspx" />
     <Content Include="Sales\ViewORPayBalanceSale.aspx" />
     <Content Include="ErrorPages\Web.config" />
+    <Content Include="Payment\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -586,6 +596,27 @@
     <Compile Include="Masters\User.aspx.designer.cs">
       <DependentUpon>User.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Payment\ccavRequestHandler.aspx.cs">
+      <DependentUpon>ccavRequestHandler.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Payment\ccavRequestHandler.aspx.designer.cs">
+      <DependentUpon>ccavRequestHandler.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Payment\ccavResponseHandler.aspx.cs">
+      <DependentUpon>ccavResponseHandler.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Payment\ccavResponseHandler.aspx.designer.cs">
+      <DependentUpon>ccavResponseHandler.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Payment\SuccessUrl.aspx.cs">
+      <DependentUpon>SuccessUrl.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Payment\SuccessUrl.aspx.designer.cs">
+      <DependentUpon>SuccessUrl.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchases\PrintPurchase.aspx.cs">
       <DependentUpon>PrintPurchase.aspx</DependentUpon>
@@ -804,6 +835,34 @@
     <Compile Include="Branch.aspx.designer.cs">
       <DependentUpon>Branch.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Subscription\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Subscription\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Subscription\Message.aspx.cs">
+      <DependentUpon>Message.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Subscription\Message.aspx.designer.cs">
+      <DependentUpon>Message.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Subscription\Pricing.aspx.cs">
+      <DependentUpon>Pricing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Subscription\Pricing.aspx.designer.cs">
+      <DependentUpon>Pricing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Subscription\Subscription.Master.cs">
+      <DependentUpon>Subscription.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Subscription\Subscription.Master.designer.cs">
+      <DependentUpon>Subscription.Master</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
@@ -813,6 +872,9 @@
     <Folder Include="Uploads\Logos\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Subscription\Login.aspx" />
+    <Content Include="Subscription\Message.aspx" />
+    <Content Include="Subscription\Pricing.aspx" />
     <Content Include="Uploads\down.png" />
     <Content Include="Uploads\mony.png" />
     <Content Include="Uploads\up.png" />
@@ -857,6 +919,8 @@
     <Content Include="Reports\CommonDataSet.xss">
       <DependentUpon>CommonDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="Subscription\Subscription.Master" />
+    <Content Include="Subscription\Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

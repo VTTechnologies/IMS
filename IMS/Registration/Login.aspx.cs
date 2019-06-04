@@ -31,7 +31,7 @@ namespace IMS.Registration
         {
             if (!IsPostBack)
             {
-
+                Session["CustomerId"] = null;
                 if (Request.Cookies["us_ID"] != null)
 
                     txtEmail.Text = Request.Cookies["us_ID"].Value;
@@ -51,6 +51,7 @@ namespace IMS.Registration
         #region Methods
         public void login()
         {
+            Session["EndSubscriptionFlag"] = null;
             try
             {
                 if (txtEmail.Text != "  " && txtPassword.Text != "")
@@ -122,6 +123,7 @@ namespace IMS.Registration
                                         FormsAuthentication.SetAuthCookie(txtEmail.Text, false);
                                     }
                                 }
+
                                 string returnUrl = Request.QueryString["ReturnUrl"];
                                 if (role.Equals("Purchase Manager"))
                                 {
@@ -140,11 +142,13 @@ namespace IMS.Registration
                             else
                             {
                                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Your free count has over.');", true);
+                                Session["CustomerId"] = txtEmail.Text;
                             }
                         }
                         else
                         {
                             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openalert('Your subscription has been ended, Please Choose any Of Our Plan To Continue.');", true);
+                            Session["CustomerId"] = txtEmail.Text;
                         }
 
                     }

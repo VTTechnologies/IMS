@@ -63,6 +63,9 @@
     <Compile Include="EntityModel\ELMAH_Error.cs">
       <DependentUpon>IMSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModel\GetUserDetailsAndCompanyByUserId_Result.cs">
+      <DependentUpon>IMSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModel\IMSModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

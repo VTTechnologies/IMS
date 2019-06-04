@@ -22,6 +22,15 @@ namespace IMS.Subscription {
         protected global::System.Web.UI.WebControls.Label lblName1;
         
         /// <summary>
+        /// plnId1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField plnId1;
+        
+        /// <summary>
         /// lblPrice1 control.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,15 @@ namespace IMS.Subscription {
         protected global::System.Web.UI.WebControls.Label lblName2;
         
         /// <summary>
+        /// plnId2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField plnId2;
+        
+        /// <summary>
         /// lblPrice2 control.
         /// </summary>
         /// <remarks>
@@ -74,6 +92,15 @@ namespace IMS.Subscription {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblName3;
+        
+        /// <summary>
+        /// plnId3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField plnId3;
         
         /// <summary>
         /// lblPrice3 control.

@@ -22,7 +22,12 @@
     <script>
         function openalert(msg) {
             alertify.alert('Alert', msg).setting({
-                'onok': function () { window.location.href = "Login.aspx"; }
+                'onok': function () {
+                    if (msg == 'Your subscription has been ended, Please Choose any Of Our Plan To Continue.')
+                        window.location.href = "../Subscription/Pricing.aspx";
+                    else
+                        window.location.href = "Login.aspx";
+                }
             });
             //$("#myModal").modal({ backdrop: "static" });
             //$('#myModal').modal('show');
@@ -30,7 +35,7 @@
 
             //alertify.confirm('Alert', 'Your Plan Is End Please Choose any Of Our Plan To Continue',
             //    function () { window.location = "../Subscription/Pricing.aspx"; ('Ok') }
-            //     , function () { window.location = "../index.html"; ('Cancel') });
+            //     , function () { window.location = "Login.aspx"; ('Cancel') });
         }
     </script>
 </asp:Content>

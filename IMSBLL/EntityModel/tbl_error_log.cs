@@ -21,8 +21,5 @@ namespace IMSBLL.EntityModel
         public string error_msg { get; set; }
         public string created_by { get; set; }
         public Nullable<System.DateTime> created_date { get; set; }
-    
-        public virtual tbl_branch tbl_branch { get; set; }
-        public virtual tbl_company tbl_company { get; set; }
     }
 }
